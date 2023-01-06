@@ -1,6 +1,7 @@
-using System;
-
 using Assets.Scripts.Constants;
+
+using GameFrame.Core.Audio.Multi;
+using GameFrame.Core.Audio.Single;
 
 using UnityEngine;
 
@@ -8,6 +9,15 @@ namespace Assets.Scripts.Core
 {
     public class Game : GameFrame.Core.Game<GameState, PlayerOptions>
     {
+        public ContinuousAudioManager AmbienceAudioManager { get; set; }
+        public ContinuousAudioManager BackgroundAudioManager { get; set; }
+        public EffectsAudioManager EffectsAudioManager { get; set; }
+
+        public void PlayButtonSound()
+        {
+            EffectsAudioManager.Play("Button");
+        }
+
         protected override GameState InitializeGameState()
         {
             // Maybe add a Tutorial scene, where the user can set "skip" for the next time.
@@ -41,5 +51,7 @@ namespace Assets.Scripts.Core
         {
             Base.Core.Game.Startup();
         }
+
+
     }
 }
