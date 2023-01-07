@@ -36,12 +36,7 @@ namespace Assets.Scripts.Core
 
             return gameState;
         }
-
-        private void GenerateWorld(GameState gameState)
-        {
-
-        }
-
+                
         protected override PlayerOptions InitialzePlayerOptions()
         {
             return new PlayerOptions()
@@ -51,6 +46,16 @@ namespace Assets.Scripts.Core
                 BackgroundVolume = 0.9f,
                 AmbienceVolume = 0.125f
             };
+        }
+
+        private void GenerateWorld(GameState gameState)
+        {
+            var worldGenerator = new Core.Generating.World.Generator(this.SelectedGameMode);
+
+            if (worldGenerator.Generate())
+            {
+                gameState.World = worldGenerator.World;
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

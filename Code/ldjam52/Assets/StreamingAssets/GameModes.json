@@ -2,11 +2,15 @@
   {
     "Name": "Test",
     "Description": "Test game mode 1",
-    "GeneratedWorldSize": {
-      "X": 64,
-      "Y": 64
+    "World": {
+      "Rows": 64,
+      "Columns": 64,
+      "RandomBiomesAmount": 0,
+      "IsAllBiomesUsageForced": true
     },
-    "PlayerStartingFunds": 9001,
+    "Player": {
+      "StartingFunds":  9001
+    },
     "AvailablePlants": [
       {
         "Name": "Test plant 1001",
@@ -30,8 +34,8 @@
       {
         "Name": "Grasslands",
         "MaterialReference": "GrasslandGreen",
-        "SizeMin": 1,
-        "SizeMax": 3,
+        "WeightMin": 1,
+        "WeightMax": 3,
         "TemperatureMin": 0.7,
         "TemperatureMax": 0.9,
         "SunshineMin": 0.4,
@@ -44,8 +48,8 @@
       {
         "Name": "Desert",
         "MaterialReference": "Desert",
-        "SizeMin": 1,
-        "SizeMax": 3,
+        "WeightMin": 1,
+        "WeightMax": 3,
         "TemperatureMin": 0.9,
         "TemperatureMax": 1,
         "SunshineMin": 0.9,
@@ -58,8 +62,8 @@
       {
         "Name": "Forest",
         "MaterialReference": "Forest",
-        "SizeMin": 1,
-        "SizeMax": 3,
+        "WeightMin": 1,
+        "WeightMax": 3,
         "TemperatureMin": 0.3,
         "TemperatureMax": 0.5,
         "SunshineMin": 0.2,
@@ -72,8 +76,8 @@
       {
         "Name": "Swamp",
         "MaterialReference": "Swamp",
-        "SizeMin": 1,
-        "SizeMax": 3,
+        "WeightMin": 1,
+        "WeightMax": 3,
         "TemperatureMin": 0.4,
         "TemperatureMax": 0.6,
         "SunshineMin": 0.4,
@@ -86,8 +90,8 @@
       {
         "Name": "Mountains",
         "MaterialReference": "Mountains",
-        "SizeMin": 1,
-        "SizeMax": 3,
+        "WeightMin": 1,
+        "WeightMax": 3,
         "TemperatureMin": 0.0,
         "TemperatureMax": 0.2,
         "SunshineMin": 0.7,

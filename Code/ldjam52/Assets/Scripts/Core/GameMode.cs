@@ -11,8 +11,8 @@ namespace Assets.Scripts.Core
     {
         public String Name { get; set; }
         public String Description { get; set; }
-        public Vector2 GeneratedWorldSize { get; set; }
-        public Decimal PlayerStartingFunds { get; set; }
+        public Core.Generating.WorldGenerationSettings World {get;set;}
+        public Core.Generating.PlayerSettings Player {get;set;}
         public List<Plant> AvailablePlants { get; set; }
         public List<Biome> AvailableBiomes { get; set; }
     }
