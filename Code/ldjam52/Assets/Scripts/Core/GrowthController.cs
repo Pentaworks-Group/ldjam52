@@ -14,11 +14,11 @@ public class GrowthController
         //Humidity
         Double humidityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
         //Temperature
-        Double temperatureFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
+        Double temperatureFactor = getGrowthFactorForType(ChromosomeTypes.TEMP, plant, field.Humidity);
         //Sunshine
-        Double sunshineFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
+        Double sunshineFactor = getGrowthFactorForType(ChromosomeTypes.SUN, plant, field.Humidity);
         //Fertility
-        Double fertilityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
+        Double fertilityFactor = getGrowthFactorForType(ChromosomeTypes.FERTILITY, plant, field.Humidity);
 
         Double growthFactor = (humidityFactor + temperatureFactor + sunshineFactor + fertilityFactor) / 4;
 

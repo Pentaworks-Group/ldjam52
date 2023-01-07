@@ -14,6 +14,6 @@ namespace Assets.Scripts.Model
         // Fertility of the field
         public Double Fertility { get; set; }
         // Growth Progress
-        public Double GrowthProgress { get; set; }
+        public Double GrowthProgress { get; set; } = 0;
     }
 }
