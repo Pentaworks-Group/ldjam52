@@ -32,6 +32,12 @@ public class MainMenuBehaviour : MonoBehaviour
         Core.Game.ChangeScene(SceneNames.Credits);
     }
 
+    public void ShowTestField()
+    {
+        //Core.Game.PlayButtonSound();
+        Core.Game.ChangeScene(SceneNames.TestField);
+    }
+
     public void StartGame()
     {
         //if (Assets.Scripts.Base.Core.Game.Options.ShowTutorial)
