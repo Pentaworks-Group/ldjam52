@@ -69,7 +69,7 @@ public class InheritanceController : MonoBehaviour
     }
 
     // Cross two Plants to create a new one. The new genome is generated randomly based on the parents.
-    public Plant crossPlants(Plant plant1, Plant plant2)
+    public static Plant crossPlants(Plant plant1, Plant plant2)
     {
         Plant newPlant = new Plant();
         newPlant.Name = PlantNames.adjectives.GetRandomEntry()+" "+PlantNames.names.GetRandomEntry();
@@ -87,7 +87,7 @@ public class InheritanceController : MonoBehaviour
         return newPlant;
     }
 
-    private Chromosome chooseRandomChromosomeByType(Plant plant, String type)
+    private static Chromosome chooseRandomChromosomeByType(Plant plant, String type)
     {
         ChromosomePair chromosomePair;
         if (plant.genome.TryGetValue(type, out chromosomePair))
@@ -100,7 +100,7 @@ public class InheritanceController : MonoBehaviour
         }
     }
 
-    private Chromosome chooseRandomChromosome(ChromosomePair pair)
+    private static Chromosome chooseRandomChromosome(ChromosomePair pair)
     {
         double randomNumber = UnityEngine.Random.value;
         return randomNumber < 0.5 ? pair.Chromosome1 : pair.Chromosome2;
