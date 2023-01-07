@@ -10,12 +10,18 @@ namespace Assets.Scripts.Constants
     {
         public static List<String> adjectives = new List<String>
         {
-            "normal"
+            "purple",
+            "amazing",
+            "smart",
+            "lucky"
         };
 
         public static List<String> names = new List<String>
         {
-            "normal"
+            "tree",
+            "starfish",
+            "bubblegum",
+            "kitty"
         };
 
     }
