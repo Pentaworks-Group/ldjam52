@@ -14,19 +14,139 @@
     "AvailablePlants": [
       {
         "ID": "35054514-e9b5-45e1-bc5b-bd548de633da",
-        "Name": "Test plant 1001",
-        "Description": "Some weird test plan... people say...1001",
-        "ImageReference": "WeirdPlan3000",
+        "Name": "sissy basil",
+        "Description": "a difficult to handle plant",
+        "ImageReference": "Basil",
         "Genome": {
           "Temp": {
             "Chromosome1": {
-              "Value0": 2,
-              "ValueDev": 2,
+              "Value0": 0.5,
+              "ValueDev": 0.2,
               "IsDominant": false
             },
             "Chromosome2": {
-              "Value0": 2,
-              "ValueDev": 2,
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Sun": {
+            "Chromosome1": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Fertility": {
+            "Chromosome1": {
+              "Value0": 1.0,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1.0,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Water": {
+            "Chromosome1": {
+              "Value0": 0.4,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.4,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Growth": {
+            "Chromosome1": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Wither": {
+            "Chromosome1": {
+              "Value0": 10,
+              "ValueDev": 0,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 10,
+              "ValueDev": 0,
+              "IsDominant": false
+            }
+          },
+          "Durability": {
+            "Chromosome1": {
+              "Value0": 10,
+              "ValueDev": 0,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 10,
+              "ValueDev": 0,
+              "IsDominant": false
+            }
+          },
+          "Harvest": {
+            "Chromosome1": {
+              "Value0": 3,
+              "ValueDev": 0,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 3,
+              "ValueDev": 0,
+              "IsDominant": false
+            }
+          },
+          "Seeds": {
+            "Chromosome1": {
+              "Value0": 4,
+              "ValueDev": 0,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 4,
+              "ValueDev": 0,
+              "IsDominant": false
+            }
+          },
+          "PlantValue": {
+            "Chromosome1": {
+              "Value0": 10,
+              "ValueDev": 0,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 10,
+              "ValueDev": 0,
+              "IsDominant": false
+            }
+          },
+          "SeedsValue": {
+            "Chromosome1": {
+              "Value0": 1,
+              "ValueDev": 0,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1,
+              "ValueDev": 0,
               "IsDominant": false
             }
           }
