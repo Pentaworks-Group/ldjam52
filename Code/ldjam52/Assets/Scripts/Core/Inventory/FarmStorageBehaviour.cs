@@ -24,6 +24,13 @@ namespace Assets.Scripts.Core.Inventory
             return storage.StorageItems;
         }
 
+        // Return money balance
+        public static int GetStorageBalance()
+        {
+            FarmStorage storage = Base.Core.Game.FarmStorage;
+            return storage.MoneyBalance;
+        }
+
         //Tries to put in an amount of plants and returns the amount that fitted in the storage
         public static int PutPlantInStorage(Plant plant, int amount)
         {
