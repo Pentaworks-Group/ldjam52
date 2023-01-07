@@ -1,14 +1,18 @@
 ﻿using System;
 
 using GameFrame.Core.Math;
+using GameFrame.Core.Media;
 
 namespace Assets.Scripts.Model
 {
     public class Tile
     {
         public Boolean IsOwned { get; set; }
-        public Biome Biome { get; set; }
-        public Field Field { get; set; }
         public Vector2 Position { get; set; }
+        public Color Color { get; set; }
+        public Single Temperature { get; set; }
+        public Single Fertility { get; set; }
+        public Single Sunshine { get; set; }
+        public Single Humidity { get; set; }
     }
 }
