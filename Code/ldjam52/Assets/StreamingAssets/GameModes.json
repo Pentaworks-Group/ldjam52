@@ -30,14 +30,72 @@
       {
         "Name": "Grasslands",
         "MaterialReference": "GrasslandGreen",
-        "HumidityMin": 1,
-        "HumidityMax": 1,
-        "TemperatureMin": 1,
+        "SizeMin": 1,
+        "SizeMax": 3,
+        "TemperatureMin": 0.7,
+        "TemperatureMax": 0.9,
+        "SunshineMin": 0.4,
+        "SunshineMax": 0.6,
+        "FertilityMin": 0.4,
+        "FertilityMax": 0.6,
+        "HumidityMin": 0.3,
+        "HumidityMax": 0.5
+      },
+      {
+        "Name": "Desert",
+        "MaterialReference": "Desert",
+        "SizeMin": 1,
+        "SizeMax": 3,
+        "TemperatureMin": 0.9,
         "TemperatureMax": 1,
-        "SunshineMin": 1,
+        "SunshineMin": 0.9,
         "SunshineMax": 1,
-        "FertilityMin": 1,
-        "FertilityMax": 1
+        "FertilityMin": 0,
+        "FertilityMax": 0.2,
+        "HumidityMin": 0,
+        "HumidityMax": 0.2
+      },
+      {
+        "Name": "Forest",
+        "MaterialReference": "Forest",
+        "SizeMin": 1,
+        "SizeMax": 3,
+        "TemperatureMin": 0.3,
+        "TemperatureMax": 0.5,
+        "SunshineMin": 0.2,
+        "SunshineMax": 0.4,
+        "FertilityMin": 0.9,
+        "FertilityMax": 1,
+        "HumidityMin": 0.7,
+        "HumidityMax": 0.9
+      },
+      {
+        "Name": "Swamp",
+        "MaterialReference": "Swamp",
+        "SizeMin": 1,
+        "SizeMax": 3,
+        "TemperatureMin": 0.4,
+        "TemperatureMax": 0.6,
+        "SunshineMin": 0.4,
+        "SunshineMax": 0.6,
+        "FertilityMin": 0.7,
+        "FertilityMax": 0.9,
+        "HumidityMin": 0.9,
+        "HumidityMax": 1
+      },
+      {
+        "Name": "Mountains",
+        "MaterialReference": "Mountains",
+        "SizeMin": 1,
+        "SizeMax": 3,
+        "TemperatureMin": 0.0,
+        "TemperatureMax": 0.2,
+        "SunshineMin": 0.7,
+        "SunshineMax": 0.9,
+        "FertilityMin": 0.3,
+        "FertilityMax": 0.5,
+        "HumidityMin": 0.5,
+        "HumidityMax": 0.7
       }
     ]
   }

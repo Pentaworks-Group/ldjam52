@@ -29,6 +29,7 @@ namespace Assets.Scripts.Core
             var gameState = new GameState()
             {
                 CurrentScene = SceneNames.World,
+                GameMode = this.SelectedGameMode
             };
 
             GenerateWorld(gameState);
@@ -38,6 +39,7 @@ namespace Assets.Scripts.Core
 
         private void GenerateWorld(GameState gameState)
         {
+
         }
 
         protected override PlayerOptions InitialzePlayerOptions()
