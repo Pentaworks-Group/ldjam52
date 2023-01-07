@@ -3,18 +3,21 @@ using Assets.Scripts.Constants;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FieldBehaviour : MonoBehaviour
 {
     public TileViewBehaviour tileViewBehaviour;
 
-    public Field Field { get; set; }
-    public Plant Plant { get; set; }
 
-    public float TimePlanted { get; private set; } = -1;
+
+    public Field Field { get; set; }
+
 
     private GrowthStage currentStadium = null;
     private List<GameObject> flowerPots = new List<GameObject>();
+
+
 
     private Double growthRate = 0;
 
@@ -86,9 +89,11 @@ public class FieldBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (Plant != null)
+        if (Field.Seed != null)
+        {
             Field.GrowthProgress = Math.Min(1.0, Field.GrowthProgress + growthRate * Time.deltaTime);
-        AdjustStadium();
+            AdjustStadium();
+        }
     }
 
 
@@ -127,9 +132,11 @@ public class FieldBehaviour : MonoBehaviour
 
     private void ClearField()
     {
-        Plant = null;
-        TimePlanted = -1;
+        Field.Seed = null;
+        Field.TimePlanted = -1;
         currentStadium = null;
+        Field.GrowthProgress = 0;
+
         foreach (GameObject flowerPot in flowerPots)
         {
             foreach (Transform child in flowerPot.transform)
@@ -152,10 +159,16 @@ public class FieldBehaviour : MonoBehaviour
 
     public void PlantCrop(Plant newPlant)
     {
-        Plant = newPlant;
-        TimePlanted = Time.realtimeSinceStartup;
+        Field.Seed = newPlant;
+        if (Assets.Scripts.Base.Core.Game.State != default)
+        {
+            Field.TimePlanted = Assets.Scripts.Base.Core.Game.State.ElapsedTime;
+        } else
+        {
+            Field.TimePlanted = Time.realtimeSinceStartup;
+        }
         currentStadium = GrowthStages.stages[0];
-        growthRate = GrowthController.getGrowthRate(Field, Plant);
+        growthRate = GrowthController.getGrowthRate(Field, Field.Seed);
 
         foreach (GameObject flowerPot in flowerPots)
         {
@@ -163,12 +176,15 @@ public class FieldBehaviour : MonoBehaviour
             flowerPot.transform.Rotate(new Vector3(0, randomNumber, 0));
         }
         Debug.Log("GrowthRate: " + growthRate);
+        AdjustStadium();
     }
 
     public void HarvestCrop()
     {
         if (IsFullyGrown())
         {
+            HarvestResult harvest = HarvestController.GetHarvestResult(Field.Seed);
+            tileViewBehaviour.ShowHarvestResult(harvest);
             ClearField();
         }
     }

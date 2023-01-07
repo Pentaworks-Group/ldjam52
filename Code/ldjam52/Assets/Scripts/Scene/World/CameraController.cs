@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
     public Camera cam;
 
-    private float moveSpeed = 100.0f;
+    private float moveSpeed = 10f;
     private float zoomSpeed = 5.0f;
     private float zoomSpeedMouse = 80.0f;
     private float zoomSpeedTouch = 10.0f;
@@ -34,16 +34,27 @@ public class CameraController : MonoBehaviour
             float moveX = Input.GetAxisRaw("Horizontal");
             float moveZ = Input.GetAxisRaw("Vertical");
 
-            // Mouse
-            if (Input.mousePosition.x <= Screen.width * 0.01f)
-                moveX = -5.0f;
-            else if (Input.mousePosition.x >= Screen.width * 0.99f)
-                moveX = 5.0f;
+            if (Core.Game.Options.IsMouseScreenEdgeScrollingEnabled)
+            {
+                // Mouse
+                if (Input.mousePosition.x <= Screen.width * 0.01f)
+                {
+                    moveX = -1.0f;
+                }
+                else if (Input.mousePosition.x >= Screen.width * 0.99f)
+                {
+                    moveX = 1.0f;
+                }
 
-            if (Input.mousePosition.y <= Screen.height * 0.01f)
-                moveZ = -5.0f;
-            else if (Input.mousePosition.y >= Screen.height * 0.99f)
-                moveZ = 5.0f;
+                if (Input.mousePosition.y <= Screen.height * 0.01f)
+                {
+                    moveZ = -1.0f;
+                }
+                else if (Input.mousePosition.y >= Screen.height * 0.99f)
+                {
+                    moveZ = 1.0f;
+                }
+            }
 
             // Touch
             if (Input.touchCount == 1)
@@ -51,7 +62,9 @@ public class CameraController : MonoBehaviour
                 Touch touch = Input.GetTouch(0);
 
                 if (touch.phase == TouchPhase.Began)
-                    prevTouch = touch.position;
+                {
+                    this.prevTouch = touch.position;
+                }
                 else if (touch.phase == TouchPhase.Moved)
                 {
                     moveX = prevTouch.x - touch.position.x;
@@ -59,20 +72,33 @@ public class CameraController : MonoBehaviour
                 }
             }
 
-            cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+            if (moveX != 0 || moveZ != 0)
+            {
+                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+            }
 
             //// Zoom
             float zoom = 0.0f;
+
             // Keys
             if (Input.GetKey(KeyCode.Q))
-                zoom = -zoomSpeed;
+            {
+                zoom = -this.zoomSpeed;
+            }
+
             //cam.fieldOfView = Mathf.Max(minFov, cam.fieldOfView - zoomSpeed * Time.deltaTime);
             if (Input.GetKey(KeyCode.E))
+            {
                 zoom = zoomSpeed;
+            }
             //cam.fieldOfView = Mathf.Min(maxFov, cam.fieldOfView + zoomSpeed * Time.deltaTime);
 
             // Mouse
-            zoom = zoomSpeedMouse * Input.mouseScrollDelta.y;
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                zoom = zoomSpeedMouse * -Input.mouseScrollDelta.y;
+            }
+
             //cam.fieldOfView = Mathf.Max(minFov, cam.fieldOfView - zoomSpeedMouse * Input.mouseScrollDelta.y * Time.deltaTime);
             //cam.fieldOfView = Mathf.Min(maxFov, cam.fieldOfView);
 

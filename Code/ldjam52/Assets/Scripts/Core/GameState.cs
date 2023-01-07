@@ -10,5 +10,7 @@ namespace Assets.Scripts.Core
         public GameMode GameMode { get; set; }
 
         public Decimal AvailableFunds { get; set; }
+
+        public float ElapsedTime { get; set; }
     }
 }

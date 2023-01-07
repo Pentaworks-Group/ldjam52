@@ -1,6 +1,9 @@
-﻿namespace Assets.Scripts.Core
+﻿using System;
+
+namespace Assets.Scripts.Core
 {
     public class PlayerOptions : GameFrame.Core.PlayerOptions
     {
+        public Boolean IsMouseScreenEdgeScrollingEnabled { get; set; }
     }
 }
