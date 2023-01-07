@@ -17,7 +17,5 @@ namespace Assets.Scripts.Model
         public Double Sunshine { get; set; }
         // Fertility of the field
         public Double Fertility { get; set; }
-
-
     }
 }
