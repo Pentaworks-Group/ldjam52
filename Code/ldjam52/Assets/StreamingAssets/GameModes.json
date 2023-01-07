@@ -1,0 +1,44 @@
+﻿[
+  {
+    "Name": "Test",
+    "Description": "Test game mode 1",
+    "GeneratedWorldSize": {
+      "X": 64,
+      "Y": 64
+    },
+    "PlayerStartingFunds": 9001,
+    "AvailablePlants": [
+      {
+        "Name": "Test plant 1001",
+        "Description": "Some weird test plan... people say...1001",
+        "ImageReference": "WeirdPlan3000",
+        "Temp": {
+          "Chromosome1": {
+            "Value0": 2,
+            "ValueDev": 2,
+            "IsDominant": false
+          },
+          "Chromosome2": {
+            "Value0": 2,
+            "ValueDev": 2,
+            "IsDominant": false
+          }
+        }
+      }
+    ],
+    "AvailableBiomes": [
+      {
+        "Name": "Grasslands",
+        "MaterialReference": "GrasslandGreen",
+        "HumidityMin": 1,
+        "HumidityMax": 1,
+        "TemperatureMin": 1,
+        "TemperatureMax": 1,
+        "SunshineMin": 1,
+        "SunshineMax": 1,
+        "FertilityMin": 1,
+        "FertilityMax": 1
+      }
+    ]
+  }
+]

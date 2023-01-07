@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using Assets.Scripts.Constants;
 
 using GameFrame.Core.Audio.Multi;
@@ -12,6 +14,9 @@ namespace Assets.Scripts.Core
         public ContinuousAudioManager AmbienceAudioManager { get; set; }
         public ContinuousAudioManager BackgroundAudioManager { get; set; }
         public EffectsAudioManager EffectsAudioManager { get; set; }
+
+        public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
+        public GameMode SelectedGameMode { get; set; }
 
         public void PlayButtonSound()
         {
@@ -51,7 +56,5 @@ namespace Assets.Scripts.Core
         {
             Base.Core.Game.Startup();
         }
-
-
     }
 }
