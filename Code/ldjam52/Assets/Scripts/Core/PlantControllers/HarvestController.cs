@@ -9,13 +9,13 @@ using UnityEngine;
 public class HarvestController
 {
 
-    public static HarvestProduce GetHarvestProduce(Plant plant)
+    public static HarvestResult GetHarvestResult(Plant plant)
     {
-        HarvestProduce harvestProduce = new();
-        harvestProduce.NumSeeds = GetNumSeeds(plant);
-        harvestProduce.NumHarvest = GetNumHarvest(plant);
+        HarvestResult harvestResult = new();
+        harvestResult.NumSeeds = GetNumSeeds(plant);
+        harvestResult.NumHarvest = GetNumHarvest(plant);
 
-        return harvestProduce;
+        return harvestResult;
     }
 
     private static int GetNumSeeds(Plant plant)

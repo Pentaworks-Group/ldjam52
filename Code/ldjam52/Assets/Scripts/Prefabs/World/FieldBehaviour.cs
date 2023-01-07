@@ -3,16 +3,21 @@ using Assets.Scripts.Constants;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FieldBehaviour : MonoBehaviour
 {
     public TileViewBehaviour tileViewBehaviour;
+
+
 
     public Field Field { get; set; }
 
 
     private GrowthStage currentStadium = null;
     private List<GameObject> flowerPots = new List<GameObject>();
+
+
 
     private Double growthRate = 0;
 
@@ -178,7 +183,8 @@ public class FieldBehaviour : MonoBehaviour
     {
         if (IsFullyGrown())
         {
-            HarvestProduce harvest = HarvestController.GetHarvestProduce(Field.Seed);
+            HarvestResult harvest = HarvestController.GetHarvestResult(Field.Seed);
+            tileViewBehaviour.ShowHarvestResult(harvest);
             ClearField();
         }
     }

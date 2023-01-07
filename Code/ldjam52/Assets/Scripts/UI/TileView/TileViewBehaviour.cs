@@ -6,9 +6,12 @@ using Assets.Scripts.Model;
 public class TileViewBehaviour : MonoBehaviour
 {
     private FieldBehaviour currentlyViewedField;
+
     private GameObject viewToggle;
     private GameObject currentInfo;
     private GameObject plantingOptions;
+    private GameObject harvestResult;
+
     private Image plantImage;
     private Text plantName;
     private Text plantedTime;
@@ -18,17 +21,32 @@ public class TileViewBehaviour : MonoBehaviour
     private TileViewSeedListDetailsBehaviour parent1;
     private TileViewSeedListDetailsBehaviour parent2;
 
+
+    private Text harvestSeedAmount;
+    private Text harvestPlantAmount;
+    private Image harvestSeedPic;
+    private Image harvestPlantPic;
+
     private void Awake()
     {
         viewToggle = transform.Find("TileViewToggle")?.gameObject;
         currentInfo = transform.Find("TileViewToggle/CurrentInfo")?.gameObject;
         plantingOptions = transform.Find("TileViewToggle/PlantingOptions")?.gameObject;
+        harvestResult = transform.Find("TileViewToggle/HarvestResult")?.gameObject;
+
         plantImage = transform.Find("TileViewToggle/CurrentInfo/CurrentPlant/Image")?.GetComponent<Image>();
         plantName = transform.Find("TileViewToggle/CurrentInfo/CurrentPlant/Name")?.GetComponent<Text>();
         plantedTime = transform.Find("TileViewToggle/CurrentInfo/PlantedTime/Value")?.GetComponent<Text>();
         harvestButton = transform.Find("TileViewToggle/CurrentInfo/Buttons/Harvest")?.GetComponent<Button>();
+
         parent1 = transform.Find("TileViewToggle/PlantingOptions/Selection/Selected1")?.GetComponent<TileViewSeedListDetailsBehaviour>();
         parent2 = transform.Find("TileViewToggle/PlantingOptions/Selection/Selected2")?.GetComponent<TileViewSeedListDetailsBehaviour>();
+
+
+        harvestSeedAmount = transform.Find("TileViewToggle/HarvestResult/Seeds/Amount")?.GetComponent<Text>();
+        harvestPlantAmount = transform.Find("TileViewToggle/HarvestResult/Plants/Amount")?.GetComponent<Text>();
+        harvestSeedPic = transform.Find("TileViewToggle/HarvestResult/Seeds/Pic")?.GetComponent<Image>();
+        harvestPlantPic = transform.Find("TileViewToggle/HarvestResult/Plants/Pic")?.GetComponent<Image>();
     }
 
     public void ViewField(FieldBehaviour fieldBehaviour)
@@ -39,14 +57,15 @@ public class TileViewBehaviour : MonoBehaviour
         UpdateView();
     }
 
+
     private void UpdateView()
     {
-        if (currentlyViewedField.Plant != null)
+        if (currentlyViewedField.Field.Seed != null)
         {
             currentInfo.SetActive(true);
             plantingOptions.SetActive(false);
-            plantName.text = currentlyViewedField.Plant.Name;
-            plantedTime.text = currentlyViewedField.TimePlanted.ToString();
+            plantName.text = currentlyViewedField.Field.Seed.Name;
+            plantedTime.text = currentlyViewedField.Field.TimePlanted.ToString();
             if (currentlyViewedField.IsFullyGrown())
             {
                 harvestButton.interactable = true;
@@ -87,7 +106,10 @@ public class TileViewBehaviour : MonoBehaviour
     public void CloseView()
     {
         currentlyViewedField = null;
+        currentInfo.SetActive(false);
         viewToggle.SetActive(false);
+        plantingOptions.SetActive(false);
+        harvestResult.SetActive(false);
         Core.Game.LockCameraMovement = false;
     }
 
@@ -117,4 +139,19 @@ public class TileViewBehaviour : MonoBehaviour
         currentlyViewedField.PlantSeeds(parent1.GetPlant(), parent2.GetPlant());
         UpdateView();
     }
+
+    public void HideHarvestResult()
+    {
+        harvestResult.SetActive(false);
+    }
+
+    public void ShowHarvestResult(HarvestResult result)
+    {
+        harvestResult.SetActive(true);
+        harvestSeedAmount.text = result.NumSeeds.ToString();
+        harvestPlantAmount.text = result.NumHarvest.ToString();
+        harvestSeedPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.SeedImageName);
+        harvestPlantPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.ImageName);
+    }
+
 }

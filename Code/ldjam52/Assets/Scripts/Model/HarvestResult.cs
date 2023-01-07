@@ -5,7 +5,7 @@ using Assets.Scripts.Model;
 
 using UnityEngine;
 
-public class HarvestProduce
+public class HarvestResult
 {
     public Plant Plant { get; set; }
     public int NumHarvest { get; set; }
