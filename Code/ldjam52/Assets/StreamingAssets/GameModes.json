@@ -3,8 +3,8 @@
     "Name": "Test",
     "Description": "Test game mode 1",
     "World": {
-      "Rows": 64,
-      "Columns": 64,
+      "Height": 64,
+      "Width": 64,
       "RandomBiomesAmount": 0,
       "IsAllBiomesUsageForced": true
     },
@@ -13,19 +13,282 @@
     },
     "AvailablePlants": [
       {
-        "Name": "Test plant 1001",
-        "Description": "Some weird test plan... people say...1001",
-        "ImageReference": "WeirdPlan3000",
-        "Temp": {
-          "Chromosome1": {
-            "Value0": 2,
-            "ValueDev": 2,
-            "IsDominant": false
+        "ID": "35054514-e9b5-45e1-bc5b-bd548de633da",
+        "Name": "sissy basil",
+        "Description": "a plant difficult to handle",
+        "ImageReference": "Basil",
+        "Genome": {
+          "Temp": {
+            "Chromosome1": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
           },
-          "Chromosome2": {
-            "Value0": 2,
-            "ValueDev": 2,
-            "IsDominant": false
+          "Sun": {
+            "Chromosome1": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Fertility": {
+            "Chromosome1": {
+              "Value0": 1.0,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1.0,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Water": {
+            "Chromosome1": {
+              "Value0": 0.4,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.4,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Growth": {
+            "Chromosome1": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Wither": {
+            "Chromosome1": {
+              "Value0": 10,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 10,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Durability": {
+            "Chromosome1": {
+              "Value0": 10,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 10,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Harvest": {
+            "Chromosome1": {
+              "Value0": 3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Seeds": {
+            "Chromosome1": {
+              "Value0": 4,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 4,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "PlantValue": {
+            "Chromosome1": {
+              "Value0": 10,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 10,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "SeedsValue": {
+            "Chromosome1": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          }
+        }
+      },
+      {
+        "ID": "9356849c-8c09-46f8-9521-29cea3e0c367",
+        "Name": "pickly pear",
+        "Description": "a dry plant",
+        "ImageReference": "Kaktus",
+        "Genome": {
+          "Temp": {
+            "Chromosome1": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Sun": {
+            "Chromosome1": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.9,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Fertility": {
+            "Chromosome1": {
+              "Value0": 0.2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Water": {
+            "Chromosome1": {
+              "Value0": 0.1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Growth": {
+            "Chromosome1": {
+              "Value0": 0.6,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.6,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Wither": {
+            "Chromosome1": {
+              "Value0": 600,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 600,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Durability": {
+            "Chromosome1": {
+              "Value0": 600,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 600,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Harvest": {
+            "Chromosome1": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Seeds": {
+            "Chromosome1": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "PlantValue": {
+            "Chromosome1": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "SeedsValue": {
+            "Chromosome1": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
           }
         }
       }
@@ -33,7 +296,12 @@
     "AvailableBiomes": [
       {
         "Name": "Grasslands",
-        "MaterialReference": "GrasslandGreen",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.7,
@@ -47,7 +315,12 @@
       },
       {
         "Name": "Desert",
-        "MaterialReference": "Desert",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.9,
@@ -61,7 +334,12 @@
       },
       {
         "Name": "Forest",
-        "MaterialReference": "Forest",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.3,
@@ -75,7 +353,12 @@
       },
       {
         "Name": "Swamp",
-        "MaterialReference": "Swamp",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.4,
@@ -89,7 +372,12 @@
       },
       {
         "Name": "Mountains",
-        "MaterialReference": "Mountains",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.0,

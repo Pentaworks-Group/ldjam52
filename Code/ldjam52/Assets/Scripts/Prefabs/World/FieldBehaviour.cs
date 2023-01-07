@@ -29,7 +29,18 @@ public class FieldBehaviour : MonoBehaviour
 
     private void Start()
     {
-        DebugPlant();
+        //DebugPlant();
+        if (Field == null)
+        {
+            Debug.LogWarning("No Field set, using default");
+            Field = new Field
+            {
+                Humidity = 0.5,
+                Temperature = 0.5,
+                Fertility = 0.5,
+                Sunshine = 0.5
+            };
+        }
     }
 
     private void DebugPlant()
@@ -64,11 +75,11 @@ public class FieldBehaviour : MonoBehaviour
             Name = "Test 1",
             Description = "This is the first plant"
         };
-        plant1.genome.Add(ChromosomeTypes.WATER, pair1);
-        plant1.genome.Add(ChromosomeTypes.TEMP, pair1);
-        plant1.genome.Add(ChromosomeTypes.SUN, pair1);
-        plant1.genome.Add(ChromosomeTypes.FERTILITY, pair1);
-        plant1.genome.Add(ChromosomeTypes.GROWTH, pair1);
+        plant1.Genome.Add(ChromosomeTypes.WATER, pair1);
+        plant1.Genome.Add(ChromosomeTypes.SUN, pair1);
+        plant1.Genome.Add(ChromosomeTypes.TEMP, pair1);
+        plant1.Genome.Add(ChromosomeTypes.FERTILITY, pair1);
+        plant1.Genome.Add(ChromosomeTypes.GROWTH, pair1);
 
         PlantCrop(plant1);
     }
@@ -90,14 +101,13 @@ public class FieldBehaviour : MonoBehaviour
     {
         foreach (GrowthStage stadium in GrowthStages.stages)
         {
-            if (stadium.ProgressStart<=Field.GrowthProgress && stadium.ProgressEnd>Field.GrowthProgress &&
-                !stadium.Equals(currentStadium))
+            if (stadium.ProgressStart <= Field.GrowthProgress && stadium.ProgressEnd > Field.GrowthProgress && !stadium.Equals(currentStadium))
             {
                 currentStadium = stadium;
                 ReplacePlantModel(stadium.ModelName);
             }
         }
-   }
+    }
 
 
     private void ReplacePlantModel(string newModelName)
@@ -117,6 +127,7 @@ public class FieldBehaviour : MonoBehaviour
 
     private void ClearField()
     {
+        Plant = null;
         TimePlanted = -1;
         currentStadium = null;
         foreach (GameObject flowerPot in flowerPots)
@@ -133,6 +144,12 @@ public class FieldBehaviour : MonoBehaviour
         return Field.GrowthProgress >= 1.0;
     }
 
+    public void PlantSeeds(Plant parent1, Plant parent2)
+    {
+        Plant child = InheritanceController.crossPlants(parent1, parent2);
+        PlantCrop(child);
+    }
+
     public void PlantCrop(Plant newPlant)
     {
         Plant = newPlant;
@@ -142,7 +159,7 @@ public class FieldBehaviour : MonoBehaviour
 
         foreach (GameObject flowerPot in flowerPots)
         {
-            int randomNumber = (int) (UnityEngine.Random.value*360);
+            int randomNumber = (int)(UnityEngine.Random.value * 360);
             flowerPot.transform.Rotate(new Vector3(0, randomNumber, 0));
         }
         Debug.Log("GrowthRate: " + growthRate);

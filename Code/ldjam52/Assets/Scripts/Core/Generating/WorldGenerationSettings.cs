@@ -6,8 +6,8 @@ namespace Assets.Scripts.Core.Generating
 {
     public class WorldGenerationSettings
     {
-        public Int32 Rows { get; set; }
-        public Int32 Columns { get; set; }
+        public Int32 Height { get; set; }
+        public Int32 Width { get; set; }
         public Int32 RandomBiomesAmount { get; set; }
 
         /// <summary>
