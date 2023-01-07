@@ -29,6 +29,11 @@ public class FieldBehaviour : MonoBehaviour
 
     private void Start()
     {
+        DebugPlant()
+    }
+
+    private void DebugPlant()
+    {
         Field = new Field
         {
             Humidity = 0.5,
@@ -59,16 +64,20 @@ public class FieldBehaviour : MonoBehaviour
             Name = "Test 1",
             Description = "This is the first plant"
         };
-        plant1.genome.Add("Temp", pair1);
+        plant1.genome.Add(ChromosomeTypes.WATER, pair1);
+        plant1.genome.Add(ChromosomeTypes.TEMP, pair1);
+        plant1.genome.Add(ChromosomeTypes.SUN, pair1);
+        plant1.genome.Add(ChromosomeTypes.FERTILITY, pair1);
+        plant1.genome.Add(ChromosomeTypes.GROWTH, pair1);
 
         PlantCrop(plant1);
     }
-
 
     void Update()
     {
         if (Plant != null)
             Field.GrowthProgress = Math.Min(1.0, Field.GrowthProgress + growthRate * Time.deltaTime);
+        Debug.Log(Field.GrowthProgress);
         AdjustStadium();
     }
 
@@ -83,7 +92,7 @@ public class FieldBehaviour : MonoBehaviour
         foreach (GrowthStage stadium in GrowthStages.stages)
         {
             if (stadium.ProgressStart<=Field.GrowthProgress && stadium.ProgressEnd>Field.GrowthProgress &&
-                !currentStadium.Equals(stadium))
+                !stadium.Equals(currentStadium))
             {
                 currentStadium = stadium;
                 ReplacePlantModel(stadium.ModelName);
@@ -131,6 +140,7 @@ public class FieldBehaviour : MonoBehaviour
         TimePlanted = Time.realtimeSinceStartup;
         currentStadium = GrowthStages.stages[0];
         growthRate = GrowthController.getGrowthRate(Field, Plant);
+        Debug.Log("GrothRate: " + growthRate);
     }
 
     public void HarvestCrop()
