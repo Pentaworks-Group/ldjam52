@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Constants
 {
-    internal class NameConstants
+    public static class PlantNames
     {
         public static List<String> adjectives = new List<String>
         {

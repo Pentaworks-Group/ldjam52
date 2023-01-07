@@ -69,6 +69,7 @@ public class InheritanceController : MonoBehaviour
     public Plant crossPlants(Plant plant1, Plant plant2)
     {
         Plant newPlant = new Plant();
+        newPlant = NameConstants.adjectives
         foreach (KeyValuePair<string, ChromosomePair> pair in plant1.genome)
         {
             Chromosome chromosome1 = chooseRandomChromosome(pair.Value);
