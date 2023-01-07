@@ -16,5 +16,7 @@ namespace Assets.Scripts.Model
         public Double Fertility { get; set; }
         // Growth Progress
         public Double GrowthProgress { get; set; } = 0;
+
+        public float TimePlanted { get; set; } = -1;
     }
 }

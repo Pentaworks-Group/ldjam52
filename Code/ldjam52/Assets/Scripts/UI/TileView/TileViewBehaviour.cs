@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using Assets.Scripts.Base;
+using Assets.Scripts.Model;
 
 public class TileViewBehaviour : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class TileViewBehaviour : MonoBehaviour
         plantingOptions = transform.Find("TileViewToggle/PlantingOptions")?.gameObject;
         plantImage = transform.Find("TileViewToggle/CurrentInfo/CurrentPlant/Image")?.GetComponent<Image>();
         plantName = transform.Find("TileViewToggle/CurrentInfo/CurrentPlant/Name")?.GetComponent<Text>();
-        plantedTime = transform.Find("TileViewToggle/CurrentInfo/PlantedTime/Text")?.GetComponent<Text>();
+        plantedTime = transform.Find("TileViewToggle/CurrentInfo/PlantedTime/Value")?.GetComponent<Text>();
         harvestButton = transform.Find("TileViewToggle/CurrentInfo/Buttons/Harvest")?.GetComponent<Button>();
         parent1 = transform.Find("TileViewToggle/PlantingOptions/Selection/Selected1")?.GetComponent<TileViewSeedListDetailsBehaviour>();
         parent2 = transform.Find("TileViewToggle/PlantingOptions/Selection/Selected2")?.GetComponent<TileViewSeedListDetailsBehaviour>();
@@ -99,6 +100,17 @@ public class TileViewBehaviour : MonoBehaviour
     {
         parent2.DisplaySeedDetails(plantBehaviour.GetPlant());
     }
+
+    public void SelectParent1Slot(TileViewSeedListSlotBehaviour slotBehaviour)
+    {
+        parent1.DisplaySeedDetails(slotBehaviour.GetPlant());
+    }
+
+    public void SelectParent2Slot(TileViewSeedListSlotBehaviour slotBehaviour)
+    {
+        parent2.DisplaySeedDetails(slotBehaviour.GetPlant());
+    }
+
 
     public void PlantSeeds()
     {

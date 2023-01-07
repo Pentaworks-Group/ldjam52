@@ -9,9 +9,7 @@ public class FieldBehaviour : MonoBehaviour
     public TileViewBehaviour tileViewBehaviour;
 
     public Field Field { get; set; }
-    public Plant Plant { get; set; }
 
-    public float TimePlanted { get; private set; } = -1;
 
     private GrowthStage currentStadium = null;
     private List<GameObject> flowerPots = new List<GameObject>();
@@ -86,7 +84,7 @@ public class FieldBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (Plant != null)
+        if (Field.Seed != null)
         {
             Field.GrowthProgress = Math.Min(1.0, Field.GrowthProgress + growthRate * Time.deltaTime);
             AdjustStadium();
@@ -129,9 +127,10 @@ public class FieldBehaviour : MonoBehaviour
 
     private void ClearField()
     {
-        Plant = null;
-        TimePlanted = -1;
+        Field.Seed = null;
+        Field.TimePlanted = -1;
         currentStadium = null;
+        Field.GrowthProgress = 0;
 
         foreach (GameObject flowerPot in flowerPots)
         {
@@ -155,10 +154,16 @@ public class FieldBehaviour : MonoBehaviour
 
     public void PlantCrop(Plant newPlant)
     {
-        Plant = newPlant;
-        TimePlanted = Assets.Scripts.Base.Core.Game.State.ElapsedTime;
+        Field.Seed = newPlant;
+        if (Assets.Scripts.Base.Core.Game.State != default)
+        {
+            Field.TimePlanted = Assets.Scripts.Base.Core.Game.State.ElapsedTime;
+        } else
+        {
+            Field.TimePlanted = Time.realtimeSinceStartup;
+        }
         currentStadium = GrowthStages.stages[0];
-        growthRate = GrowthController.getGrowthRate(Field, Plant);
+        growthRate = GrowthController.getGrowthRate(Field, Field.Seed);
 
         foreach (GameObject flowerPot in flowerPots)
         {
@@ -173,6 +178,7 @@ public class FieldBehaviour : MonoBehaviour
     {
         if (IsFullyGrown())
         {
+            HarvestProduce harvest = HarvestController.GetHarvestProduce(Field.Seed);
             ClearField();
         }
     }

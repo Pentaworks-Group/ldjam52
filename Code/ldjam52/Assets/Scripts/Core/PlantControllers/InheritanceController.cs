@@ -7,7 +7,7 @@ using MathNet.Numerics.Distributions;
 using UnityEngine;
 using GameFrame.Core.Extensions;
 
-public class InheritanceController : MonoBehaviour
+public class InheritanceController 
 {
     // Start is called before the first frame update
     void Start()

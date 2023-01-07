@@ -36,7 +36,7 @@ public class GrowthController
         return growthFactor * growthRate;
     }
 
-    private static Double getGrowthFactorForType(String type, Plant plant, Double biomeValue)
+    public static Double getGrowthFactorForType(String type, Plant plant, Double biomeValue)
     {
         ChromosomePair pair;
         Double factor = 1.0;
@@ -51,7 +51,7 @@ public class GrowthController
         return factor;
     }
 
-    private static Chromosome getDominantChromosome(ChromosomePair pair)
+    public static Chromosome getDominantChromosome(ChromosomePair pair)
     {
         Chromosome outValue = new Chromosome
         {
