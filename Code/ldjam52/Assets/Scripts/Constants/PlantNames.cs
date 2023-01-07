@@ -21,5 +21,10 @@ namespace Assets.Scripts.Constants
             "kitty"
         };
 
+        public static List<String> images = new List<String>
+        {
+            "img1.png"
+        };
+
     }
 }
