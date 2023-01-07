@@ -24,7 +24,7 @@ namespace Assets.Scripts.Model
         // 'Seeds': amount of seeds coming out of a harvest
         // 'PlantValue': selling value of the plant
         // 'SeedsValue': selling value of the new seeds
-        public Dictionary<String, ChromosomePair> genome { get; set; }
+        public Dictionary<String, ChromosomePair> genome = new Dictionary<string, ChromosomePair> { };
 
     }
 }
