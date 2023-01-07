@@ -50,13 +50,13 @@ public class InheritanceController : MonoBehaviour
             Name = "Test 1",
             Description = "This is the first plant"
         };
-        plant1.genome.Add("Temp", pair1);
+        plant1.Genome.Add("Temp", pair1);
         Plant plant2 = new Plant
         {
             Name = "Test 2",
             Description = "This is the second plant"
         };
-        plant2.genome.Add("Temp", pair2);
+        plant2.Genome.Add("Temp", pair2);
 
         Plant plant3 = crossPlants(plant1, plant2);
         Debug.Log(plant3.Name);
@@ -73,7 +73,7 @@ public class InheritanceController : MonoBehaviour
     {
         Plant newPlant = new Plant();
         newPlant.Name = PlantNames.adjectives.GetRandomEntry()+" "+PlantNames.names.GetRandomEntry();
-        foreach (KeyValuePair<string, ChromosomePair> pair in plant1.genome)
+        foreach (KeyValuePair<string, ChromosomePair> pair in plant1.Genome)
         {
             Chromosome chromosome1 = chooseRandomChromosome(pair.Value);
             Chromosome chromosome2 = chooseRandomChromosomeByType(plant2, pair.Key);
@@ -82,7 +82,7 @@ public class InheritanceController : MonoBehaviour
                 Chromosome1 = chromosome1,
                 Chromosome2 = chromosome2
             };
-            newPlant.genome.Add(pair.Key, newPair);
+            newPlant.Genome.Add(pair.Key, newPair);
         }
         return newPlant;
     }
@@ -90,7 +90,7 @@ public class InheritanceController : MonoBehaviour
     private static Chromosome chooseRandomChromosomeByType(Plant plant, String type)
     {
         ChromosomePair chromosomePair;
-        if (plant.genome.TryGetValue(type, out chromosomePair))
+        if (plant.Genome.TryGetValue(type, out chromosomePair))
         {
             return chooseRandomChromosome(chromosomePair);
         } else
