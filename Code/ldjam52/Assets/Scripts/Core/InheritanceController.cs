@@ -59,6 +59,7 @@ public class InheritanceController : MonoBehaviour
         plant2.genome.Add("Temp", pair2);
 
         Plant plant3 = crossPlants(plant1, plant2);
+        Debug.Log(plant3.Name);
     }
 
     // Update is called once per frame
@@ -94,7 +95,7 @@ public class InheritanceController : MonoBehaviour
             return chooseRandomChromosome(chromosomePair);
         } else
         {
-            Console.Write($"Key {type} not defined for the plant!");
+            Console.WriteLine($"Key {type} not defined for the plant!");
             return null;
         }
     }
