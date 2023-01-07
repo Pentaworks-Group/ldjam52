@@ -12,6 +12,7 @@ namespace Assets.Scripts.Model
         public String Name { get; set; }
         public String Description { get; set; }
         public String ImageName { get; set; }
+        public String SeedImageName { get; set; }
         //Set of Chromosome Pairs
         //The following Sets have to be defined:
         // 'Temp': reaction to temperature

@@ -9,6 +9,7 @@ namespace Assets.Scripts.Model
     public class FarmStorage
     {
         public Double StorageSize { get; set; }
+        public Double MoneyBalance { get; set; }
         public List<StorageItem> StorageItems { get; set; }
     }
 }
