@@ -5,9 +5,10 @@ using UnityEngine;
 public class FieldBehaviour : MonoBehaviour
 {
     private Plant plant;
-    private float planted;
+    private bool planted = false;
     private float nextStadium = 2;
-    private int currentStadium = 0;
+    private int currentStadium = -1;
+    private int ripe = 4;
     private List<GameObject> flowerPots = new List<GameObject>();
 
     private float currentGameTime = 0;
@@ -27,9 +28,33 @@ public class FieldBehaviour : MonoBehaviour
         currentGameTime += Time.deltaTime;
     }
 
+
+    public void SelectField()
+    {
+        if (planted)
+        {
+            if (currentStadium == ripe)
+            {
+                Debug.Log("Harvest");
+                ClearField();
+            }
+        }
+        else
+        {
+            Debug.Log("Planted");
+            planted = true;
+            nextStadium = currentGameTime;
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        SelectField();
+    }
+
     private void CheckIfNextStadium()
     {
-        if (nextStadium < currentGameTime)
+        if (planted && currentStadium < ripe && nextStadium < currentGameTime)
         {
             string nextModelName = GetNextModelName();
             ReplacePlantModel(nextModelName);
@@ -60,6 +85,19 @@ public class FieldBehaviour : MonoBehaviour
             Transform flower = Instantiate(template, flowerPot.transform);
             flower.gameObject.name = "Flower";
             flower.gameObject.SetActive(true);
+        }
+    }
+
+    private void ClearField()
+    {
+        planted = false;
+        currentStadium = -1;
+        foreach (GameObject flowerPot in flowerPots)
+        {
+            foreach (Transform child in flowerPot.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
     }
 }
