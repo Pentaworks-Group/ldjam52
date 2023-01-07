@@ -10,18 +10,21 @@ namespace Assets.Scripts.Core.Inventory
 {
     public class FormStorageBehaviour
     {
+        //Returns the free space left in the farm storage
         public static int GetFreeStorageSpace()
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
             return storage.StorageSize-getTotalStorageFilled(storage);
         }
 
+        //Returns all the items in storage
         public static List<StorageItem> getStorageInventory()
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
             return storage.StorageItems;
         }
 
+        //Tries to put in an amount of plants and returns the amount that fitted in the storage
         public static int GutPlantInStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
@@ -37,6 +40,7 @@ namespace Assets.Scripts.Core.Inventory
             return definitveAmount;
         }
 
+        //Tries to take out an amount of plants and returns the amount that was possible to take out
         public static Double TakePlantOfStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
@@ -50,6 +54,7 @@ namespace Assets.Scripts.Core.Inventory
             return definitiveAmount;
         }
 
+        //Tries to put in an amount of seeds and returns the amount that fitted in the storage
         public static int PutSeedInStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
@@ -65,6 +70,7 @@ namespace Assets.Scripts.Core.Inventory
             return definitveAmount;
         }
 
+        //Tries to take out an amount of seeds and returns the amount that was possible to take out
         public static Double TakeSeedsOfStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
@@ -78,12 +84,14 @@ namespace Assets.Scripts.Core.Inventory
             return definitiveAmount;
         }
 
+        //Puts Money on your account
         public static void PutMoneyInStorage(int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
             storage.MoneyBalance += amount;
         }
 
+        //Takes Money on your account
         public static void TakeMoneyOfStorage(int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
