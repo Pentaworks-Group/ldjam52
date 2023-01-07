@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Model;
+﻿using System;
+
+using Assets.Scripts.Model;
 
 namespace Assets.Scripts.Core
 {
@@ -6,5 +8,7 @@ namespace Assets.Scripts.Core
     {
         public World World { get; set; }
         public GameMode GameMode { get; set; }
+
+        public Decimal AvailableFunds { get; set; }
     }
 }

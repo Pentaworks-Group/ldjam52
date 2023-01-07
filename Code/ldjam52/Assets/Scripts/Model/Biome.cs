@@ -1,22 +1,24 @@
 ﻿using System;
 
+using GameFrame.Core.Media;
+
 namespace Assets.Scripts.Model
 {
     public class Biome
     {
         public String Name { get; set; }
-        public String MaterialReference { get; set; } // Used to load the related Material to color the tile
+        public Color Color { get; set; }
         //Game Value: Possible Humidity values for the Biome
-        public Double HumidityMin { get; set; }
-        public Double HumidityMax { get; set; }
+        public Single HumidityMin { get; set; }
+        public Single HumidityMax { get; set; }
         //Game Value: Possible Temperature values for the Biome
-        public Double TemperatureMin { get; set; }
-        public Double TemperatureMax { get; set; }
+        public Single TemperatureMin { get; set; }
+        public Single TemperatureMax { get; set; }
         //Game Value: Possible Sunhsine values for the Biome
-        public Double SunshineMin { get; set; }
-        public Double SunshineMax { get; set; }
+        public Single SunshineMin { get; set; }
+        public Single SunshineMax { get; set; }
         //Game Value: Possible Fertility values for the Biome
-        public Double FertilityMin { get; set; }
-        public Double FertilityMax { get; set; }
+        public Single FertilityMin { get; set; }
+        public Single FertilityMax { get; set; }
     }
 }
