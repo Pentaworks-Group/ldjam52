@@ -8,8 +8,11 @@ namespace Assets.Scripts.Model
 {
     public class Chromosome
     {
+        //Expected Value (Normal Distribution)
         public Double Value_0 { get; set; }
+        //Variance (Normal Distribution)
         public Double Value_dev { get; set; }
-        public Boolean dominant { get; set; }
+        //Dominance of the Chromosome
+        public Boolean dominant { get; set; } = false;
     }
 }

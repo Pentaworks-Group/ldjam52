@@ -11,29 +11,27 @@ namespace Assets.Scripts.Model
         public String Name { get; set; }
         public String Description { get; set; }
         public String ImageName { get; set; }
-        public Chromosome Temp_1 { get; set; }
-        public Chromosome Temp_2 { get; set; }
-        public Chromosome Sun_1 { get; set; }
-        public Chromosome Sun_2 { get; set; }
-        public Chromosome Fertility_1 { get; set; }
-        public Chromosome Fertility_2 { get; set; }
-        public Chromosome Water_1 { get; set; }
-        public Chromosome Water_2 { get; set; }
-        public Chromosome Growth_1 { get; set; }
-        public Chromosome Growth_2 { get; set; }
-        public Chromosome Age_1 { get; set; }
-        public Chromosome Age_2 { get; set; }
-        public Chromosome Wither_1 { get; set; }
-        public Chromosome Wither_2 { get; set; }
-        public Chromosome Durabilty_1 { get; set; }
-        public Chromosome Durabilty_2 { get; set; }
-        public Chromosome Harvest_1 { get; set; }
-        public Chromosome Harvest_2 { get; set; }
-        public Chromosome Seeds_1 { get; set; }
-        public Chromosome Seeds_2 { get; set; }
-        public Chromosome Plant_Value_1 { get; set; }
-        public Chromosome Plant_Value_2 { get; set; }
-        public Chromosome Seeds_Value_1 { get; set; }
-        public Chromosome Seeds_Value_2 { get; set; }
+        //Chromosome Pair defining the reaction to temperature
+        public ChromosomePair Temp { get; set; }
+        //Chromosome Pair defining the reaction to Sunlight
+        public ChromosomePair Sun { get; set; }
+        //Chromosome Pair defining the reaction to Fertility of the ground
+        public ChromosomePair Fertility { get; set; }
+        //Chromosome Pair defining the need of Water (could come from Humidity of the ground or irrigation)
+        public ChromosomePair Water { get; set; }
+        //Chromosome Pair defining the speed of the growth on the field
+        public ChromosomePair Growth { get; set; }
+        //Chromosome Pair defining the time in which the plant withers (on the field)
+        public ChromosomePair Wither { get; set; }
+        //Chromosome Pair defining the time after which the plan is not sellable anymore (being in storage)
+        public ChromosomePair Durability { get; set; }
+        //Chromosome Pair defining the amount of harvest
+        public ChromosomePair Harvest { get; set; }
+        //Chromosome Pair defining the amount of seeds coming out of a harvest
+        public ChromosomePair Seeds { get; set; }
+        //Chromosome Pair defining the selling value of the plant
+        public ChromosomePair Plant_Value { get; set; }
+        //Chromosome Pair defining the selling value of the new seeds
+        public ChromosomePair Seeds_Value { get; set; }
     }
 }
