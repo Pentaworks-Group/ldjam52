@@ -18,7 +18,7 @@ public class InheritanceController : MonoBehaviour
         
     }
 
-    public Plant crossPlants(Plant plant1, Plant plant2)
+    public void crossPlants(Plant plant1, Plant plant2)
     {
 
     }
@@ -26,7 +26,7 @@ public class InheritanceController : MonoBehaviour
     private Chromosome chooseRandomChromosome(ChromosomePair pair)
     {
         double randomNumber = Random.value;
-        return randomNumber < 0.5 ? pair.Chromosome_1 : pair.Chromosome_2;
+        return randomNumber < 0.5 ? pair.Chromosome1 : pair.Chromosome2;
     }
 
     private void updateMeanValue(Chromosome chromomose)
