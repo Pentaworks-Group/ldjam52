@@ -66,6 +66,7 @@ public class TileViewBehaviour : MonoBehaviour
     public void HarvestCrop()
     {
         currentlyViewedField.HarvestCrop();
+        UpdateView();
     }
 
 
@@ -78,6 +79,7 @@ public class TileViewBehaviour : MonoBehaviour
     public void DestroyCrop()
     {
         currentlyViewedField.DestroyCrop();
+        UpdateView();
     }
 
 
