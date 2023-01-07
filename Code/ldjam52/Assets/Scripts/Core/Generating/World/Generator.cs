@@ -67,20 +67,22 @@ namespace Assets.Scripts.Core.Generating.World
                 tiles[x, z] = tile;
             }
 
-            FillEmptyTiles(tiles);
+            var tileList = FillEmptyTiles(tiles);
 
             this.world = new Model.World()
             {
                 Height = gameMode.World.Height,
                 Width = gameMode.World.Width,
-                //Tiles = tiles.ToList()
+                Tiles = tileList
             };
 
             return isSuccessful;
         }
 
-        private void FillEmptyTiles(Tile[,] tiles)
+        private List<Tile> FillEmptyTiles(Tile[,] tiles)
         {
+            var tileList = new List<Tile>();
+
             for (int x = 0; x < gameMode.World.Width; x++)
             {
                 for (int z = 0; z < gameMode.World.Height; z++)
@@ -105,8 +107,12 @@ namespace Assets.Scripts.Core.Generating.World
 
                         tiles[x, z] = tile;
                     }
+
+                    tileList.Add(tile);
                 }
             }
+
+            return tileList;
         }
 
         private BiomeSpawn FindBiome(Tile tile)
