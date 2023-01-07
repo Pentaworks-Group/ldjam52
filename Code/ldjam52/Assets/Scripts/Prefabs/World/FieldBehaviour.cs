@@ -64,11 +64,11 @@ public class FieldBehaviour : MonoBehaviour
             Name = "Test 1",
             Description = "This is the first plant"
         };
-        plant1.genome.Add(ChromosomeTypes.WATER, pair1);
-        plant1.genome.Add(ChromosomeTypes.TEMP, pair1);
-        plant1.genome.Add(ChromosomeTypes.SUN, pair1);
-        plant1.genome.Add(ChromosomeTypes.FERTILITY, pair1);
-        plant1.genome.Add(ChromosomeTypes.GROWTH, pair1);
+        plant1.Genome.Add(ChromosomeTypes.WATER, pair1);
+        plant1.Genome.Add(ChromosomeTypes.SUN, pair1);
+        plant1.Genome.Add(ChromosomeTypes.TEMP, pair1);
+        plant1.Genome.Add(ChromosomeTypes.FERTILITY, pair1);
+        plant1.Genome.Add(ChromosomeTypes.GROWTH, pair1);
 
         PlantCrop(plant1);
     }

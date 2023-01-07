@@ -23,8 +23,7 @@ public class GrowthController
         Double growthFactor = (humidityFactor + temperatureFactor + sunshineFactor + fertilityFactor) / 4;
 
         Double growthRate = 0.0;
-        ChromosomePair growthPair;
-        if (plant.genome.TryGetValue(ChromosomeTypes.GROWTH, out growthPair))
+        if (plant.Genome.TryGetValue(ChromosomeTypes.GROWTH, out ChromosomePair growthPair))
         {
             Chromosome chromosome = getDominantChromosome(growthPair);
             growthRate = chromosome.Value0;
@@ -41,7 +40,7 @@ public class GrowthController
     {
         ChromosomePair pair;
         Double factor = 1.0;
-        if (plant.genome.TryGetValue(type, out pair))
+        if (plant.Genome.TryGetValue(type, out pair))
         {
             return getGrowthForChromosome(getDominantChromosome(pair), biomeValue);
         }

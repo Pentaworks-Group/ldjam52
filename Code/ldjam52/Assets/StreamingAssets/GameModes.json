@@ -17,16 +17,18 @@
         "Name": "Test plant 1001",
         "Description": "Some weird test plan... people say...1001",
         "ImageReference": "WeirdPlan3000",
-        "Temp": {
-          "Chromosome1": {
-            "Value0": 2,
-            "ValueDev": 2,
-            "IsDominant": false
-          },
-          "Chromosome2": {
-            "Value0": 2,
-            "ValueDev": 2,
-            "IsDominant": false
+        "Genome": {
+          "Temp": {
+            "Chromosome1": {
+              "Value0": 2,
+              "ValueDev": 2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 2,
+              "ValueDev": 2,
+              "IsDominant": false
+            }
           }
         }
       }
