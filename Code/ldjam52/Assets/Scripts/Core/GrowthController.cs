@@ -7,18 +7,8 @@ using MathNet.Numerics.Distributions;
 using UnityEngine;
 using GameFrame.Core.Extensions;
 
-public class GrowthController : MonoBehaviour
+public class GrowthController
 {
-    void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-
-    }
-
     public Double getGrowthRate(Field field, Plant plant)
     {
         //Humidity
