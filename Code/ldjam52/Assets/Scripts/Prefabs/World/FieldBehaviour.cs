@@ -7,7 +7,6 @@ using UnityEngine;
 public class FieldBehaviour : MonoBehaviour
 {
     public TileViewBehaviour tileViewBehaviour;
-    public GrowthController GrowthController;
 
     public Field Field { get; set; }
     public Plant Plant { get; set; }
@@ -17,7 +16,6 @@ public class FieldBehaviour : MonoBehaviour
     private GrowthStage currentStadium = null;
     private List<GameObject> flowerPots = new List<GameObject>();
 
-    private float currentGameTime = 0;
     private Double growthRate = 0;
 
     private void Awake()
@@ -29,13 +27,49 @@ public class FieldBehaviour : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Field = new Field
+        {
+            Humidity = 0.5,
+            Temperature = 0.5,
+            Fertility = 0.5,
+            Sunshine = 0.5
+        };
+
+        //Debug: Test code
+        Chromosome ch1 = new Chromosome
+        {
+            Value0 = 0.1,
+            ValueDev = 0.2,
+            IsDominant = true
+        };
+        Chromosome ch2 = new Chromosome
+        {
+            Value0 = 0.2,
+            ValueDev = 0.4
+        };
+        ChromosomePair pair1 = new ChromosomePair
+        {
+            Chromosome1 = ch1,
+            Chromosome2 = ch2
+        };
+        Plant plant1 = new Plant
+        {
+            Name = "Test 1",
+            Description = "This is the first plant"
+        };
+        plant1.genome.Add("Temp", pair1);
+
+        PlantCrop(plant1);
+    }
+
 
     void Update()
     {
         if (Plant != null)
             Field.GrowthProgress = Math.Min(1.0, Field.GrowthProgress + growthRate * Time.deltaTime);
         AdjustStadium();
-        currentGameTime += Time.deltaTime;
     }
 
 
@@ -91,7 +125,7 @@ public class FieldBehaviour : MonoBehaviour
         return Field.GrowthProgress >= 1.0;
     }
 
-    public void plantCrop(Plant newPlant)
+    public void PlantCrop(Plant newPlant)
     {
         Plant = newPlant;
         TimePlanted = Time.realtimeSinceStartup;
