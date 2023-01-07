@@ -1,3 +1,5 @@
+using Assets.Scripts.Base;
+using Assets.Scripts.Constants;
 using Assets.Scripts.Model;
 
 using UnityEngine;
@@ -7,26 +9,32 @@ public class WorldBehaviour : MonoBehaviour
     private GameObject tileContainer;
     private GameObject templateContainer;
 
-    // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
-        this.tileContainer = transform.Find("TileContainer").gameObject;
-        this.templateContainer = transform.Find("TemplateContainer").gameObject;
-
-        var gameState = Assets.Scripts.Base.Core.Game.State;
-
-        if (gameState != default)
+        if (Core.Game.AvailableGameModes.Count < 1)
         {
-            if (gameState.World.Tiles.Count > 0)
+            Assets.Scripts.Base.Core.Game.ChangeScene(SceneNames.MainMenu);
+        }
+        else
+        {
+            this.tileContainer = transform.Find("TileContainer").gameObject;
+            this.templateContainer = transform.Find("Templates").gameObject;
+
+            var gameState = Assets.Scripts.Base.Core.Game.State;
+
+            if (gameState != default)
             {
-                RenderWorld(gameState.World);
+                if (gameState.World.Tiles.Count > 0)
+                {
+                    RenderWorld(gameState.World);
+                }
             }
         }
     }
 
     private void RenderWorld(World world)
     {
-        var tileTemplate = default(GameObject);
+        var tileTemplate = templateContainer.GetComponentInChildren<TileBehaviour>().gameObject;
 
         foreach (var tile in world.Tiles)
         {
@@ -35,10 +43,14 @@ public class WorldBehaviour : MonoBehaviour
             var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
 
             tileBehaviour.Tile = tile;
+
+            if ((tileGameObject.transform.position.x != tile.Position.X) || (tileGameObject.transform.position.z != tile.Position.Z))
+            {
+                tileGameObject.transform.position = new Vector3(tile.Position.X, this.transform.position.y, tile.Position.Z);
+            }
         }
     }
 
-    // Update is called once per frame
     private void Update()
     {
         Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
