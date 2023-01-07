@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 
 using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
-
-using GameFrame.Core.Audio.Multi;
-using GameFrame.Core.Audio.Single;
+using Assets.Scripts.Core;
 
 using UnityEngine;
 
@@ -50,4 +47,35 @@ public class MainMenuBehaviour : MonoBehaviour
         //}
     }
 
+    public void LoadGameSettings()
+    {
+        if (Core.Game.AvailableGameModes.Count == 0)
+        {
+            var filePath = Application.streamingAssetsPath + "/GameModes.json";
+            StartCoroutine(GameFrame.Core.Json.Handler.DeserializeObjectFromStreamingAssets<List<GameMode>>(filePath, SetGameSettings));
+        }
+    }
+
+    private List<GameMode> SetGameSettings(List<GameMode> loadedGameModes)
+    {
+        if (loadedGameModes?.Count > 0)
+        {
+            foreach (var gameMode in loadedGameModes)
+            {
+                Core.Game.AvailableGameModes.Add(gameMode);
+            }
+        }
+
+        if (Core.Game.SelectedGameMode == default)
+        {
+            Core.Game.SelectedGameMode = loadedGameModes[0];
+        }
+
+        return loadedGameModes;
+    }
+
+    private void Start()
+    {
+        LoadGameSettings();
+    }
 }

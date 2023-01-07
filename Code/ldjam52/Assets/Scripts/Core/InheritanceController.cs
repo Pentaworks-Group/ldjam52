@@ -19,9 +19,12 @@ public class InheritanceController : MonoBehaviour
 
     public Plant crossPlants(Plant plant1, Plant plant2)
     {
-        UnityEngine.Random.value;
-
+        //UnityEngine.Random.value;
+        return default;
     }
 
     private static double RandomGaussian(double minVal)
+    {
+        return default;
+    }
 }
