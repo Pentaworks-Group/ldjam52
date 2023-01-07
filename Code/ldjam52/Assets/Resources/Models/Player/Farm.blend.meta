@@ -3,7 +3,32 @@ guid: 778e76c89a330a549b6450119285edb4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete Ground
+    second: {fileID: 2100000, guid: 175387768f58a1847a27bc1b1f4ec1ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dach
+    second: {fileID: 2100000, guid: cb165791b6d14a34bb3dda66fa0426f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 6723be05fa4fa774084a7842e1dd0dfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fenster
+    second: {fileID: 2100000, guid: 40c4e0a28c72a2b4f9d8b06403a9e1c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wand
+    second: {fileID: 2100000, guid: ed275ddff27027d4aac5cc7898397588, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
