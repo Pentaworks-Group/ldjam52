@@ -6,7 +6,7 @@ namespace Assets.Scripts.Constants
     {
         public const String MainMenu = "MainMenuScene";
         public const String GameMode = "GameModeScene";
-        public const String SavedGames = "SaveGamesScene";
+        public const String SavedGames = "SaveGameScene";
         public const String Options = "OptionsScene";
         public const String World= "WorldScene";
         public const String Credits= "CreditsScene";

@@ -44,8 +44,8 @@ public class MainMenuBehaviour : MonoBehaviour
         //}
         //else
         //{
-        //    Core.Game.PlayButtonSound();
-        //    Core.Game.Start();
+        //Core.Game.PlayButtonSound();
+        Core.Game.Start();
 
         //}
     }
