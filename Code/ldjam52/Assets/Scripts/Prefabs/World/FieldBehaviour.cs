@@ -77,7 +77,6 @@ public class FieldBehaviour : MonoBehaviour
     {
         if (Plant != null)
             Field.GrowthProgress = Math.Min(1.0, Field.GrowthProgress + growthRate * Time.deltaTime);
-        Debug.Log(Field.GrowthProgress);
         AdjustStadium();
     }
 
@@ -140,7 +139,13 @@ public class FieldBehaviour : MonoBehaviour
         TimePlanted = Time.realtimeSinceStartup;
         currentStadium = GrowthStages.stages[0];
         growthRate = GrowthController.getGrowthRate(Field, Plant);
-        Debug.Log("GrothRate: " + growthRate);
+
+        foreach (GameObject flowerPot in flowerPots)
+        {
+            int randomNumber = (int) (UnityEngine.Random.value*360);
+            flowerPot.transform.Rotate(new Vector3(0, randomNumber, 0));
+        }
+        Debug.Log("GrowthRate: " + growthRate);
     }
 
     public void HarvestCrop()
