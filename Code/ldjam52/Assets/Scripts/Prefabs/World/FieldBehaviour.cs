@@ -29,7 +29,7 @@ public class FieldBehaviour : MonoBehaviour
 
     private void Start()
     {
-        DebugPlant()
+        DebugPlant();
     }
 
     private void DebugPlant()
