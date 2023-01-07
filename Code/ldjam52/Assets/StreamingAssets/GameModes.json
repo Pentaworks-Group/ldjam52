@@ -431,6 +431,146 @@
             }
           }
         }
+      },
+      {
+        "ID": "866ead50-2a6e-4ef5-a830-6297373ae879",
+        "Name": "amazing maize",
+        "Description": "do not let it get too hot",
+        "ImageReference": "Mais",
+        "Genome": {
+          "Temp": {
+            "Chromosome1": {
+              "Value0": 0.7,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.7,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Sun": {
+            "Chromosome1": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Fertility": {
+            "Chromosome1": {
+              "Value0": 0.6,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.6,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Water": {
+            "Chromosome1": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Growth": {
+            "Chromosome1": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Wither": {
+            "Chromosome1": {
+              "Value0": 60,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 60,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Durability": {
+            "Chromosome1": {
+              "Value0": 300,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 300,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Harvest": {
+            "Chromosome1": {
+              "Value0": 50,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 50,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Seeds": {
+            "Chromosome1": {
+              "Value0": 30,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 30,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "PlantValue": {
+            "Chromosome1": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "SeedsValue": {
+            "Chromosome1": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          }
+        }
       }
     ],
     "AvailableBiomes": [
