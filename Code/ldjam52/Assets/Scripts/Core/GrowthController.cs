@@ -19,7 +19,7 @@ public class GrowthController : MonoBehaviour
 
     }
 
-    Double getGrowthRate(Field field, Plant plant)
+    public Double getGrowthRate(Field field, Plant plant)
     {
         //Humidity
         Double humidityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
