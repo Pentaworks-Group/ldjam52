@@ -7,7 +7,7 @@ public class FieldBehaviour : MonoBehaviour
     private Plant plant;
     private float planted;
     private float nextStadium = 2;
-    private string currentStadium = "Flower0";
+    private int currentStadium = 0;
     private List<GameObject> flowerPots = new List<GameObject>();
 
     private float currentGameTime = 0;
@@ -39,12 +39,13 @@ public class FieldBehaviour : MonoBehaviour
 
     private float GetNextGrowthTick()
     {
-        return nextStadium + 100;
+        return nextStadium + 2;
     }
 
     private string GetNextModelName()
     {
-        return "Flower1";
+        currentStadium += 1;
+        return "Flower" + currentStadium;
     }
 
     private void ReplacePlantModel(string newModelName)
