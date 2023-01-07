@@ -8,6 +8,7 @@ namespace Assets.Scripts.Model
 {
     public class Plant
     {
+        public Guid ID { get; set; }
         public String Name { get; set; }
         public String Description { get; set; }
         public String ImageName { get; set; }

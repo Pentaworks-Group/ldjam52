@@ -7,6 +7,7 @@ namespace Assets.Scripts.Model
 {
     public class Tile
     {
+        public Guid ID { get; set; }
         public Boolean IsOwned { get; set; }
         public Vector2 Position { get; set; }
         public Color Color { get; set; }
