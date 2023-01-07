@@ -95,7 +95,7 @@ public class InheritanceController : MonoBehaviour
             return chooseRandomChromosome(chromosomePair);
         } else
         {
-            Console.WriteLine($"Key {type} not defined for the plant!");
+            Debug.LogError($"Key {type} not defined for the plant!");
             return null;
         }
     }
