@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class TileViewSeedListSlotBehaviour : ListSlotBehaviour
 {
-    private Text slotText;
     private Image pic;
+    private Text plantName;
+    private Text seedAmount;
 
     private void Awake()
     {
-        slotText = transform.Find("Text").GetComponent<Text>();
+        plantName = transform.Find("PlantName").GetComponent<Text>();
+        seedAmount = transform.Find("SeedAmount").GetComponent<Text>();
         pic = transform.Find("Pic").GetComponent<Image>();
     }
 
@@ -21,13 +23,20 @@ public class TileViewSeedListSlotBehaviour : ListSlotBehaviour
 
     public Plant GetPlant()
     {
-        return (Plant)obj;
+        return GetStorageItem().Plant;
+    }
+
+    public StorageItem GetStorageItem()
+    {
+        return (StorageItem)obj;
     }
 
     override public void UpdateUI()
     {
-        Plant plant = GetPlant();
-        slotText.text = plant.Name;
-        pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(plant?.ImageName);
+        StorageItem item = GetStorageItem();
+        Plant plant = item.Plant;
+        plantName.text = plant.Name;
+        seedAmount.text = item.StorageAmountSeeds.ToString();
+        pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(plant?.SeedImageName);
     }
 }
