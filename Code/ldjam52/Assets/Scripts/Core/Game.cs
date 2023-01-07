@@ -18,6 +18,8 @@ namespace Assets.Scripts.Core
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
 
+        public bool LockCameraMovement { get; set; } = false;
+
         public void PlayButtonSound()
         {
             EffectsAudioManager.Play("Button");
