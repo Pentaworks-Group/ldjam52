@@ -9,19 +9,16 @@ public class TileViewSeedListBehaviour : ListContainerBehaviour
 {
     override public void CustomStart()
     {
-        Plant plant1 = new Plant();
-        plant1.Name = "Hans";
-        plant1.ImageName = "Mais";
-
-
-
-        Plant plant2 = new Plant();
-        plant2.Name = "adsf";
-        plant2.ImageName = "Fertilizer";
 
         List<System.Object> plants = new();
-        plants.Add(plant2);
-        plants.Add(plant1);
+        foreach (StorageItem item in Assets.Scripts.Base.Core.Game.State.FarmStorage.StorageItems)
+        {
+            if (item.StorageAmountSeeds > 0)
+            {
+                plants.Add(item);
+            }
+        }
+   
 
         SetObjects(plants);
     }
