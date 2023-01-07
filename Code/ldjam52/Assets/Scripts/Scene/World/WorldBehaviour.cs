@@ -41,6 +41,6 @@ public class WorldBehaviour : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
+        Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
     }
 }
