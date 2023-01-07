@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldScene.unity
     guid: 65a395b32fe1e61458415927b54fed13
+  - enabled: 1
+    path: Assets/Scenes/FieldTestScene.unity
+    guid: f579c7726fe11be408eddbed870a1402
   m_configObjects: {}
