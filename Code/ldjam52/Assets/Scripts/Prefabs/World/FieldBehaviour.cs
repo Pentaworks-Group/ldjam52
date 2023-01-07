@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class FieldBehaviour : MonoBehaviour
 {
-    private Plant plant;
-    private bool planted = false;
+    public TileViewBehaviour tileViewBehaviour;
+
+    public Plant Plant { get; set; }
+    public float TimePlanted { get; private set; } = -1;
+
+
     private float nextStadium = 2;
     private int currentStadium = -1;
     private int ripe = 4;
@@ -22,6 +26,7 @@ public class FieldBehaviour : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         CheckIfNextStadium();
@@ -31,35 +36,23 @@ public class FieldBehaviour : MonoBehaviour
 
     public void SelectField()
     {
-        if (planted)
-        {
-            if (currentStadium == ripe)
-            {
-                Debug.Log("Harvest");
-                ClearField();
-            }
-        }
-        else
-        {
-            Debug.Log("Planted");
-            planted = true;
-            nextStadium = currentGameTime;
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        SelectField();
+        tileViewBehaviour.ViewField(this);
     }
 
     private void CheckIfNextStadium()
     {
-        if (planted && currentStadium < ripe && nextStadium < currentGameTime)
+        if (TimePlanted >= 0 && currentStadium < ripe && nextStadium < currentGameTime)
         {
-            string nextModelName = GetNextModelName();
-            ReplacePlantModel(nextModelName);
-            nextStadium = GetNextGrowthTick();
+            currentStadium += 1;
+            GrowToStadium(currentStadium);           
         }
+    }
+
+    private void GrowToStadium(int state) 
+    {
+        string nextModelName = GetNextModelName(state);
+        ReplacePlantModel(nextModelName);
+        nextStadium = GetNextGrowthTick();
     }
 
     private float GetNextGrowthTick()
@@ -67,10 +60,9 @@ public class FieldBehaviour : MonoBehaviour
         return nextStadium + 2;
     }
 
-    private string GetNextModelName()
+    private string GetNextModelName(int state)
     {
-        currentStadium += 1;
-        return "Flower" + currentStadium;
+        return "Flower" + state;
     }
 
     private void ReplacePlantModel(string newModelName)
@@ -90,7 +82,7 @@ public class FieldBehaviour : MonoBehaviour
 
     private void ClearField()
     {
-        planted = false;
+        TimePlanted = -1;
         currentStadium = -1;
         foreach (GameObject flowerPot in flowerPots)
         {
@@ -99,5 +91,29 @@ public class FieldBehaviour : MonoBehaviour
                 GameObject.Destroy(child.gameObject);
             }
         }
+    }
+
+    public bool IsFullyGrown()
+    {
+        return currentStadium == ripe;
+    }
+
+    public void HarvestCrop()
+    {
+        if (IsFullyGrown())
+        {
+            ClearField();
+        }
+    }
+
+
+    public void FertilizeCrop()
+    {
+        GrowToStadium(ripe);
+    }
+
+    public void DestroyCrop()
+    {
+        ClearField();
     }
 }
