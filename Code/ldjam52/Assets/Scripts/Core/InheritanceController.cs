@@ -1,9 +1,11 @@
 using Assets.Scripts.Model;
+using Assets.Scripts.Constants;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using MathNet.Numerics.Distributions;
 using UnityEngine;
+using GameFrame.Core.Extensions;
 
 public class InheritanceController : MonoBehaviour
 {
@@ -69,6 +71,7 @@ public class InheritanceController : MonoBehaviour
     public Plant crossPlants(Plant plant1, Plant plant2)
     {
         Plant newPlant = new Plant();
+        newPlant.Name = PlantNames.adjectives.GetRandomEntry()+" "+PlantNames.names.GetRandomEntry();
         foreach (KeyValuePair<string, ChromosomePair> pair in plant1.genome)
         {
             Chromosome chromosome1 = chooseRandomChromosome(pair.Value);
