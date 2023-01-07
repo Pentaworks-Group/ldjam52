@@ -991,6 +991,146 @@
             }
           }
         }
+      },
+      {
+        "ID": "beb9d455-539a-4783-9a73-a91b326af581",
+        "Name": "hungry carnivore",
+        "Description": "better keep your distance",
+        "ImageReference": "FleischFresser",
+        "Genome": {
+          "Temp": {
+            "Chromosome1": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Sun": {
+            "Chromosome1": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Fertility": {
+            "Chromosome1": {
+              "Value0": 1.0,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1.0,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Water": {
+            "Chromosome1": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Growth": {
+            "Chromosome1": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Wither": {
+            "Chromosome1": {
+              "Value0": 20,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 20,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Durability": {
+            "Chromosome1": {
+              "Value0": 20,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 20,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Harvest": {
+            "Chromosome1": {
+              "Value0": 5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Seeds": {
+            "Chromosome1": {
+              "Value0": 3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "PlantValue": {
+            "Chromosome1": {
+              "Value0": 8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "SeedsValue": {
+            "Chromosome1": {
+              "Value0": 8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          }
+        }
       }
     ],
     "AvailableBiomes": [
