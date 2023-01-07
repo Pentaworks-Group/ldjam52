@@ -8,6 +8,11 @@ namespace Assets.Scripts.Model
     {
         public String Name { get; set; }
         public Color Color { get; set; }
+        
+        //Use while generating world.
+        public Single WeightMin { get; set; }
+        public Single WeightMax { get; set; }
+
         //Game Value: Possible Humidity values for the Biome
         public Single HumidityMin { get; set; }
         public Single HumidityMax { get; set; }
