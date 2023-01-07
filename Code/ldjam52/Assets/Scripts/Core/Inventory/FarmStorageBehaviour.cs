@@ -27,7 +27,7 @@ namespace Assets.Scripts.Core.Inventory
         // Return money balance
         public static int GetStorageBalance()
         {
-            FarmStorage storage = Base.Core.Game.FarmStorage;
+            FarmStorage storage = Base.Core.Game.State.FarmStorage;
             return storage.MoneyBalance;
         }
 
