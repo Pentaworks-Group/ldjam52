@@ -9,7 +9,7 @@ namespace Assets.Scripts.Model
     public class StorageItem
     {
         public Plant Plant { get; set; }
-        public Double StorageAmountPlants { get; set; }
-        public Double StorageAmountSeeds { get; set; }
+        public int StorageAmountPlants { get; set; }
+        public int StorageAmountSeeds { get; set; }
     }
 }

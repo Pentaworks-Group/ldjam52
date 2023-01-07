@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
+using Assets.Scripts.Model;
 
 using GameFrame.Core.Audio.Multi;
 using GameFrame.Core.Audio.Single;
@@ -17,6 +18,8 @@ namespace Assets.Scripts.Core
 
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
+
+        public FarmStorage FarmStorage { get; set; }
 
         public void PlayButtonSound()
         {
