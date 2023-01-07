@@ -9,7 +9,7 @@ namespace Assets.Scripts.Core
         public World World { get; set; }
         public GameMode GameMode { get; set; }
 
-        public Decimal AvailableFunds { get; set; }
+        public FarmStorage FarmStorage { get; set; }
 
         public float ElapsedTime { get; set; }
     }

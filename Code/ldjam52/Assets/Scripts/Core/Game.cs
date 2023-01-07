@@ -19,7 +19,6 @@ namespace Assets.Scripts.Core
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
 
-        public FarmStorage FarmStorage { get; set; }
         public bool LockCameraMovement { get; set; } = false;
 
         public void PlayButtonSound()
