@@ -9,7 +9,7 @@ using GameFrame.Core.Extensions;
 
 public class GrowthController
 {
-    public Double getGrowthRate(Field field, Plant plant)
+    public static Double getGrowthRate(Field field, Plant plant)
     {
         //Humidity
         Double humidityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
@@ -37,7 +37,7 @@ public class GrowthController
         return growthFactor * growthRate;
     }
 
-    private Double getGrowthFactorForType(String type, Plant plant, Double biomeValue)
+    private static Double getGrowthFactorForType(String type, Plant plant, Double biomeValue)
     {
         ChromosomePair pair;
         Double factor = 1.0;
@@ -52,7 +52,7 @@ public class GrowthController
         return factor;
     }
 
-    private Chromosome getDominantChromosome(ChromosomePair pair)
+    private static Chromosome getDominantChromosome(ChromosomePair pair)
     {
         Chromosome outValue = new Chromosome
         {
@@ -71,7 +71,7 @@ public class GrowthController
         return outValue;
     }
 
-    private Double getGrowthForChromosome(Chromosome chromosome, Double biomeValue)
+    private static Double getGrowthForChromosome(Chromosome chromosome, Double biomeValue)
     {
         Normal normal = new Normal(mean: chromosome.Value0, stddev: chromosome.ValueDev);
         double newMean = normal.Density(biomeValue);
