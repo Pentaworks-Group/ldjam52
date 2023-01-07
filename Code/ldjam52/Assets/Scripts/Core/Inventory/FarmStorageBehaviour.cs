@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Core.Inventory
 {
-    public class FormStorageBehaviour
+    public class FarmStorageBehaviour
     {
         //Returns the free space left in the farm storage
         public static int GetFreeStorageSpace()
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Core.Inventory
         }
 
         //Tries to put in an amount of plants and returns the amount that fitted in the storage
-        public static int GutPlantInStorage(Plant plant, int amount)
+        public static int PutPlantInStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.FarmStorage;
             StorageItem item = getStorageItemToPlant(storage, plant);
