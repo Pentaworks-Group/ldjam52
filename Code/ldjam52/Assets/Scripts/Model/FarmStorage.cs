@@ -8,8 +8,8 @@ namespace Assets.Scripts.Model
 {
     public class FarmStorage
     {
-        public Double StorageSize { get; set; }
-        public Double MoneyBalance { get; set; }
+        public int StorageSize { get; set; }
+        public int MoneyBalance { get; set; }
         public List<StorageItem> StorageItems { get; set; }
     }
 }
