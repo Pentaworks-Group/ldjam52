@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
                 prevPinch = (touch1.position, touch2.position);
             else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
             {
-                zoom = Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2);
+                zoom = zoomSpeedTouch * Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2);
             }
         }
 
