@@ -291,6 +291,146 @@
             }
           }
         }
+      },
+      {
+        "ID": "ac77c6d6-c379-499c-bc79-91b49ca6cd66",
+        "Name": "precious fungus",
+        "Description": "detectable only with dogs",
+        "ImageReference": "Trueffel",
+        "Genome": {
+          "Temp": {
+            "Chromosome1": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.5,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Sun": {
+            "Chromosome1": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.3,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Fertility": {
+            "Chromosome1": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Water": {
+            "Chromosome1": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.8,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Growth": {
+            "Chromosome1": {
+              "Value0": 0.6,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 0.6,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Wither": {
+            "Chromosome1": {
+              "Value0": 300,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 300,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Durability": {
+            "Chromosome1": {
+              "Value0": 25,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 25,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Harvest": {
+            "Chromosome1": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 1,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "Seeds": {
+            "Chromosome1": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 2,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "PlantValue": {
+            "Chromosome1": {
+              "Value0": 50,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 50,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          },
+          "SeedsValue": {
+            "Chromosome1": {
+              "Value0": 15,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            },
+            "Chromosome2": {
+              "Value0": 15,
+              "ValueDev": 0.2,
+              "IsDominant": false
+            }
+          }
+        }
       }
     ],
     "AvailableBiomes": [
