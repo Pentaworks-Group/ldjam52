@@ -1,6 +1,7 @@
 using Assets.Scripts.Model;
 using System.Collections;
 using System.Collections.Generic;
+using MathNet.Numerics.Distributions;
 using UnityEngine;
 
 public class InheritanceController : MonoBehaviour
@@ -17,14 +18,21 @@ public class InheritanceController : MonoBehaviour
         
     }
 
-    public Plant crossPlants(Plant plant1, Plant plant2)
+    public void crossPlants(Plant plant1, Plant plant2)
     {
-        //UnityEngine.Random.value;
-        return default;
+
     }
 
-    private static double RandomGaussian(double minVal)
+    private Chromosome chooseRandomChromosome(ChromosomePair pair)
     {
-        return default;
+        double randomNumber = Random.value;
+        return randomNumber < 0.5 ? pair.Chromosome1 : pair.Chromosome2;
     }
+
+    private void updateMeanValue(Chromosome chromomose)
+    {
+        Normal normal = new Normal();
+        normal.Sample();
+    }
+
 }
