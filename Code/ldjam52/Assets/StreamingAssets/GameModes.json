@@ -3,8 +3,8 @@
     "Name": "Test",
     "Description": "Test game mode 1",
     "World": {
-      "Rows": 64,
-      "Columns": 64,
+      "Height": 64,
+      "Width": 64,
       "RandomBiomesAmount": 0,
       "IsAllBiomesUsageForced": true
     },
@@ -156,7 +156,12 @@
     "AvailableBiomes": [
       {
         "Name": "Grasslands",
-        "MaterialReference": "GrasslandGreen",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.7,
@@ -170,7 +175,12 @@
       },
       {
         "Name": "Desert",
-        "MaterialReference": "Desert",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.9,
@@ -184,7 +194,12 @@
       },
       {
         "Name": "Forest",
-        "MaterialReference": "Forest",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.3,
@@ -198,7 +213,12 @@
       },
       {
         "Name": "Swamp",
-        "MaterialReference": "Swamp",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.4,
@@ -212,7 +232,12 @@
       },
       {
         "Name": "Mountains",
-        "MaterialReference": "Mountains",
+        "Color": {
+          "Red": 255,
+          "Green": 255,
+          "Blue": 255,
+          "Alpha": 255
+        },
         "WeightMin": 1,
         "WeightMax": 3,
         "TemperatureMin": 0.0,

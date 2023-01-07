@@ -9,7 +9,7 @@ namespace Assets.Scripts.Model
     {
         public Guid ID { get; set; }
         public Boolean IsOwned { get; set; }
-        public Vector2 Position { get; set; }
+        public Vector3 Position { get; set; }
         public Color Color { get; set; }
         public Single Temperature { get; set; }
         public Single Fertility { get; set; }
