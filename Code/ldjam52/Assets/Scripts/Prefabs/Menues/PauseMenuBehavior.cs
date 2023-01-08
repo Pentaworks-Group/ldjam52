@@ -22,6 +22,8 @@ public class PauseMenuBehavior : MonoBehaviour
     private Button backButton;
     private Button continueButton;
 
+
+    private Text currentOpenMenu;
     //private Transform inputFieldLeft;
     //private Transform inputFieldRight;
     // Start is called before the first frame update
@@ -35,6 +37,9 @@ public class PauseMenuBehavior : MonoBehaviour
 
         backButton = transform.Find("ToggleArea/Header/Back").GetComponent<Button>();
         continueButton = transform.Find("ToggleArea/Header/Continue").GetComponent<Button>();
+
+
+        currentOpenMenu = transform.Find("ToggleArea/Header/Openmenu").GetComponent<Text>();
     }
 
     void Start()
@@ -60,7 +65,7 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         if (menuToggle.activeSelf == true)
         {
-            if (this.optionsArea.activeSelf)
+            if (this.optionsArea.activeSelf || this.saveGameArea.activeSelf)
             {
                 this.OnBackButtonClicked();
             }
@@ -168,6 +173,18 @@ public class PauseMenuBehavior : MonoBehaviour
 
     private void SetVisible(Boolean pauseMenu = false, Boolean options = false, Boolean saveGame = false)
     {
+        if (pauseMenu)
+        {
+            currentOpenMenu.text = "Pause";
+        } else if (options)
+        {
+            currentOpenMenu.text = "Options";
+        }
+        else if(saveGame)
+        {
+            currentOpenMenu.text = "Save Games";
+        }
+
         this.pauseArea.SetActive(pauseMenu);
         this.optionsArea.SetActive(options);
         this.saveGameArea.SetActive(saveGame);

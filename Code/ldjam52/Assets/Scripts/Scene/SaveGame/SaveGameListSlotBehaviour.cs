@@ -14,6 +14,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         private SaveGameListBehaviour listBehaviour;
 
+
         override public void RudeAwake()
         {
             saveGameName = transform.Find("SlotContainer/Info/Name").GetComponent<Text>();
