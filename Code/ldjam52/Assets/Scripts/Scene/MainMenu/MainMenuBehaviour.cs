@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Assets.Scripts.Base;
@@ -113,6 +114,23 @@ public class MainMenuBehaviour : MonoBehaviour
         Core.Game.AmbientClipList = new System.Collections.Generic.List<AudioClip>()
         {
                 GameFrame.Base.Resources.Manager.Audio.Get("Ambient Sound")
+        };
+
+        Core.Game.AmbientEffectsClipList = new System.Collections.Generic.List<String>()
+        {
+            "Car2",
+            "Car3",
+            "Car1",
+            "Church_Bell",
+            "Cow",
+            "Pig1",
+            "Pig2",
+            "Sheep1",
+            "Sheep2",
+            "Sheep3",
+            "Sheep4",
+            "Sheep5",
+            "Sheep5",
         };
 
         if (Core.Game.EffectsAudioManager == default)
