@@ -86,6 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FieldBehaviour: {fileID: 0}
+  TileViewBehaviour: {fileID: 0}
 --- !u!223 &6407438395780981326
 Canvas:
   m_ObjectHideFlags: 0
@@ -191,18 +192,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0bd18c6407dfa3446b4f246d111c8f92, type: 3}
   m_PrefabInstance: {fileID: 1448384503261656662}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &788258841729957436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790422580207438599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a8a8b9ac1818f4c813cc546fdf60de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &1505766543051792909
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -217,6 +206,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1246030303168111667, guid: 0bd18c6407dfa3446b4f246d111c8f92, type: 3}
+--- !u!114 &788258841729957436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790422580207438599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a8a8b9ac1818f4c813cc546fdf60de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1998369943064649847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,13 +273,17 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 4897364777809070992, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7998806007986450344, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
       propertyPath: m_Name
       value: Field
       objectReference: {fileID: 0}
     - target: {fileID: 7998806007986450344, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7998806007986450345, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
       propertyPath: m_RootOrder

@@ -1,7 +1,7 @@
-using UnityEngine.UI;
-using UnityEngine;
 using Assets.Scripts.Base;
-using Assets.Scripts.Model;
+
+using UnityEngine;
+using UnityEngine.UI;
 
 public class TileViewBehaviour : MonoBehaviour
 {
@@ -88,7 +88,13 @@ public class TileViewBehaviour : MonoBehaviour
 
     public void HarvestCrop()
     {
-        currentlyViewedField.HarvestCrop();
+        var harvest = currentlyViewedField.HarvestCrop();
+
+        if (harvest != null)
+        {
+            ShowHarvestResult(harvest);
+        }
+
         UpdateView();
     }
 
@@ -104,7 +110,6 @@ public class TileViewBehaviour : MonoBehaviour
         currentlyViewedField.DestroyCrop();
         UpdateView();
     }
-
 
     public void CloseView()
     {
@@ -135,7 +140,6 @@ public class TileViewBehaviour : MonoBehaviour
     {
         parent2.DisplaySeedDetails(slotBehaviour.GetPlant());
     }
-
 
     public void PlantSeeds()
     {
