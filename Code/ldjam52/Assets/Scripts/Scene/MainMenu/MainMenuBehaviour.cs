@@ -47,14 +47,14 @@ public class MainMenuBehaviour : MonoBehaviour
 
     public void StartGame()
     {
+        Core.Game.PlayButtonSound();
+
         //if (Assets.Scripts.Base.Core.Game.Options.ShowTutorial)
         //{
-        //    Core.Game.PlayButtonSound();
         //    Core.Game.ChangeScene(SceneNames.Tutorial);
         //}
         //else
         //{
-        //Core.Game.PlayButtonSound();
         Core.Game.Start();
 
         //}
