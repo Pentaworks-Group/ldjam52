@@ -1,5 +1,8 @@
+using System;
+
 using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
+using Assets.Scripts.Core;
 using Assets.Scripts.Model;
 
 using UnityEngine;
@@ -8,6 +11,9 @@ public class WorldBehaviour : MonoBehaviour
 {
     private GameObject tileContainer;
     private GameObject templateContainer;
+
+    private Boolean isFarmSet = false;
+    private GameState gameState;
 
     private void Awake()
     {
@@ -20,7 +26,7 @@ public class WorldBehaviour : MonoBehaviour
             this.tileContainer = transform.Find("TileContainer").gameObject;
             this.templateContainer = transform.Find("Templates").gameObject;
 
-            var gameState = Assets.Scripts.Base.Core.Game.State;
+            gameState = Assets.Scripts.Base.Core.Game.State;
 
             if (gameState != default)
             {
@@ -49,10 +55,34 @@ public class WorldBehaviour : MonoBehaviour
                 tileGameObject.transform.position = new Vector3(tile.Position.X, this.transform.position.y, tile.Position.Z);
             }
         }
+
+        if (world.Farm != default)
+        {
+            RenderFarm(world.Farm);
+        }
     }
 
     private void Update()
     {
         Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
+
+        if (!isFarmSet && gameState.World.Farm != default)
+        {
+            RenderFarm(gameState.World.Farm);
+        }
+    }
+
+    private void RenderFarm(Farm farm)
+    {
+        var farmTemplate = templateContainer.transform.Find("Farm").gameObject;
+
+        var farmGameObject = Instantiate(farmTemplate, tileContainer.transform);
+
+        if ((farmGameObject.transform.position.x != farm.Position.X) || (farmGameObject.transform.position.z != farm.Position.Z))
+        {
+            farmGameObject.transform.position = new Vector3(farm.Position.X, this.transform.position.y, farm.Position.Z);
+        }
+
+        isFarmSet = true;
     }
 }

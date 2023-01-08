@@ -4,6 +4,6 @@ namespace Assets.Scripts.Model
 {
     public class Farm
     {
-        public Vector2 Position { get; set; }
+        public Vector3 Position { get; set; }
     }
 }

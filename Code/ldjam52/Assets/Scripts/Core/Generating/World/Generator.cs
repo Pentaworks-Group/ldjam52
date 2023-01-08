@@ -43,7 +43,6 @@ namespace Assets.Scripts.Core.Generating.World
                     var biome = gameMode.AvailableBiomes.GetRandomEntry();
 
                     biomes.Add(new BiomeSpawn(biome));
-
                 }
             }
 

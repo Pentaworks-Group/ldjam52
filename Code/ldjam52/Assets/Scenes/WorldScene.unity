@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.17511088, g: 0.21907213, b: 0.3013723, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,6 +594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900354444}
   - component: {fileID: 1900354445}
+  - component: {fileID: 1900354446}
   m_Layer: 0
   m_Name: WorldGameObject
   m_TagString: Untagged
@@ -630,6 +631,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f57d01d58b0174bb33024d502a4bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1900354446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900354443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5690243fe6f5a4049911ba5696b087c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 1978416389}
+  radius: 6
+  daytimeSkyColor: {r: 0.31, g: 0.88, b: 1, a: 1}
+  middaySkyColor: {r: 0.58, g: 0.88, b: 1, a: 1}
+  nighttimeSkyColor: {r: 0.04, g: 0.19, b: 0.27, a: 1}
 --- !u!1 &1978416389
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,11 +734,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978416389}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
