@@ -124,7 +124,12 @@ public class MainMenuBehaviour : MonoBehaviour
 
             var backgroundClips = new List<AudioClip>()
             {
-                GameFrame.Base.Resources.Manager.Audio.Get("Background001")
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_1"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_2"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_3"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_4"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_5"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_6")
             };
 
             this.BackgroundAudioManager.Play(backgroundClips);
