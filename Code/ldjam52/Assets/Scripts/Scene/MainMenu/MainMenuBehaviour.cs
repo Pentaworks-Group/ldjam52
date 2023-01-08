@@ -122,9 +122,18 @@ public class MainMenuBehaviour : MonoBehaviour
             "Car3",
             "Car1",
             "Church_Bell",
+            "Church_Bell",
+            "Church_Bell",
+            "Cow",
+            "Cow",
+            "Cow",
+            "Cow",
             "Cow",
             "Pig1",
             "Pig2",
+            "Pig1",
+            "Pig2",
+            "Pig1",
             "Sheep1",
             "Sheep2",
             "Sheep3",
@@ -158,6 +167,8 @@ public class MainMenuBehaviour : MonoBehaviour
             this.BackgroundAudioManager.Initialize();
 
             Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListMenu;
+
+            Core.Game.BackgroundAudioManager.Resume();
         }
     }
 }

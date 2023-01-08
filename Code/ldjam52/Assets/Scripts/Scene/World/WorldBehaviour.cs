@@ -126,14 +126,12 @@ public class WorldBehaviour : MonoBehaviour
             double randomNumber = UnityEngine.Random.value;
 
             nextSoundEffectTime = (float)(randomNumber * 30.0 + 5.0 + Assets.Scripts.Base.Core.Game.State.ElapsedTime);
-            Debug.Log("Next Effect: " + randomNumber * 30.0 + 5.0);
         }
         else if(nextSoundEffectTime==0)
         {
             double randomNumber = UnityEngine.Random.value;
 
             nextSoundEffectTime = (float)(randomNumber * 30.0 + 5.0 + Assets.Scripts.Base.Core.Game.State.ElapsedTime);
-            Debug.Log("Next Effect: " + randomNumber * 30.0 + 5.0);
         }
     }
 }
