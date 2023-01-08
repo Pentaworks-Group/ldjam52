@@ -140,7 +140,6 @@ public class MainMenuBehaviour : MonoBehaviour
             this.BackgroundAudioManager.Initialize();
 
             Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListMenu;
-            this.BackgroundAudioManager.Play(backgroundClips);
         }
     }
 }
