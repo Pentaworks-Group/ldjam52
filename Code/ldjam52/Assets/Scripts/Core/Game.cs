@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Assets.Scripts.Constants;
 using Assets.Scripts.Model;
 
+using GameFrame.Core.Audio.Continuous;
 using GameFrame.Core.Audio.Multi;
-using GameFrame.Core.Audio.Single;
 
 using UnityEngine;
 

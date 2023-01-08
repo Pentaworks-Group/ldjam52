@@ -28,25 +28,25 @@ public class FieldViewBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        viewToggle = transform.Find("FieldViewToggle")?.gameObject;
-        currentInfo = transform.Find("FieldViewToggle/CurrentInfo")?.gameObject;
-        plantingOptions = transform.Find("FieldViewToggle/PlantingOptions")?.gameObject;
-        harvestResult = transform.Find("FieldViewToggle/HarvestResult")?.gameObject;
+        viewToggle = transform.Find("FieldViewToggle").gameObject;
+        currentInfo = transform.Find("FieldViewToggle/CurrentInfo").gameObject;
+        plantingOptions = transform.Find("FieldViewToggle/PlantingOptions").gameObject;
+        harvestResult = transform.Find("FieldViewToggle/HarvestResult").gameObject;
 
-        plantImage = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Image")?.GetComponent<Image>();
-        plantName = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Name")?.GetComponent<Text>();
-        plantedTime = transform.Find("FieldViewToggle/CurrentInfo/PlantedTime/Value")?.GetComponent<Text>();
-        harvestButton = transform.Find("FieldViewToggle/CurrentInfo/Buttons/Harvest")?.GetComponent<Button>();
+        plantImage = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Image").GetComponent<Image>();
+        plantName = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Name").GetComponent<Text>();
+        plantedTime = transform.Find("FieldViewToggle/CurrentInfo/PlantedTime/Value").GetComponent<Text>();
+        harvestButton = transform.Find("FieldViewToggle/CurrentInfo/Buttons/Harvest").GetComponent<Button>();
 
-        seedList = transform.Find("FieldViewToggle/PlantingOptions/SeedList/ListContainer")?.GetComponent<FieldViewSeedListBehaviour>();
-        parent1 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected1")?.GetComponent<FieldViewSeedListDetailsBehaviour>();
-        parent2 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected2")?.GetComponent<FieldViewSeedListDetailsBehaviour>();
+        seedList = transform.Find("FieldViewToggle/PlantingOptions/SeedList/ListContainer").GetComponent<FieldViewSeedListBehaviour>();
+        parent1 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected1").GetComponent<FieldViewSeedListDetailsBehaviour>();
+        parent2 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected2").GetComponent<FieldViewSeedListDetailsBehaviour>();
 
 
-        harvestSeedAmount = transform.Find("FieldViewToggle/HarvestResult/Seeds/Amount")?.GetComponent<Text>();
-        harvestPlantAmount = transform.Find("FieldViewToggle/HarvestResult/Plants/Amount")?.GetComponent<Text>();
-        harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Seeds/Pic")?.GetComponent<Image>();
-        harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Plants/Pic")?.GetComponent<Image>();
+        harvestSeedAmount = transform.Find("FieldViewToggle/HarvestResult/Seeds/Amount").GetComponent<Text>();
+        harvestPlantAmount = transform.Find("FieldViewToggle/HarvestResult/Plants/Amount").GetComponent<Text>();
+        harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Seeds/Pic").GetComponent<Image>();
+        harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Plants/Pic").GetComponent<Image>();
     }
 
     public void ViewField(FieldBehaviour fieldBehaviour)

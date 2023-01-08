@@ -4,8 +4,8 @@ using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core;
 
+using GameFrame.Core.Audio.Continuous;
 using GameFrame.Core.Audio.Multi;
-using GameFrame.Core.Audio.Single;
 
 using UnityEngine;
 
@@ -108,12 +108,12 @@ public class MainMenuBehaviour : MonoBehaviour
             Core.Game.AmbienceAudioManager.Volume = Core.Game.Options.AmbienceVolume;
             Core.Game.AmbienceAudioManager.Initialize();
 
-            this.AmbienceAudioManager.Clips = new List<AudioClip>()
+            var ambienceClips = new List<AudioClip>()
             {
                 GameFrame.Base.Resources.Manager.Audio.Get("Background001")
             };
 
-            this.AmbienceAudioManager.Resume();
+            this.AmbienceAudioManager.Play(ambienceClips);
         }
 
         if (Core.Game.BackgroundAudioManager == default)
