@@ -39,7 +39,7 @@ public class WorldBehaviour : MonoBehaviour
                     RenderWorld(gameState.World);
                 }
             }
-
+            Core.Game.AmbienceAudioManager.Resume();
         }
     }
 
