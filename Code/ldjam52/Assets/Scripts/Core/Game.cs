@@ -44,6 +44,7 @@ namespace Assets.Scripts.Core
             GenerateWorld(gameState);
             PopulateKnownPlants(gameState);
             SetPlayerValues(gameState);
+            GenerateAnalyzers(gameState);
 
             return gameState;
         }
@@ -105,6 +106,26 @@ namespace Assets.Scripts.Core
             }
 
             gameState.FarmStorage = newFarmStorage;
+        }
+
+        private void GenerateAnalyzers(GameState gameState)
+        {
+            var newPlantAnalizer = new Analyzer
+            {
+                Name = "Plant Analyzer",
+                Description = "Can analyse the plants genome and give you some informations about them.",
+                MaxDevelopmentStage = 5
+            };
+            gameState.PlantAnalyzer = newPlantAnalizer;
+
+            var newFieldAnalizer = new Analyzer
+            {
+                Name = "Field Analyzer",
+                Description = "Can analyse fields and give you some informations about them.",
+                MaxDevelopmentStage = 3
+            };
+            gameState.FieldAnalyzer = newFieldAnalizer;
+
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
