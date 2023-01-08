@@ -5,16 +5,19 @@ using Assets.Scripts.Model;
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TileBehaviour : MonoBehaviour
 {
+    public UnityEvent<TileBehaviour> OnClick = new UnityEvent<TileBehaviour>();
+
     private GameObject floorGameObject;
     private GameObject naturalAreaGameObject;
 
     private Boolean isTileOwned;
 
     public FieldBehaviour FieldBehaviour;
-    public TileViewBehaviour TileViewBehaviour;
+    public FieldViewBehaviour FieldViewBehaviour;
 
     public Tile Tile { get; private set; }
 
@@ -44,11 +47,11 @@ public class TileBehaviour : MonoBehaviour
         }
     }
 
-    public void ShowTileView()
+    public void ShowFieldView()
     {
-        if (this.TileViewBehaviour != null)
+        if (this.FieldViewBehaviour != null)
         {
-            this.TileViewBehaviour.ViewField(this.FieldBehaviour);
+            this.FieldViewBehaviour.ViewField(this.FieldBehaviour);
         }
     }
 

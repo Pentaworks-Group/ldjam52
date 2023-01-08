@@ -3,7 +3,7 @@ using Assets.Scripts.Model;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TileViewSeedListDetailsBehaviour : MonoBehaviour
+public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
 {
     private Image pic;
     private Text plantName;
@@ -16,7 +16,7 @@ public class TileViewSeedListDetailsBehaviour : MonoBehaviour
         plantName = transform.Find("NameAndPic/Name").GetComponent<Text>();
     }
 
-    public void DisplaySlot(TileViewSeedListSlotBehaviour slot)
+    public void DisplaySlot(FieldViewSeedListSlotBehaviour slot)
     {
         DisplaySeedDetails(slot.GetPlant());
     }

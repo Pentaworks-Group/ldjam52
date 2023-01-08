@@ -4,6 +4,7 @@ using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core;
 using Assets.Scripts.Model;
+using Assets.Scripts.UI.TileView;
 
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class WorldBehaviour : MonoBehaviour
     private GameState gameState;
 
     public TileViewBehaviour TileViewBehaviour;
+    public FieldViewBehaviour FieldViewBehaviour;
 
     private void Awake()
     {
@@ -49,9 +51,10 @@ public class WorldBehaviour : MonoBehaviour
             var tileGameObject = Instantiate(tileTemplate, this.tileContainer.transform);
 
             var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
+            tileBehaviour.OnClick.AddListener(TileSelected);
 
             tileBehaviour.SetTile(tile);
-            tileBehaviour.TileViewBehaviour = this.TileViewBehaviour;
+            tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
 
             if ((tileGameObject.transform.position.x != tile.Position.X) || (tileGameObject.transform.position.z != tile.Position.Z))
             {
@@ -62,6 +65,21 @@ public class WorldBehaviour : MonoBehaviour
         if (world.Farm != default)
         {
             RenderFarm(world.Farm);
+        }
+    }
+
+    private void TileSelected(TileBehaviour tileBehaviour)
+    {
+        if (tileBehaviour != null)
+        {
+            if (!tileBehaviour.Tile.IsOwned)
+            {
+
+            }
+            else
+            {
+                tileBehaviour.ShowFieldView();
+            }
         }
     }
 

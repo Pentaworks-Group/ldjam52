@@ -1,8 +1,10 @@
 
+using System;
 using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core;
+using Assets.Scripts.Model;
 
 
 using UnityEngine;
@@ -11,11 +13,46 @@ namespace Assets.Scripts.Scene.FieldTestScene
 {
     public class TestFieldBehaviour : MonoBehaviour
     {
+        public FieldViewBehaviour FieldViewBehaviour;
+
         // Start is called before the first frame update
         void Start()
         {
-            if (Assets.Scripts.Base.Core.Game.State == default) {
+            if (Assets.Scripts.Base.Core.Game.State == default)
+            {
                 InitializeGameState();
+            }
+            else
+            {
+                var tileTemplate = transform.Find("TileTemplate");
+                var targetContainer = transform.Find("Blubb");
+
+                Tile tile = new()
+                {
+                    Color = new GameFrame.Core.Media.Color(1f, 0.411f, 0.705f),
+                    Field = new() { Fertility = .5, Sunshine = 2, Temperature = .8, Humidity = .4 },
+                    Position = GameFrame.Core.Math.Vector3.Zero
+                };
+
+                var tileGameObject = Instantiate(tileTemplate, targetContainer.transform);
+
+                tileGameObject.gameObject.SetActive(true);
+
+                var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
+
+                tileBehaviour.OnClick.AddListener(TileSelected);
+
+                tileBehaviour.SetTile(tile);
+                tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
+                tileBehaviour.gameObject.SetActive(true);
+            }
+        }
+
+        private void TileSelected(TileBehaviour tileBehaviour)
+        {
+            if (tileBehaviour != null)
+            {
+                tileBehaviour.ShowFieldView();
             }
         }
 

@@ -3,7 +3,7 @@ using Assets.Scripts.Model;
 
 using UnityEngine.UI;
 
-public class TileViewSeedListSlotBehaviour : ListSlotBehaviour
+public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
 {
     private Image pic;
     private Text plantName;
