@@ -226,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 494671372}
   - component: {fileID: 494671374}
-  - component: {fileID: 494671373}
+  - component: {fileID: 494671375}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -249,26 +249,6 @@ Transform:
   m_Father: {fileID: 1359329832}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &494671373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494671371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2115949959, guid: 38a06a7c2097ec74e84f6144cc477448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VolumeChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  PauseToggled:
-    m_PersistentCalls:
-      m_Calls: []
-  Clips: []
-  Template: {fileID: 494671374}
 --- !u!82 &494671374
 AudioSource:
   m_ObjectHideFlags: 0
@@ -365,6 +345,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &494671375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494671371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -918740298, guid: 38a06a7c2097ec74e84f6144cc477448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  PauseToggled:
+    m_PersistentCalls:
+      m_Calls: []
+  Clips: []
+  Template: {fileID: 494671374}
 --- !u!1001 &506001122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -929,7 +929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299023834}
   - component: {fileID: 1299023836}
-  - component: {fileID: 1299023835}
+  - component: {fileID: 1299023837}
   m_Layer: 5
   m_Name: Ambience
   m_TagString: Untagged
@@ -952,26 +952,6 @@ Transform:
   m_Father: {fileID: 1359329832}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1299023835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299023833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2115949959, guid: 38a06a7c2097ec74e84f6144cc477448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VolumeChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  PauseToggled:
-    m_PersistentCalls:
-      m_Calls: []
-  Clips: []
-  Template: {fileID: 1299023836}
 --- !u!82 &1299023836
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1068,6 +1048,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1299023837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299023833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -918740298, guid: 38a06a7c2097ec74e84f6144cc477448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  PauseToggled:
+    m_PersistentCalls:
+      m_Calls: []
+  Clips: []
+  Template: {fileID: 1299023836}
 --- !u!1 &1359329829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,8 +1276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EffectsAudioManager: {fileID: 1489986656}
-  AmbienceAudioManager: {fileID: 1299023835}
-  BackgroundAudioManager: {fileID: 494671373}
+  AmbienceAudioManager: {fileID: 1299023837}
+  BackgroundAudioManager: {fileID: 494671375}
 --- !u!1 &1489986654
 GameObject:
   m_ObjectHideFlags: 0

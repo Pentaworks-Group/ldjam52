@@ -2221,7 +2221,7 @@ GameObject:
   - component: {fileID: 1622292187981982549}
   - component: {fileID: 1622292187981982548}
   m_Layer: 5
-  m_Name: TileViewToggle
+  m_Name: FieldViewToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
