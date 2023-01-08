@@ -15,13 +15,10 @@ namespace Assets.Scripts.Scene.Shops
 {
     public class EquipmentShopBehaviour : MonoBehaviour
     {
-        public TMP_Text PlantAnalyzerName;
-        public TMP_Text PlantAnalyzerDesc;
-        public TMP_Text FieldAnalyzerName;
-        public TMP_Text FieldAnalyzerDesc;
+        public GameObject PlantAnalyzerPanel;
+        public GameObject FieldAnalyzerPanel;
 
-        public Image PlantAnalyzerImage;
-        public Image FieldAnalyzerImg;
+        public TMP_Text BalanceText;
 
         // Start is called before the first frame update
         void Start()
@@ -31,21 +28,72 @@ namespace Assets.Scripts.Scene.Shops
                 InitializeGameState();
             }
 
-            PlantAnalyzerName.text = Base.Core.Game.State.PlantAnalyzer.Name;
-            PlantAnalyzerDesc.text = Base.Core.Game.State.PlantAnalyzer.Description;
-            FieldAnalyzerName.text = Base.Core.Game.State.FieldAnalyzer.Name;
-            FieldAnalyzerDesc.text = Base.Core.Game.State.FieldAnalyzer.Description;
+            BalanceText.text = FarmStorageController.GetStorageBalance().ToString();
 
-            PlantAnalyzerImage.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(Base.Core.Game.State.PlantAnalyzer.ImgName);
-            FieldAnalyzerImg.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(Base.Core.Game.State.FieldAnalyzer.ImgName);
-            //            PlantAnalyzerImg.sprite = Base.Core.Game.State.PlantAnalyzer.ImgName;
+            InitAnalyzerPanel(Base.Core.Game.State.PlantAnalyzer, PlantAnalyzerPanel);
+            InitAnalyzerPanel(Base.Core.Game.State.FieldAnalyzer, FieldAnalyzerPanel);
+        }
 
+        private void InitAnalyzerPanel(Analyzer analyzer, GameObject panel)
+        {
+            panel.transform.Find("AnalyzerName").GetComponent<TMP_Text>().text = analyzer.Name;
+            panel.transform.Find("AnalyzerDesc").GetComponent<TMP_Text>().text = analyzer.Description;
+
+            panel.transform.Find("AnalyzerImage").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(analyzer.ImgName);
+
+            DevelopmentStage nextStage = getNextDevelopmentStage(analyzer);
+            if (nextStage != null)
+            {
+                panel.transform.Find("NextStageDesc").GetComponent<TMP_Text>().text = "Next Stage: " + nextStage.Name;
+                Image footer = panel.transform.Find("Footer").GetComponent<Image>();
+                footer.transform.Find("CostText").GetComponent<TMP_Text>().text = nextStage.UpgradeCost.ToString();
+
+                if (FarmStorageController.GetStorageBalance() < nextStage.UpgradeCost)
+                {
+                    Debug.Log("Not Enough Money to Upgrade");
+                    footer.transform.Find("ButtonUpgrade").GetComponent<Button>().enabled = false;
+                }
+            }
+            else
+            {
+                panel.transform.Find("ButtonUpgrade").gameObject.SetActive(false);
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
 
+        }
+
+        public void UpgradePlantAnalyzer()
+        {
+            DevelopmentStage nextStage = getNextDevelopmentStage(Base.Core.Game.State.PlantAnalyzer);
+            
+            if (nextStage != null && FarmStorageController.GetStorageBalance() >= nextStage.UpgradeCost)
+            {
+                //Check Money Amount
+                Base.Core.Game.State.PlantAnalyzer.CurrentDevelopmentStage = nextStage;
+            }
+        }
+
+        public void UpgradeFieldAnalyzer()
+        {
+            DevelopmentStage nextStage = getNextDevelopmentStage(Base.Core.Game.State.FieldAnalyzer);
+
+            if (nextStage != null && FarmStorageController.GetStorageBalance() >= nextStage.UpgradeCost)
+            {
+                //Check Money Amount
+                Base.Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage = nextStage;
+            }
+        }
+
+        protected DevelopmentStage getNextDevelopmentStage(Analyzer analyzer)
+        {
+            int index = analyzer.DevelopmentStages.IndexOf(analyzer.CurrentDevelopmentStage);
+            if (index < analyzer.DevelopmentStages.Count-1)
+                return analyzer.DevelopmentStages[index+1];
+            return null;
         }
 
         // TEST

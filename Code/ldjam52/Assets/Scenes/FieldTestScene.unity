@@ -292,26 +292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1622292186665263496, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c4ebe909860c2d344b854dfaef874e1f, type: 3}
-    - target: {fileID: 1622292187183395595, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_FontData.m_BestFit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1622292187410892812, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c4ebe909860c2d344b854dfaef874e1f, type: 3}
-    - target: {fileID: 1622292187410892812, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1622292187602110817, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_FontData.m_BestFit
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726834, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_Name
       value: FieldView
@@ -400,14 +380,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1622292187820483449, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c4ebe909860c2d344b854dfaef874e1f, type: 3}
-    - target: {fileID: 1622292188230855457, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c4ebe909860c2d344b854dfaef874e1f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
 --- !u!114 &1118367178 stripped

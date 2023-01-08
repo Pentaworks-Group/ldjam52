@@ -1,3 +1,4 @@
+using Assets.Scripts.Base;
 using Assets.Scripts.Model;
 
 using UnityEngine;
@@ -7,8 +8,7 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
 {
     private Image pic;
     private Text plantName;
-    private Plant plant;
-
+    public Plant Plant { get; private set; }
 
     private void Awake()
     {
@@ -16,20 +16,30 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
         plantName = transform.Find("NameAndPic/Name").GetComponent<Text>();
     }
 
+    private void Start()
+    {
+        ClearDisplayDetails();
+    }
+
     public void DisplaySlot(FieldViewSeedListSlotBehaviour slot)
     {
         DisplaySeedDetails(slot.GetPlant());
+        Core.Game.PlayButtonSound();
     }
 
     public void DisplaySeedDetails(Plant plant)
     {
-        this.plant = plant;
+        this.Plant = plant;
         plantName.text = plant.Name;
         pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(plant?.ImageName);
     }
 
-    public Plant GetPlant()
+    public void ClearDisplayDetails()
     {
-        return plant;
+        this.Plant = default;
+        plantName.text = "";
+        pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get("Invisible_placeholder");
     }
+
+
 }
