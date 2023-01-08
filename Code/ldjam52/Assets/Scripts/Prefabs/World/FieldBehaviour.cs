@@ -21,6 +21,14 @@ public class FieldBehaviour : MonoBehaviour
     public void SetField(Field field)
     {
         this.field = field;
+
+        if (field != default)
+        {
+            if (GetComponentInParent<TileBehaviour>().Tile.IsOwned)
+            {
+                this.dirtPatch.SetActive(true);
+            }
+        }
     }
 
     private void Awake()
@@ -37,65 +45,20 @@ public class FieldBehaviour : MonoBehaviour
 
     private void Start()
     {
-        ////DebugPlant();
-        //if (field == null)
-        //{
-        //    Debug.LogWarning("No Field set, using default");
-        //    field = new Field
-        //    {
-        //        Humidity = 0.5,
-        //        Temperature = 0.5,
-        //        Fertility = 0.5,
-        //        Sunshine = 0.5
-        //    };
-        //}
-    }
-
-    private void DebugPlant()
-    {
-        this.field = new Field()
-        {
-            Humidity = 0.5,
-            Temperature = 0.5,
-            Fertility = 0.5,
-            Sunshine = 0.5
-        };
-
-        //Debug: Test code
-        Chromosome ch1 = new Chromosome
-        {
-            Value0 = 0.1,
-            ValueDev = 0.2,
-            IsDominant = true
-        };
-        Chromosome ch2 = new Chromosome
-        {
-            Value0 = 0.2,
-            ValueDev = 0.4
-        };
-        ChromosomePair pair1 = new ChromosomePair
-        {
-            Chromosome1 = ch1,
-            Chromosome2 = ch2
-        };
-        Plant plant1 = new Plant
-        {
-            Name = "Test 1",
-            Description = "This is the first plant"
-        };
-        plant1.Genome.Add(ChromosomeTypes.WATER, pair1);
-        plant1.Genome.Add(ChromosomeTypes.SUN, pair1);
-        plant1.Genome.Add(ChromosomeTypes.TEMP, pair1);
-        plant1.Genome.Add(ChromosomeTypes.FERTILITY, pair1);
-        plant1.Genome.Add(ChromosomeTypes.GROWTH, pair1);
-
-        PlantCrop(plant1);
     }
 
     void Update()
     {
         if (this.field != default)
         {
+            if (!this.dirtPatch.activeSelf)
+            {
+                if (GetComponentInParent<TileBehaviour>().Tile.IsOwned)
+                {
+                    this.dirtPatch.SetActive(true);
+                }
+            }
+
             var isPlanted = this.field.Seed != null;
 
             if (isPlanted)
@@ -163,7 +126,8 @@ public class FieldBehaviour : MonoBehaviour
             FarmStorageController.TakeSeedsOfStorage(parent2, 1);
             Plant child = InheritanceController.crossPlants(parent1, parent2);
             PlantCrop(child);
-        } else if (parent1 != default || parent2 != default)
+        }
+        else if (parent1 != default || parent2 != default)
         {
             if (parent1 != default)
             {
@@ -174,7 +138,7 @@ public class FieldBehaviour : MonoBehaviour
                 PlantCrop(parent2);
             }
         }
-        
+
     }
 
     public void PlantCrop(Plant newPlant)
@@ -188,10 +152,9 @@ public class FieldBehaviour : MonoBehaviour
         {
             this.field.TimePlanted = Time.realtimeSinceStartup;
         }
+
         currentStadium = GrowthStages.stages[0];
         growthRate = GrowthController.getGrowthRate(this.field, this.field.Seed);
-
-        this.dirtPatch.SetActive(true);
 
         foreach (GameObject flowerPot in flowerPots)
         {

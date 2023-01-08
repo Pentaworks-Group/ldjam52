@@ -85,8 +85,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb446a411ae60534cab0599946364347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnClick:
+    m_PersistentCalls:
+      m_Calls: []
   FieldBehaviour: {fileID: 0}
-  TileViewBehaviour: {fileID: 0}
+  FieldViewBehaviour: {fileID: 0}
 --- !u!223 &6407438395780981326
 Canvas:
   m_ObjectHideFlags: 0
@@ -280,10 +283,6 @@ PrefabInstance:
     - target: {fileID: 7998806007986450344, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
       propertyPath: m_Name
       value: Field
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998806007986450344, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7998806007986450345, guid: 835466e5c50b7a44cbe3c0fee22bf9b7, type: 3}
       propertyPath: m_RootOrder

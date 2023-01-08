@@ -91,7 +91,7 @@ public class WorldBehaviour : MonoBehaviour
                     tileBehaviour.ShowFieldView();
                 });
             }
-            else
+            else if (tileBehaviour.Tile.Farm == default)
             {
                 tileBehaviour.ShowFieldView();
             }
@@ -126,7 +126,6 @@ public class WorldBehaviour : MonoBehaviour
 
     private void playRandomEffectSound()
     {
-
         if (Assets.Scripts.Base.Core.Game.State.ElapsedTime > nextSoundEffectTime && nextSoundEffectTime != 0)
         {
             Core.Game.EffectsAudioManager.Play(Core.Game.AmbientEffectsClipList.GetRandomEntry());

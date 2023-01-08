@@ -72,9 +72,9 @@ public class TileBehaviour : MonoBehaviour
     {
         if (this.Tile != default)
         {
-            if (this.Tile.IsOwned && !isTileOwned)
+            if (this.Tile.IsOwned && !this.isTileOwned)
             {
-                isTileOwned = this.Tile.IsOwned;
+                this.isTileOwned = this.Tile.IsOwned;
 
                 this.FieldBehaviour.gameObject.SetActive(this.Tile.IsOwned);
                 this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
