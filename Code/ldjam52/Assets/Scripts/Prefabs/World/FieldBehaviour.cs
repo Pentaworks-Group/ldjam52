@@ -94,12 +94,15 @@ public class FieldBehaviour : MonoBehaviour
 
     void Update()
     {
-        var isPlanted = this.field.Seed != null;
-
-        if (isPlanted)
+        if (this.field != default)
         {
-            this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
-            AdjustStadium();
+            var isPlanted = this.field.Seed != null;
+
+            if (isPlanted)
+            {
+                this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
+                AdjustStadium();
+            }
         }
     }
 
