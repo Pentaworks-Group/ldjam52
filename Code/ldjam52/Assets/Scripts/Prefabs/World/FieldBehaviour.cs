@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class FieldBehaviour : MonoBehaviour
 {
-    public TileViewBehaviour tileViewBehaviour;
+    private GameObject dirtPatch;
     private GrowthStage currentStadium = null;
     private readonly List<GameObject> flowerPots = new List<GameObject>();
 
@@ -25,6 +25,8 @@ public class FieldBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        dirtPatch = transform.Find("DirtPatch").gameObject;
+
         Transform PotsParent = transform.Find("FlowerPots");
 
         foreach (Transform child in PotsParent)
@@ -35,18 +37,18 @@ public class FieldBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //DebugPlant();
-        if (field == null)
-        {
-            Debug.LogWarning("No Field set, using default");
-            field = new Field
-            {
-                Humidity = 0.5,
-                Temperature = 0.5,
-                Fertility = 0.5,
-                Sunshine = 0.5
-            };
-        }
+        ////DebugPlant();
+        //if (field == null)
+        //{
+        //    Debug.LogWarning("No Field set, using default");
+        //    field = new Field
+        //    {
+        //        Humidity = 0.5,
+        //        Temperature = 0.5,
+        //        Fertility = 0.5,
+        //        Sunshine = 0.5
+        //    };
+        //}
     }
 
     private void DebugPlant()
@@ -92,10 +94,15 @@ public class FieldBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (this.field.Seed != null)
+        if (this.field != default)
         {
-            this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
-            AdjustStadium();
+            var isPlanted = this.field.Seed != null;
+
+            if (isPlanted)
+            {
+                this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
+                AdjustStadium();
+            }
         }
     }
 
@@ -119,6 +126,7 @@ public class FieldBehaviour : MonoBehaviour
             {
                 GameObject.Destroy(child.gameObject);
             }
+
             Transform template = transform.Find("Flowers/" + newModelName);
             Transform flower = Instantiate(template, flowerPot.transform);
             flower.gameObject.name = "Flower";
@@ -169,16 +177,19 @@ public class FieldBehaviour : MonoBehaviour
         currentStadium = GrowthStages.stages[0];
         growthRate = GrowthController.getGrowthRate(this.field, this.field.Seed);
 
+        this.dirtPatch.SetActive(true);
+
         foreach (GameObject flowerPot in flowerPots)
         {
             int randomNumber = (int)(UnityEngine.Random.value * 360);
             flowerPot.transform.Rotate(new Vector3(0, randomNumber, 0));
         }
+
         Debug.Log("GrowthRate: " + growthRate);
         AdjustStadium();
     }
 
-    public void HarvestCrop()
+    public HarvestResult HarvestCrop()
     {
         if (IsFullyGrown())
         {
@@ -186,10 +197,13 @@ public class FieldBehaviour : MonoBehaviour
 
             FarmStorageController.PutPlantInStorage(harvest.Plant, harvest.NumHarvest);
             FarmStorageController.PutSeedInStorage(harvest.Plant, harvest.NumSeeds);
-            tileViewBehaviour.ShowHarvestResult(harvest);
 
             ClearField();
+
+            return harvest;
         }
+
+        return default;
     }
 
     public void FertilizeCrop()
