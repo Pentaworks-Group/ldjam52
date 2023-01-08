@@ -495,14 +495,14 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.7,
+                            "Value0": 0.8,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
                     },
                     "Sun": {
                         "Chromosome1": {
-                            "Value0": 0.5,
+                            "Value0": 0.6,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -519,14 +519,14 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.6,
+                            "Value0": 0.3,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
                     },
                     "Water": {
                         "Chromosome1": {
-                            "Value0": 0.3,
+                            "Value0": 0.5,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -543,7 +543,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.8,
+                            "Value0": 0.7,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
@@ -574,7 +574,7 @@
                     },
                     "Harvest": {
                         "Chromosome1": {
-                            "Value0": 50,
+                            "Value0": 66,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -591,14 +591,14 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 30,
+                            "Value0": 33,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
                     },
                     "PlantValue": {
                         "Chromosome1": {
-                            "Value0": 1,
+                            "Value0": 2,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
@@ -615,7 +615,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 1,
+                            "Value0": 5,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -636,14 +636,14 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.2,
+                            "Value0": 0.1,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
                     },
                     "Sun": {
                         "Chromosome1": {
-                            "Value0": 0.9,
+                            "Value0": 0.6,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
@@ -655,7 +655,7 @@
                     },
                     "Fertility": {
                         "Chromosome1": {
-                            "Value0": 0.4,
+                            "Value0": 0.5,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
@@ -667,7 +667,7 @@
                     },
                     "Water": {
                         "Chromosome1": {
-                            "Value0": 0.5,
+                            "Value0": 0.3,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -684,7 +684,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 0.4,
+                            "Value0": 0.2,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
@@ -720,7 +720,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 2,
+                            "Value0": 6,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -732,14 +732,14 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 4,
+                            "Value0": 10,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
                     },
                     "PlantValue": {
                         "Chromosome1": {
-                            "Value0": 30,
+                            "Value0": 45,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -751,7 +751,7 @@
                     },
                     "SeedsValue": {
                         "Chromosome1": {
-                            "Value0": 10,
+                            "Value0": 1,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -777,7 +777,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.5,
+                            "Value0": 0.4,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -789,7 +789,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.5,
+                            "Value0": 0.4,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -801,7 +801,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 0.7,
+                            "Value0": 0.3,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -813,14 +813,14 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 0.9,
+                            "Value0": 0.2,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
                     },
                     "Growth": {
                         "Chromosome1": {
-                            "Value0": 0.5,
+                            "Value0": 0.9,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
@@ -861,7 +861,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 40,
+                            "Value0": 30,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -873,14 +873,14 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 4,
+                            "Value0": 16,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
                     },
                     "PlantValue": {
                         "Chromosome1": {
-                            "Value0": 20,
+                            "Value0": 27,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -892,7 +892,7 @@
                     },
                     "SeedsValue": {
                         "Chromosome1": {
-                            "Value0": 10,
+                            "Value0": 4,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
@@ -1054,7 +1054,7 @@
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
-                            "Value0": 0.5,
+                            "Value0": 0.6,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -1066,7 +1066,7 @@
                     },
                     "Sun": {
                         "Chromosome1": {
-                            "Value0": 0.5,
+                            "Value0": 0.2,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         },
@@ -1083,7 +1083,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 1.0,
+                            "Value0": 0.4,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
@@ -1095,7 +1095,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 0.3,
+                            "Value0": 0.5,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -1143,7 +1143,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 5,
+                            "Value0": 10,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -1155,7 +1155,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 3,
+                            "Value0": 5,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -1167,7 +1167,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 8,
+                            "Value0": 13,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
@@ -1179,7 +1179,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 8,
+                            "Value0": 13,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
