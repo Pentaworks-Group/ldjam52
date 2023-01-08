@@ -10,14 +10,20 @@ namespace Assets.Scripts.Core.Inventory
 {
     public class FarmStorageController
     {
-        //Returns the free space left in the farm storage
+        /// <summary>
+        /// Returns the free space left in the farm storage
+        /// </summary>
+        /// <returns></returns>
         public static int GetFreeStorageSpace()
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
             return storage.StorageSize-getTotalStorageFilled(storage);
         }
 
-        //Returns all the items in storage
+        /// <summary>
+        /// Returns all the items in storage
+        /// </summary>
+        /// <returns></returns>
         public static List<StorageItem> getStorageInventory()
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
@@ -31,7 +37,12 @@ namespace Assets.Scripts.Core.Inventory
             return storage.MoneyBalance;
         }
 
-        //Tries to put in an amount of plants and returns the amount that fitted in the storage
+        /// <summary>
+        /// Tries to put in an amount of plants and returns the amount that fitted in the storage
+        /// </summary>
+        /// <param name="plant"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public static int PutPlantInStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
@@ -47,7 +58,12 @@ namespace Assets.Scripts.Core.Inventory
             return definitveAmount;
         }
 
-        //Tries to take out an amount of plants and returns the amount that was possible to take out
+        /// <summary>
+        /// Tries to take out an amount of plants and returns the amount that was possible to take out
+        /// </summary>
+        /// <param name="plant"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public static Double TakePlantOfStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
@@ -61,7 +77,12 @@ namespace Assets.Scripts.Core.Inventory
             return definitiveAmount;
         }
 
-        //Tries to put in an amount of seeds and returns the amount that fitted in the storage
+        /// <summary>
+        /// Tries to put in an amount of seeds and returns the amount that fitted in the storage
+        /// </summary>
+        /// <param name="plant"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public static int PutSeedInStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
@@ -77,7 +98,12 @@ namespace Assets.Scripts.Core.Inventory
             return definitveAmount;
         }
 
-        //Tries to take out an amount of seeds and returns the amount that was possible to take out
+        /// <summary>
+        /// Tries to take out an amount of seeds and returns the amount that was possible to take out
+        /// </summary>
+        /// <param name="plant"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public static Double TakeSeedsOfStorage(Plant plant, int amount)
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
@@ -91,7 +117,10 @@ namespace Assets.Scripts.Core.Inventory
             return definitiveAmount;
         }
 
-        //Puts Money on your account
+        /// <summary>
+        /// Puts Money on your account
+        /// </summary>
+        /// <param name="amount"></param>
         public static void PutMoneyInStorage(int amount)
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
