@@ -37,6 +37,7 @@ namespace Assets.Scripts.Core
 
             GenerateWorld(gameState);
             PopulateKnownPlants(gameState);
+            SetPlayerValues(gameState);
 
             return gameState;
         }
@@ -76,6 +77,28 @@ namespace Assets.Scripts.Core
             {
                 gameState.World = worldGenerator.World;
             }
+        }
+
+        private void SetPlayerValues(GameState gameState)
+        {
+            var newFarmStorage = new FarmStorage()
+            {
+                StorageSize = this.SelectedGameMode.Player.StartingFarmStorage.StorageSize,
+                MoneyBalance = this.SelectedGameMode.Player.StartingFarmStorage.MoneyBalance,
+                StorageItems = new List<StorageItem>()
+            };
+
+            foreach (var startStorageItem in this.SelectedGameMode.Player.StartingFarmStorage.StorageItems)
+            {
+                newFarmStorage.StorageItems.Add(new StorageItem()
+                {
+                    PlantId = startStorageItem.PlantId,
+                    StorageAmountPlants = startStorageItem.StorageAmountPlants,
+                    StorageAmountSeeds = startStorageItem.StorageAmountSeeds,
+                });
+            }
+
+            gameState.FarmStorage = newFarmStorage;
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
