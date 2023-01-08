@@ -47,6 +47,7 @@ namespace Assets.Scripts.Core
             {
                 gameState.KnownPlants = new Dictionary<System.Guid, Plant>();
             }
+
             foreach (Plant plant in gameState.GameMode.AvailablePlants)
             {
                 if (!gameState.KnownPlants.ContainsKey(plant.ID))
@@ -55,7 +56,7 @@ namespace Assets.Scripts.Core
                 }
             }
         }
-                
+
         protected override PlayerOptions InitialzePlayerOptions()
         {
             return new PlayerOptions()
