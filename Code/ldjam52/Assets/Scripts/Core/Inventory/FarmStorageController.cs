@@ -1,10 +1,8 @@
-﻿using Assets.Scripts.Model;
-using Assets.Scripts.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Assets.Scripts.Model;
 
 namespace Assets.Scripts.Core.Inventory
 {
@@ -17,7 +15,7 @@ namespace Assets.Scripts.Core.Inventory
         public static int GetFreeStorageSpace()
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
-            return storage.StorageSize-getTotalStorageFilled(storage);
+            return storage.StorageSize - getTotalStorageFilled(storage);
         }
 
         /// <summary>
@@ -70,7 +68,7 @@ namespace Assets.Scripts.Core.Inventory
             StorageItem item = getStorageItemToPlant(storage, plant);
 
             int definitiveAmount = amount;
-            if (item.StorageAmountPlants<amount)
+            if (item.StorageAmountPlants < amount)
                 definitiveAmount = item.StorageAmountPlants;
             item.StorageAmountPlants = Math.Max(0, item.StorageAmountPlants - amount);
 
@@ -144,8 +142,10 @@ namespace Assets.Scripts.Core.Inventory
                 {
                     Plant = plant
                 };
+
                 storage.StorageItems.Add(item);
             }
+
             return item;
         }
 

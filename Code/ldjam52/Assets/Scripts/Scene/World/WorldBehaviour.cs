@@ -74,7 +74,7 @@ public class WorldBehaviour : MonoBehaviour
         {
             if (!tileBehaviour.Tile.IsOwned)
             {
-
+                this.TileViewBehaviour.Show();
             }
             else
             {
