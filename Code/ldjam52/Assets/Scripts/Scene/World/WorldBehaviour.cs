@@ -6,6 +6,8 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Model;
 using Assets.Scripts.UI.TileView;
 
+using GameFrame.Core.Extensions;
+
 using UnityEngine;
 
 public class WorldBehaviour : MonoBehaviour
@@ -20,6 +22,7 @@ public class WorldBehaviour : MonoBehaviour
     public FieldViewBehaviour FieldViewBehaviour;
 
     //Random Ambient Sounds
+    private float nextSoundEffectTime = 0;
 
     private void Awake()
     {
@@ -63,7 +66,7 @@ public class WorldBehaviour : MonoBehaviour
 
             if ((tileGameObject.transform.position.x != tile.Position.X) || (tileGameObject.transform.position.z != tile.Position.Z))
             {
-                tileGameObject.transform.position = new Vector3(tile.Position.X, this.transform.position.y, tile.Position.Z);
+                tileGameObject.transform.position = new UnityEngine.Vector3(tile.Position.X, this.transform.position.y, tile.Position.Z);
             }
         }
 
@@ -96,6 +99,8 @@ public class WorldBehaviour : MonoBehaviour
         {
             RenderFarm(gameState.World.Farm);
         }
+
+        playRandomEffectSound();
     }
 
     private void RenderFarm(Farm farm)
@@ -106,7 +111,7 @@ public class WorldBehaviour : MonoBehaviour
 
         if ((farmGameObject.transform.position.x != farm.Position.X) || (farmGameObject.transform.position.z != farm.Position.Z))
         {
-            farmGameObject.transform.position = new Vector3(farm.Position.X, this.transform.position.y, farm.Position.Z);
+            farmGameObject.transform.position = new UnityEngine.Vector3(farm.Position.X, this.transform.position.y, farm.Position.Z);
         }
 
         isFarmSet = true;
@@ -114,6 +119,21 @@ public class WorldBehaviour : MonoBehaviour
 
     private void playRandomEffectSound()
     {
-        Core.Game.EffectsAudioManager.Play("Button");
+
+        if (Assets.Scripts.Base.Core.Game.State.ElapsedTime > nextSoundEffectTime && nextSoundEffectTime!=0)
+        {
+            Core.Game.EffectsAudioManager.Play(Core.Game.AmbientEffectsClipList.GetRandomEntry());
+            double randomNumber = UnityEngine.Random.value;
+
+            nextSoundEffectTime = (float)(randomNumber * 30.0 + 5.0 + Assets.Scripts.Base.Core.Game.State.ElapsedTime);
+            Debug.Log("Next Effect: " + randomNumber * 30.0 + 5.0);
+        }
+        else if(nextSoundEffectTime==0)
+        {
+            double randomNumber = UnityEngine.Random.value;
+
+            nextSoundEffectTime = (float)(randomNumber * 30.0 + 5.0 + Assets.Scripts.Base.Core.Game.State.ElapsedTime);
+            Debug.Log("Next Effect: " + randomNumber * 30.0 + 5.0);
+        }
     }
 }
