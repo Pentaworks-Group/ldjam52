@@ -51,26 +51,11 @@ public class SeedShopBehaviour : MonoBehaviour
         }
 
 
-        // TODO use when possible
         balance = FarmStorageController.GetStorageBalance();
         BalanceText.text = balance.ToString();
 
-        //inventory = FarmStorageBehaviour.getStorageInventory();
-
-        Dictionary<Guid, Plant> plants = Core.Game.State.KnownPlants;
-
-        inventory = new List<StorageItem>();
-        foreach (KeyValuePair<Guid, Plant> entry in plants)
-        {
-            StorageItem storageItem = new StorageItem();
-            storageItem.Plant = entry.Value;
-            storageItem.PlantId = entry.Key;
-            storageItem.StorageAmountPlants = UnityEngine.Random.Range(1, 10);
-            storageItem.StorageAmountSeeds = UnityEngine.Random.Range(1, 10);
-
-            inventory.Add(storageItem);
-        }
-
+        inventory = FarmStorageController.getStorageInventory();
+      
         fillPlants();
     }
 
@@ -97,9 +82,6 @@ public class SeedShopBehaviour : MonoBehaviour
         ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
         seedValue = GrowthController.getDominantChromosome(pair).Value0;
 
-        buyQuantity = Mathf.Min(chosenSeed.StorageAmountSeeds, buyQuantity);
-        BuyQuantityText.text = buyQuantity.ToString();
-
         updatePrice(false);
         updateInfo(false);
     }
@@ -124,7 +106,7 @@ public class SeedShopBehaviour : MonoBehaviour
         {
             if (chosenSeed == null)
                 return;
-            buyQuantity = Mathf.Min(chosenSeed.StorageAmountSeeds, ++buyQuantity);
+            buyQuantity++;
             BuyQuantityText.text = buyQuantity.ToString();
         }
 
@@ -201,7 +183,7 @@ public class SeedShopBehaviour : MonoBehaviour
         }
     }
 
-    // TODO
+    // TODO complete
     private void stateUpdate(bool isSell)
     {
         balance = FarmStorageController.GetStorageBalance();
@@ -211,23 +193,15 @@ public class SeedShopBehaviour : MonoBehaviour
         {
             sellQuantity = Mathf.Min(chosenPlant.StorageAmountPlants, sellQuantity);
             SellQuantityText.text = sellQuantity.ToString();
-        }
-        else
-        {
-            buyQuantity = Mathf.Min(chosenSeed.StorageAmountSeeds, buyQuantity);
-            BuyQuantityText.text = buyQuantity.ToString();
+
         }
 
+        updatePrice(isSell);
         updateInfo(isSell);
     }
 
     private void updatePrice(bool isSell)
     {
-        /* Should never be called with null
-        if (isSell && chosenPlant == null || !isSell && chosenSeed == null)
-            return;
-        */
-
         Plant plant = isSell ? chosenPlant.Plant : chosenSeed.Plant;
         double value = isSell ? plantValue : seedValue;
         int quantity = isSell ? sellQuantity : buyQuantity;
@@ -250,7 +224,6 @@ public class SeedShopBehaviour : MonoBehaviour
     {
         string info = "";
 
-
         StorageItem item = isSell ? chosenPlant : chosenSeed;
 
         string name = item.Plant.Name;
@@ -263,7 +236,7 @@ public class SeedShopBehaviour : MonoBehaviour
         else
             SeedInfo.text = info;
 
-        //
+        // TODO iterate over chromosomes
     }
 
 
