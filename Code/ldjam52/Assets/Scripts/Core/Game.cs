@@ -20,10 +20,12 @@ namespace Assets.Scripts.Core
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
 
-        public System.Collections.Generic.List<AudioClip> AudioClipListMenu { get; set; }
-        public System.Collections.Generic.List<AudioClip> AudioClipListGame { get; set; }
-        public System.Collections.Generic.List<AudioClip> AmbientClipList { get; set; }
-        public System.Collections.Generic.List<String> AmbientEffectsClipList { get; set; }
+        public List<AudioClip> AudioClipListMenu { get; set; }
+        public List<AudioClip> AudioClipListGame { get; set; }
+        public List<AudioClip> AmbientClipList { get; set; }
+        public List<String> AmbientEffectsClipList { get; set; }
+
+        public TileController TileController { get; set; }
 
         public bool LockCameraMovement { get; set; } = false;
 
@@ -108,12 +110,13 @@ namespace Assets.Scripts.Core
             gameState.FarmStorage = newFarmStorage;
         }
 
-        private void GenerateAnalyzers(GameState gameState)
+        public void GenerateAnalyzers(GameState gameState)
         {
             var newPlantAnalizer = new Analyzer
             {
                 Name = "Plant Analyzer",
                 Description = "Can analyse the plants genome and give you some informations about them.",
+                ImgName = "Seed_Basil",
                 MaxDevelopmentStage = 5
             };
             gameState.PlantAnalyzer = newPlantAnalizer;
@@ -122,6 +125,7 @@ namespace Assets.Scripts.Core
             {
                 Name = "Field Analyzer",
                 Description = "Can analyse fields and give you some informations about them.",
+                ImgName = "Seed_Sand",
                 MaxDevelopmentStage = 3
             };
             gameState.FieldAnalyzer = newFieldAnalizer;

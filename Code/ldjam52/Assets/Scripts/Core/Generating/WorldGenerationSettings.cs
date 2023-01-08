@@ -16,5 +16,6 @@ namespace Assets.Scripts.Core.Generating
         /// Forces the Generator to use all biomes available in addition to the <see cref="RandomBiomesAmount"/>.
         /// </summary>
         public Boolean IsAllBiomesUsageForced { get; set; }
+        public Single TotalDayDuration { get; set; }
     }
 }

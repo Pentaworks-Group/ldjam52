@@ -20,6 +20,7 @@ public class FieldViewBehaviour : MonoBehaviour
     private FieldViewSeedListBehaviour seedList;
     private FieldViewSeedListDetailsBehaviour parent1;
     private FieldViewSeedListDetailsBehaviour parent2;
+    private Button plantButton;
 
     private Text harvestSeedAmount;
     private Text harvestPlantAmount;
@@ -41,6 +42,7 @@ public class FieldViewBehaviour : MonoBehaviour
         seedList = transform.Find("FieldViewToggle/PlantingOptions/SeedList/ListContainer").GetComponent<FieldViewSeedListBehaviour>();
         parent1 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected1").GetComponent<FieldViewSeedListDetailsBehaviour>();
         parent2 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected2").GetComponent<FieldViewSeedListDetailsBehaviour>();
+        plantButton = transform.Find("FieldViewToggle/PlantingOptions/Selection/PlantButton").GetComponent<Button>();
 
 
         harvestSeedAmount = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Amount").GetComponent<Text>();
@@ -51,7 +53,11 @@ public class FieldViewBehaviour : MonoBehaviour
 
     private void Update()
     {
-        CheckHarvestButton();
+        if (viewToggle.activeSelf)
+        {
+            CheckHarvestButton();
+            CheckPlantingButton();
+        }
     }
 
     public void ViewField(FieldBehaviour fieldBehaviour)
@@ -86,7 +92,6 @@ public class FieldViewBehaviour : MonoBehaviour
         {
             if (harvestButton.interactable == false)
             {
-                Debug.Log("Interact");
                 harvestButton.interactable = true;
             }
         }
@@ -94,8 +99,25 @@ public class FieldViewBehaviour : MonoBehaviour
         {
             if (harvestButton.interactable == true)
             {
-                Debug.Log("DeInteract");
                 harvestButton.interactable = false;
+            }
+        }
+    }
+
+    public void CheckPlantingButton()
+    {
+        if (currentlyViewedField != default && (parent1.Plant != default || parent2.Plant != default))
+        {
+            if (plantButton.interactable == false)
+            {
+                plantButton.interactable = true;
+            }
+        }
+        else
+        {
+            if (plantButton.interactable == true)
+            {
+                plantButton.interactable = false;
             }
         }
     }
@@ -137,12 +159,12 @@ public class FieldViewBehaviour : MonoBehaviour
 
     public void SelectParent1(FieldViewSeedListDetailsBehaviour plantBehaviour)
     {
-        parent1.DisplaySeedDetails(plantBehaviour.GetPlant());
+        parent1.DisplaySeedDetails(plantBehaviour.Plant);
     }
 
     public void SelectParent2(FieldViewSeedListDetailsBehaviour plantBehaviour)
     {
-        parent2.DisplaySeedDetails(plantBehaviour.GetPlant());
+        parent2.DisplaySeedDetails(plantBehaviour.Plant);
     }
 
     public void SelectParent1Slot(FieldViewSeedListSlotBehaviour slotBehaviour)
@@ -157,7 +179,7 @@ public class FieldViewBehaviour : MonoBehaviour
 
     public void PlantSeeds()
     {
-        currentlyViewedField.PlantSeeds(parent1.GetPlant(), parent2.GetPlant());
+        currentlyViewedField.PlantSeeds(parent1.Plant, parent2.Plant);
         UpdateView();
     }
 
@@ -176,4 +198,20 @@ public class FieldViewBehaviour : MonoBehaviour
         seedList.UpdateList();
     }
 
+
+    public void ClearSelectedParent1()
+    {
+        parent1.ClearDisplayDetails();
+    }
+
+    public void ClearSelectedParent2()
+    {
+        parent2.ClearDisplayDetails();
+    }
+
+    public void ClearSelectedParents()
+    {
+        parent1.ClearDisplayDetails();
+        parent2.ClearDisplayDetails();
+    }
 }

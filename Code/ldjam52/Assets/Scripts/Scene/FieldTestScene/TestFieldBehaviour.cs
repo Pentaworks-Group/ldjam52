@@ -48,6 +48,11 @@ namespace Assets.Scripts.Scene.FieldTestScene
             }
         }
 
+        private void Update()
+        {
+            
+        }
+
         private void TileSelected(TileBehaviour tileBehaviour)
         {
             if (tileBehaviour != null)

@@ -7,13 +7,17 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
 {
     private Image pic;
     private Text plantName;
-    private Plant plant;
-
+    public Plant Plant { get; private set; }
 
     private void Awake()
     {
         pic = transform.Find("NameAndPic/Pic").GetComponent<Image>();
         plantName = transform.Find("NameAndPic/Name").GetComponent<Text>();
+    }
+
+    private void Start()
+    {
+        ClearDisplayDetails();
     }
 
     public void DisplaySlot(FieldViewSeedListSlotBehaviour slot)
@@ -23,13 +27,17 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
 
     public void DisplaySeedDetails(Plant plant)
     {
-        this.plant = plant;
+        this.Plant = plant;
         plantName.text = plant.Name;
         pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(plant?.ImageName);
     }
 
-    public Plant GetPlant()
+    public void ClearDisplayDetails()
     {
-        return plant;
+        this.Plant = default;
+        plantName.text = "";
+        pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get("Invisible_placeholder");
     }
+
+
 }

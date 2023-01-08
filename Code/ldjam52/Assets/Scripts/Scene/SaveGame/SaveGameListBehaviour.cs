@@ -24,5 +24,13 @@ namespace Assets.Scripts.Scene.SaveGame
 
             SetObjects(saveGames);
         }
+
+        public void SaveGame()
+        {
+            SaveGameController.SaveNewGame();
+            UpdateList();
+        }
+
+       
     }
 }
