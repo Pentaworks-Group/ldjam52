@@ -256,7 +256,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622292186768246416}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -266,7 +266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1622292186768246431
@@ -602,18 +602,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622292186821321247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1622292186768246417}
   - {fileID: 1622292188520771696}
-  m_Father: {fileID: 1622292188561656802}
-  m_RootOrder: 1
+  m_Father: {fileID: 9123152656150913652}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.01, y: 0.11}
-  m_AnchorMax: {x: 0.49, y: 0.99}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.49, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1684,12 +1684,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1622292187684726847}
-        m_TargetAssemblyTypeName: TileViewBehaviour, Assembly-CSharp
+        m_TargetAssemblyTypeName: FieldViewBehaviour, Assembly-CSharp
         m_MethodName: SelectParent2Slot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1622292187090596962}
-          m_ObjectArgumentAssemblyTypeName: TileViewSeedListSlotBehaviour, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: FieldViewSeedListSlotBehaviour, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1859,12 +1859,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1622292187684726847}
-        m_TargetAssemblyTypeName: TileViewBehaviour, Assembly-CSharp
+        m_TargetAssemblyTypeName: FieldViewBehaviour, Assembly-CSharp
         m_MethodName: SelectParent1
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1622292188122544209}
-          m_ObjectArgumentAssemblyTypeName: TileViewSeedListDetailsBehaviour, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: FieldViewSeedListDetailsBehaviour, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2038,12 +2038,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1622292187684726847}
-        m_TargetAssemblyTypeName: TileViewBehaviour, Assembly-CSharp
+        m_TargetAssemblyTypeName: FieldViewBehaviour, Assembly-CSharp
         m_MethodName: SelectParent2
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1622292188122544209}
-          m_ObjectArgumentAssemblyTypeName: TileViewSeedListDetailsBehaviour, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: FieldViewSeedListDetailsBehaviour, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2192,18 +2192,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622292187937898715}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1622292187143748834}
   - {fileID: 1622292188253996017}
-  m_Father: {fileID: 1622292188561656802}
-  m_RootOrder: 2
+  m_Father: {fileID: 9123152656150913652}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.51, y: 0.11}
-  m_AnchorMax: {x: 0.99, y: 0.99}
+  m_AnchorMin: {x: 0.51, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2411,12 +2411,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1622292187684726847}
-        m_TargetAssemblyTypeName: TileViewBehaviour, Assembly-CSharp
+        m_TargetAssemblyTypeName: FieldViewBehaviour, Assembly-CSharp
         m_MethodName: SelectParent1Slot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1622292187090596962}
-          m_ObjectArgumentAssemblyTypeName: TileViewSeedListSlotBehaviour, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: FieldViewSeedListSlotBehaviour, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2904,7 +2904,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622292188520771699}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2914,7 +2914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1622292188520771710
@@ -2970,6 +2970,8 @@ GameObject:
   - component: {fileID: 1622292188561656802}
   - component: {fileID: 1622292188561656800}
   - component: {fileID: 1622292188561656803}
+  - component: {fileID: 808093918}
+  - component: {fileID: 808093917}
   m_Layer: 5
   m_Name: HarvestResult
   m_TagString: Untagged
@@ -2990,8 +2992,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7983365376681716141}
-  - {fileID: 1622292186821321244}
-  - {fileID: 1622292187937898712}
+  - {fileID: 9123152656150913652}
   m_Father: {fileID: 1622292187981982505}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3038,6 +3039,82 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!223 &808093918
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622292188561656805}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &808093917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622292188561656805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!1 &2350622220623747159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9123152656150913652}
+  m_Layer: 5
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9123152656150913652
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350622220623747159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1622292186821321244}
+  - {fileID: 1622292187937898712}
+  m_Father: {fileID: 1622292188561656802}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.01, y: 0.01}
+  m_AnchorMax: {x: 0.99, y: 0.89}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4652134198410370921
 GameObject:
   m_ObjectHideFlags: 0
@@ -3047,6 +3124,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7983365376681716141}
+  - component: {fileID: 730811359}
+  - component: {fileID: 730811358}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -3075,6 +3154,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &730811359
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652134198410370921}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &730811358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652134198410370921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &8519097775145183092
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,12 +3374,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1622292188122544209}
-          m_TargetAssemblyTypeName: TileViewSeedListDetailsBehaviour, Assembly-CSharp
+          m_TargetAssemblyTypeName: FieldViewSeedListDetailsBehaviour, Assembly-CSharp
           m_MethodName: DisplaySlot
           m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 1622292187090596962}
-            m_ObjectArgumentAssemblyTypeName: TileViewSeedListSlotBehaviour, Assembly-CSharp
+            m_ObjectArgumentAssemblyTypeName: FieldViewSeedListSlotBehaviour, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3827,7 +3944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TileViewBehaviour, Assembly-CSharp
+      value: FieldViewBehaviour, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3938,6 +4055,18 @@ PrefabInstance:
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.4056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.4056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.4056604
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

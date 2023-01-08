@@ -43,10 +43,15 @@ public class FieldViewBehaviour : MonoBehaviour
         parent2 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected2").GetComponent<FieldViewSeedListDetailsBehaviour>();
 
 
-        harvestSeedAmount = transform.Find("FieldViewToggle/HarvestResult/Seeds/Amount").GetComponent<Text>();
-        harvestPlantAmount = transform.Find("FieldViewToggle/HarvestResult/Plants/Amount").GetComponent<Text>();
-        harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Seeds/Pic").GetComponent<Image>();
-        harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Plants/Pic").GetComponent<Image>();
+        harvestSeedAmount = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Amount").GetComponent<Text>();
+        harvestPlantAmount = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Amount").GetComponent<Text>();
+        harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Pic").GetComponent<Image>();
+        harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Pic").GetComponent<Image>();
+    }
+
+    private void Update()
+    {
+        CheckHarvestButton();
     }
 
     public void ViewField(FieldBehaviour fieldBehaviour)
@@ -66,20 +71,32 @@ public class FieldViewBehaviour : MonoBehaviour
             plantName.text = currentlyViewedField.Field.Seed.Name;
             plantedTime.text = currentlyViewedField.Field.TimePlanted.ToString();
             plantImage.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(currentlyViewedField.Field.Seed.ImageName);
-            if (currentlyViewedField.IsFullyGrown())
-            {
-                harvestButton.interactable = true;
-            }
-            else
-            {
-                harvestButton.interactable = false;
-            }
         }
         else
         {
             currentInfo.SetActive(false);
             plantingOptions.SetActive(true);
 
+        }
+    }
+
+    public void CheckHarvestButton()
+    {
+        if (currentlyViewedField != default && currentlyViewedField.IsFullyGrown())
+        {
+            if (harvestButton.interactable == false)
+            {
+                Debug.Log("Interact");
+                harvestButton.interactable = true;
+            }
+        }
+        else
+        {
+            if (harvestButton.interactable == true)
+            {
+                Debug.Log("DeInteract");
+                harvestButton.interactable = false;
+            }
         }
     }
 
