@@ -14,6 +14,10 @@ namespace Assets.Scripts.Core
 
         public FarmStorage FarmStorage { get; set; }
 
+        public Analyzer PlantAnalyzer { get; set; }
+
+        public Analyzer FieldAnalyzer { get; set; }
+
         public float ElapsedTime { get; set; }
     }
 }
