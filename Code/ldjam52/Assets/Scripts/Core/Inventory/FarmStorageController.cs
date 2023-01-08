@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Core.Inventory
 {
-    public class FarmStorageBehaviour
+    public class FarmStorageController
     {
         //Returns the free space left in the farm storage
         public static int GetFreeStorageSpace()

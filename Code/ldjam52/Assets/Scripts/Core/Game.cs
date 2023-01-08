@@ -41,7 +41,7 @@ namespace Assets.Scripts.Core
             return gameState;
         }
 
-        private void PopulateKnownPlants(GameState gameState)
+        public void PopulateKnownPlants(GameState gameState)
         {
             if (gameState.KnownPlants == default)
             {

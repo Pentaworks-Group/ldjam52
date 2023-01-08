@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Assets.Scripts.Model;
+
 using GameFrame.Core.Math;
 
 namespace Assets.Scripts.Core.Generating
@@ -14,5 +16,8 @@ namespace Assets.Scripts.Core.Generating
         /// Forces the Generator to use all biomes available in addition to the <see cref="RandomBiomesAmount"/>.
         /// </summary>
         public Boolean IsAllBiomesUsageForced { get; set; }
+
+
+        public FarmStorage StartingFarmStorage { get; set; }
     }
 }

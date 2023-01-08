@@ -6,7 +6,24 @@
             "Height": 64,
             "Width": 64,
             "RandomBiomesAmount": 0,
-            "IsAllBiomesUsageForced": true
+            "IsAllBiomesUsageForced": true,
+            "StartingFarmStorage": {
+                "StorageSize": 10,
+                "MoneyBalance": 100,
+                "StorageItems": [
+                    {
+                        "PlantId": "35054514-e9b5-45e1-bc5b-bd548de633da",
+                        "StorageAmountPlants": 10,
+                        "StorageAmountSeeds": 10
+                    },
+                    {
+                        "PlantId": "9356849c-8c09-46f8-9521-29cea3e0c367",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
+                    }
+
+                ]
+            }
         },
         "Player": {
             "StartingFunds": 9001
@@ -16,7 +33,8 @@
                 "ID": "35054514-e9b5-45e1-bc5b-bd548de633da",
                 "Name": "sissy basil",
                 "Description": "a plant difficult to handle",
-                "ImageReference": "Basil",
+                "ImageName": "Basilikum",
+                "SeedImageName": "Seed_Basilikum",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -156,7 +174,8 @@
                 "ID": "9356849c-8c09-46f8-9521-29cea3e0c367",
                 "Name": "pickly pear",
                 "Description": "a dry plant",
-                "ImageReference": "Kaktus",
+                "ImageName": "Kaktus",
+                "SeedImageName": "Seed_Kaktus",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -296,7 +315,8 @@
                 "ID": "ac77c6d6-c379-499c-bc79-91b49ca6cd66",
                 "Name": "precious fungus",
                 "Description": "detectable only with dogs",
-                "ImageReference": "Trueffel",
+                "ImageName": "Trueffel",
+                "SeedImageName": "Seed_Trueffel",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -436,7 +456,8 @@
                 "ID": "866ead50-2a6e-4ef5-a830-6297373ae879",
                 "Name": "amazing maize",
                 "Description": "do not let it get too hot",
-                "ImageReference": "Mais",
+                "ImageName": "Mais",
+                "SeedImageName": "Seed_Mais",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -576,7 +597,8 @@
                 "ID": "7ac5b649-0f8f-48dc-bfb5-fb2a3328e4ef",
                 "Name": "noble edelweiss",
                 "Description": "a symbol of courage, bravery and love",
-                "ImageReference": "Edelweiss",
+                "ImageName": "Edelweiss",
+                "SeedImageName": "Seed_Edelweiss",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -716,7 +738,8 @@
                 "ID": "0c77d03b-85da-4552-bff7-6ad6b2e71f5d",
                 "Name": "bilbo berry",
                 "Description": "healthy AND delicious",
-                "ImageReference": "Heidelbeere",
+                "ImageName": "Heidelbeere",
+                "SeedImageName": "Seed_Heidelbeere",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -856,7 +879,8 @@
                 "ID": "7ebc5e0b-ea81-42bf-b1c7-d96c306bfe4b",
                 "Name": "sandy corn",
                 "Description": "this is certainly not a plant, what is it good for?",
-                "ImageReference": "Sand",
+                "ImageName": "Sand",
+                "SeedImageName": "Seed_Sand",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -996,7 +1020,8 @@
                 "ID": "beb9d455-539a-4783-9a73-a91b326af581",
                 "Name": "hungry carnivore",
                 "Description": "better keep your distance",
-                "ImageReference": "FleischFresser",
+                "ImageName": "FleischFresser",
+                "SeedImageName": "Seed_FleischFresser",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -1136,7 +1161,8 @@
                 "ID": "e5bc09bf-7517-4768-a01e-e8e79d97bc41",
                 "Name": "dropping snow",
                 "Description": "a little snow for switzerland",
-                "ImageReference": "Schneegloeckchen",
+                "ImageName": "Schneegloeckchen",
+                "SeedImageName": "Seed_Schneegloeckchen",
                 "Genome": {
                     "Temp": {
                         "Chromosome1": {
@@ -1369,23 +1395,6 @@
                 "HumidityMin": 0.5,
                 "HumidityMax": 0.7
             }
-        ],
-        "FarmStorage": {
-            "StorageSize": 10,
-            "MoneyBalance": 100,
-            "StorageItems": [
-                {
-                    "PlantId": "35054514-e9b5-45e1-bc5b-bd548de633da",
-                    "StorageAmountPlants": 10,
-                    "StorageAmountSeeds": 10
-                },
-                {
-                    "PlantId": "35054514-e9b5-45e1-bc5b-bd548de633da",
-                    "StorageAmountPlants": 15,
-                    "StorageAmountSeeds": 8
-                }
-
-            ]
-        }
+        ]
     }
 ]

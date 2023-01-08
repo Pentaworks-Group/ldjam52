@@ -66,6 +66,7 @@ public class TileViewBehaviour : MonoBehaviour
             plantingOptions.SetActive(false);
             plantName.text = currentlyViewedField.Field.Seed.Name;
             plantedTime.text = currentlyViewedField.Field.TimePlanted.ToString();
+            plantImage.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(currentlyViewedField.Field.Seed.ImageName);
             if (currentlyViewedField.IsFullyGrown())
             {
                 harvestButton.interactable = true;
@@ -136,6 +137,7 @@ public class TileViewBehaviour : MonoBehaviour
 
     public void PlantSeeds()
     {
+
         currentlyViewedField.PlantSeeds(parent1.GetPlant(), parent2.GetPlant());
         UpdateView();
     }
