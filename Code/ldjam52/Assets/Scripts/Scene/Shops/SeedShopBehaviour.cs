@@ -20,18 +20,18 @@ public class SeedShopBehaviour : MonoBehaviour
     public TMP_Text BuyMoney;
     public TMP_Text BalanceText;
 
-    public TMP_Text PlantInfo;
-    public TMP_Text SeedInfo;
+    public GameObject PlantInfo;
+    public GameObject SeedInfo;
 
     public ScrollRect Plants;
     public ScrollRect Seeds;
 
     public Button buttonPrefab;
 
+    public Sprite[] plantImages;
+
     private int sellQuantity = 0;
-    private int sellPrice = 0;
     private int buyQuantity = 0;
-    private int buyPrice = 0;
     private int balance;
 
     private StorageItem chosenPlant;
@@ -50,7 +50,6 @@ public class SeedShopBehaviour : MonoBehaviour
             InitializeGameState();
         }
 
-
         balance = FarmStorageController.GetStorageBalance();
         BalanceText.text = balance.ToString();
 
@@ -63,7 +62,7 @@ public class SeedShopBehaviour : MonoBehaviour
     {
         chosenPlant = item;
 
-        ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
+        ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.PLANTVALUE];
         plantValue = GrowthController.getDominantChromosome(pair).Value0;
 
         sellQuantity = Mathf.Min(chosenPlant.StorageAmountPlants, sellQuantity);
@@ -139,9 +138,7 @@ public class SeedShopBehaviour : MonoBehaviour
     {
         int amount = sellAll ? chosenPlant.StorageAmountPlants : sellQuantity;
         FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, amount);
-
-        // Hacky solution because sell all does not (yet) update sellPrice
-        FarmStorageController.PutMoneyInStorage(sellPrice / sellQuantity * amount);
+        FarmStorageController.PutMoneyInStorage((int)(plantValue * amount));
 
         // TODO Update info, plants list, money...
         stateUpdate(true);
@@ -161,6 +158,7 @@ public class SeedShopBehaviour : MonoBehaviour
     {
         foreach (StorageItem item in inventory)
         {
+            Debug.Log($"Adding plant {item.Plant.Name} now.");
             Button newItem = Instantiate(buttonPrefab);
             newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
             newItem.transform.SetParent(Plants.transform.GetChild(0).GetChild(0));
@@ -206,37 +204,137 @@ public class SeedShopBehaviour : MonoBehaviour
         double value = isSell ? plantValue : seedValue;
         int quantity = isSell ? sellQuantity : buyQuantity;
 
-        double total = value * quantity;
+        int total = (int)(value * quantity);
 
         if (isSell)
         {
-            sellPrice = (int)total;
             SellMoney.text = total.ToString();
         }
         else
         {
-            buyPrice = (int)total;
             BuyMoney.text = total.ToString();
         }
     }
 
+    // TODO put in separate method that is called with item and iformation
     private void updateInfo(bool isSell)
     {
-        string info = "";
 
         StorageItem item = isSell ? chosenPlant : chosenSeed;
+        Transform information = isSell ? PlantInfo.transform : SeedInfo.transform;
 
-        string name = item.Plant.Name;
-        string amount = (isSell ? item.StorageAmountPlants : item.StorageAmountSeeds).ToString();
+        // Always shown
+        information.Find("Name").GetComponent<TMP_Text>().text = item.Plant.Name;
+        information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + (isSell ? item.StorageAmountPlants : item.StorageAmountSeeds).ToString();
+        information.Find("Image").GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+        information.Find("Image").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(item.Plant.ImageName);
 
-        info = name + ": " + amount;
+        ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
+        information.Find("SeedsValue").GetComponent<TMP_Text>().text = "Seed value: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
 
-        if (isSell)
-            PlantInfo.text = info;
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.PLANTVALUE];
+        information.Find("PlantsValue").GetComponent<TMP_Text>().text = "Plant value: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
+
+        // Visibility checks needed
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDS];
+        if (pair.IsVisible)
+            information.Find("Seeds").GetComponent<TMP_Text>().text = "Seeds: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
         else
-            SeedInfo.text = info;
+            information.Find("Seeds").GetComponent<TMP_Text>().text = "Seeds: ?";
 
-        // TODO iterate over chromosomes
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.HARVEST];
+        if (pair.IsVisible)
+            information.Find("Harvest").GetComponent<TMP_Text>().text = "Harvest: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
+        else
+            information.Find("Harvest").GetComponent<TMP_Text>().text = "Harvest: ?";
+
+        // Stat bars
+        // TODO put into StatsBar
+        drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
+        drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
+        drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
+        drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
+
+        /*
+        StatsBar bar = information.Find("Temp").GetChild(0).GetComponent<StatsBar>();
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP];
+        if (pair.IsVisible || true)
+        {
+            bar.QuestionMark.SetActive(false);
+            bar.GradientTransform.gameObject.SetActive(true);
+            bar.BiomeTransform.gameObject.SetActive(true);
+            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
+            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
+        }
+        else
+        {
+            bar.GradientTransform.gameObject.SetActive(false);
+            bar.BiomeTransform.gameObject.SetActive(false);
+            bar.QuestionMark.SetActive(true);
+        }
+
+        bar = information.Find("Sun").GetChild(0).GetComponent<StatsBar>();
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SUN];
+        if (pair.IsVisible || true)
+        {
+            bar.QuestionMark.SetActive(false);
+            bar.GradientTransform.gameObject.SetActive(true);
+            bar.BiomeTransform.gameObject.SetActive(true);
+            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
+            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
+        }
+        else
+        {
+            bar.GradientTransform.gameObject.SetActive(false);
+            bar.BiomeTransform.gameObject.SetActive(false);
+            bar.QuestionMark.SetActive(true);
+        }
+
+        bar = information.Find("Water").GetChild(0).GetComponent<StatsBar>();
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.WATER];
+        if (pair.IsVisible || true)
+        {
+            bar.QuestionMark.SetActive(false);
+            bar.GradientTransform.gameObject.SetActive(true);
+            bar.BiomeTransform.gameObject.SetActive(true);
+            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
+            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
+        }
+        else
+        {
+            bar.GradientTransform.gameObject.SetActive(false);
+            bar.BiomeTransform.gameObject.SetActive(false);
+            bar.QuestionMark.SetActive(true);
+        }
+
+        bar = information.Find("Fertility").GetChild(0).GetComponent<StatsBar>();
+        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.FERTILITY];
+        if (pair.IsVisible || true)
+        {
+            bar.QuestionMark.SetActive(false);
+            bar.GradientTransform.gameObject.SetActive(true);
+            bar.BiomeTransform.gameObject.SetActive(true);
+            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
+            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
+        }
+        else
+        {
+            bar.GradientTransform.gameObject.SetActive(false);
+            bar.BiomeTransform.gameObject.SetActive(false);
+            bar.QuestionMark.SetActive(true);
+        }
+        */
+    }
+
+    private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair)
+    {
+        StatsBar bar = infoPanel.Find(barName).GetChild(0).GetComponent<StatsBar>();
+
+        if (pair.IsVisible || true)
+        {
+            bar.SetPlantValues(GrowthController.getDominantChromosome(pair).Value0, GrowthController.getDominantChromosome(pair).ValueDev);
+            bar.ShowPlantValue();
+        }
     }
 
 

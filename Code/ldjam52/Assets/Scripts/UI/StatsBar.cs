@@ -6,45 +6,51 @@ public class StatsBar : MonoBehaviour
 {
 
     // Values in [0,1]
-    private double mean { get; set; }
-    private double width { get; set; }
-    public double BiomeVal { get; set; }
+    private double mean;
+    private double var;
+    private double biomeVal;
 
     private Color col;
 
-    private bool knowsPlant = false;
-    private bool knowsBiome = false;
-
-    public RectTransform gradientTransform;
-    public RectTransform biomeTransform;
-
-    public StatsBar(double _mean, double _width, Color _col)
-    {
-        mean = _mean;
-        width = _width;
-        col = _col;
-    }
+    public RectTransform GradientTransform;
+    public RectTransform BiomeTransform;
+    public GameObject QuestionMark;
 
     // Start is called before the first frame update
     void Start()
     {
     }
 
-    public void TriggerPlant()
+    public void SetPlantValues(double _mean, double _variance)
     {
-        knowsPlant = true;
-        gradientTransform.gameObject.SetActive(true);
+        mean = _mean;
+        var = _variance;
+
     }
 
-    public void TriggerBiome()
+    public void ShowPlantValue()
     {
-        knowsPlant = true;
+        QuestionMark.SetActive(false);
+        GradientTransform.gameObject.SetActive(true);
     }
 
-    public void Draw()
+    public void HidePlantValue()
     {
-        
+        QuestionMark.SetActive(true);
+        GradientTransform.gameObject.SetActive(false);
     }
+
+    public void ShowBiomeValue()
+    {
+        QuestionMark.SetActive(false);
+        BiomeTransform.gameObject.SetActive(true);
+    }
+
+    public void hideBiomeValue()
+    {
+        BiomeTransform.gameObject.SetActive(false);
+    }
+
 
     // Update is called once per frame
     void Update()
