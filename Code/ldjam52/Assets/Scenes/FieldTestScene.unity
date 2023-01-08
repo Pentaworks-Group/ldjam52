@@ -307,6 +307,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa4b2252dece434894363b372556c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1657117063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 657397590932350739, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+  m_PrefabInstance: {fileID: 8411269790795334177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb446a411ae60534cab0599946364347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1808898255
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71cbfce43cb6574d8f5e878d1a40f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileBehaviour: {fileID: 1657117063}
 --- !u!1 &2013928448
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,10 +573,34 @@ PrefabInstance:
       propertyPath: TileViewBehaviour
       value: 
       objectReference: {fileID: 677978537}
+    - target: {fileID: 1129867701437881292, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129867701437881292, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129867701437881292, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129867701437881292, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129867701437881292, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4048129925067238486, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
       propertyPath: tileViewBehaviour
       value: 
       objectReference: {fileID: 677978537}
+    - target: {fileID: 6362827273145314279, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7168394626662614725, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

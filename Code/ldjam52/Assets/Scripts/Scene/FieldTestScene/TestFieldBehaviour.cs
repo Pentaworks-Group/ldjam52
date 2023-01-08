@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core;
+using Assets.Scripts.Model;
 
 
 using UnityEngine;
@@ -11,11 +12,16 @@ namespace Assets.Scripts.Scene.FieldTestScene
 {
     public class TestFieldBehaviour : MonoBehaviour
     {
+        public TileBehaviour tileBehaviour;
+
         // Start is called before the first frame update
         void Start()
         {
             if (Assets.Scripts.Base.Core.Game.State == default) {
                 InitializeGameState();
+                Tile tile = new();
+                tile.Field = new() { Fertility = .5, Sunshine = 2, Temperature = .8, Humidity = .4 };
+                tileBehaviour.SetTile(tile);
             }
         }
 

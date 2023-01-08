@@ -462,6 +462,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flower1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b8a4ab4b64ec734479e4b07eef5a3f85, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a4ab4b64ec734479e4b07eef5a3f85, type: 3}
 --- !u!4 &4202962746296972155 stripped
@@ -523,6 +527,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2fac05db654dcfa4184d72bbb7209325, type: 3}
       propertyPath: m_Name
       value: Flower2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fac05db654dcfa4184d72bbb7209325, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fac05db654dcfa4184d72bbb7209325, type: 3}
@@ -648,6 +656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flower3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2499d46cae22b2446bca040b067b57e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2499d46cae22b2446bca040b067b57e3, type: 3}
 --- !u!4 &7944262095856440749 stripped
@@ -710,6 +722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flower4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b26205286bd89ce4b9eff08e220851f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b26205286bd89ce4b9eff08e220851f1, type: 3}
 --- !u!4 &7781068937836196805 stripped
@@ -771,6 +787,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aa3586bffd2b77a4a80931d7b262cea2, type: 3}
       propertyPath: m_Name
       value: Flower0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aa3586bffd2b77a4a80931d7b262cea2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa3586bffd2b77a4a80931d7b262cea2, type: 3}
