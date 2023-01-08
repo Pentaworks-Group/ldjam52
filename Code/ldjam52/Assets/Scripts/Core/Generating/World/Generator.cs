@@ -97,6 +97,7 @@ namespace Assets.Scripts.Core.Generating.World
 
                         var closestSpawn = FindBiome(tile);
 
+                        tile.Color = closestSpawn.Biome.Color;
                         tile.Temperature = UnityEngine.Random.Range(closestSpawn.Biome.TemperatureMin, closestSpawn.Biome.TemperatureMax);
                         tile.Fertility = UnityEngine.Random.Range(closestSpawn.Biome.FertilityMin, closestSpawn.Biome.FertilityMax);
                         tile.Humidity = UnityEngine.Random.Range(closestSpawn.Biome.HumidityMin, closestSpawn.Biome.HumidityMax);

@@ -29,7 +29,7 @@ namespace Assets.Scripts.Scene.FieldTestScene
                 GameMode = Base.Core.Game.AvailableGameModes[0]
             };
 
-            gameState.FarmStorage = gameState.GameMode.World.StartingFarmStorage;
+            gameState.FarmStorage = gameState.GameMode.Player.StartingFarmStorage;
             Assets.Scripts.Base.Core.Game.PopulateKnownPlants(gameState);
 
             Assets.Scripts.Base.Core.Game.Start(gameState);

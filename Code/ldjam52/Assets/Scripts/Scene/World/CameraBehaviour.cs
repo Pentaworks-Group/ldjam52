@@ -7,13 +7,13 @@ public class CameraBehaviour : MonoBehaviour
 {
     public Camera cam;
 
-    private float moveSpeed = 10f;
-    private float zoomSpeed = 5.0f;
-    private float zoomSpeedMouse = 80.0f;
-    private float zoomSpeedTouch = 10.0f;
+    private readonly float moveSpeed = 10f;
+    private readonly float zoomSpeed = 5.0f;
+    private readonly float zoomSpeedMouse = 80.0f;
+    private readonly float zoomSpeedTouch = 10.0f;
 
-    private float minFov = 10.0f;
-    private float maxFov = 90.0f;
+    private readonly float minFov = 10.0f;
+    //private float maxFov = 90.0f;
 
     private Vector2 prevTouch = Vector2.zero;
     private (Vector2, Vector2) prevPinch;
