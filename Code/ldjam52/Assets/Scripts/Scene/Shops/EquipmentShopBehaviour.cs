@@ -28,14 +28,18 @@ namespace Assets.Scripts.Scene.Shops
                 InitializeGameState();
             }
 
-            BalanceText.text = FarmStorageController.GetStorageBalance().ToString();
+            updateGUI();
+        }
 
+        private void updateGUI()
+        {
+            BalanceText.text = FarmStorageController.GetStorageBalance().ToString();
             InitAnalyzerPanel(Base.Core.Game.State.PlantAnalyzer, PlantAnalyzerPanel);
             InitAnalyzerPanel(Base.Core.Game.State.FieldAnalyzer, FieldAnalyzerPanel);
         }
-
         private void InitAnalyzerPanel(Analyzer analyzer, GameObject panel)
         {
+
             panel.transform.Find("AnalyzerName").GetComponent<TMP_Text>().text = analyzer.Name;
             panel.transform.Find("AnalyzerDesc").GetComponent<TMP_Text>().text = analyzer.Description;
 
@@ -51,7 +55,9 @@ namespace Assets.Scripts.Scene.Shops
                 if (FarmStorageController.GetStorageBalance() < nextStage.UpgradeCost)
                 {
                     Debug.Log("Not Enough Money to Upgrade");
-                    footer.transform.Find("ButtonUpgrade").GetComponent<Button>().enabled = false;
+                    Button upgradeButton = footer.transform.Find("ButtonUpgrade").GetComponent<Button>();
+                    upgradeButton.enabled = false;
+                    upgradeButton.transform.Find("Text").GetComponent<TMP_Text>().color = Color.gray;
                 }
             }
             else
@@ -74,6 +80,8 @@ namespace Assets.Scripts.Scene.Shops
             {
                 //Check Money Amount
                 Base.Core.Game.State.PlantAnalyzer.CurrentDevelopmentStage = nextStage;
+                FarmStorageController.TakeMoneyOfStorage(nextStage.UpgradeCost);
+                updateGUI();
             }
         }
 
@@ -85,6 +93,8 @@ namespace Assets.Scripts.Scene.Shops
             {
                 //Check Money Amount
                 Base.Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage = nextStage;
+                FarmStorageController.TakeMoneyOfStorage(nextStage.UpgradeCost);
+                updateGUI();
             }
         }
 
