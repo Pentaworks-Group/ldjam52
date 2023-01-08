@@ -116,18 +116,20 @@ namespace Assets.Scripts.Core
             {
                 Name = "Plant Analyzer",
                 Description = "Can analyse the plants genome and give you some informations about them.",
-                ImgName = "Seed_Basil",
-                MaxDevelopmentStage = 5
+                ImgName = "Microscope",
+                DevelopmentStages = Constants.DevelopmentStages.PlantAnalyticsStages,
             };
+            newPlantAnalizer.CurrentDevelopmentStage = newPlantAnalizer.DevelopmentStages[0];
             gameState.PlantAnalyzer = newPlantAnalizer;
 
             var newFieldAnalizer = new Analyzer
             {
                 Name = "Field Analyzer",
                 Description = "Can analyse fields and give you some informations about them.",
-                ImgName = "Seed_Sand",
-                MaxDevelopmentStage = 3
+                ImgName = "Scanner",
+                DevelopmentStages = Constants.DevelopmentStages.FieldAnalyticsStages,
             };
+            newFieldAnalizer.CurrentDevelopmentStage = newFieldAnalizer.DevelopmentStages[0];
             gameState.FieldAnalyzer = newFieldAnalizer;
 
         }
