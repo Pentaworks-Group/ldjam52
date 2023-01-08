@@ -108,7 +108,7 @@ public class InheritanceController
                 ChromosomePair otherPair;
                 if (plant.Genome.TryGetValue(chromosomePair.Key, out otherPair))
                 {
-                    equal |= chromosomePair.Equals(otherPair);
+                    equal &= chromosomePair.Equals(otherPair);
                     if (!equal)
                     {
                         break;
@@ -120,7 +120,7 @@ public class InheritanceController
                 }
 
             }
-            if (!equal)
+            if (equal)
             {
                 return pair.Value;
             }
