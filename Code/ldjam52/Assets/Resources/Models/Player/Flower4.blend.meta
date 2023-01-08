@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Blossoms
+    second: {fileID: 2100000, guid: 4117d573cd1e94f4e9b0cc12ac8ddcb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.002
     second: {fileID: 2100000, guid: 039ad51bcca6bf741bb0fac3418491b4, type: 2}
   - first:
