@@ -292,6 +292,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1622292187183395595, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622292187410892812, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b26a54654471bec4f83f2765802774a0, type: 3}
+    - target: {fileID: 1622292187410892812, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622292187602110817, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726834, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_Name
       value: FieldView
@@ -581,9 +597,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1548934669274811023, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145769892168702879, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186908271673052816, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7016828543276112029, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232062709979713464, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626883899680046534, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9199526047750111619, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_Pivot.x
