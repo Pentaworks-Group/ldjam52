@@ -20,6 +20,36 @@
                         "PlantId": "9356849c-8c09-46f8-9521-29cea3e0c367",
                         "StorageAmountPlants": 15,
                         "StorageAmountSeeds": 8
+                    },
+                    {
+                        "PlantId": "ac77c6d6-c379-499c-bc79-91b49ca6cd66",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
+                    },
+                    {
+                        "PlantId": "866ead50-2a6e-4ef5-a830-6297373ae879",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
+                    },
+                    {
+                        "PlantId": "7ac5b649-0f8f-48dc-bfb5-fb2a3328e4ef",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
+                    },
+                    {
+                        "PlantId": "0c77d03b-85da-4552-bff7-6ad6b2e71f5d",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
+                    },
+                    {
+                        "PlantId": "beb9d455-539a-4783-9a73-a91b326af581",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
+                    },
+                    {
+                        "PlantId": "9356849c-8c09-46f8-9521-29cea3e0c367",
+                        "StorageAmountPlants": 15,
+                        "StorageAmountSeeds": 8
                     }
 
                 ]

@@ -1,6 +1,8 @@
 using Assets.Scripts.Scenes;
-
-public class SaveGameSceneBehaviour : BaseMenuBehaviour
+namespace Assets.Scripts.Scene.SaveGame
 {
- 
+    public class SaveGameSceneBehaviour : BaseMenuBehaviour
+    {
+
+    }
 }
