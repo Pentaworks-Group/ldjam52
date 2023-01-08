@@ -18,6 +18,7 @@ public class TileViewBehaviour : MonoBehaviour
     private Button harvestButton;
 
 
+    private TileViewSeedListBehaviour seedList;
     private TileViewSeedListDetailsBehaviour parent1;
     private TileViewSeedListDetailsBehaviour parent2;
 
@@ -39,6 +40,7 @@ public class TileViewBehaviour : MonoBehaviour
         plantedTime = transform.Find("TileViewToggle/CurrentInfo/PlantedTime/Value")?.GetComponent<Text>();
         harvestButton = transform.Find("TileViewToggle/CurrentInfo/Buttons/Harvest")?.GetComponent<Button>();
 
+        seedList = transform.Find("TileViewToggle/PlantingOptions/SeedList/ListContainer")?.GetComponent<TileViewSeedListBehaviour>();
         parent1 = transform.Find("TileViewToggle/PlantingOptions/Selection/Selected1")?.GetComponent<TileViewSeedListDetailsBehaviour>();
         parent2 = transform.Find("TileViewToggle/PlantingOptions/Selection/Selected2")?.GetComponent<TileViewSeedListDetailsBehaviour>();
 
@@ -137,7 +139,6 @@ public class TileViewBehaviour : MonoBehaviour
 
     public void PlantSeeds()
     {
-
         currentlyViewedField.PlantSeeds(parent1.GetPlant(), parent2.GetPlant());
         UpdateView();
     }
@@ -154,6 +155,7 @@ public class TileViewBehaviour : MonoBehaviour
         harvestPlantAmount.text = result.NumHarvest.ToString();
         harvestSeedPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.SeedImageName);
         harvestPlantPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.ImageName);
+        seedList.UpdateList();
     }
 
 }

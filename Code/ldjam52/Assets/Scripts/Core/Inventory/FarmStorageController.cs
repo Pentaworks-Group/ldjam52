@@ -107,7 +107,7 @@ namespace Assets.Scripts.Core.Inventory
 
         private static StorageItem getStorageItemToPlant(FarmStorage storage, Plant plant)
         {
-            var item = storage.StorageItems.First(i => i.Plant.ID == plant.ID);
+            var item = storage.StorageItems.FirstOrDefault(i => i.Plant.ID == plant.ID);
 
             if (item == null)
             {

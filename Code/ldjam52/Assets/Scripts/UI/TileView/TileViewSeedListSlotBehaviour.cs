@@ -16,6 +16,13 @@ public class TileViewSeedListSlotBehaviour : ListSlotBehaviour
         pic = transform.Find("Pic").GetComponent<Image>();
     }
 
+    public void SetVars()
+    {
+        plantName = transform.Find("PlantName").GetComponent<Text>();
+        seedAmount = transform.Find("SeedAmount").GetComponent<Text>();
+        pic = transform.Find("Pic").GetComponent<Image>();
+    }
+
     public void SelectSlot()
     {
 
