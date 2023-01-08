@@ -48,7 +48,7 @@ public class WorldBehaviour : MonoBehaviour
 
             var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
 
-            tileBehaviour.Tile = tile;
+            tileBehaviour.SetTile(tile);
 
             if ((tileGameObject.transform.position.x != tile.Position.X) || (tileGameObject.transform.position.z != tile.Position.Z))
             {

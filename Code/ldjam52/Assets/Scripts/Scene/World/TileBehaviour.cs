@@ -8,33 +8,40 @@ using UnityEngine;
 
 public class TileBehaviour : MonoBehaviour
 {
-    public Tile Tile;
-
     private GameObject floorGameObject;
-    private Boolean isColorSet;
+    private GameObject fieldGameObject;
+    private GameObject naturalAreaGameObject;
+
     private Boolean isTileOwned;
 
-    private void Awake()
+    public Tile Tile { get; private set; }
+
+    public void SetTile(Tile tile)
     {
-        this.floorGameObject = transform.Find("Fliese").gameObject;
-        
+        this.Tile = tile;
 
-        if (this.Tile != default)
+        if (tile != default)
         {
-            this.isTileOwned = this.Tile.IsOwned;
+            this.isTileOwned = tile.IsOwned;
 
-            if (!isColorSet && this.floorGameObject != null)
+            if (this.floorGameObject != null)
             {
                 if (this.floorGameObject.TryGetComponent<MeshRenderer>(out var meshRenderer))
                 {
                     if (meshRenderer.material != null)
                     {
-                        meshRenderer.material.color = this.Tile.Color.ToUnity();
-                        this.isColorSet = true;
+                        meshRenderer.material.color = tile.Color.ToUnity();
                     }
                 }
             }
         }
+    }
+
+    private void Awake()
+    {
+        this.floorGameObject = transform.Find("Surface").gameObject;
+        this.fieldGameObject = transform.Find("Field").gameObject;
+        this.naturalAreaGameObject = transform.Find("NatureArea").gameObject;
     }
 
     // Start is called before the first frame update
@@ -49,23 +56,11 @@ public class TileBehaviour : MonoBehaviour
         {
             if (this.Tile.IsOwned && !isTileOwned)
             {
-                transform.Find("Field").gameObject.SetActive(true);
-                transform.Find("NatureArea").gameObject.SetActive(false);
+                isTileOwned = this.Tile.IsOwned;
+
+                this.fieldGameObject.SetActive(this.Tile.IsOwned);
+                this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
             }
         }
-        //if (this.Tile != default)
-        //{
-        //    if (!isColorSet && this.floorGameObject != null)
-        //    {
-        //        if (this.floorGameObject.TryGetComponent<MeshRenderer>(out var meshRenderer))
-        //        {
-        //            if (meshRenderer.material != null)
-        //            {
-        //                meshRenderer.material.color = this.Tile.Color.ToUnity();
-        //                this.isColorSet = true;
-        //            }
-        //        }
-        //    }
-        //}
     }
 }
