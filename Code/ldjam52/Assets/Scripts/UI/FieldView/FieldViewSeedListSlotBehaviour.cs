@@ -18,9 +18,9 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
 
     override public void RudeAwake()
     {
-        plantName = transform.Find("PlantName").GetComponent<Text>();
-        seedAmount = transform.Find("SeedAmount").GetComponent<Text>();
-        pic = transform.Find("Pic").GetComponent<Image>();
+        plantName = transform.Find("Info/PlantName").GetComponent<Text>();
+        seedAmount = transform.Find("Info/SeedAmount").GetComponent<Text>();
+        pic = transform.Find("Info/Pic").GetComponent<Image>();
     }
 
     public void SelectSlot()

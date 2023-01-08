@@ -581,9 +581,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1548934669274811023, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2145769892168702879, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186908271673052816, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7016828543276112029, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232062709979713464, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626883899680046534, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9199526047750111619, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_Pivot.x

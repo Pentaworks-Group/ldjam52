@@ -9,6 +9,8 @@ namespace Assets.Scripts.Core.Generating.World
 {
     public class Generator
     {
+        private const Int32 TilePrice = 1;
+
         private readonly GameMode gameMode;
         private List<BiomeSpawn> biomes;
 
@@ -54,9 +56,11 @@ namespace Assets.Scripts.Core.Generating.World
 
                 var tile = new Tile()
                 {
+                    ID = Guid.NewGuid(),
                     IsOwned = false,
                     Position = new GameFrame.Core.Math.Vector3(x, 0, z),
                     Color = biomeSpawn.Biome.Color,
+                    Price = TilePrice,
                     Field = new Field()
                     {
                         Temperature = UnityEngine.Random.Range(biomeSpawn.Biome.TemperatureMin, biomeSpawn.Biome.TemperatureMax),
@@ -95,7 +99,9 @@ namespace Assets.Scripts.Core.Generating.World
                     {
                         tile = new Tile()
                         {
-                            Position = new GameFrame.Core.Math.Vector3(x, 0, z)
+                            ID = Guid.NewGuid(),
+                            Position = new GameFrame.Core.Math.Vector3(x, 0, z),
+                            Price = TilePrice
                         };
 
                         var closestSpawn = FindBiome(tile);

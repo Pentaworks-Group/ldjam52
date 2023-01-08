@@ -28,6 +28,7 @@ namespace Assets.Scripts.Scene.SaveGame
         public void SaveGame()
         {
             SaveGameController.SaveNewGame();
+            UpdateList();
         }
 
        
