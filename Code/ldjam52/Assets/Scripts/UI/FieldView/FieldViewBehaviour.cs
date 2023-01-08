@@ -66,6 +66,7 @@ public class FieldViewBehaviour : MonoBehaviour
         viewToggle.SetActive(true);
         Core.Game.LockCameraMovement = true;
         UpdateView();
+        Core.Game.PlayButtonSound();
     }
 
     private void UpdateView()
@@ -132,6 +133,7 @@ public class FieldViewBehaviour : MonoBehaviour
         }
 
         UpdateView();
+        Core.Game.PlayButtonSound();
     }
 
 
@@ -139,12 +141,14 @@ public class FieldViewBehaviour : MonoBehaviour
     {
         currentlyViewedField.FertilizeCrop();
         UpdateView();
+        Core.Game.PlayButtonSound();
     }
 
     public void DestroyCrop()
     {
         currentlyViewedField.DestroyCrop();
         UpdateView();
+        Core.Game.PlayButtonSound();
     }
 
     public void CloseView()
@@ -155,37 +159,44 @@ public class FieldViewBehaviour : MonoBehaviour
         plantingOptions.SetActive(false);
         harvestResult.SetActive(false);
         Core.Game.LockCameraMovement = false;
+        Core.Game.PlayButtonSound();
     }
 
     public void SelectParent1(FieldViewSeedListDetailsBehaviour plantBehaviour)
     {
         parent1.DisplaySeedDetails(plantBehaviour.Plant);
+        Core.Game.PlayButtonSound();
     }
 
     public void SelectParent2(FieldViewSeedListDetailsBehaviour plantBehaviour)
     {
         parent2.DisplaySeedDetails(plantBehaviour.Plant);
+        Core.Game.PlayButtonSound();
     }
 
     public void SelectParent1Slot(FieldViewSeedListSlotBehaviour slotBehaviour)
     {
         parent1.DisplaySeedDetails(slotBehaviour.GetPlant());
+        Core.Game.PlayButtonSound();
     }
 
     public void SelectParent2Slot(FieldViewSeedListSlotBehaviour slotBehaviour)
     {
         parent2.DisplaySeedDetails(slotBehaviour.GetPlant());
+        Core.Game.PlayButtonSound();
     }
 
     public void PlantSeeds()
     {
         currentlyViewedField.PlantSeeds(parent1.Plant, parent2.Plant);
         UpdateView();
+        Core.Game.PlayButtonSound();
     }
 
     public void HideHarvestResult()
     {
         harvestResult.SetActive(false);
+        Core.Game.PlayButtonSound();
     }
 
     public void ShowHarvestResult(HarvestResult result)
@@ -202,16 +213,19 @@ public class FieldViewBehaviour : MonoBehaviour
     public void ClearSelectedParent1()
     {
         parent1.ClearDisplayDetails();
+        Core.Game.PlayButtonSound();
     }
 
     public void ClearSelectedParent2()
     {
         parent2.ClearDisplayDetails();
+        Core.Game.PlayButtonSound();
     }
 
     public void ClearSelectedParents()
     {
         parent1.ClearDisplayDetails();
         parent2.ClearDisplayDetails();
+        Core.Game.PlayButtonSound();
     }
 }

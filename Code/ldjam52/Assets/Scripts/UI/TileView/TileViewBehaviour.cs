@@ -18,11 +18,16 @@ namespace Assets.Scripts.UI.TileView
         private GameObject buyTileContent;
         private TMP_Text buyCouldBuyText;
         private TMP_Text buyCostFundsAvailableText;
-        private TMP_Text buyCostFundsCostText;
+        private TMP_Text buyCostTotalCostAmount;
+        private GameObject buyCostBuyAndBuildContainer;
+        private TMP_Text buyCostBuyAndBuildAmount;
         private Button buyTileButton;
+        private Button buyTileAndBuildFarmButton;
 
         private GameObject buildFarmContent;
         private TMP_Text buildFarmStatusText;
+        private GameObject buildCostBuyAndBuildContainer;
+        private TMP_Text buildCostBuyAndBuildAmount;
         private Button buildFarmButton;
         private Button buildBuyAndBuildFarmButton;
 
@@ -61,12 +66,37 @@ namespace Assets.Scripts.UI.TileView
             SetVisibility(false);
         }
 
-        public void BuyTile()
+        public void BuyTile(Boolean isBuyAndBuilt)
         {
             Base.Core.Game.EffectsAudioManager.Play("Buy");
 
-            FarmStorageController.TakeMoneyOfStorage(this.tileBehaviour.Tile.Price);
             this.tileBehaviour.Tile.IsOwned = true;
+            FarmStorageController.TakeMoneyOfStorage(this.tileBehaviour.Tile.Price);
+
+            if (isBuyAndBuilt)
+            {
+                FarmStorageController.TakeMoneyOfStorage(tilesTotalCost);
+                
+                //FarmStorageController.TakeMoneyOfStorage(tilesTotalCost); // Farm price tbd
+
+                var farm = new Farm()
+                {
+                    Position = this.tileBehaviour.Tile.Position
+                };
+
+                Base.Core.Game.State.World.Farm = farm;
+
+                this.tileBehaviour.Tile.Farm = farm;
+
+                foreach (var surroundingBehvaiour in surroundingTiles)
+                {
+                    surroundingBehvaiour.Tile.IsOwned = true;
+                    surroundingBehvaiour.Tile.Farm = farm;
+                }
+            }
+            else
+            {
+            }
 
             Hide();
 
@@ -77,7 +107,12 @@ namespace Assets.Scripts.UI.TileView
         {
             Base.Core.Game.EffectsAudioManager.Play("Buy");
 
-            //FarmStorageController.TakeMoneyOfStorage(this.tileBehaviour.Tile.Price);
+            if (tilesTotalCost > 0)
+            {
+                FarmStorageController.TakeMoneyOfStorage(tilesTotalCost); // Farm price tbd....
+            }
+            
+            //FarmStorageController.TakeMoneyOfStorage(this.tileBehaviour.Tile.Price); // Farm price tbd....
 
             var farm = new Farm()
             {
@@ -90,6 +125,7 @@ namespace Assets.Scripts.UI.TileView
 
             foreach (var surroundingBehvaiour in surroundingTiles)
             {
+                surroundingBehvaiour.Tile.IsOwned = true;
                 surroundingBehvaiour.Tile.Farm = farm;
             }
 
@@ -130,7 +166,6 @@ namespace Assets.Scripts.UI.TileView
                             tilesTotalCost += surroundingTile.Tile.Price;
 
                             isAbleToBuild = false;
-                            break;
                         }
                         else if (surroundingTile.Tile.Farm != default)
                         {
@@ -154,9 +189,20 @@ namespace Assets.Scripts.UI.TileView
                 }
             }
 
-            buildFarmStatusText.text = statusString;
+            this.buildFarmStatusText.text = statusString;
             this.buildFarmButton.interactable = isAbleToBuild;
             this.buildBuyAndBuildFarmButton.interactable = isAbleToBuyAndBuild;
+            
+            if (errorLevel == 1)
+            {
+                this.buildCostBuyAndBuildContainer.SetActive(true);
+                this.buildCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
+
+            }
+            else
+            {
+                this.buildCostBuyAndBuildContainer.SetActive(false);
+            }
 
             var textColor = Color.green;
 
@@ -177,17 +223,64 @@ namespace Assets.Scripts.UI.TileView
             buildFarmContent.SetActive(false);
 
             buyCostFundsAvailableText.text = Base.Core.Game.State.FarmStorage.MoneyBalance.ToString("n0");
-            buyCostFundsCostText.text = this.tileBehaviour.Tile.Price.ToString("n0");
+            buyCostTotalCostAmount.text = this.tileBehaviour.Tile.Price.ToString("n0");
 
-            if (Base.Core.Game.State.FarmStorage.MoneyBalance >= this.tileBehaviour.Tile.Price)
+            var checkBuyAndBuild = Base.Core.Game.State.World.Farm == default;
+
+            this.buyTileAndBuildFarmButton.gameObject.SetActive(checkBuyAndBuild);
+            this.buyCostBuyAndBuildContainer.SetActive(checkBuyAndBuild);
+
+            if (checkBuyAndBuild)
             {
-                this.buyTileButton.interactable = true;
-                buyCouldBuyText.text = "But it could.\nClick 'Buy' below, and it is yours!\nDo it. Do it now!";
+                surroundingTiles = Base.Core.Game.TileController.GetSurroundingTiles(this.tileBehaviour.Tile);
+
+                if (surroundingTiles.Count > 0)
+                {
+                    foreach (var surroundingTile in surroundingTiles)
+                    {
+                        if (!surroundingTile.Tile.IsOwned)
+                        {
+                            tilesTotalCost += surroundingTile.Tile.Price;
+                        }
+                    }
+                }
+
+                this.buyCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
+
+                if (Base.Core.Game.State.FarmStorage.MoneyBalance >= tilesTotalCost)
+                {
+                    this.buyTileButton.interactable = true;
+                    this.buyTileAndBuildFarmButton.interactable = true;
+
+                    buyCouldBuyText.text = "But it could.\nClick 'Buy' or 'Buy and Build' below, and it is yours!\nMaybe even with the Farm!";
+                }
+                else if (Base.Core.Game.State.FarmStorage.MoneyBalance >= this.tileBehaviour.Tile.Price)
+                {
+                    this.buyTileButton.interactable = true;
+                    this.buyTileAndBuildFarmButton.interactable = false;
+
+                    buyCouldBuyText.text = "But it could.\nClick 'Buy' below, and it is yours!\nDo it. Do it now!";
+                }
+                else
+                {
+                    this.buyTileButton.interactable = false;
+                    this.buyTileAndBuildFarmButton.interactable = false;
+
+                    buyCouldBuyText.text = "And it will remain this way.\nGo earn some money!\nSlacker.";
+                }
             }
             else
             {
-                this.buyTileButton.interactable = false;
-                buyCouldBuyText.text = "And it will remain this way.\nGo earn some money!\nSlacker.";
+                if (Base.Core.Game.State.FarmStorage.MoneyBalance >= this.tileBehaviour.Tile.Price)
+                {
+                    this.buyTileButton.interactable = true;
+                    buyCouldBuyText.text = "But it could.\nClick 'Buy' below, and it is yours!\nDo it. Do it now!";
+                }
+                else
+                {
+                    this.buyTileButton.interactable = false;
+                    buyCouldBuyText.text = "And it will remain this way.\nGo earn some money!\nSlacker.";
+                }
             }
 
             buyTileContent.SetActive(true);
@@ -207,11 +300,16 @@ namespace Assets.Scripts.UI.TileView
             this.buyTileContent = transform.Find("TileViewToggle/ContentContainer/BuyTileContent").gameObject;
             this.buyCouldBuyText = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CouldBuyText").GetComponent<TMP_Text>();
             this.buyCostFundsAvailableText = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/FundsAvailableAmount").GetComponent<TMP_Text>();
-            this.buyCostFundsCostText = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/CostAmount").GetComponent<TMP_Text>();
+            this.buyCostTotalCostAmount = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/CostAmount").GetComponent<TMP_Text>();
+            this.buyCostBuyAndBuildContainer = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/CostBuyAndBuildContainer").gameObject;
+            this.buyCostBuyAndBuildAmount = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/CostBuyAndBuildContainer/CostBuyAndBuildAmount").GetComponent<TMP_Text>();
             this.buyTileButton = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/BuyArea/BuyTileButton").GetComponent<Button>();
+            this.buyTileAndBuildFarmButton = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/BuyArea/BuyTileAndBuildFarmButton").GetComponent<Button>();
 
             this.buildFarmContent = transform.Find("TileViewToggle/ContentContainer/BuildFarmContent").gameObject;
             this.buildFarmStatusText = transform.Find("TileViewToggle/ContentContainer/BuildFarmContent/TopTextContainer/BuildFarmStatusText").GetComponent<TMP_Text>();
+            this.buildCostBuyAndBuildContainer = transform.Find("TileViewToggle/ContentContainer/BuildFarmContent/TopTextContainer/CostBuyAndBuildContainer").gameObject;
+            this.buildCostBuyAndBuildAmount = transform.Find("TileViewToggle/ContentContainer/BuildFarmContent/TopTextContainer/CostBuyAndBuildContainer/CostBuyAndBuildAmount").GetComponent<TMP_Text>();
             this.buildFarmButton = transform.Find("TileViewToggle/ContentContainer/BuildFarmContent/BuildFarmArea/BuildFarmButton").GetComponent<Button>();
             this.buildBuyAndBuildFarmButton = transform.Find("TileViewToggle/ContentContainer/BuildFarmContent/BuildFarmArea/BuyAndBuildFarmButton").GetComponent<Button>();
         }

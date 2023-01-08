@@ -9,13 +9,12 @@ namespace Assets.Scripts.Scenes
 
         private void Awake()
         {
-            //if (GameHandler.AvailableGameModes == default)
-            //{
-            //    Assets.Scripts.Base.Core.Game.ChangeScene(SceneNames.MainMenu);
-            //    return;
-            //}
+            if (Base.Core.Game.AmbienceAudioManager == default)
+            {
+                Base.Core.Game.ChangeScene(SceneNames.MainMenu);
+                return;
+            }
 
-            Debug.Log("Implement Default to MainMenu");
 
             CustomAwake();
         }
@@ -27,7 +26,7 @@ namespace Assets.Scripts.Scenes
 
         public void ToMainMenu()
         {
-            //Base.Core.Game.PlayButtonSound();
+            Base.Core.Game.PlayButtonSound();
             Base.Core.Game.ChangeScene(SceneNames.MainMenu);
         }
     }
