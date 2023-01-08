@@ -13,6 +13,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
     private Slider ambienceVolumeSlider;
     private Slider backgroundVolumeSlider;
     private Toggle animationEnabledToggle;
+    private Toggle sideScrollingEnabledToggle;
     private ToggleGroup mobileInterface;
 
     private void Awake()
@@ -21,6 +22,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
         ambienceVolumeSlider = transform.Find("OptionContainer/AmbienceVolume/Right/AmbieceSlider").GetComponent<Slider>();
         backgroundVolumeSlider = transform.Find("OptionContainer/BackgroundVolume/Right/BackgroundSlider").GetComponent<Slider>();
 
+        sideScrollingEnabledToggle = transform.Find("OptionContainer/EnableSideScroll/Right/Toggle").GetComponent<Toggle>();
         animationEnabledToggle = transform.Find("OptionContainer/EnableAnimations/Right/Toggle").GetComponent<Toggle>();
         mobileInterface = transform.Find("OptionContainer/MobileInterface/Right").GetComponent<ToggleGroup>();
     }
@@ -78,6 +80,11 @@ public class OptionsMenuBehaviour : MonoBehaviour
         Core.Game.Options.AreAnimationsEnabled = this.animationEnabledToggle.isOn;
     }
 
+    public void OnSideScrollEnabledToggleValueChanged()
+    {
+        Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = this.sideScrollingEnabledToggle.isOn;
+    }
+
     public void OnMobileInterfaceValueChanged(Toggle t)
     {
         if (t.isOn)
@@ -94,6 +101,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
         ambienceVolumeSlider.value = 0.125f;
         backgroundVolumeSlider.value = 0.125f;
         Core.Game.Options.AreAnimationsEnabled = true;
+        Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = true;
         //Core.Game.Options.MobileInterface = "Right";
 
 
@@ -127,6 +135,11 @@ public class OptionsMenuBehaviour : MonoBehaviour
             if (this.animationEnabledToggle.isOn != Core.Game.Options.AreAnimationsEnabled)
             {
                 this.animationEnabledToggle.isOn = Core.Game.Options.AreAnimationsEnabled;
+            }
+
+            if (this.sideScrollingEnabledToggle.isOn != Core.Game.Options.IsMouseScreenEdgeScrollingEnabled)
+            {
+                this.sideScrollingEnabledToggle.isOn = Core.Game.Options.IsMouseScreenEdgeScrollingEnabled;
             }
         }
     }
