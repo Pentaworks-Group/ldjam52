@@ -39,6 +39,8 @@ public class WorldBehaviour : MonoBehaviour
                     RenderWorld(gameState.World);
                 }
             }
+
+            Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListGame;
             Core.Game.AmbienceAudioManager.Resume();
         }
     }
