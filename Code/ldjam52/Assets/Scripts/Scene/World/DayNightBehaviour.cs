@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Scripts.Scene.World
 {
+    using Assets.Scripts.Core;
+
     using UnityEngine;
-    using System.Collections;
 
     public class DayNightBehaviour : MonoBehaviour
     {
-        void Start()
-        {
-        }
-
+        private GameState gameState;
         public GameObject sun;
 
         public float radius = 6;
@@ -23,40 +17,35 @@ namespace Assets.Scripts.Scene.World
         public Color middaySkyColor = new Color(0.58f, 0.88f, 1f);
         public Color nighttimeSkyColor = new Color(0.04f, 0.19f, 0.27f);
 
-        // 1 Day => 60 sec
+        private Single totalDayDuration;
+        private Single dayTimeDuration;
+        private Single nightTimeDuration;
+        private Single duskDuration;
 
-        // implementing minecraft PC defaults
-        public const float daytimeRLSeconds = 30f;
-        public const float duskRLSeconds = 4.5f;
-        public const float nighttimeRLSeconds = 21f;
-        public const float sunsetRLSeconds = 4.5f;
-        public const float gameDayRLSeconds = daytimeRLSeconds + duskRLSeconds + nighttimeRLSeconds + sunsetRLSeconds;
-
-        public const float startOfDaytime = 0;
-        public const float startOfDusk = daytimeRLSeconds / gameDayRLSeconds;
-        public const float startOfNighttime = startOfDusk + duskRLSeconds / gameDayRLSeconds;
-        public const float startOfSunset = startOfNighttime + nighttimeRLSeconds / gameDayRLSeconds;
-
+        private float startOfDusk;
+        private float startOfNighttime;
+        private float startOfSunset;
 
         private float timeRT = 0;
         public float TimeOfDay // game time 0 .. 1
         {
-            get { return timeRT / gameDayRLSeconds; }
-            set { timeRT = value * gameDayRLSeconds; }
+            get { return timeRT / totalDayDuration; }
+            set { timeRT = value * totalDayDuration; }
         }
 
         void Update()
         {
-            timeRT = (timeRT + Time.deltaTime) % gameDayRLSeconds;
+            timeRT = (timeRT + Time.deltaTime) % totalDayDuration;
+
             Camera.main.backgroundColor = CalculateSkyColor();
-            
+
             float sunangle = TimeOfDay * 360;
 
             sun.transform.position = Vector3.zero + Quaternion.Euler(-70, 0, sunangle) * (radius * Vector3.right);
             sun.transform.LookAt(Vector3.zero);
         }
 
-        Color CalculateSkyColor()
+        private Color CalculateSkyColor()
         {
             float time = TimeOfDay;
 
@@ -83,6 +72,19 @@ namespace Assets.Scripts.Scene.World
             return Color.Lerp(nighttimeSkyColor, daytimeSkyColor, (time - startOfSunset) / (1.0f - startOfSunset));
         }
 
-    }
+        private void Awake()
+        {
+            this.gameState = Base.Core.Game.State;
 
+            this.totalDayDuration = gameState.GameMode.World.TotalDayDuration;
+
+            this.dayTimeDuration = this.totalDayDuration / 2f;
+            this.nightTimeDuration = this.dayTimeDuration * 0.7f;
+            this.duskDuration = this.dayTimeDuration * 0.15f;
+
+            this.startOfDusk = dayTimeDuration / totalDayDuration;
+            this.startOfNighttime = startOfDusk + duskDuration / totalDayDuration;
+            this.startOfSunset = startOfNighttime + nightTimeDuration / totalDayDuration;
+        }
+    }
 }
