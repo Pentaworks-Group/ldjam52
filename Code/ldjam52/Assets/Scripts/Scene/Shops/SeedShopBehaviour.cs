@@ -139,10 +139,11 @@ public class SeedShopBehaviour : MonoBehaviour
     {
         int amount = sellAll ? chosenPlant.StorageAmountPlants : sellQuantity;
         FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, amount);
-        FarmStorageController.PutMoneyInStorage(sellPrice);
+
+        // Hacky solution because sell all does not (yet) update sellPrice
+        FarmStorageController.PutMoneyInStorage(sellPrice / sellQuantity * amount);
 
         // TODO Update info, plants list, money...
-
         stateUpdate(true);
     }
 
@@ -153,7 +154,6 @@ public class SeedShopBehaviour : MonoBehaviour
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
         // TODO Update info, plants list, money...
-
         stateUpdate(false);
     }
 
