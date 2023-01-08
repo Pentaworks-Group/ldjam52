@@ -39,6 +39,8 @@ public class WorldBehaviour : MonoBehaviour
 
             if (gameState != default)
             {
+                Core.Game.TileController = new TileController(gameState.World);
+
                 if (gameState.World.Tiles.Count > 0)
                 {
                     RenderWorld(gameState.World);
@@ -64,6 +66,8 @@ public class WorldBehaviour : MonoBehaviour
             tileBehaviour.SetTile(tile);
             tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
 
+            Core.Game.TileController.AddTile(tileBehaviour);
+
             if ((tileGameObject.transform.position.x != tile.Position.X) || (tileGameObject.transform.position.z != tile.Position.Z))
             {
                 tileGameObject.transform.position = new UnityEngine.Vector3(tile.Position.X, this.transform.position.y, tile.Position.Z);
@@ -80,9 +84,12 @@ public class WorldBehaviour : MonoBehaviour
     {
         if (tileBehaviour != null)
         {
-            if (!tileBehaviour.Tile.IsOwned)
+            if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
             {
-                this.TileViewBehaviour.Show();
+                this.TileViewBehaviour.Show(tileBehaviour, () =>
+                {
+                    tileBehaviour.ShowFieldView();
+                });
             }
             else
             {
@@ -120,14 +127,14 @@ public class WorldBehaviour : MonoBehaviour
     private void playRandomEffectSound()
     {
 
-        if (Assets.Scripts.Base.Core.Game.State.ElapsedTime > nextSoundEffectTime && nextSoundEffectTime!=0)
+        if (Assets.Scripts.Base.Core.Game.State.ElapsedTime > nextSoundEffectTime && nextSoundEffectTime != 0)
         {
             Core.Game.EffectsAudioManager.Play(Core.Game.AmbientEffectsClipList.GetRandomEntry());
             double randomNumber = UnityEngine.Random.value;
 
             nextSoundEffectTime = (float)(randomNumber * 30.0 + 5.0 + Assets.Scripts.Base.Core.Game.State.ElapsedTime);
         }
-        else if(nextSoundEffectTime==0)
+        else if (nextSoundEffectTime == 0)
         {
             double randomNumber = UnityEngine.Random.value;
 

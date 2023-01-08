@@ -20,10 +20,12 @@ namespace Assets.Scripts.Core
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
 
-        public System.Collections.Generic.List<AudioClip> AudioClipListMenu { get; set; }
-        public System.Collections.Generic.List<AudioClip> AudioClipListGame { get; set; }
-        public System.Collections.Generic.List<AudioClip> AmbientClipList { get; set; }
-        public System.Collections.Generic.List<String> AmbientEffectsClipList { get; set; }
+        public List<AudioClip> AudioClipListMenu { get; set; }
+        public List<AudioClip> AudioClipListGame { get; set; }
+        public List<AudioClip> AmbientClipList { get; set; }
+        public List<String> AmbientEffectsClipList { get; set; }
+
+        public TileController TileController { get; set; }
 
         public bool LockCameraMovement { get; set; } = false;
 

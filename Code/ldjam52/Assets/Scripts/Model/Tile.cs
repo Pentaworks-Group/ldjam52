@@ -12,6 +12,9 @@ namespace Assets.Scripts.Model
         public Vector3 Position { get; set; }
         public Color Color { get; set; }
         public Field Field { get; set; }
+        public Farm Farm { get; set; }
+        public Int32 Price { get; set; }
+
         public Int32 NaturalElementsAmount { get; set; }
     }
 }
