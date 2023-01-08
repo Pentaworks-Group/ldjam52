@@ -19,6 +19,8 @@ public class WorldBehaviour : MonoBehaviour
     public TileViewBehaviour TileViewBehaviour;
     public FieldViewBehaviour FieldViewBehaviour;
 
+    //Random Ambient Sounds
+
     private void Awake()
     {
         if (Core.Game.AvailableGameModes.Count < 1)
@@ -39,6 +41,9 @@ public class WorldBehaviour : MonoBehaviour
                     RenderWorld(gameState.World);
                 }
             }
+
+            Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListGame;
+            Core.Game.AmbienceAudioManager.Resume();
         }
     }
 
@@ -105,5 +110,10 @@ public class WorldBehaviour : MonoBehaviour
         }
 
         isFarmSet = true;
+    }
+
+    private void playRandomEffectSound()
+    {
+        Core.Game.EffectsAudioManager.Play("Button");
     }
 }

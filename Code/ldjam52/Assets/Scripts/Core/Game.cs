@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
@@ -18,6 +19,11 @@ namespace Assets.Scripts.Core
 
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
+
+        public System.Collections.Generic.List<AudioClip> AudioClipListMenu { get; set; }
+        public System.Collections.Generic.List<AudioClip> AudioClipListGame { get; set; }
+        public System.Collections.Generic.List<AudioClip> AmbientClipList { get; set; }
+        public System.Collections.Generic.List<String> AmbientEffectsClipList { get; set; }
 
         public bool LockCameraMovement { get; set; } = false;
 
