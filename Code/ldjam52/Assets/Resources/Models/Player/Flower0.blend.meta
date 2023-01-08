@@ -3,7 +3,12 @@ guid: aa3586bffd2b77a4a80931d7b262cea2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blaetter
+    second: {fileID: 2100000, guid: 039ad51bcca6bf741bb0fac3418491b4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

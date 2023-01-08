@@ -3,7 +3,12 @@ guid: 2fac05db654dcfa4184d72bbb7209325
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rinde
+    second: {fileID: 2100000, guid: 1c87e1bc65087c1429659f2d7d2149f3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
