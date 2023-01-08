@@ -39,6 +39,7 @@ public class WorldBehaviour : MonoBehaviour
                     RenderWorld(gameState.World);
                 }
             }
+
         }
     }
 

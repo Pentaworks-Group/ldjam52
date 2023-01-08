@@ -95,6 +95,26 @@ public class MainMenuBehaviour : MonoBehaviour
 
     private void StartAudioManagers()
     {
+        Core.Game.AudioClipListMenu = new System.Collections.Generic.List<AudioClip>()
+        {
+            GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_1")
+        };
+
+        Core.Game.AudioClipListGame = new System.Collections.Generic.List<AudioClip>()
+        {
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_1"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_2"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_3"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_4"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_5"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_6")
+        };
+
+        Core.Game.AmbientClipList = new System.Collections.Generic.List<AudioClip>()
+        {
+                GameFrame.Base.Resources.Manager.Audio.Get("Ambient Sound")
+        };
+
         if (Core.Game.EffectsAudioManager == default)
         {
             Core.Game.EffectsAudioManager = this.EffectsAudioManager;
@@ -108,12 +128,9 @@ public class MainMenuBehaviour : MonoBehaviour
             Core.Game.AmbienceAudioManager.Volume = Core.Game.Options.AmbienceVolume;
             Core.Game.AmbienceAudioManager.Initialize();
 
-            var ambienceClips = new List<AudioClip>()
-            {
-                GameFrame.Base.Resources.Manager.Audio.Get("Ambient Sound")
-            };
+            Core.Game.AmbienceAudioManager.Clips = Core.Game.AmbientClipList;
 
-            this.AmbienceAudioManager.Play(ambienceClips);
+            Core.Game.AmbienceAudioManager.Pause();
         }
 
         if (Core.Game.BackgroundAudioManager == default)
@@ -122,17 +139,7 @@ public class MainMenuBehaviour : MonoBehaviour
             Core.Game.BackgroundAudioManager.Volume = Core.Game.Options.BackgroundVolume;
             Core.Game.BackgroundAudioManager.Initialize();
 
-            this.BackgroundAudioManager.Clips = new List<AudioClip>()
-            {
-                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_1"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_2"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_3"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_4"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_5"),
-                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_6")
-            };
-
-            this.BackgroundAudioManager.Resume();
+            Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListMenu;
         }
     }
 }
