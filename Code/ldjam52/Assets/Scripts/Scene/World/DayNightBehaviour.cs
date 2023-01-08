@@ -72,7 +72,7 @@ namespace Assets.Scripts.Scene.World
             return Color.Lerp(nighttimeSkyColor, daytimeSkyColor, (time - startOfSunset) / (1.0f - startOfSunset));
         }
 
-        private void Awake()
+        private void Start()
         {
             this.gameState = Base.Core.Game.State;
 
