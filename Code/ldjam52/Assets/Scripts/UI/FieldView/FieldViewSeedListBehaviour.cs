@@ -24,7 +24,6 @@ public class FieldViewSeedListBehaviour : ListContainerBehaviour
                 plants.Add(item);
             }
         }
-        Debug.Log(plants.Count);
 
         SetObjects(plants);
     }
