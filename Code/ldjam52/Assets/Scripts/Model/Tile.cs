@@ -13,9 +13,5 @@ namespace Assets.Scripts.Model
         public Color Color { get; set; }
         public Field Field { get; set; }
         public Int32 NaturalElementsAmount { get; set; }
-        public Single Temperature { get; set; }
-        public Single Fertility { get; set; }
-        public Single Sunshine { get; set; }
-        public Single Humidity { get; set; }
     }
 }
