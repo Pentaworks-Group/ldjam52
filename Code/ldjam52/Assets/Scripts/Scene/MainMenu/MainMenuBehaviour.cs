@@ -110,10 +110,10 @@ public class MainMenuBehaviour : MonoBehaviour
 
             this.AmbienceAudioManager.Clips = new List<AudioClip>()
             {
-                GameFrame.Base.Resources.Manager.Audio.Get("Background001")
+                GameFrame.Base.Resources.Manager.Audio.Get("Ambient Sound")
             };
 
-            this.AmbienceAudioManager.Resume();
+            this.AmbienceAudioManager.Volume = 0;
         }
 
         if (Core.Game.BackgroundAudioManager == default)
@@ -121,6 +121,18 @@ public class MainMenuBehaviour : MonoBehaviour
             Core.Game.BackgroundAudioManager = this.BackgroundAudioManager;
             Core.Game.BackgroundAudioManager.Volume = Core.Game.Options.BackgroundVolume;
             Core.Game.BackgroundAudioManager.Initialize();
+
+            this.BackgroundAudioManager.Clips = new List<AudioClip>()
+            {
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_1"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_2"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_3"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_4"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_5"),
+                GameFrame.Base.Resources.Manager.Audio.Get("Background_Music_6")
+            };
+
+            this.BackgroundAudioManager.Resume();
         }
     }
 }
