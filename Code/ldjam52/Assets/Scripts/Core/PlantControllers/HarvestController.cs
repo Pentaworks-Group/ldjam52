@@ -12,6 +12,7 @@ public class HarvestController
     public static HarvestResult GetHarvestResult(Plant plant)
     {
         HarvestResult harvestResult = new();
+        harvestResult.Plant = plant;
         harvestResult.NumSeeds = GetNumSeeds(plant);
         harvestResult.NumHarvest = GetNumHarvest(plant);
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Core.Inventory;
 
 public class FieldBehaviour : MonoBehaviour
 {
@@ -153,6 +154,8 @@ public class FieldBehaviour : MonoBehaviour
 
     public void PlantSeeds(Plant parent1, Plant parent2)
     {
+        FarmStorageController.TakeSeedsOfStorage(parent1, 1);
+        FarmStorageController.TakeSeedsOfStorage(parent2, 1);
         Plant child = InheritanceController.crossPlants(parent1, parent2);
         PlantCrop(child);
     }
@@ -184,6 +187,9 @@ public class FieldBehaviour : MonoBehaviour
         if (IsFullyGrown())
         {
             HarvestResult harvest = HarvestController.GetHarvestResult(Field.Seed);
+
+            FarmStorageController.PutPlantInStorage(harvest.Plant, harvest.NumHarvest);
+            FarmStorageController.PutSeedInStorage(harvest.Plant, harvest.NumSeeds);
             tileViewBehaviour.ShowHarvestResult(harvest);
             ClearField();
         }

@@ -8,13 +8,15 @@ Todo:
  - 
   
  GamePlay:
- - 
+ - Place farm building
+ - Keep TimeOfDay and Date in GameState.
+ - Monetary system
    
  UI:
  
  
  Audio:
-
+ - yes :)
  
   
 Refactoring:

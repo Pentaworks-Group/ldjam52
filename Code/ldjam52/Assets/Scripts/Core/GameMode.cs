@@ -15,5 +15,6 @@ namespace Assets.Scripts.Core
         public Core.Generating.PlayerSettings Player {get;set;}
         public List<Plant> AvailablePlants { get; set; }
         public List<Biome> AvailableBiomes { get; set; }
+
     }
 }

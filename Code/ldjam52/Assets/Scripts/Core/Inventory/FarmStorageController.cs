@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Core.Inventory
 {
-    public class FarmStorageBehaviour
+    public class FarmStorageController
     {
         //Returns the free space left in the farm storage
         public static int GetFreeStorageSpace()
@@ -107,7 +107,7 @@ namespace Assets.Scripts.Core.Inventory
 
         private static StorageItem getStorageItemToPlant(FarmStorage storage, Plant plant)
         {
-            var item = storage.StorageItems.First(i => i.Plant.ID == plant.ID);
+            var item = storage.StorageItems.FirstOrDefault(i => i.Plant.ID == plant.ID);
 
             if (item == null)
             {
@@ -115,6 +115,7 @@ namespace Assets.Scripts.Core.Inventory
                 {
                     Plant = plant
                 };
+                storage.StorageItems.Add(item);
             }
             return item;
         }

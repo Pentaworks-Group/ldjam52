@@ -84,7 +84,22 @@ public class InheritanceController
             };
             newPlant.Genome.Add(pair.Key, newPair);
         }
+        AddImages(plant1, plant2, newPlant);
         return newPlant;
+    }
+
+    private static void AddImages(Plant plant1, Plant plant2, Plant newPlant)
+    {
+        if (UnityEngine.Random.value < 0.5)
+        {
+            newPlant.ImageName = plant1.ImageName;
+            newPlant.SeedImageName = plant1.SeedImageName;
+        } else
+        {
+            newPlant.ImageName = plant2.ImageName;
+            newPlant.SeedImageName = plant2.SeedImageName;
+        }
+
     }
 
     private static Chromosome chooseRandomChromosomeByType(Plant plant, String type)
