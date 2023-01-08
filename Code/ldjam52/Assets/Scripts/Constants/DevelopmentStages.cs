@@ -26,7 +26,7 @@ namespace Assets.Scripts.Constants
                 StageId = 0,
                 Name = "Discover two Chromosomes in an analysis",
                 ValueVisibleCount = 2,
-                UpgradeCost = 10000,
+                UpgradeCost = 5000,
                 AnalyticsCost = 75,
                 AnalyticsPlantCost = 2
             },
@@ -91,7 +91,7 @@ namespace Assets.Scripts.Constants
             new DevelopmentStage
             {
                 StageId = 0,
-                Name = "Discover one Properties in a Scan",
+                Name = "Discover three Properties in a Scan",
                 ValueVisibleCount = 3,
                 UpgradeCost = 7500,
                 AnalyticsCost = 100,
@@ -100,7 +100,7 @@ namespace Assets.Scripts.Constants
             new DevelopmentStage
             {
                 StageId = 0,
-                Name = "Discover one Properties in a Scan",
+                Name = "Discover four Properties in a Scan",
                 ValueVisibleCount = 4,
                 UpgradeCost = 10000,
                 AnalyticsCost = 125,
