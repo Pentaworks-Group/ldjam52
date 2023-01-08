@@ -115,6 +115,7 @@ namespace Assets.Scripts.Core.Inventory
                 {
                     Plant = plant
                 };
+                //storage.StorageItems.Add(item);
             }
             return item;
         }

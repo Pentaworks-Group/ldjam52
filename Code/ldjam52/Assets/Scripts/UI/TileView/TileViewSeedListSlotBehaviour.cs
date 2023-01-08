@@ -9,14 +9,14 @@ public class TileViewSeedListSlotBehaviour : ListSlotBehaviour
     private Text plantName;
     private Text seedAmount;
 
-    private void Awake()
-    {
-        plantName = transform.Find("PlantName").GetComponent<Text>();
-        seedAmount = transform.Find("SeedAmount").GetComponent<Text>();
-        pic = transform.Find("Pic").GetComponent<Image>();
-    }
+    //private void Awake()
+    //{
+    //    plantName = transform.Find("PlantName").GetComponent<Text>();
+    //    seedAmount = transform.Find("SeedAmount").GetComponent<Text>();
+    //    pic = transform.Find("Pic").GetComponent<Image>();
+    //}
 
-    public void SetVars()
+    override public void RudeAwake()
     {
         plantName = transform.Find("PlantName").GetComponent<Text>();
         seedAmount = transform.Find("SeedAmount").GetComponent<Text>();
