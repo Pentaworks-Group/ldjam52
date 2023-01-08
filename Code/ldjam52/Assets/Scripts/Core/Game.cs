@@ -108,12 +108,13 @@ namespace Assets.Scripts.Core
             gameState.FarmStorage = newFarmStorage;
         }
 
-        private void GenerateAnalyzers(GameState gameState)
+        public void GenerateAnalyzers(GameState gameState)
         {
             var newPlantAnalizer = new Analyzer
             {
                 Name = "Plant Analyzer",
                 Description = "Can analyse the plants genome and give you some informations about them.",
+                ImgName = "Seed_Basil",
                 MaxDevelopmentStage = 5
             };
             gameState.PlantAnalyzer = newPlantAnalizer;
@@ -122,6 +123,7 @@ namespace Assets.Scripts.Core
             {
                 Name = "Field Analyzer",
                 Description = "Can analyse fields and give you some informations about them.",
+                ImgName = "Seed_Sand",
                 MaxDevelopmentStage = 3
             };
             gameState.FieldAnalyzer = newFieldAnalizer;

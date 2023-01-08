@@ -10,6 +10,7 @@ namespace Assets.Scripts.Model
     {
         public String Name { get; set; } = "Plant Analyzer";
         public String Description { get; set; } = "Can analyze plants and give some information about how it grows.";
+        public String ImgName { get; set; }
         public int DevelopmentStage { get; set; } = 0;  
         public int MaxDevelopmentStage { get; set; } = 0;
     }
