@@ -197,7 +197,6 @@ namespace Assets.Scripts.UI.TileView
             {
                 this.buildCostBuyAndBuildContainer.SetActive(true);
                 this.buildCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
-
             }
             else
             {
