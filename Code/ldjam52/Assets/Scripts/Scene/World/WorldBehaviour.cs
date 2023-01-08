@@ -15,6 +15,8 @@ public class WorldBehaviour : MonoBehaviour
     private Boolean isFarmSet = false;
     private GameState gameState;
 
+    public TileViewBehaviour TileViewBehaviour;
+
     private void Awake()
     {
         if (Core.Game.AvailableGameModes.Count < 1)
@@ -49,6 +51,7 @@ public class WorldBehaviour : MonoBehaviour
             var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
 
             tileBehaviour.SetTile(tile);
+            tileBehaviour.TileViewBehaviour = this.TileViewBehaviour;
 
             if ((tileGameObject.transform.position.x != tile.Position.X) || (tileGameObject.transform.position.z != tile.Position.Z))
             {

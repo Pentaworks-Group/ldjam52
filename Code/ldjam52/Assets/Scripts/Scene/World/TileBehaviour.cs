@@ -9,16 +9,23 @@ using UnityEngine;
 public class TileBehaviour : MonoBehaviour
 {
     private GameObject floorGameObject;
-    private GameObject fieldGameObject;
     private GameObject naturalAreaGameObject;
 
     private Boolean isTileOwned;
+
+    public FieldBehaviour FieldBehaviour;
+    public TileViewBehaviour TileViewBehaviour;
 
     public Tile Tile { get; private set; }
 
     public void SetTile(Tile tile)
     {
         this.Tile = tile;
+
+        if (this.FieldBehaviour != null)
+        {
+            this.FieldBehaviour.SetField(tile?.Field);
+        }
 
         if (tile != default)
         {
@@ -37,10 +44,18 @@ public class TileBehaviour : MonoBehaviour
         }
     }
 
+    public void ShowTileView()
+    {
+        if (this.TileViewBehaviour != null)
+        {
+            this.TileViewBehaviour.ViewField(this.FieldBehaviour);
+        }
+    }
+
     private void Awake()
     {
         this.floorGameObject = transform.Find("Surface").gameObject;
-        this.fieldGameObject = transform.Find("Field").gameObject;
+        this.FieldBehaviour = transform.Find("Field").GetComponent<FieldBehaviour>();
         this.naturalAreaGameObject = transform.Find("NatureArea").gameObject;
     }
 
@@ -58,7 +73,7 @@ public class TileBehaviour : MonoBehaviour
             {
                 isTileOwned = this.Tile.IsOwned;
 
-                this.fieldGameObject.SetActive(this.Tile.IsOwned);
+                this.FieldBehaviour.gameObject.SetActive(this.Tile.IsOwned);
                 this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
             }
         }

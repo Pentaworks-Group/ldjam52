@@ -1,30 +1,32 @@
-using Assets.Scripts.Model;
-using Assets.Scripts.Constants;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+
+using Assets.Scripts.Constants;
 using Assets.Scripts.Core.Inventory;
+using Assets.Scripts.Model;
+
+using UnityEngine;
 
 public class FieldBehaviour : MonoBehaviour
 {
     public TileViewBehaviour tileViewBehaviour;
-
-
-
-    public Field Field { get; set; }
-
-
     private GrowthStage currentStadium = null;
-    private List<GameObject> flowerPots = new List<GameObject>();
-
-
+    private readonly List<GameObject> flowerPots = new List<GameObject>();
 
     private Double growthRate = 0;
+
+    private Field field;
+    public Field Field => this.field;
+
+    public void SetField(Field field)
+    {
+        this.field = field;
+    }
 
     private void Awake()
     {
         Transform PotsParent = transform.Find("FlowerPots");
+
         foreach (Transform child in PotsParent)
         {
             flowerPots.Add(child.gameObject);
@@ -34,10 +36,10 @@ public class FieldBehaviour : MonoBehaviour
     private void Start()
     {
         //DebugPlant();
-        if (Field == null)
+        if (field == null)
         {
             Debug.LogWarning("No Field set, using default");
-            Field = new Field
+            field = new Field
             {
                 Humidity = 0.5,
                 Temperature = 0.5,
@@ -49,7 +51,7 @@ public class FieldBehaviour : MonoBehaviour
 
     private void DebugPlant()
     {
-        Field = new Field
+        this.field = new Field()
         {
             Humidity = 0.5,
             Temperature = 0.5,
@@ -90,31 +92,24 @@ public class FieldBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (Field.Seed != null)
+        if (this.field.Seed != null)
         {
-            Field.GrowthProgress = Math.Min(1.0, Field.GrowthProgress + growthRate * Time.deltaTime);
+            this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
             AdjustStadium();
         }
-    }
-
-
-    public void SelectField()
-    {
-        tileViewBehaviour.ViewField(this);
     }
 
     private void AdjustStadium()
     {
         foreach (GrowthStage stadium in GrowthStages.stages)
         {
-            if (stadium.ProgressStart <= Field.GrowthProgress && stadium.ProgressEnd > Field.GrowthProgress && !stadium.Equals(currentStadium))
+            if (stadium.ProgressStart <= this.field.GrowthProgress && stadium.ProgressEnd > this.field.GrowthProgress && !stadium.Equals(currentStadium))
             {
                 currentStadium = stadium;
                 ReplacePlantModel(stadium.ModelName);
             }
         }
     }
-
 
     private void ReplacePlantModel(string newModelName)
     {
@@ -133,10 +128,10 @@ public class FieldBehaviour : MonoBehaviour
 
     private void ClearField()
     {
-        Field.Seed = null;
-        Field.TimePlanted = -1;
+        this.field.Seed = null;
+        this.field.TimePlanted = -1;
         currentStadium = null;
-        Field.GrowthProgress = 0;
+        this.field.GrowthProgress = 0;
 
         foreach (GameObject flowerPot in flowerPots)
         {
@@ -149,7 +144,7 @@ public class FieldBehaviour : MonoBehaviour
 
     public bool IsFullyGrown()
     {
-        return Field.GrowthProgress >= 1.0;
+        return this.field.GrowthProgress >= 1.0;
     }
 
     public void PlantSeeds(Plant parent1, Plant parent2)
@@ -162,16 +157,17 @@ public class FieldBehaviour : MonoBehaviour
 
     public void PlantCrop(Plant newPlant)
     {
-        Field.Seed = newPlant;
+        this.field.Seed = newPlant;
         if (Assets.Scripts.Base.Core.Game.State != default)
         {
-            Field.TimePlanted = Assets.Scripts.Base.Core.Game.State.ElapsedTime;
-        } else
+            this.field.TimePlanted = Assets.Scripts.Base.Core.Game.State.ElapsedTime;
+        }
+        else
         {
-            Field.TimePlanted = Time.realtimeSinceStartup;
+            this.field.TimePlanted = Time.realtimeSinceStartup;
         }
         currentStadium = GrowthStages.stages[0];
-        growthRate = GrowthController.getGrowthRate(Field, Field.Seed);
+        growthRate = GrowthController.getGrowthRate(this.field, this.field.Seed);
 
         foreach (GameObject flowerPot in flowerPots)
         {
@@ -186,19 +182,19 @@ public class FieldBehaviour : MonoBehaviour
     {
         if (IsFullyGrown())
         {
-            HarvestResult harvest = HarvestController.GetHarvestResult(Field.Seed);
+            HarvestResult harvest = HarvestController.GetHarvestResult(this.field.Seed);
 
             FarmStorageController.PutPlantInStorage(harvest.Plant, harvest.NumHarvest);
             FarmStorageController.PutSeedInStorage(harvest.Plant, harvest.NumSeeds);
             tileViewBehaviour.ShowHarvestResult(harvest);
+
             ClearField();
         }
     }
 
-
     public void FertilizeCrop()
     {
-        Field.GrowthProgress = 1;
+        this.field.GrowthProgress = 1;
     }
 
     public void DestroyCrop()
