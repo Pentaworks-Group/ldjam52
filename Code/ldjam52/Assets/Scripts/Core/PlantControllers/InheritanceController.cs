@@ -1,5 +1,6 @@
 using Assets.Scripts.Model;
 using Assets.Scripts.Constants;
+using Assets.Scripts.Base;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -85,7 +86,46 @@ public class InheritanceController
             newPlant.Genome.Add(pair.Key, newPair);
         }
         AddImages(plant1, plant2, newPlant);
+        Plant existingPlant = checkIfGenomeExists(newPlant);
+        if (existingPlant != null)
+        {
+            newPlant = existingPlant;
+        }
+        else
+        {
+            newPlant.ID = Guid.NewGuid();
+        }
         return newPlant;
+    }
+
+    public static Plant checkIfGenomeExists(Plant plant)
+    {
+        foreach (KeyValuePair<Guid, Plant> pair in Core.Game.State.KnownPlants)
+        {
+            bool equal = true;
+            foreach (KeyValuePair<string, ChromosomePair> chromosomePair in pair.Value.Genome)
+            {
+                ChromosomePair otherPair;
+                if (plant.Genome.TryGetValue(chromosomePair.Key, out otherPair))
+                {
+                    equal |= chromosomePair.Equals(otherPair);
+                    if (!equal)
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    equal = false;
+                }
+
+            }
+            if (!equal)
+            {
+                return pair.Value;
+            }
+        }
+        return null;
     }
 
     private static void AddImages(Plant plant1, Plant plant2, Plant newPlant)
