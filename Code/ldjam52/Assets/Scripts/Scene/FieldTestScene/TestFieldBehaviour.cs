@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
@@ -12,7 +13,7 @@ namespace Assets.Scripts.Scene.FieldTestScene
 {
     public class TestFieldBehaviour : MonoBehaviour
     {
-        public TileViewBehaviour tileViewBehaviour;
+        public FieldViewBehaviour FieldViewBehaviour;
 
         // Start is called before the first frame update
         void Start()
@@ -39,9 +40,19 @@ namespace Assets.Scripts.Scene.FieldTestScene
 
                 var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
 
+                tileBehaviour.OnClick.AddListener(TileSelected);
+
                 tileBehaviour.SetTile(tile);
-                tileBehaviour.TileViewBehaviour = this.tileViewBehaviour;
+                tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
                 tileBehaviour.gameObject.SetActive(true);
+            }
+        }
+
+        private void TileSelected(TileBehaviour tileBehaviour)
+        {
+            if (tileBehaviour != null)
+            {
+                tileBehaviour.ShowFieldView();
             }
         }
 

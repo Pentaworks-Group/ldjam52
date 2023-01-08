@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TileColliderBehaviour : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class TileColliderBehaviour : MonoBehaviour
     {
         if (tileBehaviour != null && (!Assets.Scripts.Base.Core.Game.LockCameraMovement))
         {
-            tileBehaviour.ShowTileView();
+            tileBehaviour.OnClick.Invoke(tileBehaviour);
         }
     }
 }

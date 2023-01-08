@@ -6,7 +6,7 @@ using Assets.Scripts.Model;
 
 using UnityEngine;
 
-public class TileViewSeedListBehaviour : ListContainerBehaviour
+public class FieldViewSeedListBehaviour1 : ListCont
 {
     override public void CustomStart()
     {
