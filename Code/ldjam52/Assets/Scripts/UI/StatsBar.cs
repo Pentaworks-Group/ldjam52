@@ -6,9 +6,11 @@ public class StatsBar : MonoBehaviour
 {
 
     // Values in [0,1]
-    public double Mean { get; set; }
-    public double Width { get; set; }
+    private double mean { get; set; }
+    private double width { get; set; }
     public double BiomeVal { get; set; }
+
+    private Color col;
 
     private bool knowsPlant = false;
     private bool knowsBiome = false;
@@ -16,10 +18,11 @@ public class StatsBar : MonoBehaviour
     public RectTransform gradientTransform;
     public RectTransform biomeTransform;
 
-    public StatsBar(double mean, double width)
+    public StatsBar(double _mean, double _width, Color _col)
     {
-        Mean = mean;
-        Width = width;
+        mean = _mean;
+        width = _width;
+        col = _col;
     }
 
     // Start is called before the first frame update
@@ -38,7 +41,7 @@ public class StatsBar : MonoBehaviour
         knowsPlant = true;
     }
 
-    private void Draw()
+    public void Draw()
     {
         
     }

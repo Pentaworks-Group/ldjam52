@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FieldTestScene.unity
     guid: f579c7726fe11be408eddbed870a1402
+  - enabled: 1
+    path: Assets/Scenes/SeedShopScene.unity
+    guid: 56feea1fad727aa44ba06f96b4acf079
   m_configObjects: {}

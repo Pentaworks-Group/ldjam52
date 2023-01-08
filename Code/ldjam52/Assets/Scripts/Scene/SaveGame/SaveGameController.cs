@@ -23,7 +23,7 @@ namespace Assets.Scripts.Scene.SaveGame
         }
 
 
-        private static List<GameState> LoadSaveGamesFromPlayerPrefs()
+        private static void LoadSaveGamesFromPlayerPrefs()
         {
             var savedGamesJson = PlayerPrefs.GetString("SavedGames");
 
@@ -32,6 +32,7 @@ namespace Assets.Scripts.Scene.SaveGame
                 try
                 {
                     savedGames = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson);
+                    return;
                 }
                 catch
                 {
@@ -39,13 +40,13 @@ namespace Assets.Scripts.Scene.SaveGame
 
 
             }
-            return new();
+            savedGames = new();
         }
 
         public static void SaveNewGame()
         {
             Assets.Scripts.Base.Core.Game.State.SavedOn = DateTime.Now;
-            savedGames.Add(Assets.Scripts.Base.Core.Game.State);
+            GetSaveGames().Add(Assets.Scripts.Base.Core.Game.State);
             SaveGames();
         }
 

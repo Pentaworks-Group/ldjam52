@@ -157,10 +157,24 @@ public class FieldBehaviour : MonoBehaviour
 
     public void PlantSeeds(Plant parent1, Plant parent2)
     {
-        FarmStorageController.TakeSeedsOfStorage(parent1, 1);
-        FarmStorageController.TakeSeedsOfStorage(parent2, 1);
-        Plant child = InheritanceController.crossPlants(parent1, parent2);
-        PlantCrop(child);
+        if (parent1 != default && parent2 != default)
+        {
+            FarmStorageController.TakeSeedsOfStorage(parent1, 1);
+            FarmStorageController.TakeSeedsOfStorage(parent2, 1);
+            Plant child = InheritanceController.crossPlants(parent1, parent2);
+            PlantCrop(child);
+        } else if (parent1 != default || parent2 != default)
+        {
+            if (parent1 != default)
+            {
+                PlantCrop(parent1);
+            }
+            if (parent2 != default)
+            {
+                PlantCrop(parent2);
+            }
+        }
+        
     }
 
     public void PlantCrop(Plant newPlant)
