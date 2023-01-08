@@ -11,7 +11,7 @@ public class TileColliderBehaviour : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (tileBehaviour != null)
+        if (tileBehaviour != null && (!Assets.Scripts.Base.Core.Game.LockCameraMovement))
         {
             tileBehaviour.ShowTileView();
         }
