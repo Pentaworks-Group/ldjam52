@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1129867701437881292, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8411269789819925528, guid: ad03f046a68bce94399a4ba0c9445e1f, type: 3}
       propertyPath: m_Name
       value: Tile
@@ -380,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &951418324
 Transform:
   m_ObjectHideFlags: 0

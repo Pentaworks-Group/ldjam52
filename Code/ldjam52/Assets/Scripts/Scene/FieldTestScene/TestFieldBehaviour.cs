@@ -12,16 +12,36 @@ namespace Assets.Scripts.Scene.FieldTestScene
 {
     public class TestFieldBehaviour : MonoBehaviour
     {
-        public TileBehaviour tileBehaviour;
+        public TileViewBehaviour tileViewBehaviour;
 
         // Start is called before the first frame update
         void Start()
         {
-            if (Assets.Scripts.Base.Core.Game.State == default) {
+            if (Assets.Scripts.Base.Core.Game.State == default)
+            {
                 InitializeGameState();
-                Tile tile = new();
-                tile.Field = new() { Fertility = .5, Sunshine = 2, Temperature = .8, Humidity = .4 };
+            }
+            else
+            {
+                var tileTemplate = transform.Find("TileTemplate");
+                var targetContainer = transform.Find("Blubb");
+
+                Tile tile = new()
+                {
+                    Color = new GameFrame.Core.Media.Color(1f, 0.411f, 0.705f),
+                    Field = new() { Fertility = .5, Sunshine = 2, Temperature = .8, Humidity = .4 },
+                    Position = GameFrame.Core.Math.Vector3.Zero
+                };
+
+                var tileGameObject = Instantiate(tileTemplate, targetContainer.transform);
+
+                tileGameObject.gameObject.SetActive(true);
+
+                var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
+
                 tileBehaviour.SetTile(tile);
+                tileBehaviour.TileViewBehaviour = this.tileViewBehaviour;
+                tileBehaviour.gameObject.SetActive(true);
             }
         }
 
