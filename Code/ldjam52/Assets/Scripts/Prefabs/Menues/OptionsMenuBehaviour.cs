@@ -17,12 +17,12 @@ public class OptionsMenuBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        effectsVolumeSlider = transform.Find("OptionContainer/EffectsVolume").GetComponent<Slider>();
-        ambienceVolumeSlider = transform.Find("OptionContainer/EffectsVolume").GetComponent<Slider>();
-        backgroundVolumeSlider = transform.Find("OptionContainer/EffectsVolume").GetComponent<Slider>();
+        effectsVolumeSlider = transform.Find("OptionContainer/EffectsVolume/Right/ForegroundSlider").GetComponent<Slider>();
+        ambienceVolumeSlider = transform.Find("OptionContainer/AmbienceVolume/Right/AmbieceSlider").GetComponent<Slider>();
+        backgroundVolumeSlider = transform.Find("OptionContainer/BackgroundVolume/Right/BackgroundSlider").GetComponent<Slider>();
 
-        animationEnabledToggle = transform.Find("OptionContainer/EnableAnimations").GetComponent<Toggle>();
-        mobileInterface = transform.Find("OptionContainer/MobileInterface").GetComponent<ToggleGroup>();
+        animationEnabledToggle = transform.Find("OptionContainer/EnableAnimations/Right/Toggle").GetComponent<Toggle>();
+        mobileInterface = transform.Find("OptionContainer/MobileInterface/Right").GetComponent<ToggleGroup>();
     }
 
     private void Start()
