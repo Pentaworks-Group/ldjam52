@@ -1,3 +1,4 @@
+using Assets.Scripts.Base;
 using Assets.Scripts.Model;
 
 using UnityEngine;
@@ -23,6 +24,7 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
     public void DisplaySlot(FieldViewSeedListSlotBehaviour slot)
     {
         DisplaySeedDetails(slot.GetPlant());
+        Core.Game.PlayButtonSound();
     }
 
     public void DisplaySeedDetails(Plant plant)
