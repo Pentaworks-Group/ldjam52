@@ -41,7 +41,7 @@ public class WorldBehaviour : MonoBehaviour
 
             if (gameState != default)
             {
-                Core.Game.TileController = new TileController(gameState.World);
+                Core.Game.TileController = new TileController();
 
                 if (gameState.World.Tiles.Count > 0)
                 {
