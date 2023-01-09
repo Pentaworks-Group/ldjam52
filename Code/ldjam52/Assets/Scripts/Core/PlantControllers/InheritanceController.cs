@@ -133,6 +133,44 @@ public class InheritanceController
         return chromosomes;
     }
 
+    public static void AnalyseField(Field field, Analyzer analyzer)
+    {
+        int newVisibleProperties = 0;
+        int attempts = 0;
+        int propertiesCount = 4;
+        while (newVisibleProperties < analyzer.CurrentDevelopmentStage.ValueVisibleCount)
+        {
+            int randomPropertyID = (int) Math.Round(UnityEngine.Random.value * propertiesCount);
+            
+            //TODO: Unschön, ich weiss;-)
+            if (randomPropertyID==FieldProperties.PROP_HUMIDITY && field.IsHumidityVisible)
+            {
+                newVisibleProperties = newVisibleProperties + 1;
+                field.IsHumidityVisible = true;
+            }
+            else if (randomPropertyID == FieldProperties.PROP_TEMPERATURE && field.IsTemperatureVisible)
+            {
+                newVisibleProperties = newVisibleProperties + 1;
+                field.IsTemperatureVisible = true;
+            }
+            else if (randomPropertyID == FieldProperties.PROP_SUNSHINE && field.IsSunshineVisible)
+            {
+                newVisibleProperties = newVisibleProperties + 1;
+                field.IsSunshineVisible = true;
+            }
+            else if (randomPropertyID == FieldProperties.PROP_FERTILITY && field.IsFertiliyVisible)
+            {
+                newVisibleProperties = newVisibleProperties + 1;
+                field.IsFertiliyVisible = true;
+            }
+
+            attempts++;
+            if (attempts >= propertiesCount)
+                break;
+        }
+    }
+
+
     public static Plant checkIfGenomeExists(Plant plant)
     {
         foreach (KeyValuePair<Guid, Plant> pair in Core.Game.State.KnownPlants)
