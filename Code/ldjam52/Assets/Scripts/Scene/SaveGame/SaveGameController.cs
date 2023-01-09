@@ -22,7 +22,6 @@ namespace Assets.Scripts.Scene.SaveGame
             return savedGames;
         }
 
-
         private static void LoadSaveGamesFromPlayerPrefs()
         {
             var savedGamesJson = PlayerPrefs.GetString("SavedGames");
@@ -37,8 +36,6 @@ namespace Assets.Scripts.Scene.SaveGame
                 catch
                 {
                 }
-
-
             }
             savedGames = new();
         }
@@ -59,12 +56,14 @@ namespace Assets.Scripts.Scene.SaveGame
             PlayerPrefs.Save();
         }
 
-
         public static void OverrideSave(int index)
         {
-            Assets.Scripts.Base.Core.Game.State.SavedOn = DateTime.Now;
-            savedGames[index] = Assets.Scripts.Base.Core.Game.State;
-            SaveGames(); ;
+            if (Assets.Scripts.Base.Core.Game.State != default)
+            {
+                Assets.Scripts.Base.Core.Game.State.SavedOn = DateTime.Now;
+                savedGames[index] = Assets.Scripts.Base.Core.Game.State;
+                SaveGames();
+            }
         }
 
         public static void DeleteSave(int index)

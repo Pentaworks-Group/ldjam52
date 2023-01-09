@@ -1,17 +1,17 @@
 using Assets.Scripts.Core;
 
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Scene.SaveGame
 {
     public class SaveGameListSlotBehaviour : ListSlotBehaviour
     {
-
         private Text createdOn;
         private Text timeStamp;
         private Text timeElapsed;
         private Text moneyAmount;
-
+        private Button overwriteButton;
         private SaveGameListBehaviour listBehaviour;
 
 
@@ -21,8 +21,11 @@ namespace Assets.Scripts.Scene.SaveGame
             timeStamp = transform.Find("SlotContainer/Info/TimeStamp").GetComponent<Text>();
             timeElapsed = transform.Find("SlotContainer/Info/TimeElapsed").GetComponent<Text>();
             moneyAmount = transform.Find("SlotContainer/Info/Money").GetComponent<Text>();
+            overwriteButton = transform.Find("SlotContainer/Override").GetComponent<Button>();
 
             listBehaviour = transform.parent.parent.GetComponent<SaveGameListBehaviour>();
+
+            overwriteButton.interactable = Base.Core.Game.State != default;
         }
 
         public GameState GetGameState()
@@ -33,9 +36,10 @@ namespace Assets.Scripts.Scene.SaveGame
         override public void UpdateUI()
         {
             GameState saveGame = GetGameState();
+
             createdOn.text = string.Format("{0:G}", saveGame.CreatedOn);
             timeStamp.text = string.Format("{0:G}", saveGame.SavedOn);
-            timeElapsed.text = string.Format("{0:F1}s", saveGame.ElapsedTime); 
+            timeElapsed.text = string.Format("{0:F1}s", saveGame.ElapsedTime);
             moneyAmount.text = saveGame.FarmStorage.MoneyBalance.ToString();
         }
 
