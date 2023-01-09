@@ -7,10 +7,11 @@ public class CameraBehaviour : MonoBehaviour
 {
     public Camera cam;
 
-    private readonly float moveSpeed = 1f;
-    private readonly float zoomSpeed = 3.0f;
+    private readonly float moveSpeed = 15f;
+    private readonly float moveSpeedTouch = 3f;
+    private readonly float zoomSpeed = 10.0f;
     private readonly float zoomSpeedMouse = 80.0f;
-    private readonly float zoomSpeedTouch = 10.0f;
+    private readonly float zoomSpeedTouch = 1.0f;
 
     private readonly float minFov = 10.0f;
     //private float maxFov = 90.0f;
@@ -32,7 +33,9 @@ public class CameraBehaviour : MonoBehaviour
             //// Movement along x, z axis
             // Keys
             float moveX = Input.GetAxisRaw("Horizontal");
+            
             float moveZ = Input.GetAxisRaw("Vertical");
+            
 
             if (Core.Game.Options.IsMouseScreenEdgeScrollingEnabled)
             {
@@ -55,6 +58,14 @@ public class CameraBehaviour : MonoBehaviour
                     moveZ = 1.0f;
                 }
             }
+            if (moveX != 0)
+            {
+                moveX *= moveSpeed;
+            }
+            if (moveZ != 0)
+            {
+                moveZ *= moveSpeed;
+            }
 
             // Touch
             if (Input.touchCount == 1)
@@ -67,14 +78,14 @@ public class CameraBehaviour : MonoBehaviour
                 }
                 else if (touch.phase == TouchPhase.Moved)
                 {
-                    moveX = prevTouch.x - touch.position.x;
-                    moveZ = prevTouch.y - touch.position.y;
+                    moveX = (prevTouch.x - touch.position.x) * moveSpeedTouch;
+                    moveZ = (prevTouch.y - touch.position.y) * moveSpeedTouch;
                 }
             }
 
             if (moveX != 0 || moveZ != 0)
             {
-                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed * Core.Game.Options.MoveSensivity;
+                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * Core.Game.Options.MoveSensivity;
             }
 
             //// Zoom
