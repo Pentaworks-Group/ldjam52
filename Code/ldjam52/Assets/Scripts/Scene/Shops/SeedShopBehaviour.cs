@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class SeedShopBehaviour : ViewBaseBehaviour
 {
     public TMP_Text SellQuantityText;
