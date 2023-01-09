@@ -1,22 +1,29 @@
 Todo:
 ----------------------------------
  Bugs:
-  
- Exceptions:
+ - Game paused on load (unpause after load)
  
- Core:
+ Exceptions: 
  - 
+ Core:
+ - Name! Suggested: H.I.V.E (Highly Involuntary Violent Evolition)
+ - Farm Building price
+ - Tile price per Biome
   
  GamePlay:
- - Place farm building
- - Keep TimeOfDay and Date in GameState.
- - Monetary system
-   
+ - Keep TimeOfDay and Date in GameState (and load it correctly).
+ - Shop integration (e.g. Lab & Shop buildings on map)
+ - Open Inventory on farm click 
+ - Show chromosomes in various locations
+ - Rotten fields
+    
  UI:
- 
- 
+ - GET RID OF THE ANNOYING SPHERE!!!!!
+ - Buttons as Prefabs (FieldView)
+ - HarvestView overhaul
+  
  Audio:
- - yes :)
+ - Fully grown effect audio!
  
   
 Refactoring:
@@ -29,12 +36,14 @@ WIP:
  
 Nice to have:
 ----------------------------------
- 
  - Tooltip.cs in GameFrame 
+ - ScrollView (List container)
+ - Show owned tiles with fence
+ - ShortKeys
  
 Ideas:
 ----------------------------------
-  
+ - Increase map size (Generate extra tiles)
  
 Done:
 ----------------------------------

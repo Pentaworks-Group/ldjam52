@@ -1,5 +1,6 @@
 using System;
 
+using Assets.Scripts.Base;
 using Assets.Scripts.Model;
 
 using GameFrame.Core.Extensions;
@@ -10,6 +11,8 @@ using UnityEngine.Events;
 public class TileBehaviour : MonoBehaviour
 {
     public UnityEvent<TileBehaviour> OnClick = new UnityEvent<TileBehaviour>();
+
+    private AudioSource audioSource;
 
     private GameObject floorGameObject;
     private GameObject naturalAreaGameObject;
@@ -55,6 +58,17 @@ public class TileBehaviour : MonoBehaviour
         }
     }
 
+    public void PlayEffect(String audioClipName)
+    {
+        var audioSource = GetAudioSource();
+
+        var audioClip = GameFrame.Base.Resources.Manager.Audio.Get(audioClipName);
+
+        audioSource.clip = audioClip;
+        
+        audioSource.Play();
+    }
+
     private void Awake()
     {
         this.floorGameObject = transform.Find("Surface").gameObject;
@@ -80,5 +94,17 @@ public class TileBehaviour : MonoBehaviour
                 this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
             }
         }
+    }
+
+    private AudioSource GetAudioSource()
+    {
+        if (this.audioSource == default)
+        {
+            this.audioSource = GetComponent<AudioSource>();
+        }
+
+        this.audioSource.volume = audioSource.volume = Core.Game.Options.EffectsVolume;
+
+        return this.audioSource;
     }
 }

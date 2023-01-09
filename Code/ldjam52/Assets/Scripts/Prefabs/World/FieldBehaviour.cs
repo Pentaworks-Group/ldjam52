@@ -10,12 +10,16 @@ using UnityEngine;
 public class FieldBehaviour : MonoBehaviour
 {
     private GameObject dirtPatch;
+    private TileBehaviour parentTile;
+        
     private GrowthStage currentStadium = null;
     private readonly List<GameObject> flowerPots = new List<GameObject>();
 
     private Double growthRate = 0;
 
     private Field field;
+    private Boolean isNotified;
+
     public Field Field => this.field;
 
     public void SetField(Field field)
@@ -24,7 +28,7 @@ public class FieldBehaviour : MonoBehaviour
 
         if (field != default)
         {
-            if (GetComponentInParent<TileBehaviour>().Tile.IsOwned)
+            if (parentTile.Tile.IsOwned)
             {
                 this.dirtPatch.SetActive(true);
             }
@@ -34,6 +38,8 @@ public class FieldBehaviour : MonoBehaviour
     private void Awake()
     {
         dirtPatch = transform.Find("DirtPatch").gameObject;
+
+        parentTile = GetComponentInParent<TileBehaviour>();
 
         Transform PotsParent = transform.Find("FlowerPots");
 
@@ -65,6 +71,12 @@ public class FieldBehaviour : MonoBehaviour
             {
                 this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
                 AdjustStadium();
+
+                if (IsFullyGrown() && !this.isNotified)
+                {
+                    this.isNotified = true;
+                    parentTile.PlayEffect("FullyGrown");
+                }                
             }
         }
     }
@@ -103,6 +115,7 @@ public class FieldBehaviour : MonoBehaviour
         this.field.TimePlanted = -1;
         currentStadium = null;
         this.field.GrowthProgress = 0;
+        isNotified = false;
 
         foreach (GameObject flowerPot in flowerPots)
         {
