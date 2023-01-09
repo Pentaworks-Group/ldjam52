@@ -75,11 +75,7 @@ namespace Assets.Scripts.Scene.Shops
             }
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        }
-
+   
         public void UpgradePlantAnalyzer()
         {
             DevelopmentStage nextStage = getNextDevelopmentStage(Base.Core.Game.State.PlantAnalyzer);
