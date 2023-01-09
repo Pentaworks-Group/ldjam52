@@ -13,7 +13,7 @@ namespace Assets.Scripts.Core.Generating.World
         private const Int32 TilePrice = 300;
 
         private readonly GameMode gameMode;
-        private List<BiomeSpawn> biomes;
+        private List<Biome> biomes;
         private Tile[,] tileCache;
 
         public Generator(GameMode gameMode)
@@ -59,13 +59,20 @@ namespace Assets.Scripts.Core.Generating.World
 
         private void GenerateBiomes()
         {
-            biomes = new List<BiomeSpawn>();
+            biomes = new List<Biome>();
 
             if (gameMode.World.IsAllBiomesUsageForced)
             {
-                foreach (var biome in gameMode.AvailableBiomes)
+                foreach (var biomeType in gameMode.AvailableBiomes)
                 {
-                    biomes.Add(new BiomeSpawn(biome));
+                    var biome = new Biome()
+                    {
+                        Type = biomeType,
+                        Weight = UnityEngine.Random.Range(biomeType.WeightMin, biomeType.WeightMax),
+                        Size = 1,
+                    };
+
+                    biomes.Add(biome);
                 }
             }
 
@@ -73,9 +80,16 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 for (int i = 0; i < gameMode.World.RandomBiomesAmount; i++)
                 {
-                    var biome = gameMode.AvailableBiomes.GetRandomEntry();
+                    var biomeType = gameMode.AvailableBiomes.GetRandomEntry();
 
-                    biomes.Add(new BiomeSpawn(biome));
+                    var biome = new Biome()
+                    {
+                        Type = biomeType,
+                        Weight = UnityEngine.Random.Range(biomeType.WeightMin, biomeType.WeightMax),
+                        Size = 1,
+                    };
+
+                    biomes.Add(biome);
                 }
             }
         }
@@ -84,26 +98,26 @@ namespace Assets.Scripts.Core.Generating.World
         {
             this.tileCache = new Tile[gameMode.World.Width, gameMode.World.Height];
 
-            foreach (var biomeSpawn in biomes)
+            foreach (var biome in biomes)
             {
                 GetAvailableSpawnPoint(this.tileCache, out Int32 x, out Int32 z);
 
-                biomeSpawn.Position = new GameFrame.Core.Math.Vector3(x, 0, z);
+                biome.SpawnPosition = new GameFrame.Core.Math.Vector3(x, 0, z);
 
                 var tile = new Tile()
                 {
                     ID = Guid.NewGuid(),
+                    Biome = biome,
                     IsOwned = false,
                     Position = new GameFrame.Core.Math.Vector3(x, 0, z),
-                    Color = biomeSpawn.Biome.Color,
-                    Price = GetTilePrice(biomeSpawn.Biome),
+                    Color = biome.Type.Color,
+                    Price = GetTilePrice(biome.Type),
                     Field = new Field()
                     {
-                        Temperature = UnityEngine.Random.Range(biomeSpawn.Biome.TemperatureMin, biomeSpawn.Biome.TemperatureMax),
-                        Fertility = UnityEngine.Random.Range(biomeSpawn.Biome.FertilityMin, biomeSpawn.Biome.FertilityMax),
-                        Humidity = UnityEngine.Random.Range(biomeSpawn.Biome.HumidityMin, biomeSpawn.Biome.HumidityMax),
-                        Sunshine = UnityEngine.Random.Range(biomeSpawn.Biome.SunshineMin, biomeSpawn.Biome.SunshineMax),
-                        Biome = biomeSpawn.Biome
+                        Temperature = UnityEngine.Random.Range(biome.Type.TemperatureMin, biome.Type.TemperatureMax),
+                        Fertility = UnityEngine.Random.Range(biome.Type.FertilityMin, biome.Type.FertilityMax),
+                        Humidity = UnityEngine.Random.Range(biome.Type.HumidityMin, biome.Type.HumidityMax),
+                        Sunshine = UnityEngine.Random.Range(biome.Type.SunshineMin, biome.Type.SunshineMax),
                     }
                 };
 
@@ -135,7 +149,7 @@ namespace Assets.Scripts.Core.Generating.World
             }
         }
 
-        private Int32 GetTilePrice(Biome biome)
+        private Int32 GetTilePrice(BiomeType biome)
         {
             if ((biome.TilePriceMin > 0) && (biome.TilePriceMax > 0))
             {
@@ -186,15 +200,14 @@ namespace Assets.Scripts.Core.Generating.World
 
                         var closestSpawn = FindBiome(tile);
 
-                        tile.Color = closestSpawn.Biome.Color;
+                        tile.Color = closestSpawn.Type.Color;
 
                         tile.Field = new Field()
                         {
-                            Temperature = UnityEngine.Random.Range(closestSpawn.Biome.TemperatureMin, closestSpawn.Biome.TemperatureMax),
-                            Fertility = UnityEngine.Random.Range(closestSpawn.Biome.FertilityMin, closestSpawn.Biome.FertilityMax),
-                            Humidity = UnityEngine.Random.Range(closestSpawn.Biome.HumidityMin, closestSpawn.Biome.HumidityMax),
-                            Sunshine = UnityEngine.Random.Range(closestSpawn.Biome.SunshineMin, closestSpawn.Biome.SunshineMax),
-                            Biome = closestSpawn.Biome
+                            Temperature = UnityEngine.Random.Range(closestSpawn.Type.TemperatureMin, closestSpawn.Type.TemperatureMax),
+                            Fertility = UnityEngine.Random.Range(closestSpawn.Type.FertilityMin, closestSpawn.Type.FertilityMax),
+                            Humidity = UnityEngine.Random.Range(closestSpawn.Type.HumidityMin, closestSpawn.Type.HumidityMax),
+                            Sunshine = UnityEngine.Random.Range(closestSpawn.Type.SunshineMin, closestSpawn.Type.SunshineMax),
                         };
 
                         closestSpawn.Size++;
@@ -209,10 +222,10 @@ namespace Assets.Scripts.Core.Generating.World
             return tileList;
         }
 
-        private BiomeSpawn FindBiome(Tile tile)
+        private Biome FindBiome(Tile tile)
         {
             var shortestWeightedDistance = Double.MaxValue;
-            var closestSpawn = default(BiomeSpawn);
+            var closestSpawn = default(Biome);
 
             foreach (var spawn in biomes)
             {
@@ -228,9 +241,9 @@ namespace Assets.Scripts.Core.Generating.World
             return closestSpawn;
         }
 
-        private Single CalculateWeightedDistance(Tile tile, BiomeSpawn spawn)
+        private Single CalculateWeightedDistance(Tile tile, Biome spawn)
         {
-            var distanceVector = spawn.Position - tile.Position;
+            var distanceVector = spawn.SpawnPosition - tile.Position;
 
             var distance = distanceVector.Length / spawn.Weight;
 

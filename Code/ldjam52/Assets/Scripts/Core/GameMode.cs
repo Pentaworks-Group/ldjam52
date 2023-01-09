@@ -14,7 +14,6 @@ namespace Assets.Scripts.Core
         public Core.Generating.WorldGenerationSettings World {get;set;}
         public Core.Generating.PlayerSettings Player {get;set;}
         public List<Plant> AvailablePlants { get; set; }
-        public List<Biome> AvailableBiomes { get; set; }
-
+        public List<BiomeType> AvailableBiomes { get; set; }
     }
 }

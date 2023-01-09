@@ -8,6 +8,7 @@ namespace Assets.Scripts.Model
     public class Tile
     {
         public Guid ID { get; set; }
+        public Biome Biome { get; set; }
         public Boolean IsOwned { get; set; }
         public Vector3 Position { get; set; }
         public Color Color { get; set; }
@@ -16,5 +17,6 @@ namespace Assets.Scripts.Model
         public Int32 Price { get; set; }
 
         public Int32 NaturalElementsAmount { get; set; }
+        
     }
 }

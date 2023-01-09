@@ -75,7 +75,6 @@ public class PauseMenuBehavior : MonoBehaviour
             else
             {
                 Hide();
-                Core.Game.PlayButtonSound();
                 this.PauseToggled.Invoke(false);
                 foreach (GameObject gameObject in ObjectsToHide)
                 {
@@ -118,6 +117,7 @@ public class PauseMenuBehavior : MonoBehaviour
         {
             worldBehaviour.PressEsc();
         }
+        Core.Game.PlayButtonSound();
     }
 
     public void Show()
