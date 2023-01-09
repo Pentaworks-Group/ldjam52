@@ -38,6 +38,8 @@ Nice to have:
  - ShortKeys (e.g. "H" for Home)
  - Only buy adjacent tiles
  - Rename Crops
+ - Inventory manager (delete seeds?)
+ - Fertilizer
  
 Ideas:
 ----------------------------------
