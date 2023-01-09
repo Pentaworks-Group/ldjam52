@@ -25,8 +25,10 @@ public class WorldBehaviour : MonoBehaviour
 
     public TileViewBehaviour TileViewBehaviour;
     public FieldViewBehaviour FieldViewBehaviour;
-    public PauseMenuBehavior PauseMenuBehaviour;
     public LaboratoryBehaviour LaboratoryBehaviour;
+    public SeedShopBehaviour SeedShopBehaviour;
+
+    public PauseMenuBehavior PauseMenuBehaviour;
 
     //Random Ambient Sounds
     private float nextSoundEffectTime = 0;
@@ -65,7 +67,7 @@ public class WorldBehaviour : MonoBehaviour
     {
         this.TileViewBehaviour.OnHide.AddListener(OnTileViewHide);
         this.FieldViewBehaviour.OnHide.AddListener(OnFieldViewHide);
-        //this.ShopViewBehaviour.OnHide.AddListener(OnShopViewHide);
+        //this.SeedShopBehaviour.OnHide.AddListener(OnShopViewHide);
         this.LaboratoryBehaviour.OnHide.AddListener(OnLaboratiryHide);
 
         Core.Game.LockCameraMovement = false;
