@@ -54,6 +54,28 @@ public class WorldBehaviour : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Core.Game.LockCameraMovement = false;
+    }
+
+    private void Update()
+    {
+        Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
+
+        if (!isFarmSet && gameState.World.Farm != default)
+        {
+            RenderFarm(gameState.World.Farm);
+        }
+
+        playRandomEffectSound();
+
+        if (escTimeout > 0)
+        {
+            escTimeout--;
+        }
+    }
+
     private void RenderWorld(World world)
     {
         var tileTemplate = templateContainer.GetComponentInChildren<TileBehaviour>().gameObject;
@@ -104,22 +126,7 @@ public class WorldBehaviour : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
-
-        if (!isFarmSet && gameState.World.Farm != default)
-        {
-            RenderFarm(gameState.World.Farm);
-        }
-
-        playRandomEffectSound();
-
-        if (escTimeout > 0)
-        {
-            escTimeout--;
-        }
-    }
+    
 
     public void PressEsc()
     {
