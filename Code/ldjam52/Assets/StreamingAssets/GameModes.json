@@ -213,9 +213,9 @@
         "ImageName": "PricklyPear",
         "SeedImageName": "Seed_PricklyPear",
         "BlossomColor": {
-          "Red": 0.901,
-          "Green": 0.788,
-          "Blue": 0.686,
+          "Red": 0.000,
+          "Green": 0.000,
+          "Blue": 1.000,
           "Alpha": 1
         },
         "Genome": {
@@ -360,9 +360,9 @@
         "ImageName": "Truffle",
         "SeedImageName": "Seed_Truffle",
         "BlossomColor": {
-          "Red": 0.901,
-          "Green": 0.788,
-          "Blue": 0.686,
+          "Red": 1.000,
+          "Green": 1.000,
+          "Blue": 0.000,
           "Alpha": 1
         },
         "Genome": {
