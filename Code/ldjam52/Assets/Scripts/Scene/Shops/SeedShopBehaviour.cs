@@ -279,16 +279,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     private void emptyList(ScrollRect scrollRect)
     {
         Transform content = scrollRect.transform.Find("Viewport").Find("Content");
-        while (content.childCount > 0)
-        {
-            /*
-            Button tmp = content.GetChild(0).GetComponent<Button>();
-            tmp.onClick.RemoveAllListeners();
-            */
-            Destroy(content.GetChild(0).gameObject);
-            
-            if (content.childCount == 8)
-                break;
+        foreach (Transform child in content) {
+            GameObject.Destroy(child.gameObject);
         }
     }
 
