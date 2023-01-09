@@ -303,7 +303,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         // Need to update amount
         updateInfo(isSell);
 
-        if (chosenPlant.StorageAmountPlants == 0)
+        if (isSell && chosenPlant.StorageAmountPlants == 0)
         {
             buttonPressed.onClick.RemoveAllListeners();
             Destroy(buttonPressed.gameObject);

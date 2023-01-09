@@ -15,6 +15,7 @@ public class MainMenuBehaviour : MonoBehaviour
     public EffectsAudioManager EffectsAudioManager;
     public ContinuousAudioManager AmbienceAudioManager;
     public ContinuousAudioManager BackgroundAudioManager;
+    private GameObject quitButton;
 
     public void ShowSavedGames()
     {
@@ -67,6 +68,11 @@ public class MainMenuBehaviour : MonoBehaviour
         //}
     }
 
+    public void Quit()
+    {
+
+    }
+
     public void LoadGameSettings()
     {
         if (Core.Game.AvailableGameModes.Count == 0)
@@ -98,6 +104,16 @@ public class MainMenuBehaviour : MonoBehaviour
     {
         StartAudioManagers();
         LoadGameSettings();
+
+        HideIfNoStorageAccess();
+    }
+
+    private void HideIfNoStorageAccess()
+    {
+        if (Core.Game.IsFileAccessPossible)
+        {
+            this.transform.Find("QuitButton").gameObject.SetActive(true);
+        }
     }
 
     private void StartAudioManagers()
