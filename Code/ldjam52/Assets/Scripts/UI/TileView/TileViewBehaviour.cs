@@ -13,6 +13,7 @@ namespace Assets.Scripts.UI.TileView
 {
     public class TileViewBehaviour : MonoBehaviour
     {
+        public WorldBehaviour worldBehaviour;
         private GameObject visiblityContainer;
 
         private GameObject buyTileContent;
@@ -55,6 +56,7 @@ namespace Assets.Scripts.UI.TileView
                 }
 
                 SetVisibility(true);
+                Assets.Scripts.Base.Core.Game.PlayButtonSound();
             }
         }
 
@@ -64,6 +66,7 @@ namespace Assets.Scripts.UI.TileView
             this.actionRequired = null;
 
             SetVisibility(false);
+            Assets.Scripts.Base.Core.Game.PlayButtonSound();
         }
 
         public void BuyTile(Boolean isBuyAndBuilt)
@@ -315,6 +318,17 @@ namespace Assets.Scripts.UI.TileView
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GoBackOrClose();
+            }
+        }
+
+        private void GoBackOrClose()
+        {
+
+            Hide();
+            worldBehaviour.PressEsc();
 
         }
     }

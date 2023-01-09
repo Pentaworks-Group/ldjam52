@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FieldViewBehaviour : MonoBehaviour
 {
+    public WorldBehaviour worldBehaviour;
+
     private FieldBehaviour currentlyViewedField;
 
     private GameObject viewToggle;
@@ -57,8 +59,25 @@ public class FieldViewBehaviour : MonoBehaviour
         {
             CheckHarvestButton();
             CheckPlantingButton();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GoBackOrClose();
+            }
         }
     }
+
+    private void GoBackOrClose()
+    {
+        if (harvestResult.activeSelf)
+        {
+            HideHarvestResult();
+        } else
+        {
+            CloseView();
+            worldBehaviour.PressEsc();
+        }
+    }
+
 
     public void ViewField(FieldBehaviour fieldBehaviour)
     {

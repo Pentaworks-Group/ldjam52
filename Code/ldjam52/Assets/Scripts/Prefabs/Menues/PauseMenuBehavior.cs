@@ -10,6 +10,8 @@ using UnityEngine.UI;
 
 public class PauseMenuBehavior : MonoBehaviour
 {
+    public WorldBehaviour worldBehaviour;
+
     public UnityEvent<Boolean> PauseToggled = new UnityEvent<Boolean>();
 
     public List<GameObject> ObjectsToHide = new();
@@ -46,7 +48,7 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         //inputFieldLeft = GUI.transform.Find("InputFieldLeft");
         //inputFieldRight = GUI.transform.Find("InputFieldRight");
-        
+
 
 
         menuToggle.SetActive(false);
@@ -65,15 +67,15 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         if (menuToggle.activeSelf == true)
         {
+            
             if (this.optionsArea.activeSelf || this.saveGameArea.activeSelf)
             {
                 this.OnBackButtonClicked();
             }
             else
             {
-                //Core.Game.PlayButtonSound();
                 Hide();
-
+                Core.Game.PlayButtonSound();
                 this.PauseToggled.Invoke(false);
                 foreach (GameObject gameObject in ObjectsToHide)
                 {
@@ -84,14 +86,17 @@ public class PauseMenuBehavior : MonoBehaviour
         }
         else
         {
-            //Core.Game.PlayButtonSound();
-
-            this.PauseToggled.Invoke(true);
-            foreach (GameObject gameObject in ObjectsToHide)
+            if (!Core.Game.LockCameraMovement && !worldBehaviour.WasEscPressed())
             {
-                gameObject.SetActive(false);
+                this.PauseToggled.Invoke(true);
+                foreach (GameObject gameObject in ObjectsToHide)
+                {
+                    gameObject.SetActive(false);
+                }
+                Show();
+                Core.Game.PlayButtonSound();
             }
-            Show();
+
         }
     }
 
@@ -105,7 +110,7 @@ public class PauseMenuBehavior : MonoBehaviour
     public void Hide()
     {
         menuToggle.SetActive(false);
-        Assets.Scripts.Base.Core.Game.LockCameraMovement = false;
+        Core.Game.LockCameraMovement = false;
 
         Time.timeScale = 1;
     }
@@ -117,7 +122,7 @@ public class PauseMenuBehavior : MonoBehaviour
         SetVisible(pauseMenu: true);
 
         menuToggle.SetActive(true);
-        Assets.Scripts.Base.Core.Game.LockCameraMovement = true;
+        Core.Game.LockCameraMovement = true;
     }
 
     public void OnBackButtonClicked()
@@ -127,7 +132,7 @@ public class PauseMenuBehavior : MonoBehaviour
             Core.Game.SaveOptions();
         }
 
-        //Core.Game.PlayButtonSound();
+        Core.Game.PlayButtonSound();
         SetVisible(pauseMenu: true);
     }
 
@@ -176,11 +181,12 @@ public class PauseMenuBehavior : MonoBehaviour
         if (pauseMenu)
         {
             currentOpenMenu.text = "Pause";
-        } else if (options)
+        }
+        else if (options)
         {
             currentOpenMenu.text = "Options";
         }
-        else if(saveGame)
+        else if (saveGame)
         {
             currentOpenMenu.text = "Save Games";
         }

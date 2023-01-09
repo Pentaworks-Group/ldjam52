@@ -15,6 +15,8 @@ public class WorldBehaviour : MonoBehaviour
     private GameObject tileContainer;
     private GameObject templateContainer;
 
+
+    private int escTimeout = 3;
     private Boolean isFarmSet = false;
     private GameState gameState;
 
@@ -108,6 +110,21 @@ public class WorldBehaviour : MonoBehaviour
         }
 
         playRandomEffectSound();
+
+        if (escTimeout > 0)
+        {
+            escTimeout--;
+        }
+    }
+
+    public void PressEsc()
+    {
+        escTimeout = 3;
+    }
+
+    public bool WasEscPressed()
+    {
+        return escTimeout > 0;
     }
 
     private void RenderFarm(Farm farm)
