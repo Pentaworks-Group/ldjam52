@@ -15,13 +15,13 @@ public class WorldBehaviour : MonoBehaviour
     private GameObject tileContainer;
     private GameObject templateContainer;
 
-
     private int escTimeout = 3;
     private Boolean isFarmSet = false;
     private GameState gameState;
 
     public TileViewBehaviour TileViewBehaviour;
     public FieldViewBehaviour FieldViewBehaviour;
+    public PauseMenuBehavior PauseMenuBehaviour;
 
     //Random Ambient Sounds
     private float nextSoundEffectTime = 0;
@@ -51,6 +51,28 @@ public class WorldBehaviour : MonoBehaviour
 
             Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListGame;
             Core.Game.AmbienceAudioManager.Resume();
+        }
+    }
+
+    private void Start()
+    {
+        Core.Game.LockCameraMovement = false;
+    }
+
+    private void Update()
+    {
+        Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
+
+        if (!isFarmSet && gameState.World.Farm != default)
+        {
+            RenderFarm(gameState.World.Farm);
+        }
+
+        playRandomEffectSound();
+
+        if (escTimeout > 0)
+        {
+            escTimeout--;
         }
     }
 
@@ -93,29 +115,18 @@ public class WorldBehaviour : MonoBehaviour
                     tileBehaviour.ShowFieldView();
                 });
             }
-            else if (tileBehaviour.Tile.Farm == default)
+            else if (tileBehaviour.Tile.Farm != default)
+            {
+                PauseMenuBehaviour.Show();
+            }
+            else
             {
                 tileBehaviour.ShowFieldView();
             }
         }
     }
 
-    private void Update()
-    {
-        Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
-
-        if (!isFarmSet && gameState.World.Farm != default)
-        {
-            RenderFarm(gameState.World.Farm);
-        }
-
-        playRandomEffectSound();
-
-        if (escTimeout > 0)
-        {
-            escTimeout--;
-        }
-    }
+    
 
     public void PressEsc()
     {

@@ -1,7 +1,6 @@
 Todo:
 ----------------------------------
  Bugs: 
- - Game paused on load (unpause after load) 
  - Closing Harvest View with esc disables tile click lock
  
  Exceptions: 
@@ -41,6 +40,7 @@ Nice to have:
  - ScrollView (List container)
  - Show owned tiles with fence
  - ShortKeys
+ - Only buy adjacent tiles
  
 Ideas:
 ----------------------------------
@@ -50,3 +50,4 @@ Done:
 ----------------------------------
  - Impossible to buy land along the edges.
  - WBGL audio: when starting game error in log & freeze
+ - Game paused on load (unpause after load) 

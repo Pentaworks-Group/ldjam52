@@ -6,6 +6,7 @@ namespace Assets.Scripts.Core
     {
         public Boolean IsMouseScreenEdgeScrollingEnabled { get; set; }
 
-        public float TouchSensivity { get; set; }
+        public float MoveSensivity { get; set; } = 0.5f;
+        public float ZoomSensivity { get; set; } = 0.5f;
     }
 }
