@@ -1,7 +1,7 @@
 Todo:
 ----------------------------------
  Bugs: 
- - Closing Harvest View with esc disables tile click lock
+ - 
  
  Exceptions: 
  - 
