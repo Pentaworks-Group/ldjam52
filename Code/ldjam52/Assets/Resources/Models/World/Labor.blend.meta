@@ -27,6 +27,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Text_Color
+    second: {fileID: 2100000, guid: c488ccc4a450133459779441b69da01d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Up_wall
     second: {fileID: 2100000, guid: ed275ddff27027d4aac5cc7898397588, type: 2}
   - first:

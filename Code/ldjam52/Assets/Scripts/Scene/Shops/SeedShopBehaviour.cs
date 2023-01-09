@@ -54,8 +54,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         balance = FarmStorageController.GetStorageBalance();
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
-        updateInfo(true);
-        updateInfo(false);
+//        updateInfo(true);
+//        updateInfo(false);
     }
 
     public override void Hide()
@@ -193,7 +193,11 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     {
         // Buy
         if (seedValue * buyQuantity > FarmStorageController.GetStorageBalance() || buyQuantity == 0)
+        {
+            Core.Game.EffectsAudioManager.Play("Error");
             return;
+        }
+
 
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));

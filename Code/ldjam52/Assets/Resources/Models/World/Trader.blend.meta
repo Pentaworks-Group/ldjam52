@@ -17,6 +17,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Text_color
+    second: {fileID: 2100000, guid: c488ccc4a450133459779441b69da01d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wand_trader
     second: {fileID: 2100000, guid: 766529ce1a1c2384d8a19e15f28af073, type: 2}
   - first:
