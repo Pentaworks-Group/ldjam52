@@ -114,7 +114,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
     private void SeedSelected(StorageItem item)
     {
-        chosenSeed = item;
+        chosenSeed = FarmStorageController.getStorageItemToPlant(Core.Game.State.FarmStorage, item.Plant);
 
         ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
         seedValue = GrowthController.getDominantChromosome(pair).Value0;
@@ -269,6 +269,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     {
         foreach (StorageItem item in items)
         {
+            if (isPlant && item.StorageAmountPlants == 0)
+                continue;
+
             Debug.Log($"Adding plant {item.Plant.Name} now.");
             Button newItem = Instantiate(buttonPrefab);
             newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
