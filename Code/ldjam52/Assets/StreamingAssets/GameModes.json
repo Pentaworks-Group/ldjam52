@@ -1387,9 +1387,9 @@
       {
         "Name": "Grasslands",
         "Color": {
-          "Red": 0.702,
-          "Green": 0.643,
-          "Blue": 0.470,
+          "Red": 0.000,
+          "Green": 1.000,
+          "Blue": 0.000,
           "Alpha": 1
         },
         "WeightMin": 1,
@@ -1406,9 +1406,9 @@
       {
         "Name": "Desert",
         "Color": {
-          "Red": 0.901,
-          "Green": 0.788,
-          "Blue": 0.686,
+          "Red": 0.851,
+          "Green": 0.800,
+          "Blue": 0.000,
           "Alpha": 1
         },
         "WeightMin": 1,
@@ -1425,9 +1425,9 @@
       {
         "Name": "Forest",
         "Color": {
-          "Red": 0.133,
-          "Green": 0.545,
-          "Blue": 0.133,
+          "Red": 0.000,
+          "Green": 0.400,
+          "Blue": 0.000,
           "Alpha": 1
         },
         "WeightMin": 1,
@@ -1444,9 +1444,9 @@
       {
         "Name": "Swamp",
         "Color": {
-          "Red": 0.321,
-          "Green": 0.392,
-          "Blue": 0.113,
+          "Red": 0.000,
+          "Green": 0.600,
+          "Blue": 0.302,
           "Alpha": 1
         },
         "WeightMin": 1,
