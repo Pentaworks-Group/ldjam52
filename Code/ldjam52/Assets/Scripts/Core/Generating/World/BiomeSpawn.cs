@@ -17,7 +17,6 @@ namespace Assets.Scripts.Core.Generating.World
 
         public Biome Biome { get; }
         public Single Weight { get; }
-
         public Vector3 Position { get; set; }
         public Int32 Size { get; set; } = 1;
     }
