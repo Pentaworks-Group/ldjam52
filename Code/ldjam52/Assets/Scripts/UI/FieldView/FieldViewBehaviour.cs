@@ -1,4 +1,5 @@
 using Assets.Scripts.Base;
+using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
 
 using UnityEngine;
@@ -32,6 +33,7 @@ public class FieldViewBehaviour : MonoBehaviour
     private Image harvestPlantPic;
 
     private Text analyzeCosts;
+    private Button analyseButton;
 
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class FieldViewBehaviour : MonoBehaviour
         harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Pic").GetComponent<Image>();
 
         analyzeCosts = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeCosts").GetComponent<Text>();
+        analyseButton = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeButton").GetComponent<Button>();
     }
 
     private void Update()
@@ -124,6 +127,14 @@ public class FieldViewBehaviour : MonoBehaviour
         }
         seedList.UpdateList();
         analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
+        if (Core.Game.State.FarmStorage.MoneyBalance < Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
+        {
+            analyseButton.enabled = false;
+        }
+        else
+        {
+            analyseButton.enabled = true;
+        }
     }
 
     public void CheckHarvestButton()
@@ -278,8 +289,13 @@ public class FieldViewBehaviour : MonoBehaviour
 
     public void AnalyseField(InformationPrefabBehaviour plantBehaviour)
     {
-        InheritanceController.AnalyseField(GetField(), Core.Game.State.FieldAnalyzer);
-        plantBehaviour.GetComponent<InformationPrefabBehaviour>().UpdateInfo(plantBehaviour.Item, GetField(), false);
-        Core.Game.PlayButtonSound();
+        if (Core.Game.State.FarmStorage.MoneyBalance >= Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost )
+        {
+            InheritanceController.AnalyseField(GetField(), Core.Game.State.FieldAnalyzer);
+            plantBehaviour.GetComponent<InformationPrefabBehaviour>().UpdateInfo(plantBehaviour.Item, GetField(), false);
+            FarmStorageController.TakeMoneyOfStorage(Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost);
+            Core.Game.PlayButtonSound();
+        }
+
     }
 }
