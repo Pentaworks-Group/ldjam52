@@ -8,10 +8,10 @@ public class CameraBehaviour : MonoBehaviour
     public Camera cam;
 
     private readonly float moveSpeed = 15f;
-    private readonly float moveSpeedTouch = 0.25f;
+    private readonly float moveSpeedTouch = 0.125f;
     private readonly float zoomSpeed = 10.0f;
     private readonly float zoomSpeedMouse = 80.0f;
-    private readonly float zoomSpeedTouch = 1.0f;
+    private readonly float zoomSpeedTouch = .5f;
 
     private readonly float minFov = 10.0f;
     //private float maxFov = 90.0f;
