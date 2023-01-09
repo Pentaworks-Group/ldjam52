@@ -78,7 +78,9 @@ public class FieldBehaviour : MonoBehaviour
                 if (IsFullyGrown() && !this.isNotified)
                 {
                     this.isNotified = true;
-                    Core.Game.EffectsAudioManager.PlayAt("Bell", parentTile.Tile.Position.ToUnity());
+                    Core.Game.EffectsAudioManager.Play("Bell");
+
+                    //parentTile.PlayEffect("FullyGrown");
                 }
             }
         }
