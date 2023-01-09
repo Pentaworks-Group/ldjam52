@@ -25,7 +25,6 @@ Todo:
  - HarvestView overhaul
   
  Audio:
- - Fully grown effect audio!
  - Effect for opening/closing menues
  
   
