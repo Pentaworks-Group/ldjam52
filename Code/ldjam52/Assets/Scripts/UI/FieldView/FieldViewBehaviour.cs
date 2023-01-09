@@ -123,12 +123,16 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     {
         if (currentlyViewedField.Field.Seed != null)
         {
-            if(item==null)
+            if (item==null)
             {
-                item = new StorageItem
+                item = FarmStorageController.getStorageItemToPlant(Core.Game.State.FarmStorage, currentlyViewedField.Field.Seed, false);
+                if (item==null)
                 {
-                    Plant = currentlyViewedField.Field.Seed
-                };
+                    item = new StorageItem
+                    {
+                        Plant = currentlyViewedField.Field.Seed
+                    };
+                }
             }
             currentInfo.SetActive(true);
             plantingOptions.SetActive(false);
