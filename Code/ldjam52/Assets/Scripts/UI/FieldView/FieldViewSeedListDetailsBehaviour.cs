@@ -10,6 +10,8 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
     private Text plantName;
     public Plant Plant { get; private set; }
 
+    public GameObject InformationPanel;
+
     private void Awake()
     {
         pic = transform.Find("NameAndPic/Pic").GetComponent<Image>();
@@ -24,11 +26,12 @@ public class FieldViewSeedListDetailsBehaviour : MonoBehaviour
     public void DisplaySlot(FieldViewSeedListSlotBehaviour slot)
     {
         DisplaySeedDetails(slot.GetPlant());
-        Core.Game.PlayButtonSound();
+//        Core.Game.PlayButtonSound();
     }
 
     public void DisplaySeedDetails(Plant plant)
     {
+
         this.Plant = plant;
         plantName.text = plant.Name;
         pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(plant?.ImageName);
