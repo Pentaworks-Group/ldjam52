@@ -1,17 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+
 using Assets.Scripts.Base;
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
+using Assets.Scripts.Prefabs.World;
 
-using Assets.Scripts.Constants;
+using TMPro;
 
-public class SeedShopBehaviour : MonoBehaviour
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SeedShopBehaviour : ViewBaseBehaviour
 {
     public TMP_Text SellQuantityText;
     public TMP_Text BuyQuantityText;
@@ -31,6 +31,8 @@ public class SeedShopBehaviour : MonoBehaviour
     public Button buttonPrefab;
     private Button buttonPressed;
 
+    private GameObject seedShopToggle;
+
     private int sellQuantity = 0;
     private int buyQuantity = 0;
     private int balance;
@@ -42,20 +44,35 @@ public class SeedShopBehaviour : MonoBehaviour
 
     private List<StorageItem> inventory;
 
+    public override void Show()
+    {
+        base.Show();
+
+        this.seedShopToggle.SetActive(true);
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+
+        this.seedShopToggle.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
         if (Assets.Scripts.Base.Core.Game.State == default)
         {
             InitializeGameState();
         }
 
+        this.seedShopToggle = transform.Find("SeedShopToggle").gameObject;
+
         balance = FarmStorageController.GetStorageBalance();
         BalanceText.text = balance.ToString();
 
         inventory = FarmStorageController.getStorageInventory();
-    
+
         fillList(inventory, Plants, true);
 
         // TODO use shop list when available
@@ -107,12 +124,7 @@ public class SeedShopBehaviour : MonoBehaviour
         updateInfo(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     // Increase quantity to sell/buy
     public void Up(bool isSell)
     {
