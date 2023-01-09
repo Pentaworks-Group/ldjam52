@@ -194,7 +194,11 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     {
         // Buy
         if (seedValue * buyQuantity > FarmStorageController.GetStorageBalance() || buyQuantity == 0)
+        {
+            Core.Game.EffectsAudioManager.Play("Error");
             return;
+        }
+
 
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
