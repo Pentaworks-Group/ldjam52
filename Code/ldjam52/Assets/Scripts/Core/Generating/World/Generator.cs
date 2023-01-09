@@ -94,6 +94,7 @@ namespace Assets.Scripts.Core.Generating.World
                         Fertility = UnityEngine.Random.Range(biomeSpawn.Biome.FertilityMin, biomeSpawn.Biome.FertilityMax),
                         Humidity = UnityEngine.Random.Range(biomeSpawn.Biome.HumidityMin, biomeSpawn.Biome.HumidityMax),
                         Sunshine = UnityEngine.Random.Range(biomeSpawn.Biome.SunshineMin, biomeSpawn.Biome.SunshineMax),
+                        Biome = biomeSpawn.Biome
                     }
                 };
 
@@ -147,6 +148,7 @@ namespace Assets.Scripts.Core.Generating.World
                             Fertility = UnityEngine.Random.Range(closestSpawn.Biome.FertilityMin, closestSpawn.Biome.FertilityMax),
                             Humidity = UnityEngine.Random.Range(closestSpawn.Biome.HumidityMin, closestSpawn.Biome.HumidityMax),
                             Sunshine = UnityEngine.Random.Range(closestSpawn.Biome.SunshineMin, closestSpawn.Biome.SunshineMax),
+                            Biome = closestSpawn.Biome
                         };
 
                         closestSpawn.Size++;

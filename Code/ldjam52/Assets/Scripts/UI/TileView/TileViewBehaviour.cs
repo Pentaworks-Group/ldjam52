@@ -17,6 +17,7 @@ namespace Assets.Scripts.UI.TileView
         private GameObject visiblityContainer;
 
         private GameObject buyTileContent;
+        private TMP_Text biomeText;
         private TMP_Text buyCouldBuyText;
         private TMP_Text buyCostFundsAvailableText;
         private TMP_Text buyCostTotalCostAmount;
@@ -139,6 +140,8 @@ namespace Assets.Scripts.UI.TileView
         {
             buyTileContent.SetActive(false);
 
+            biomeText.text = "";
+
             var statusString = "You can build the Farm.";
             var errorLevel = -1;
 
@@ -223,6 +226,11 @@ namespace Assets.Scripts.UI.TileView
         private void DisplayBuyTileContent()
         {
             buildFarmContent.SetActive(false);
+
+            biomeText.text = "The Biome of the Field is unknown";
+            if (tileBehaviour.Tile.Field.Biome != null)
+                biomeText.text = "This field is in the "+ tileBehaviour.Tile.Field.Biome.Name;
+
 
             buyCostFundsAvailableText.text = Base.Core.Game.State.FarmStorage.MoneyBalance.ToString("n0");
             buyCostTotalCostAmount.text = this.tileBehaviour.Tile.Price.ToString("n0");
@@ -318,6 +326,7 @@ namespace Assets.Scripts.UI.TileView
             this.visiblityContainer = transform.Find("TileViewToggle").gameObject;
 
             this.buyTileContent = transform.Find("TileViewToggle/ContentContainer/BuyTileContent").gameObject;
+            this.biomeText = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/BiomeText").GetComponent<TMP_Text>();
             this.buyCouldBuyText = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CouldBuyText").GetComponent<TMP_Text>();
             this.buyCostFundsAvailableText = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/FundsAvailableAmount").GetComponent<TMP_Text>();
             this.buyCostTotalCostAmount = transform.Find("TileViewToggle/ContentContainer/BuyTileContent/TopTextContainer/CostContainer/CostAmount").GetComponent<TMP_Text>();
