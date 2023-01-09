@@ -378,6 +378,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2804878926899478828, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: worldBehaviour
+      value: 
+      objectReference: {fileID: 1900354445}
     - target: {fileID: 2904717764902401346, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
