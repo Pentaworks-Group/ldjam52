@@ -111,13 +111,16 @@ public class FieldBehaviour : MonoBehaviour
 
             if(newModelName == "Flower4")
             {
+                GameObject blossom = flower.gameObject.transform.Find("Sphere").gameObject;
                 //TODO: Renderer is null?
-                if (flower.gameObject.TryGetComponent<Renderer>(out var meshRenderer))
+                if (blossom.TryGetComponent<Renderer>(out var meshRenderer))
                 {
                     Material[] mats = meshRenderer.materials;
                     if (mats[0] != null)
                     {
                         meshRenderer.material.color = field.Seed.BlossomColor.ToUnity();
+                        meshRenderer.material.EnableKeyword("_EMISSION");
+                        meshRenderer.material.SetColor("_EmissionColor", field.Seed.BlossomColor.ToUnity());
 //                        meshRenderer.material.
                     }
                 }
