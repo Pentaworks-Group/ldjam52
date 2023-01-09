@@ -58,17 +58,17 @@ public class InformationPrefabBehaviour : MonoBehaviour
         // TODO put into StatsBar
         if (field != null)
         {
-            drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], field.Temperature, true);
-            drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], field.Sunshine, true);
-            drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], field.Humidity, true);
-            drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0.1, true);
+            drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], field.Temperature, field.IsTemperatureVisible);
+            drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SUN], field.Sunshine, field.IsSunshineVisible);
+            drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.WATER], field.Humidity, field.IsHumidityVisible);
+            drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.FERTILITY], field.Fertility, field.IsFertiliyVisible);
         }
         else
         {
             drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
-            drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
-            drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
-            drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
+            drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SUN], 0, false);
+            drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.WATER], 0, false);
+            drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.FERTILITY], 0, false);
         }
     }
 
