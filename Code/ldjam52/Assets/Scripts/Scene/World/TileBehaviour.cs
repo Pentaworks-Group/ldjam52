@@ -54,7 +54,7 @@ public class TileBehaviour : MonoBehaviour
     {
         if (this.FieldViewBehaviour != null)
         {
-            this.FieldViewBehaviour.ViewField(this.FieldBehaviour);
+            this.FieldViewBehaviour.Show(this.FieldBehaviour);
         }
     }
 

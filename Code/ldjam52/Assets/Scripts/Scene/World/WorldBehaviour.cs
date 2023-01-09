@@ -6,6 +6,7 @@ using Assets.Scripts.Constants;
 using Assets.Scripts.Core;
 using Assets.Scripts.Model;
 using Assets.Scripts.Model.Buildings;
+using Assets.Scripts.Scene.Shops;
 using Assets.Scripts.UI.TileView;
 
 using GameFrame.Core.Extensions;
@@ -25,6 +26,7 @@ public class WorldBehaviour : MonoBehaviour
     public TileViewBehaviour TileViewBehaviour;
     public FieldViewBehaviour FieldViewBehaviour;
     public PauseMenuBehavior PauseMenuBehaviour;
+    public LaboratoryBehaviour LaboratoryBehaviour;
 
     //Random Ambient Sounds
     private float nextSoundEffectTime = 0;
@@ -61,6 +63,11 @@ public class WorldBehaviour : MonoBehaviour
 
     private void Start()
     {
+        this.TileViewBehaviour.OnHide.AddListener(OnTileViewHide);
+        this.FieldViewBehaviour.OnHide.AddListener(OnFieldViewHide);
+        //this.ShopViewBehaviour.OnHide.AddListener(OnShopViewHide);
+        this.LaboratoryBehaviour.OnHide.AddListener(OnLaboratiryHide);
+
         Core.Game.LockCameraMovement = false;
     }
 
@@ -118,31 +125,34 @@ public class WorldBehaviour : MonoBehaviour
     {
         if (tileBehaviour != null)
         {
-            if (tileBehaviour.Tile.Building != default)
+            if (!WasEscPressed())
             {
-                if (tileBehaviour.Tile.Building is Farm)
+                if (tileBehaviour.Tile.Building != default)
                 {
-                    PauseMenuBehaviour.Show();
+                    if (tileBehaviour.Tile.Building is Farm)
+                    {
+                        PauseMenuBehaviour.Show();
+                    }
+                    else if (tileBehaviour.Tile.Building is Shop)
+                    {
+                        //PauseMenuBehaviour.Show();
+                    }
+                    else if (tileBehaviour.Tile.Building is Laboratory)
+                    {
+                        this.LaboratoryBehaviour.Show();
+                    }
                 }
-                else if (tileBehaviour.Tile.Building is Shop)
+                else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
                 {
-                    //PauseMenuBehaviour.Show();
+                    this.TileViewBehaviour.Show(tileBehaviour, () =>
+                    {
+                        tileBehaviour.ShowFieldView();
+                    });
                 }
-                else if (tileBehaviour.Tile.Building is Laboratory)
-                {
-                    //PauseMenuBehaviour.Show();
-                }
-            }
-            else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
-            {
-                this.TileViewBehaviour.Show(tileBehaviour, () =>
+                else
                 {
                     tileBehaviour.ShowFieldView();
-                });
-            }
-            else
-            {
-                tileBehaviour.ShowFieldView();
+                }
             }
         }
     }
@@ -243,5 +253,25 @@ public class WorldBehaviour : MonoBehaviour
         }
 
         return default;
+    }
+
+    private void OnFieldViewHide()
+    {
+        PressEsc();
+    }
+
+    private void OnTileViewHide()
+    {
+        PressEsc();
+    }
+
+    private void OnShopViewHide()
+    {
+        PressEsc();
+    }
+
+    private void OnLaboratiryHide()
+    {
+        PressEsc();
     }
 }

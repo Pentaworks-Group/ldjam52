@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model.Buildings;
+using Assets.Scripts.Prefabs.World;
 
 using TMPro;
 
@@ -11,9 +12,8 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.TileView
 {
-    public class TileViewBehaviour : MonoBehaviour
+    public class TileViewBehaviour : ViewBaseBehaviour
     {
-        public WorldBehaviour worldBehaviour;
         private GameObject visiblityContainer;
 
         private GameObject buyTileContent;
@@ -38,10 +38,12 @@ namespace Assets.Scripts.UI.TileView
         private List<TileBehaviour> surroundingTiles;
         private Int32 tilesTotalCost;
 
-        public void Show(TileBehaviour tileBehaviour, Action actionRequired)
+        public virtual void Show(TileBehaviour tileBehaviour, Action actionRequired)
         {
-            if (tileBehaviour != null && !worldBehaviour.WasEscPressed())
+            if (tileBehaviour != null)
             {
+                Show();
+
                 this.tileBehaviour = tileBehaviour;
                 this.actionRequired = actionRequired;
                 this.surroundingTiles = default;
@@ -57,18 +59,17 @@ namespace Assets.Scripts.UI.TileView
                 }
 
                 SetVisibility(true);
-                Assets.Scripts.Base.Core.Game.PlayButtonSound();
             }
         }
 
-        public void Hide()
+        public override void Hide()
         {
+            base.Hide();
+
             this.tileBehaviour = null;
             this.actionRequired = null;
 
             SetVisibility(false);
-            Assets.Scripts.Base.Core.Game.PlayButtonSound();
-            worldBehaviour.PressEsc();
         }
 
         public void BuyTile(Boolean isBuyAndBuilt)
