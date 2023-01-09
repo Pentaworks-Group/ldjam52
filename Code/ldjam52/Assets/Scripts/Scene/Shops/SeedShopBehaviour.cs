@@ -10,6 +10,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using static UnityEditor.Progress;
+
 public class SeedShopBehaviour : ViewBaseBehaviour
 {
     public TMP_Text SellQuantityText;
@@ -62,6 +64,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         base.Hide();
 
         emptyList(Plants);
+        resetInfo(true);
+        resetInfo(false);
 
         this.seedShopToggle.SetActive(false);
     }
@@ -308,6 +312,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
         if (isSell && chosenPlant.StorageAmountPlants == 0)
         {
+            resetInfo(true);
             buttonPressed.onClick.RemoveAllListeners();
             Destroy(buttonPressed.gameObject);
             chosenPlant = null;
@@ -349,5 +354,15 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, true);
         else
             SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, false);
+    }
+
+    private void resetInfo(bool isSell)
+    {
+        if (isSell)
+            PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(null, null, true);
+        else
+            SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(null, null, false);
+
+
     }
 }
