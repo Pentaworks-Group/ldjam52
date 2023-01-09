@@ -92,6 +92,7 @@ public class InformationPrefabBehaviour : MonoBehaviour
             information.Find("Name").GetComponent<TMP_Text>().text = "";
             information.Find("Amount").GetComponent<TMP_Text>().text = "Amount:";
             information.Find("Image").GetComponent<Image>().sprite = null;
+            information.Find("Image").GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
             information.Find("SeedsValue").GetComponent<TMP_Text>().text = "Seed value:";
             information.Find("PlantsValue").GetComponent<TMP_Text>().text = "Plant value ";
             information.Find("Seeds").GetComponent<TMP_Text>().text = "Seeds:";

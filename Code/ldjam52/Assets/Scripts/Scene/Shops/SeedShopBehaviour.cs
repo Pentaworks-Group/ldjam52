@@ -55,8 +55,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         balance = FarmStorageController.GetStorageBalance();
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
-        updateInfo(true);
-        updateInfo(false);
+//        updateInfo(true);
+//        updateInfo(false);
     }
 
     public override void Hide()
