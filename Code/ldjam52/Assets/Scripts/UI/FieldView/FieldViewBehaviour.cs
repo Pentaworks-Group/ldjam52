@@ -210,6 +210,20 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         Core.Game.PlayButtonSound();
     }
 
+    public void HarvestAndReplantCrop()
+    {
+        var harvest = currentlyViewedField.HarvestCrop();
+
+        if (harvest != null)
+        {
+            ShowHarvestResult(harvest);
+        }
+
+        UpdateView();
+        Core.Game.PlayButtonSound();
+    }
+
+
 
     public void FertilizeCrop()
     {

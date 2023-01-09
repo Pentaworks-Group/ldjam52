@@ -56,6 +56,7 @@ namespace Assets.Scripts.Scene.Shops
 
             panel.transform.Find("AnalyzerImage").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(analyzer.ImgName);
 
+
             DevelopmentStage nextStage = getNextDevelopmentStage(analyzer);
             if (nextStage != null)
             {
@@ -63,11 +64,13 @@ namespace Assets.Scripts.Scene.Shops
                 Image footer = panel.transform.Find("Footer").GetComponent<Image>();
                 footer.transform.Find("CostText").GetComponent<TMP_Text>().text = nextStage.UpgradeCost.ToString();
 
+                Button upgradeButton = footer.transform.Find("ButtonUpgrade").GetComponent<Button>();
+                upgradeButton.interactable = true;
+
                 if (FarmStorageController.GetStorageBalance() < nextStage.UpgradeCost)
                 {
                     Debug.Log("Not Enough Money to Upgrade");
-                    Button upgradeButton = footer.transform.Find("ButtonUpgrade").GetComponent<Button>();
-                    upgradeButton.enabled = false;
+                    upgradeButton.interactable = false;
                     upgradeButton.transform.Find("Text").GetComponent<TMP_Text>().color = Color.gray;
                 }
             }
