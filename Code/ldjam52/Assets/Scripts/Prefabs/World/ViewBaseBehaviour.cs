@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts.Prefabs.World
@@ -19,6 +21,19 @@ namespace Assets.Scripts.Prefabs.World
             Assets.Scripts.Base.Core.Game.PlayButtonSound();
 
             OnHide.Invoke();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OnEscapePressed();
+            }
+        }
+
+        protected virtual void OnEscapePressed()
+        {
+            Hide();
         }
     }
 }
