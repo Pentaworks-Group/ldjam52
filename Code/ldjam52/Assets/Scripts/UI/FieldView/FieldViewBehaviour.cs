@@ -117,8 +117,8 @@ public class FieldViewBehaviour : MonoBehaviour
         {
             currentInfo.SetActive(false);
             plantingOptions.SetActive(true);
-
         }
+        seedList.UpdateList();
     }
 
     public void CheckHarvestButton()
