@@ -67,7 +67,7 @@ public class WorldBehaviour : MonoBehaviour
     {
         this.TileViewBehaviour.OnHide.AddListener(OnTileViewHide);
         this.FieldViewBehaviour.OnHide.AddListener(OnFieldViewHide);
-        //this.SeedShopBehaviour.OnHide.AddListener(OnShopViewHide);
+        this.SeedShopBehaviour.OnHide.AddListener(OnShopViewHide);
         this.LaboratoryBehaviour.OnHide.AddListener(OnLaboratiryHide);
 
         Core.Game.LockCameraMovement = false;
@@ -137,7 +137,7 @@ public class WorldBehaviour : MonoBehaviour
                     }
                     else if (tileBehaviour.Tile.Building is Shop)
                     {
-                        //PauseMenuBehaviour.Show();
+                        this.SeedShopBehaviour.Show();
                     }
                     else if (tileBehaviour.Tile.Building is Laboratory)
                     {

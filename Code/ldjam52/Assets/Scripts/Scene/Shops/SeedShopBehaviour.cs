@@ -1,17 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+
 using Assets.Scripts.Base;
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
+using Assets.Scripts.Prefabs.World;
 
-using Assets.Scripts.Constants;
+using TMPro;
 
-public class SeedShopBehaviour : MonoBehaviour
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SeedShopBehaviour : ViewBaseBehaviour
 {
     public TMP_Text SellQuantityText;
     public TMP_Text BuyQuantityText;
@@ -26,8 +26,12 @@ public class SeedShopBehaviour : MonoBehaviour
     public ScrollRect Plants;
     public ScrollRect Seeds;
 
+    public GameObject AnalyseUI;
+
     public Button buttonPrefab;
     private Button buttonPressed;
+
+    private GameObject seedShopToggle;
 
     private int sellQuantity = 0;
     private int buyQuantity = 0;
@@ -40,20 +44,35 @@ public class SeedShopBehaviour : MonoBehaviour
 
     private List<StorageItem> inventory;
 
+    public override void Show()
+    {
+        base.Show();
+
+        this.seedShopToggle.SetActive(true);
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+
+        this.seedShopToggle.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
         if (Assets.Scripts.Base.Core.Game.State == default)
         {
             InitializeGameState();
         }
 
+        this.seedShopToggle = transform.Find("SeedShopToggle").gameObject;
+
         balance = FarmStorageController.GetStorageBalance();
         BalanceText.text = balance.ToString();
 
         inventory = FarmStorageController.getStorageInventory();
-    
+
         fillList(inventory, Plants, true);
 
         // TODO use shop list when available
@@ -66,9 +85,14 @@ public class SeedShopBehaviour : MonoBehaviour
     private void ItemSelected(StorageItem item, bool isPlant, Button button)
     {
         if (isPlant)
+        {
             PlantSelected(item);
+            updateAnalyseView();
+        }
         else
+        {
             SeedSelected(item);
+        }
 
         buttonPressed = button;
     }
@@ -100,11 +124,6 @@ public class SeedShopBehaviour : MonoBehaviour
         updateInfo(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // Increase quantity to sell/buy
     public void Up(bool isSell)
@@ -151,6 +170,9 @@ public class SeedShopBehaviour : MonoBehaviour
     // Sell specified amount or all
     public void Sell(bool sellAll)
     {
+        if (chosenPlant == null)
+            return;
+
         int amount = sellAll ? chosenPlant.StorageAmountPlants : sellQuantity;
         FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, amount);
         FarmStorageController.PutMoneyInStorage((int)(plantValue * amount));
@@ -161,13 +183,15 @@ public class SeedShopBehaviour : MonoBehaviour
     // Buy specified amount
     public void Buy()
     {
+        // Buy
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
         stateUpdate(false);
-        updateInfo(false);
     }
 
+
+    // Analyses the chosen plant
     public void Analyse()
     {
         if (chosenPlant == null)
@@ -175,12 +199,66 @@ public class SeedShopBehaviour : MonoBehaviour
 
         Analyzer plantAnalyzer = Core.Game.State.PlantAnalyzer;
         int plantCost = plantAnalyzer.CurrentDevelopmentStage.AnalyticsPlantCost;
-        int moneyCost = plantAnalyzer.CurrentDevelopmentStage.AnalyticsPlantCost;
+        int moneyCost = plantAnalyzer.CurrentDevelopmentStage.AnalyticsCost;
 
-        InheritanceController.AnalysePlant(chosenPlant.Plant, plantAnalyzer);
+        if (plantCost <= chosenPlant.StorageAmountPlants && moneyCost <= balance)
+        {
+            InheritanceController.AnalysePlant(chosenPlant.Plant, plantAnalyzer);
+            FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, plantCost);
+            FarmStorageController.TakeMoneyOfStorage(moneyCost);
+        }
         updateInfo(true);
+
+        // Show updated info if same seed selected
+        if (chosenPlant == chosenSeed)
+            updateInfo(false);
+
+        updateAnalyseView();
     }
 
+    private bool checkAnalysability(Plant plant)
+    {
+        List<ChromosomePair> pairs = new List<ChromosomePair>();
+        pairs.AddRange(plant.Genome.Values);
+
+        int numVisible = 0;
+        for (int i = 0; i < pairs.Count; i++)
+        {
+            if (pairs[i].IsVisible)
+                numVisible++;
+        }
+
+        // Not yet all values analysed
+        return numVisible < 6;
+    }
+
+    private void updateAnalyseView()
+    {
+        if (!checkAnalysability(chosenPlant.Plant))
+        {
+            AnalyseUI.SetActive(false);
+            return;
+        }
+
+        AnalyseUI.SetActive(true);
+
+        // Image
+        AnalyseUI.transform.Find("PlantImage").GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+        AnalyseUI.transform.Find("PlantImage").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(chosenPlant.Plant.ImageName);
+
+        Analyzer plantAnalyzer = Core.Game.State.PlantAnalyzer;
+        // Values
+        AnalyseUI.transform.Find("PlantCost").GetComponent<TMP_Text>().text = plantAnalyzer.CurrentDevelopmentStage.AnalyticsPlantCost.ToString();
+        AnalyseUI.transform.Find("MoneyCost").GetComponent<TMP_Text>().text = plantAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
+
+    }
+
+    private void updateAnalyse()
+    {
+
+    }
+
+    // Fills scrollview with item buttons
     private void fillList(List<StorageItem> items, ScrollRect scrollRect, bool isPlant)
     {
         foreach (StorageItem item in items)
@@ -194,6 +272,7 @@ public class SeedShopBehaviour : MonoBehaviour
         }
     }
 
+    // Clear scroll view of all buttons DON'T USE, BROKEN!
     private void emptyList(ScrollRect scrollRect)
     {
         Transform content = scrollRect.transform.Find("Viewport").Find("Content");
@@ -207,15 +286,7 @@ public class SeedShopBehaviour : MonoBehaviour
                 break;
         }
     }
-    // TODO need to remove listener when leaving shop
-    private void emptyPlants()
-    {
-    }
 
-    // TODO remove listeners when leaving shop
-    private void emptySeeds()
-    {
-    }
 
     private void stateUpdate(bool isSell)
     {
@@ -231,15 +302,22 @@ public class SeedShopBehaviour : MonoBehaviour
             {
                 buttonPressed.onClick.RemoveAllListeners();
                 Destroy(buttonPressed.gameObject);
+                chosenPlant = null;
             }
         }
 
         updatePrice(isSell);
+        // Need to update amount
         updateInfo(isSell);
     }
 
+
+    // Update price of selling and buying
     private void updatePrice(bool isSell)
     {
+        if (isSell && chosenPlant == null || !isSell && chosenSeed == null)
+            return;
+
         Plant plant = isSell ? chosenPlant.Plant : chosenSeed.Plant;
         double value = isSell ? plantValue : seedValue;
         int quantity = isSell ? sellQuantity : buyQuantity;
@@ -256,15 +334,24 @@ public class SeedShopBehaviour : MonoBehaviour
         }
     }
 
+    // Update plant or seed info
     private void updateInfo(bool isSell)
     {
         StorageItem item = isSell ? chosenPlant : chosenSeed;
+
+        if (item == null)
+            return;
 
         if (isSell)
             PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, true);
         else
             SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, false);
     }
+
+
+
+
+
 
 
     // TESTING
