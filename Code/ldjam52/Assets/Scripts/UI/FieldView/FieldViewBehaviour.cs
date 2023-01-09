@@ -15,6 +15,7 @@ public class FieldViewBehaviour : MonoBehaviour
     private GameObject currentInfo;
     private GameObject plantingOptions;
     private GameObject harvestResult;
+    private GameObject infoPanel;
 
     private Image plantImage;
     private Text plantName;
@@ -33,7 +34,7 @@ public class FieldViewBehaviour : MonoBehaviour
     private Image harvestPlantPic;
 
     private Text analyzeCosts;
-    private Button analyseButton;
+    private Button analyzeButton;
 
     private void Awake()
     {
@@ -59,8 +60,9 @@ public class FieldViewBehaviour : MonoBehaviour
         harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Pic").GetComponent<Image>();
         harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Pic").GetComponent<Image>();
 
+        infoPanel = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information").gameObject;
         analyzeCosts = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeCosts").GetComponent<Text>();
-        analyseButton = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeButton").GetComponent<Button>();
+        analyzeButton = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeButton").GetComponent<Button>();
     }
 
     private void Update()
@@ -110,7 +112,7 @@ public class FieldViewBehaviour : MonoBehaviour
         return null;
     }
 
-    private void UpdateView()
+    private void UpdateView(StorageItem item=null)
     {
         if (currentlyViewedField.Field.Seed != null)
         {
@@ -127,17 +129,18 @@ public class FieldViewBehaviour : MonoBehaviour
         }
         seedList.UpdateList();
         analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
-        if (analyseButton != null)
+        if (analyzeButton != null)
         {
             if (Core.Game.State.FarmStorage.MoneyBalance < Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
             {
-                analyseButton.interactable = false;
+                analyzeButton.interactable = false;
             }
             else
             {
-                analyseButton.interactable = true;
+                analyzeButton.interactable = true;
             }
         }
+        infoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), false);
     }
 
     public void CheckHarvestButton()
