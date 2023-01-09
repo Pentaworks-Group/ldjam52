@@ -191,6 +191,7 @@ Transform:
   m_Children:
   - {fileID: 494439161}
   - {fileID: 1780211090}
+  - {fileID: 822646365}
   m_Father: {fileID: 951418324}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -397,6 +398,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fbe90c24893fd43914af1ed6fb79f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &787931164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 822646365}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+      propertyPath: m_Name
+      value: Laboratory
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+--- !u!4 &787931165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f98d09a0241e4e4aa31504971bea940, type: 3}
+  m_PrefabInstance: {fileID: 787931164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &822646364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822646365}
+  m_Layer: 0
+  m_Name: Laboratory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822646365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822646364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 787931165}
+  m_Father: {fileID: 361605662}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &862960703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1087,8 +1182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileViewBehaviour: {fileID: 530696768}
   FieldViewBehaviour: {fileID: 1457188055}
-  PauseMenuBehaviour: {fileID: 1468167439}
   LaboratoryBehaviour: {fileID: 1431662536}
+  SeedShopBehaviour: {fileID: 0}
+  PauseMenuBehaviour: {fileID: 1468167439}
 --- !u!114 &1900354446
 MonoBehaviour:
   m_ObjectHideFlags: 0

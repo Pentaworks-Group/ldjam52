@@ -23,11 +23,11 @@
       "Laboratory": {
         "Templates": [
           {
-            "Reference": "Trader",
+            "Reference": "Laboratory",
             "Size": {
-              "X": 2,
+              "X": 1,
               "Y": 0,
-              "Z": 2
+              "Z": 1
             }
           }
         ]
