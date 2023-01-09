@@ -27,7 +27,7 @@ public class InformationPrefabBehaviour : MonoBehaviour
         
     }
 
-    public void UpdateInfo(StorageItem item, Field field)
+    public void UpdateInfo(StorageItem item, Field field, bool isPlant)
     {
         this.Item = item;
 
@@ -35,9 +35,19 @@ public class InformationPrefabBehaviour : MonoBehaviour
 
         // Always shown
         information.Find("Name").GetComponent<TMP_Text>().text = item.Plant.Name;
-        information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + item.StorageAmountPlants.ToString();
+
+        if (isPlant)
+            information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + item.StorageAmountPlants.ToString();
+        else
+            information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + item.StorageAmountSeeds.ToString();
+
         information.Find("Image").GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-        information.Find("Image").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(item.Plant.ImageName);
+
+        if (isPlant)
+            information.Find("Image").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(item.Plant.ImageName);
+        else
+            information.Find("Image").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(item.Plant.SeedImageName);
+
 
         ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
         information.Find("SeedsValue").GetComponent<TMP_Text>().text = "Seed value: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();

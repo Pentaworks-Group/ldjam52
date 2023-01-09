@@ -27,6 +27,7 @@ public class SeedShopBehaviour : MonoBehaviour
     public ScrollRect Seeds;
 
     public Button buttonPrefab;
+    private Button buttonPressed;
 
     private int sellQuantity = 0;
     private int buyQuantity = 0;
@@ -52,8 +53,18 @@ public class SeedShopBehaviour : MonoBehaviour
         BalanceText.text = balance.ToString();
 
         inventory = FarmStorageController.getStorageInventory();
-      
-        fillPlants();
+    
+        fillList(inventory, Plants, true);
+        fillList(inventory, Seeds, false);
+    }
+
+    // TODO cleanup these three methods
+    private void ItemSelected(StorageItem item, bool isPlant)
+    {
+        if (isPlant)
+            PlantSelected(item);
+        else
+            SeedSelected(item);
     }
 
     public void PlantSelected(StorageItem item)
@@ -148,33 +159,43 @@ public class SeedShopBehaviour : MonoBehaviour
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
         stateUpdate(false);
+        updateInfo(false);
     }
 
-    private void fillPlants()
+    public void Analyse()
     {
-        foreach (StorageItem item in inventory)
+        if (chosenPlant == null)
+            return;
+
+        Analyzer plantAnalyzer = Core.Game.State.PlantAnalyzer;
+        int plantCost = plantAnalyzer.CurrentDevelopmentStage.AnalyticsPlantCost;
+        int moneyCost = plantAnalyzer.CurrentDevelopmentStage.AnalyticsPlantCost;
+
+        InheritanceController.AnalysePlant(chosenPlant.Plant, plantAnalyzer);
+        updateInfo(true);
+    }
+
+    private void fillList(List<StorageItem> items, ScrollRect scrollRect, bool isPlant)
+    {
+        foreach (StorageItem item in items)
         {
             Debug.Log($"Adding plant {item.Plant.Name} now.");
             Button newItem = Instantiate(buttonPrefab);
             newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
-            newItem.transform.SetParent(Plants.transform.GetChild(0).GetChild(0));
+            newItem.transform.SetParent(scrollRect.transform.GetChild(0).GetChild(0));
 
-            // TODO need to remove listener when leaving shop
-            newItem.onClick.AddListener(() => { PlantSelected(item); });
+            newItem.onClick.AddListener(() => { ItemSelected(item, isPlant); });
         }
     }
 
-    private void fillSeeds()
+    // TODO need to remove listener when leaving shop
+    private void emptyPlants()
     {
-        foreach (StorageItem item in inventory)
-        {
-            Button newItem = Instantiate(buttonPrefab);
-            newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
-            newItem.transform.SetParent(Seeds.transform.GetChild(0).GetChild(0));
+    }
 
-            // TODO need to remove listener when leaving shop
-            newItem.onClick.AddListener(() => { PlantSelected(item); });
-        }
+    // TODO remove listeners when leaving shop
+    private void emptySeeds()
+    {
     }
 
     private void stateUpdate(bool isSell)
@@ -216,13 +237,13 @@ public class SeedShopBehaviour : MonoBehaviour
         StorageItem item = isSell ? chosenPlant : chosenSeed;
 
         if (isSell)
-            PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null);
+            PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, true);
         else
-            SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null);
+            SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, false);
     }
 
 
-    // TEST
+    // TESTING
     protected void InitializeGameState()
     {
         LoadGameSettings();
@@ -235,6 +256,7 @@ public class SeedShopBehaviour : MonoBehaviour
 
         gameState.FarmStorage = gameState.GameMode.Player.StartingFarmStorage;
         Assets.Scripts.Base.Core.Game.PopulateKnownPlants(gameState);
+        Assets.Scripts.Base.Core.Game.GenerateAnalyzers(gameState);
 
         Assets.Scripts.Base.Core.Game.Start(gameState);
     }
