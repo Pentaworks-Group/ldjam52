@@ -2,6 +2,7 @@ Todo:
 ----------------------------------
  Bugs:
  - Game paused on load (unpause after load)
+ - Impossible to buy land along the edges.
  
  Exceptions: 
  - 
