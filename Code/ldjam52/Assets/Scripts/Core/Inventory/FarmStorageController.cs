@@ -127,7 +127,7 @@ namespace Assets.Scripts.Core.Inventory
             int definitveAmount = amount;
             if (GetFreeStorageSpace() < amount)
             {
-                definitveAmount = amount;
+                definitveAmount = GetFreeStorageSpace();
             }
             item.StorageAmountSeeds += definitveAmount;
 
