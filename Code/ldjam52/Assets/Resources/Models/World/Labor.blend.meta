@@ -3,7 +3,37 @@ guid: 9f98d09a0241e4e4aa31504971bea940
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 0b0e0294fde500b4aa3031dcdc7d18d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 28e934a5b7ae7d14d870ebdefeda3fca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kamin
+    second: {fileID: 2100000, guid: a2552e01f16730a4e9e9553a2d6096a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_wall
+    second: {fileID: 2100000, guid: 766529ce1a1c2384d8a19e15f28af073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Up_wall
+    second: {fileID: 2100000, guid: ed275ddff27027d4aac5cc7898397588, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roof
+    second: {fileID: 2100000, guid: 9a5d539447e15b7459b050164c567daf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
