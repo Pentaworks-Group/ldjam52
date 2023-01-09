@@ -124,7 +124,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         updateInfo(false);
     }
 
-    
+
     // Increase quantity to sell/buy
     public void Up(bool isSell)
     {
@@ -255,7 +255,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
     private void updateAnalyse()
     {
-        
+
     }
 
     // Fills scrollview with item buttons
