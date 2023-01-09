@@ -45,8 +45,10 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public static void SaveNewGame()
         {
-            Assets.Scripts.Base.Core.Game.State.SavedOn = DateTime.Now;
-            GetSaveGames().Add(Assets.Scripts.Base.Core.Game.State);
+            Base.Core.Game.State.SavedOn = DateTime.Now;
+            var saveGameJson = GameFrame.Core.Json.Handler.Serialize(Base.Core.Game.State);
+            var saveGame = GameFrame.Core.Json.Handler.Deserialize<GameState>(saveGameJson);
+            GetSaveGames().Add(saveGame);
             SaveGames();
         }
 

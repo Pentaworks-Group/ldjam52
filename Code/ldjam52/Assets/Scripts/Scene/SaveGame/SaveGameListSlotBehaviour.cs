@@ -7,7 +7,7 @@ namespace Assets.Scripts.Scene.SaveGame
     public class SaveGameListSlotBehaviour : ListSlotBehaviour
     {
 
-        private Text saveGameName;
+        private Text createdOn;
         private Text timeStamp;
         private Text timeElapsed;
         private Text moneyAmount;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         override public void RudeAwake()
         {
-            saveGameName = transform.Find("SlotContainer/Info/Name").GetComponent<Text>();
+            createdOn = transform.Find("SlotContainer/Info/Created").GetComponent<Text>();
             timeStamp = transform.Find("SlotContainer/Info/TimeStamp").GetComponent<Text>();
             timeElapsed = transform.Find("SlotContainer/Info/TimeElapsed").GetComponent<Text>();
             moneyAmount = transform.Find("SlotContainer/Info/Money").GetComponent<Text>();
@@ -33,9 +33,9 @@ namespace Assets.Scripts.Scene.SaveGame
         override public void UpdateUI()
         {
             GameState saveGame = GetGameState();
-            saveGameName.text = saveGame.CreatedOn.ToString();
-            timeStamp.text = saveGame.SavedOn.ToString();
-            timeElapsed.text = saveGame.ElapsedTime.ToString();
+            createdOn.text = string.Format("{0:G}", saveGame.CreatedOn);
+            timeStamp.text = string.Format("{0:G}", saveGame.SavedOn);
+            timeElapsed.text = string.Format("{0:F1}s", saveGame.ElapsedTime); 
             moneyAmount.text = saveGame.FarmStorage.MoneyBalance.ToString();
         }
 
