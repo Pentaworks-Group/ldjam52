@@ -74,7 +74,7 @@ public class CameraBehaviour : MonoBehaviour
 
             if (moveX != 0 || moveZ != 0)
             {
-                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed * Core.Game.Options.TouchSensivity;
             }
 
             //// Zoom
@@ -111,7 +111,7 @@ public class CameraBehaviour : MonoBehaviour
                     prevPinch = (touch1.position, touch2.position);
                 else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
                 {
-                    zoom = -zoomSpeedTouch * Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2);
+                    zoom = -zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2)) * Core.Game.Options.TouchSensivity;
                 }
             }
 
