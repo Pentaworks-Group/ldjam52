@@ -23,6 +23,7 @@ namespace Assets.Scripts.Scene.Shops
             base.Show();
 
             this.laboratoryViewToggle.SetActive(true);
+            updateGUI();
         }
 
         public override void Hide()
