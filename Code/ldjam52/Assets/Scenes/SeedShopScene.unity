@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4389463303899055504, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
+      propertyPath: m_fontSize
+      value: 61.85
+      objectReference: {fileID: 0}
     - target: {fileID: 6678597977782324764, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
       propertyPath: m_Name
       value: Amount
@@ -298,13 +302,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4431282300568246289, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
---- !u!224 &149808933 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6913870563594960795, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
-  m_PrefabInstance: {fileID: 149808932}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &240283779
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,9 +941,9 @@ RectTransform:
   m_Father: {fileID: 1198043305}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.85, y: 0.1}
-  m_AnchorMax: {x: 0.98, y: 0.15}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.85, y: 0.04}
+  m_AnchorMax: {x: 0.98, y: 0.09}
+  m_AnchoredPosition: {x: 0, y: 7}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &548072411
@@ -1763,7 +1763,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4431282300568246289, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
 --- !u!224 &1116547396 stripped
 RectTransform:
@@ -1807,7 +1808,7 @@ MonoBehaviour:
   SellQuantityText: {fileID: 342184146}
   BuyQuantityText: {fileID: 1568416601}
   SellMoney: {fileID: 486249811}
-  BuyMoney: {fileID: 1716414421}
+  BuyMoney: {fileID: 4389463304031560372}
   BalanceText: {fileID: 1948930862}
   PlantInfo: {fileID: 1920970771}
   SeedInfo: {fileID: 274647889}
@@ -1931,7 +1932,7 @@ RectTransform:
   - {fileID: 1978886448544428821}
   - {fileID: 2103144073}
   - {fileID: 1116547396}
-  - {fileID: 149808933}
+  - {fileID: 6913870563743537343}
   - {fileID: 797067323}
   - {fileID: 420834102}
   - {fileID: 548072410}
@@ -2790,7 +2791,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1216325021}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99921805
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2881,17 +2882,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1716414421 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4389463303899055504, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
-  m_PrefabInstance: {fileID: 149808932}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1725768619
 GameObject:
   m_ObjectHideFlags: 0
@@ -3803,6 +3793,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4389463304031560372 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4389463303899055504, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
+  m_PrefabInstance: {fileID: 149808932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &6913870563743537343 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6913870563594960795, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
+  m_PrefabInstance: {fileID: 149808932}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9162186815628433889
 PrefabInstance:
   m_ObjectHideFlags: 0
