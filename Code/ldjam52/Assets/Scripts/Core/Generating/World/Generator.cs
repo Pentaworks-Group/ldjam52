@@ -165,10 +165,12 @@ namespace Assets.Scripts.Core.Generating.World
 
             if (buildingSettings != default)
             {
+                var buildingTemplate = buildingSettings.Templates.GetRandomEntry();
+
                 building = new TBuilding()
                 {
-                    TemplateReference = buildingSettings.TemplateReferences.GetRandomEntry(),
-                    Position = GetBuildingSpawnPoint(buildingSettings.Size, out var affectedTiles)
+                    TemplateReference = buildingTemplate.Reference,
+                    Position = GetBuildingSpawnPoint(buildingTemplate.Size, out var affectedTiles)
                 };
 
                 foreach (var affectedTile in affectedTiles)

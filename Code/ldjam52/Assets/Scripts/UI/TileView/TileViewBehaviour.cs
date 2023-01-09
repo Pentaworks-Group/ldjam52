@@ -164,19 +164,17 @@ namespace Assets.Scripts.UI.TileView
 
                 if (surroundingTiles.Count > 0)
                 {
+                    if (surroundingTiles.Count != 8)
+                    {
+                        isAbleToBuild = false;
+                        isAbleToBuyAndBuild = false;
+                    }
+
                     foreach (var surroundingTile in surroundingTiles)
                     {
-                        if (!surroundingTile.Tile.IsOwned)
+                        if (surroundingTile.Tile.Building != default)
                         {
-                            errorLevel = 1;
-                            statusString = "You dont own all the surrounding tiles!";
-                            tilesTotalCost += surroundingTile.Tile.Price;
-
-                            isAbleToBuild = false;
-                        }
-                        else if (surroundingTile.Tile.Building != default)
-                        {
-                            statusString = "Surrounding tile is occupied by a building!";
+                            statusString = "One or more of the surrounding tiles are occupied!";
                             errorLevel = 2;
 
                             isAbleToBuild = false;
@@ -191,6 +189,14 @@ namespace Assets.Scripts.UI.TileView
                             isAbleToBuild = false;
                             isAbleToBuyAndBuild = false;
                             break;
+                        }
+                        else if (!surroundingTile.Tile.IsOwned)
+                        {
+                            errorLevel = 1;
+                            statusString = "You dont own all the surrounding tiles!";
+                            tilesTotalCost += surroundingTile.Tile.Price;
+
+                            isAbleToBuild = false;
                         }
                     }
                 }
@@ -259,14 +265,14 @@ namespace Assets.Scripts.UI.TileView
 
                     foreach (var surroundingTile in surroundingTiles)
                     {
-                        if (!surroundingTile.Tile.IsOwned)
-                        {
-                            tilesTotalCost += surroundingTile.Tile.Price;
-                        }
-                        else if (surroundingTile.Tile.Building != default)
+                        if (surroundingTile.Tile.Building != default)
                         {
                             isBuyAndBuildPossible = false;
                             break;
+                        }
+                        else if (!surroundingTile.Tile.IsOwned)
+                        {
+                            tilesTotalCost += surroundingTile.Tile.Price;
                         }
                     }
                 }
@@ -359,7 +365,7 @@ namespace Assets.Scripts.UI.TileView
         {
 
             Hide();
-            
+
 
         }
     }
