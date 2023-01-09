@@ -111,12 +111,28 @@ public class InheritanceController
     {
         List<Chromosome > chromosomes = new List<Chromosome>();
         int newVisibleChromosomes = 0;
-        int attempts = 0;
-        while (newVisibleChromosomes < analyzer.CurrentDevelopmentStage.ValueVisibleCount)
+
+        List<string> keys = new List<String>();
+        keys.AddRange(plant.Genome.Keys);
+
+        for (int i = keys.Count - 1; i >= 0; i--)
         {
-            List<String> keys = new List<String>();
-            keys.AddRange(plant.Genome.Keys);
-            var randomKey = keys.GetRandomEntry();
+            string element = keys[i];
+            if (element == "Durability" ||
+                element == "Wither" ||
+                element == "Growth" ||
+                element == "PlantValue" ||
+                element == "SeedsValue" ||
+                plant.Genome.GetValueOrDefault(element).IsVisible)
+            {
+                keys.RemoveAt(i);
+            }
+        }
+
+        while (newVisibleChromosomes < analyzer.CurrentDevelopmentStage.ValueVisibleCount && keys.Count != 0)
+        {
+            int rand = UnityEngine.Random.Range(0, keys.Count);
+            var randomKey = keys[rand];
             ChromosomePair pair = plant.Genome.GetValueOrDefault(randomKey);
 
             if (!pair.IsVisible)
@@ -124,10 +140,9 @@ public class InheritanceController
                 newVisibleChromosomes = newVisibleChromosomes + 1;
                 pair.IsVisible = true;
                 chromosomes.Add(GrowthController.getDominantChromosome(pair));
+
+                keys.RemoveAt(rand);
             }
-            attempts++;
-            if (attempts >= plant.Genome.Count)
-                break;
         }
 
         return chromosomes;
@@ -142,7 +157,7 @@ public class InheritanceController
         {
             int randomPropertyID = (int) Math.Round(UnityEngine.Random.value * propertiesCount);
             
-            //TODO: Unschön, ich weiss;-)
+            //TODO: Unschï¿½n, ich weiss;-)
             if (randomPropertyID==FieldProperties.PROP_HUMIDITY && field.IsHumidityVisible)
             {
                 newVisibleProperties = newVisibleProperties + 1;
