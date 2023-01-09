@@ -82,7 +82,7 @@
         ],
         "Player": {
             "StartingFarmStorage": {
-                "StorageSize": 10,
+                "StorageSize": 500,
                 "MoneyBalance": 3000,
                 "StorageItems": [
                     {
