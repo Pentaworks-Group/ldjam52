@@ -10,7 +10,7 @@ public class TileColliderBehaviour : MonoBehaviour
         tileBehaviour = transform.GetComponentInParent<TileBehaviour>();
     }
 
-    private void OnMouseDown()
+    private void OnMouseUpAsButton()
     {
         if (tileBehaviour != null && (!Assets.Scripts.Base.Core.Game.LockCameraMovement))
         {
