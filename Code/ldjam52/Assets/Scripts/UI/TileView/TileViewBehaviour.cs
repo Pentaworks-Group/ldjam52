@@ -229,8 +229,11 @@ namespace Assets.Scripts.UI.TileView
             buildFarmContent.SetActive(false);
 
             biomeText.text = "The Biome of the Field is unknown";
-            if (tileBehaviour.Tile.Field.Biome != null)
-                biomeText.text = "This field is in the "+ tileBehaviour.Tile.Field.Biome.Name;
+
+            if (tileBehaviour.Tile.Biome != null)
+            {
+                biomeText.text = "This field is in the " + tileBehaviour.Tile.Biome.Type.Name;
+            }
 
 
             buyCostFundsAvailableText.text = Base.Core.Game.State.FarmStorage.MoneyBalance.ToString("n0");

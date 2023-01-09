@@ -22,7 +22,5 @@ namespace Assets.Scripts.Model
         public Double GrowthProgress { get; set; } = 0;
 
         public float TimePlanted { get; set; } = -1;
-
-        public Biome Biome { get; set; }
     }
 }
