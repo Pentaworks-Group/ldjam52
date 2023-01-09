@@ -10,6 +10,9 @@ using UnityEngine.UI;
 
 public class InformationPrefabBehaviour : MonoBehaviour
 {
+
+    public GameObject Information;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +28,11 @@ public class InformationPrefabBehaviour : MonoBehaviour
     private void updateInfo(StorageItem item)
     {
 
-        Transform information = isSell ? PlantInfo.transform : SeedInfo.transform;
+        Transform information = Information.transform;
 
         // Always shown
         information.Find("Name").GetComponent<TMP_Text>().text = item.Plant.Name;
-        information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + (isSell ? item.StorageAmountPlants : item.StorageAmountSeeds).ToString();
+        information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + item.StorageAmountPlants.ToString();
         information.Find("Image").GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
         information.Find("Image").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(item.Plant.ImageName);
 
