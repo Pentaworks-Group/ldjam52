@@ -89,6 +89,14 @@ public class InformationPrefabBehaviour : MonoBehaviour
         }
         else
         {
+            information.Find("Name").GetComponent<TMP_Text>().text = "";
+            information.Find("Amount").GetComponent<TMP_Text>().text = "Amount:";
+            information.Find("Image").GetComponent<Image>().sprite = null;
+            information.Find("SeedsValue").GetComponent<TMP_Text>().text = "Seed value:";
+            information.Find("PlantsValue").GetComponent<TMP_Text>().text = "Plant value ";
+            information.Find("Seeds").GetComponent<TMP_Text>().text = "Seeds:";
+            information.Find("Harvest").GetComponent<TMP_Text>().text = "Harvest:";
+
             if (field != null)
             {
                 drawStatsBar(information, "Temp", null, field.Temperature, field.IsTemperatureVisible);
