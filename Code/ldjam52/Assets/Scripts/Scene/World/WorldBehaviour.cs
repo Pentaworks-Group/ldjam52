@@ -11,15 +11,13 @@ using Assets.Scripts.UI.TileView;
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class WorldBehaviour : MonoBehaviour
 {
-    //private IDictionary<String, Game>
-
     private GameObject tileContainer;
     private GameObject templateContainer;
 
+    private readonly IDictionary<String, GameObject> buildingTemplateCache = new Dictionary<String, GameObject>();
     private int escTimeout = 3;
     private Boolean isFarmSet = false;
     private GameState gameState;
@@ -41,6 +39,8 @@ public class WorldBehaviour : MonoBehaviour
         {
             this.tileContainer = transform.Find("TileContainer").gameObject;
             this.templateContainer = transform.Find("Templates").gameObject;
+
+            LoadTemplates();
 
             gameState = Assets.Scripts.Base.Core.Game.State;
 
@@ -118,19 +118,27 @@ public class WorldBehaviour : MonoBehaviour
     {
         if (tileBehaviour != null)
         {
-            if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
-            {
-                this.TileViewBehaviour.Show(tileBehaviour, () =>
-                {
-                    tileBehaviour.ShowFieldView();
-                });
-            }
-            else if (tileBehaviour.Tile.Building != default)
+            if (tileBehaviour.Tile.Building != default)
             {
                 if (tileBehaviour.Tile.Building is Farm)
                 {
                     PauseMenuBehaviour.Show();
                 }
+                else if (tileBehaviour.Tile.Building is Shop)
+                {
+                    //PauseMenuBehaviour.Show();
+                }
+                else if (tileBehaviour.Tile.Building is Laboratory)
+                {
+                    //PauseMenuBehaviour.Show();
+                }
+            }
+            else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
+            {
+                this.TileViewBehaviour.Show(tileBehaviour, () =>
+                {
+                    tileBehaviour.ShowFieldView();
+                });
             }
             else
             {
@@ -167,14 +175,21 @@ public class WorldBehaviour : MonoBehaviour
     {
         foreach (var building in buildings)
         {
-            //var buildingTemplate = GetTemplate(building.TemplateReference);
+            if (!String.IsNullOrEmpty(building.TemplateReference))
+            {
+                var buildingTemplate = GetBuildingTemplate(building.TemplateReference);
 
-            //var buildingGameObject = Instantiate(buildingTemplate, tileContainer.transform);
+                var buildingGameObject = Instantiate(buildingTemplate, tileContainer.transform);
 
-            //if ((buildingGameObject.transform.position.x != building.Position.X) || (buildingGameObject.transform.position.z != building.Position.Z))
-            //{
-            //    buildingGameObject.transform.position = new UnityEngine.Vector3(building.Position.X, this.transform.position.y, building.Position.Z);
-            //}
+                if ((buildingGameObject.transform.position.x != building.Position.X) || (buildingGameObject.transform.position.z != building.Position.Z))
+                {
+                    buildingGameObject.transform.position = new UnityEngine.Vector3(building.Position.X, this.transform.position.y, building.Position.Z);
+                }
+            }
+            else
+            {
+                throw new Exception($"Building of type '{building.GetType().FullName}' has no Template set!");
+            }
         }
     }
 
@@ -193,5 +208,40 @@ public class WorldBehaviour : MonoBehaviour
 
             nextSoundEffectTime = (float)(randomNumber * 30.0 + 5.0 + Assets.Scripts.Base.Core.Game.State.ElapsedTime);
         }
+    }
+
+    private void LoadTemplates()
+    {
+        var templateConatiner = transform.Find("Templates");
+
+        if (templateConatiner != default)
+        {
+            var buildingTemplates = templateContainer.transform.Find("Buildings").gameObject;
+
+            if (buildingTemplates.transform.childCount > 0)
+            {
+                foreach (Transform buildingTemplate in buildingTemplates.transform)
+                {
+                    this.buildingTemplateCache[buildingTemplate.name] = buildingTemplate.gameObject;
+                }
+            }
+            else
+            {
+                throw new Exception("Missing Templates!");
+            }
+        }
+    }
+
+    private GameObject GetBuildingTemplate(String templateReference)
+    {
+        if (!String.IsNullOrEmpty(templateReference))
+        {
+            if (this.buildingTemplateCache.TryGetValue(templateReference, out var buildingTempalte))
+            {
+                return buildingTempalte;
+            }
+        }
+
+        return default;
     }
 }
