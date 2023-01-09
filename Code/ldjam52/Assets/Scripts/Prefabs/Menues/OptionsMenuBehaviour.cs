@@ -31,8 +31,8 @@ public class OptionsMenuBehaviour : MonoBehaviour
 
     private void Start()
     {
-        this.UpdateValues();
-        this.SetMobileInterfaceToggles();
+        UpdateValues();
+        SetMobileInterfaceToggles();
     }
 
     private void SetMobileInterfaceToggles()
@@ -56,7 +56,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.UpdateValues();
+        UpdateValues();
     }
 
     public void OnForegroundSliderChanged()
