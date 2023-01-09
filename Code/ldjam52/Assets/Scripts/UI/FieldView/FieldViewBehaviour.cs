@@ -20,6 +20,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     private Image plantImage;
     private Text plantName;
     private Button harvestButton;
+    private Button harvestAndReplantButton;
 
     private FieldViewSeedListBehaviour seedList;
     private FieldViewSeedListDetailsBehaviour parent1;
@@ -47,6 +48,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
         plantName = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Name").GetComponent<Text>();
         harvestButton = transform.Find("FieldViewToggle/CurrentInfo/Buttons/Harvest").GetComponent<Button>();
+        harvestAndReplantButton = transform.Find("FieldViewToggle/CurrentInfo/Buttons/HarvestAndReplant").GetComponent<Button>();
 
         seedList = transform.Find("FieldViewToggle/PlantingOptions/SeedList/ListContainer").GetComponent<FieldViewSeedListBehaviour>();
         parent1 = transform.Find("FieldViewToggle/PlantingOptions/Selection/Selected1").GetComponent<FieldViewSeedListDetailsBehaviour>();
@@ -73,7 +75,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     {
         if (viewToggle.activeSelf)
         {
-            CheckHarvestButton();
+            CheckHarvestButtons();
             CheckPlantingButton();
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -161,13 +163,14 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         infoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), false);
     }
 
-    public void CheckHarvestButton()
+    public void CheckHarvestButtons()
     {
         if (currentlyViewedField != default && currentlyViewedField.IsFullyGrown())
         {
             if (harvestButton.interactable == false)
             {
                 harvestButton.interactable = true;
+                harvestAndReplantButton.interactable = true;
             }
         }
         else
@@ -175,6 +178,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             if (harvestButton.interactable == true)
             {
                 harvestButton.interactable = false;
+                harvestAndReplantButton.interactable = false;
             }
         }
     }
@@ -214,13 +218,10 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     {
         var harvest = currentlyViewedField.HarvestCrop();
 
-        if (harvest != null)
-        {
-            ShowHarvestResult(harvest);
-        }
 
-        UpdateView();
-        Core.Game.PlayButtonSound();
+        currentlyViewedField.PlantSeeds(harvest.Plant, default);
+
+        Hide();
     }
 
 

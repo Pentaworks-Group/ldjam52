@@ -133,9 +133,10 @@ public class CameraBehaviour : MonoBehaviour
             }
             if (zoom != 0)
             {
-                cam.fieldOfView = Mathf.Max(minFov, cam.fieldOfView + zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity);
-                cam.fieldOfView = Mathf.Min(maxFov, cam.fieldOfView);
-
+                float newView = cam.fieldOfView + zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity;
+                newView = Mathf.Max(minFov, newView);
+                newView = Mathf.Min(maxFov, newView);
+                cam.fieldOfView = newView;
             }
         }
     }
