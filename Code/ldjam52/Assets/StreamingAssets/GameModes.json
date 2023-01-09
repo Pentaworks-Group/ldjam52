@@ -82,7 +82,7 @@
         ],
         "Player": {
             "StartingFarmStorage": {
-                "StorageSize": 500,
+                "StorageSize": 50000,
                 "MoneyBalance": 3000,
                 "StorageItems": [
                     {
@@ -540,7 +540,7 @@
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 8,
+                            "Value0": 5,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -682,12 +682,12 @@
                     },
                     "Seeds": {
                         "Chromosome1": {
-                            "Value0": 30,
+                            "Value0": 6,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 33,
+                            "Value0": 5,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
@@ -829,12 +829,12 @@
                     },
                     "Seeds": {
                         "Chromosome1": {
-                            "Value0": 4,
+                            "Value0": 3,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         },
                         "Chromosome2": {
-                            "Value0": 10,
+                            "Value0": 5,
                             "ValueDev": 0.4,
                             "IsDominant": false
                         }
@@ -981,7 +981,7 @@
                             "IsDominant": false
                         },
                         "Chromosome2": {
-                            "Value0": 16,
+                            "Value0": 7,
                             "ValueDev": 0.2,
                             "IsDominant": true
                         }
