@@ -24,9 +24,10 @@ public class StatsBar : MonoBehaviour
     public void SetPlantValues(double _mean, double _variance)
     {
         mean = _mean;
+        width = _variance;
 
-        double start = mean - 0.5 * _variance;
-        double end = mean + 0.5 * _variance;
+        GradientTransform.anchorMin = new Vector2((float)(mean - width), 0.0f);
+        GradientTransform.anchorMax = new Vector2((float)(mean + width), 1.0f);
 
     }
 
