@@ -1,8 +1,10 @@
 Todo:
 ----------------------------------
  Bugs:
+ - WBGL audio: when starting game error in log & freeze
  - Game paused on load (unpause after load)
  - Impossible to buy land along the edges.
+ - Closing Harvest View with esc disables tile click lock
  
  Exceptions: 
  - 
@@ -25,6 +27,7 @@ Todo:
   
  Audio:
  - Fully grown effect audio!
+ - Effect for opening/closing menues
  
   
 Refactoring:
