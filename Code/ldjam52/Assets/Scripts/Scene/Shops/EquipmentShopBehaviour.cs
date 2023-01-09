@@ -34,10 +34,10 @@ namespace Assets.Scripts.Scene.Shops
         private void updateGUI()
         {
             BalanceText.text = FarmStorageController.GetStorageBalance().ToString();
-            InitAnalyzerPanel(Base.Core.Game.State.PlantAnalyzer, PlantAnalyzerPanel);
-            InitAnalyzerPanel(Base.Core.Game.State.FieldAnalyzer, FieldAnalyzerPanel);
+            UpdateAnalyzerPanel(Base.Core.Game.State.PlantAnalyzer, PlantAnalyzerPanel);
+            UpdateAnalyzerPanel(Base.Core.Game.State.FieldAnalyzer, FieldAnalyzerPanel);
         }
-        private void InitAnalyzerPanel(Analyzer analyzer, GameObject panel)
+        private void UpdateAnalyzerPanel(Analyzer analyzer, GameObject panel)
         {
 
             panel.transform.Find("AnalyzerName").GetComponent<TMP_Text>().text = analyzer.Name;

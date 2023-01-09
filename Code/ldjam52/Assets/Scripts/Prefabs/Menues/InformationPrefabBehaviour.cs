@@ -25,9 +25,8 @@ public class InformationPrefabBehaviour : MonoBehaviour
         
     }
 
-    private void updateInfo(StorageItem item)
+    public void UpdateInfo(StorageItem item)
     {
-
         Transform information = Information.transform;
 
         // Always shown
