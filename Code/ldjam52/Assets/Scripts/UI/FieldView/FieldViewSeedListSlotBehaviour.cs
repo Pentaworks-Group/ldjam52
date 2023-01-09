@@ -1,6 +1,7 @@
 
 using Assets.Scripts.Model;
 
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
@@ -8,6 +9,8 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
     private Image pic;
     private Text plantName;
     private Text seedAmount;
+
+    public GameObject InformationPanel;
 
     //private void Awake()
     //{
@@ -36,6 +39,11 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
     public StorageItem GetStorageItem()
     {
         return (StorageItem)obj;
+    }
+
+    public void ShowItemDetails()
+    {
+        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(GetStorageItem());
     }
 
     override public void UpdateUI()

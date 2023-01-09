@@ -1219,6 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileViewBehaviour: {fileID: 530696768}
   FieldViewBehaviour: {fileID: 1457188055}
+  PauseMenuBehaviour: {fileID: 1468167439}
 --- !u!114 &1900354446
 MonoBehaviour:
   m_ObjectHideFlags: 0

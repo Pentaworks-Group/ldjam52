@@ -31,7 +31,7 @@ namespace Assets.Scripts.Core
 
         public void PlayButtonSound()
         {
-            EffectsAudioManager.Play("ButtonSound");
+//            EffectsAudioManager.Play("ButtonSound");
         }
 
         protected override GameState InitializeGameState()
