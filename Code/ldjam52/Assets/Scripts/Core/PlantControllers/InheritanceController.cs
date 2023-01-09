@@ -103,6 +103,9 @@ public class InheritanceController
         else
         {
             newPlant.ID = Guid.NewGuid();
+            Core.Game.State.KnownPlants.Add(newPlant.ID, newPlant);
+
+
         }
         return newPlant;
     }
