@@ -66,12 +66,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
     // Start is called before the first frame update
     // TODO change to OnStart
-    void Start()
+    protected override void OnStart()
     {
-        if (Assets.Scripts.Base.Core.Game.State == default)
-        {
-            InitializeGameState();
-        }
+        base.OnStart();
 
         this.seedShopToggle = transform.Find("SeedShopToggle").gameObject;
 
@@ -79,11 +76,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         balance = FarmStorageController.GetStorageBalance();
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
-
-
-        // TODO use shop list when available
         fillList(Core.Game.State.AvailableShopItems, Seeds, false);
-
     }
 
     // TODO cleanup these three methods (low priority)
@@ -344,49 +337,5 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, true);
         else
             SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null, false);
-    }
-
-
-    protected void InitializeGameState()
-    {
-        LoadGameSettings();
-        var gameState = new GameState()
-        {
-            CurrentScene = "SeedShopScene",
-            GameMode = Core.Game.AvailableGameModes[0]
-        };
-
-        gameState.FarmStorage = gameState.GameMode.Player.StartingFarmStorage;
-        Assets.Scripts.Base.Core.Game.PopulateKnownPlants(gameState);
-        Assets.Scripts.Base.Core.Game.GenerateAnalyzers(gameState);
-
-        Assets.Scripts.Base.Core.Game.Start(gameState);
-    }
-
-    public void LoadGameSettings()
-    {
-        if (Core.Game.AvailableGameModes.Count == 0)
-        {
-            var filePath = Application.streamingAssetsPath + "/GameModes.json";
-            StartCoroutine(GameFrame.Core.Json.Handler.DeserializeObjectFromStreamingAssets<List<GameMode>>(filePath, SetGameSettings));
-        }
-    }
-
-    private List<GameMode> SetGameSettings(List<GameMode> loadedGameModes)
-    {
-        if (loadedGameModes?.Count > 0)
-        {
-            foreach (var gameMode in loadedGameModes)
-            {
-                Core.Game.AvailableGameModes.Add(gameMode);
-            }
-        }
-
-        if (Core.Game.SelectedGameMode == default)
-        {
-            Core.Game.SelectedGameMode = loadedGameModes[0];
-        }
-
-        return loadedGameModes;
     }
 }
