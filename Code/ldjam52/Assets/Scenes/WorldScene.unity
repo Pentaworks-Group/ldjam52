@@ -695,10 +695,6 @@ PrefabInstance:
       propertyPath: worldBehaviour
       value: 
       objectReference: {fileID: 1900354445}
-    - target: {fileID: 7001068520298099616, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
-      propertyPath: m_Name
-      value: AnalyzeButton
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
 --- !u!224 &1457188054 stripped
