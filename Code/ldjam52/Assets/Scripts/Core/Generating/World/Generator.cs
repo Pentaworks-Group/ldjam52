@@ -167,6 +167,7 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 building = new TBuilding()
                 {
+                    TemplateReference = buildingSettings.TemplateReferences.GetRandomEntry(),
                     Position = GetBuildingSpawnPoint(buildingSettings.Size, out var affectedTiles)
                 };
 

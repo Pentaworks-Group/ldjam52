@@ -55,19 +55,25 @@ public class SeedShopBehaviour : MonoBehaviour
         inventory = FarmStorageController.getStorageInventory();
     
         fillList(inventory, Plants, true);
+
+        // TODO use shop list when available
         fillList(inventory, Seeds, false);
+
+        //emptyList(Plants);
     }
 
-    // TODO cleanup these three methods
-    private void ItemSelected(StorageItem item, bool isPlant)
+    // TODO cleanup these three methods (low priority)
+    private void ItemSelected(StorageItem item, bool isPlant, Button button)
     {
         if (isPlant)
             PlantSelected(item);
         else
             SeedSelected(item);
+
+        buttonPressed = button;
     }
 
-    public void PlantSelected(StorageItem item)
+    private void PlantSelected(StorageItem item)
     {
         chosenPlant = item;
 
@@ -83,7 +89,7 @@ public class SeedShopBehaviour : MonoBehaviour
         updateInfo(true);
     }
 
-    public void SeedSelected(StorageItem item)
+    private void SeedSelected(StorageItem item)
     {
         chosenSeed = item;
 
@@ -182,12 +188,25 @@ public class SeedShopBehaviour : MonoBehaviour
             Debug.Log($"Adding plant {item.Plant.Name} now.");
             Button newItem = Instantiate(buttonPrefab);
             newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
-            newItem.transform.SetParent(scrollRect.transform.GetChild(0).GetChild(0));
+            newItem.transform.SetParent(scrollRect.transform.Find("Viewport").Find("Content"));
 
-            newItem.onClick.AddListener(() => { ItemSelected(item, isPlant); });
+            newItem.onClick.AddListener(() => { ItemSelected(item, isPlant, newItem); });
         }
     }
 
+    private void emptyList(ScrollRect scrollRect)
+    {
+        Transform content = scrollRect.transform.Find("Viewport").Find("Content");
+        while (content.childCount > 0)
+        {
+            Button tmp = content.GetChild(0).GetComponent<Button>();
+            tmp.onClick.RemoveAllListeners();
+            Destroy(content.GetChild(0).gameObject);
+
+            if (content.childCount == 8)
+                break;
+        }
+    }
     // TODO need to remove listener when leaving shop
     private void emptyPlants()
     {
@@ -208,6 +227,11 @@ public class SeedShopBehaviour : MonoBehaviour
             sellQuantity = Mathf.Min(chosenPlant.StorageAmountPlants, sellQuantity);
             SellQuantityText.text = sellQuantity.ToString();
 
+            if (chosenPlant.StorageAmountPlants == 0)
+            {
+                buttonPressed.onClick.RemoveAllListeners();
+                Destroy(buttonPressed.gameObject);
+            }
         }
 
         updatePrice(isSell);
