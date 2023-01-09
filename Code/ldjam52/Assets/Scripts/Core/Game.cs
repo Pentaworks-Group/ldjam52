@@ -89,6 +89,10 @@ namespace Assets.Scripts.Core
             {
                 gameState.World = worldGenerator.World;
             }
+            else
+            {
+                throw new Exception("------------ FAILED TO GENERATE WORLD! ------------");
+            }
         }
 
         private void SetPlayerValues(GameState gameState)

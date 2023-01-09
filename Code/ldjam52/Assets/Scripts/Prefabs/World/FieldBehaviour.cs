@@ -14,7 +14,7 @@ public class FieldBehaviour : MonoBehaviour
 {
     private GameObject dirtPatch;
     private TileBehaviour parentTile;
-        
+
     private GrowthStage currentStadium = null;
     private readonly List<GameObject> flowerPots = new List<GameObject>();
 
@@ -110,7 +110,7 @@ public class FieldBehaviour : MonoBehaviour
             flower.gameObject.name = "Flower";
             flower.gameObject.SetActive(true);
 
-            if(newModelName == "Flower4")
+            if (newModelName == "Flower4")
             {
                 GameObject blossom = flower.gameObject.transform.Find("Sphere").gameObject;
                 //TODO: Renderer is null?
@@ -122,7 +122,7 @@ public class FieldBehaviour : MonoBehaviour
                         meshRenderer.material.color = field.Seed.BlossomColor.ToUnity();
                         meshRenderer.material.EnableKeyword("_EMISSION");
                         meshRenderer.material.SetColor("_EmissionColor", field.Seed.BlossomColor.ToUnity());
-//                        meshRenderer.material.
+                        //                        meshRenderer.material.
                     }
                 }
             }
@@ -155,22 +155,32 @@ public class FieldBehaviour : MonoBehaviour
     {
         if (parent1 != default && parent2 != default)
         {
-            FarmStorageController.TakeSeedsOfStorage(parent1, 1);
-            FarmStorageController.TakeSeedsOfStorage(parent2, 1);
-            Plant child = InheritanceController.crossPlants(parent1, parent2);
-            PlantCrop(child);
+            if (parent1.ID == parent2.ID && FarmStorageController.GetSeedCountInStorage(parent1) >= 2)
+            {
+                FarmStorageController.TakeSeedsOfStorage(parent1, 2);
+                Plant child = InheritanceController.crossPlants(parent1, parent2);
+                PlantCrop(child);
+
+            }
+            else if (FarmStorageController.GetSeedCountInStorage(parent1) >= 1 && FarmStorageController.GetSeedCountInStorage(parent2) >= 1)
+            {
+                FarmStorageController.TakeSeedsOfStorage(parent1, 1);
+                FarmStorageController.TakeSeedsOfStorage(parent2, 1);
+                Plant child = InheritanceController.crossPlants(parent1, parent2);
+                PlantCrop(child);
+            }
         }
-        else if (parent1 != default || parent2 != default)
+        else if (parent1 != default && FarmStorageController.GetSeedCountInStorage(parent1) >= 1)
         {
-            if (parent1 != default)
-            {
-                PlantCrop(parent1);
-            }
-            if (parent2 != default)
-            {
-                PlantCrop(parent2);
-            }
+            FarmStorageController.TakeSeedsOfStorage(parent1, 1);
+            PlantCrop(parent1);
         }
+        else if (parent2 != default && FarmStorageController.GetSeedCountInStorage(parent2) >= 1)
+        {
+            FarmStorageController.TakeSeedsOfStorage(parent2, 1);
+            PlantCrop(parent2);
+        }
+
 
     }
 

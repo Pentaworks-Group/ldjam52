@@ -10,8 +10,7 @@ namespace Assets.Scripts.Model
         public Int32 Height { get; set; }
         public Int32 Width { get; set; }
         public Farm Farm { get; set; }
-        public Shop Shop { get; set; }
-        public Laboratory Laboratory { get; set; }
         public List<Tile> Tiles { get; set; }
+        public List<Building> Buildings { get; set; }
     }
 }
