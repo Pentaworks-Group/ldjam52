@@ -25,7 +25,7 @@ public class InformationPrefabBehaviour : MonoBehaviour
         
     }
 
-    public void UpdateInfo(StorageItem item)
+    public void UpdateInfo(StorageItem item, Field field)
     {
         Transform information = Information.transform;
 
@@ -56,13 +56,23 @@ public class InformationPrefabBehaviour : MonoBehaviour
 
         // Stat bars
         // TODO put into StatsBar
-        drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-        drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-        drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-        drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
+        if (field != null)
+        {
+            drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0.5, true);
+            drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0.2, true);
+            drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0.9, true);
+            drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0.1, true);
+        }
+        else
+        {
+            drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
+            drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
+            drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
+            drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP], 0, false);
+        }
     }
 
-    private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair/*, double biomeValue, bool isBiomeValueVisible*/)
+    private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair, double biomeValue, bool isBiomeValueVisible)
     {
         StatsBar bar = infoPanel.Find(barName).GetChild(0).GetComponent<StatsBar>();
 
@@ -76,12 +86,14 @@ public class InformationPrefabBehaviour : MonoBehaviour
             bar.HidePlantValue();
         }
 
-/*        if (isBiomeValueVisible)
+        if (isBiomeValueVisible)
         {
+            bar.SetBiomeValue(biomeValue);
+            bar.ShowBiomeValue();
         }
         else
         {
-
-        }*/
+            bar.hideBiomeValue();
+        }
     }
 }

@@ -2380,7 +2380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1622292187981982505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3413,6 +3413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   InformationPanel: {fileID: 8069829049660140464}
+  CurrentlyViewedField: {fileID: 1622292187684726834}
 --- !u!224 &131148404060448832 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1680516529727003705, guid: 8778584640f63754d9bd580db3ae29f9, type: 3}
@@ -3619,7 +3620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -26.568434
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3753,7 +3754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 8.547561
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4607,6 +4608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   InformationPanel: {fileID: 0}
+  CurrentlyViewedField: {fileID: 0}
 --- !u!224 &6103533234563500552 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1680516529727003705, guid: ccba42b032e42a44cbbabf5af1eb6a95, type: 3}

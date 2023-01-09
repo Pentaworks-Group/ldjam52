@@ -12,6 +12,8 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
 
     public GameObject InformationPanel;
 
+    public GameObject CurrentlyViewedField;
+
     //private void Awake()
     //{
     //    plantName = transform.Find("PlantName").GetComponent<Text>();
@@ -43,7 +45,8 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
 
     public void ShowItemDetails()
     {
-        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(GetStorageItem());
+        FieldViewBehaviour fieldView = CurrentlyViewedField.GetComponent<FieldViewBehaviour>();
+        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(GetStorageItem(), fieldView.GetField());
     }
 
     override public void UpdateUI()

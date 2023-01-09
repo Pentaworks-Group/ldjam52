@@ -1,4 +1,5 @@
 using Assets.Scripts.Base;
+using Assets.Scripts.Model;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -86,6 +87,15 @@ public class FieldViewBehaviour : MonoBehaviour
         Core.Game.LockCameraMovement = true;
         UpdateView();
         Core.Game.PlayButtonSound();
+    }
+
+    public Field GetField()
+    {
+        if (currentlyViewedField != null)
+        {
+            return currentlyViewedField.Field;
+        }
+        return null;
     }
 
     private void UpdateView()
