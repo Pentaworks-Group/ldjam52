@@ -67,7 +67,7 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         if (menuToggle.activeSelf == true)
         {
-            
+
             if (this.optionsArea.activeSelf || this.saveGameArea.activeSelf)
             {
                 this.OnBackButtonClicked();
@@ -102,7 +102,7 @@ public class PauseMenuBehavior : MonoBehaviour
 
     public void ShowSavedGames()
     {
-        //Core.Game.PlayButtonSound();
+        Core.Game.PlayButtonSound();
 
         SetVisible(saveGame: true);
     }
@@ -161,20 +161,20 @@ public class PauseMenuBehavior : MonoBehaviour
 
     public void ShowOptions()
     {
-        //Core.Game.PlayButtonSound();
-        this.SetVisible(options: true);
+        Core.Game.PlayButtonSound();
+        SetVisible(options: true);
     }
 
     public void Quit()
     {
+        Core.Game.PlayButtonSound();
         Time.timeScale = 1;
 
-        //Core.Game.PlayButtonSound();
+        Core.Game.LockCameraMovement = false;
         Core.Game.Stop();
         Core.Game.ChangeScene(SceneNames.MainMenu);
+
     }
-
-
 
     private void SetVisible(Boolean pauseMenu = false, Boolean options = false, Boolean saveGame = false)
     {

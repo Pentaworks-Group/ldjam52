@@ -1,5 +1,3 @@
-
-using Assets.Scripts;
 using Assets.Scripts.Base;
 
 using TMPro;
@@ -12,7 +10,8 @@ public class OptionsMenuBehaviour : MonoBehaviour
     private Slider effectsVolumeSlider;
     private Slider ambienceVolumeSlider;
     private Slider backgroundVolumeSlider;
-    private Slider touchSensivitySlider;
+    private Slider moveSensivitySlider;
+    private Slider zoomSensivitySlider;
     private Toggle animationEnabledToggle;
     private Toggle sideScrollingEnabledToggle;
     private ToggleGroup mobileInterface;
@@ -22,7 +21,8 @@ public class OptionsMenuBehaviour : MonoBehaviour
         effectsVolumeSlider = transform.Find("OptionContainer/EffectsVolume/Right/ForegroundSlider").GetComponent<Slider>();
         ambienceVolumeSlider = transform.Find("OptionContainer/AmbienceVolume/Right/AmbieceSlider").GetComponent<Slider>();
         backgroundVolumeSlider = transform.Find("OptionContainer/BackgroundVolume/Right/BackgroundSlider").GetComponent<Slider>();
-        touchSensivitySlider = transform.Find("OptionContainer/TouchSensivity/Right/Slider").GetComponent<Slider>();
+        moveSensivitySlider = transform.Find("OptionContainer/MoveSensivity/Right/Slider").GetComponent<Slider>();
+        zoomSensivitySlider = transform.Find("OptionContainer/ZoomSensivity/Right/Slider").GetComponent<Slider>();
 
         sideScrollingEnabledToggle = transform.Find("OptionContainer/EnableSideScroll/Right/Toggle").GetComponent<Toggle>();
         animationEnabledToggle = transform.Find("OptionContainer/EnableAnimations/Right/Toggle").GetComponent<Toggle>();
@@ -77,9 +77,14 @@ public class OptionsMenuBehaviour : MonoBehaviour
         Core.Game.Options.BackgroundVolume = backgroundVolumeSlider.value;
     }
 
-    public void OnTouchSensivitySliderChanged()
+    public void OnMoveSensivitySliderChanged()
     {
-        Core.Game.Options.TouchSensivity = touchSensivitySlider.value;
+        Core.Game.Options.MoveSensivity = moveSensivitySlider.value;
+    }
+
+    public void OnZoomSensivitySliderChanged()
+    {
+        Core.Game.Options.ZoomSensivity = zoomSensivitySlider.value;
     }
 
     public void OnAnimationEnabledToggleValueChanged()
@@ -104,16 +109,12 @@ public class OptionsMenuBehaviour : MonoBehaviour
     public void OnRestoreDefaultsClick()
     {
         Core.Game.PlayButtonSound();
-        effectsVolumeSlider.value = 1f;
-        ambienceVolumeSlider.value = 0.125f;
-        backgroundVolumeSlider.value = 0.125f;
-        touchSensivitySlider.value = 0.125f;
-        Core.Game.Options.AreAnimationsEnabled = true;
-        Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = true;
-        //Core.Game.Options.MobileInterface = "Right";
 
+        Core.Game.RestoreDefaultOptions();
 
-        this.SetMobileInterfaceToggles();
+        SetMobileInterfaceToggles();
+
+        UpdateValues();
     }
 
     public void SaveOptions()
@@ -140,9 +141,14 @@ public class OptionsMenuBehaviour : MonoBehaviour
                 this.backgroundVolumeSlider.value = Core.Game.Options.BackgroundVolume;
             }
 
-            if (this.touchSensivitySlider.value != Core.Game.Options.TouchSensivity)
+            if (this.moveSensivitySlider.value != Core.Game.Options.MoveSensivity)
             {
-                this.touchSensivitySlider.value = Core.Game.Options.TouchSensivity;
+                this.moveSensivitySlider.value = Core.Game.Options.MoveSensivity;
+            }
+
+            if (this.zoomSensivitySlider.value != Core.Game.Options.ZoomSensivity)
+            {
+                this.zoomSensivitySlider.value = Core.Game.Options.ZoomSensivity;
             }
 
             if (this.animationEnabledToggle.isOn != Core.Game.Options.AreAnimationsEnabled)
