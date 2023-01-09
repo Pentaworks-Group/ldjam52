@@ -16,8 +16,8 @@ public class CameraBehaviour : MonoBehaviour
     private readonly float zoomSpeedMouse = 80.0f;
     private readonly float zoomSpeedTouch = .5f;
 
-    private readonly float minFov = 10.0f;
-    //private float maxFov = 90.0f;
+    private readonly float minFov = 15.0f;
+    private float maxFov = 120.0f;
 
     private Vector2 prevTouch = Vector2.zero;
     private (Vector2, Vector2) prevPinch;
@@ -134,6 +134,8 @@ public class CameraBehaviour : MonoBehaviour
             if (zoom != 0)
             {
                 cam.fieldOfView = Mathf.Max(minFov, cam.fieldOfView + zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity);
+                cam.fieldOfView = Mathf.Min(maxFov, cam.fieldOfView);
+
             }
         }
     }
