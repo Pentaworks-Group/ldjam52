@@ -211,58 +211,15 @@ public class SeedShopBehaviour : MonoBehaviour
         }
     }
 
-    // TODO put in separate method that is called with item and iformation
     private void updateInfo(bool isSell)
     {
-
         StorageItem item = isSell ? chosenPlant : chosenSeed;
-        Transform information = isSell ? PlantInfo.transform : SeedInfo.transform;
 
-        // Always shown
-        information.Find("Name").GetComponent<TMP_Text>().text = item.Plant.Name;
-        information.Find("Amount").GetComponent<TMP_Text>().text = "Amount: " + (isSell ? item.StorageAmountPlants : item.StorageAmountSeeds).ToString();
-        information.Find("Image").GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-        information.Find("Image").GetComponent<Image>().sprite = GameFrame.Base.Resources.Manager.Sprites.Get(item.Plant.ImageName);
-
-        ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
-        information.Find("SeedsValue").GetComponent<TMP_Text>().text = "Seed value: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
-
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.PLANTVALUE];
-        information.Find("PlantsValue").GetComponent<TMP_Text>().text = "Plant value: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
-
-        // Visibility checks needed
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDS];
-        if (pair.IsVisible)
-            information.Find("Seeds").GetComponent<TMP_Text>().text = "Seeds: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
+        if (isSell)
+            PlantInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null);
         else
-            information.Find("Seeds").GetComponent<TMP_Text>().text = "Seeds: ?";
-
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.HARVEST];
-        if (pair.IsVisible)
-            information.Find("Harvest").GetComponent<TMP_Text>().text = "Harvest: " + ((int)GrowthController.getDominantChromosome(pair).Value0).ToString();
-        else
-            information.Find("Harvest").GetComponent<TMP_Text>().text = "Harvest: ?";
-
-        // Stat bars
-        // TODO put into StatsBar
-        drawStatsBar(information, "Temp", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-        drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-        drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-        drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-
+            SeedInfo.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, null);
     }
-
-    private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair)
-    {
-        StatsBar bar = infoPanel.Find(barName).GetChild(0).GetComponent<StatsBar>();
-
-        if (pair.IsVisible || true)
-        {
-            bar.SetPlantValues(GrowthController.getDominantChromosome(pair).Value0, GrowthController.getDominantChromosome(pair).ValueDev);
-            bar.ShowPlantValue();
-        }
-    }
-
 
 
     // TEST
