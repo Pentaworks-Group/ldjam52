@@ -17,5 +17,8 @@ namespace Assets.Scripts.Core.Generating
         /// </summary>
         public Boolean IsAllBiomesUsageForced { get; set; }
         public Single TotalDayDuration { get; set; }
+        public BuildingSettings Farm { get; set; }
+        public BuildingSettings Shop { get; set; }
+        public BuildingSettings Laboratory { get; set; }
     }
 }

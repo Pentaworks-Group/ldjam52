@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using Assets.Scripts.Core.Inventory;
-using Assets.Scripts.Model;
+using Assets.Scripts.Model.Buildings;
 
 using TMPro;
 
@@ -79,7 +79,7 @@ namespace Assets.Scripts.UI.TileView
             if (isBuyAndBuilt)
             {
                 FarmStorageController.TakeMoneyOfStorage(tilesTotalCost);
-                
+
                 //FarmStorageController.TakeMoneyOfStorage(tilesTotalCost); // Farm price tbd
 
                 var farm = new Farm()
@@ -89,12 +89,12 @@ namespace Assets.Scripts.UI.TileView
 
                 Base.Core.Game.State.World.Farm = farm;
 
-                this.tileBehaviour.Tile.Farm = farm;
+                this.tileBehaviour.Tile.Building = farm;
 
                 foreach (var surroundingBehvaiour in surroundingTiles)
                 {
                     surroundingBehvaiour.Tile.IsOwned = true;
-                    surroundingBehvaiour.Tile.Farm = farm;
+                    surroundingBehvaiour.Tile.Building = farm;
                 }
             }
             else
@@ -114,7 +114,7 @@ namespace Assets.Scripts.UI.TileView
             {
                 FarmStorageController.TakeMoneyOfStorage(tilesTotalCost); // Farm price tbd....
             }
-            
+
             //FarmStorageController.TakeMoneyOfStorage(this.tileBehaviour.Tile.Price); // Farm price tbd....
 
             var farm = new Farm()
@@ -124,12 +124,12 @@ namespace Assets.Scripts.UI.TileView
 
             Base.Core.Game.State.World.Farm = farm;
 
-            this.tileBehaviour.Tile.Farm = farm;
+            this.tileBehaviour.Tile.Building = farm;
 
             foreach (var surroundingBehvaiour in surroundingTiles)
             {
                 surroundingBehvaiour.Tile.IsOwned = true;
-                surroundingBehvaiour.Tile.Farm = farm;
+                surroundingBehvaiour.Tile.Building = farm;
             }
 
             Hide();
@@ -170,7 +170,7 @@ namespace Assets.Scripts.UI.TileView
 
                             isAbleToBuild = false;
                         }
-                        else if (surroundingTile.Tile.Farm != default)
+                        else if (surroundingTile.Tile.Building != default)
                         {
                             statusString = "Surrounding tile is occupied by a building!";
                             errorLevel = 2;
@@ -195,7 +195,7 @@ namespace Assets.Scripts.UI.TileView
             this.buildFarmStatusText.text = statusString;
             this.buildFarmButton.interactable = isAbleToBuild;
             this.buildBuyAndBuildFarmButton.interactable = isAbleToBuyAndBuild;
-            
+
             if (errorLevel == 1)
             {
                 this.buildCostBuyAndBuildContainer.SetActive(true);
@@ -251,7 +251,7 @@ namespace Assets.Scripts.UI.TileView
                         {
                             tilesTotalCost += surroundingTile.Tile.Price;
                         }
-                        else if(surroundingTile.Tile.Farm != default)
+                        else if (surroundingTile.Tile.Building != default)
                         {
                             isBuyAndBuildPossible = false;
                             break;
@@ -268,7 +268,7 @@ namespace Assets.Scripts.UI.TileView
                 {
                     this.buyTileButton.interactable = true;
                     this.buyTileAndBuildFarmButton.interactable = true;
-                    
+
                     this.buyCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
                     this.buyCostBuyAndBuildContainer.SetActive(true);
 

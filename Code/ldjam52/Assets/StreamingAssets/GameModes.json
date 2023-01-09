@@ -7,7 +7,27 @@
       "Width": 64,
       "RandomBiomesAmount": 10,
       "IsAllBiomesUsageForced": true,
-      "TotalDayDuration": 240
+      "TotalDayDuration": 240,
+      "Shop": {
+        "TemplateReferences": [
+          "Trader"
+        ],
+        "Size": {
+          "X": 2,
+          "Y": 0,
+          "Z": 2
+        }
+      },
+      "Laboratory": {
+        "TemplateReferences": [
+          "Trader"
+        ],
+        "Size": {
+          "X": 2,
+          "Y": 0,
+          "Z": 2
+        }
+      }
     },
     "Player": {
       "StartingFarmStorage": {

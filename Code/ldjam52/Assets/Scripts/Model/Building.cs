@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Model
 {
-    public class Farm
+    public abstract class Building
     {
         public Vector3 Position { get; set; }
     }
