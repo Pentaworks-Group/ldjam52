@@ -174,7 +174,7 @@ public class WorldBehaviour : MonoBehaviour
 
     private void RenderFarm(Farm farm)
     {
-        var farmTemplate = GetBuildingTemplate("Farm");
+        var farmTemplate = GetBuildingTemplate("FarmPrefab");
 
         var farmGameObject = Instantiate(farmTemplate, tileContainer.transform);
 
