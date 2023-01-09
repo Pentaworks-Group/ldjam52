@@ -13,6 +13,8 @@ public class InformationPrefabBehaviour : MonoBehaviour
 
     public GameObject Information;
 
+    public StorageItem Item;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,8 @@ public class InformationPrefabBehaviour : MonoBehaviour
 
     public void UpdateInfo(StorageItem item, Field field)
     {
+        this.Item = item;
+
         Transform information = Information.transform;
 
         // Always shown
