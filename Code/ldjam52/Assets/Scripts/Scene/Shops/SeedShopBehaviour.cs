@@ -77,8 +77,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
 
+        
         // TODO use shop list when available
-        fillList(inventory, Seeds, false);
+        fillList(Core.Game.State.AvailableShopItems, Seeds, false);
 
     }
 

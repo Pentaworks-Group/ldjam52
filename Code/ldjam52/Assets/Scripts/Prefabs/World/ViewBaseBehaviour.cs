@@ -24,9 +24,18 @@ namespace Assets.Scripts.Prefabs.World
             isShown = false;
         }
 
+        private void Start()
+        {
+            OnStart();
+        }
+
         private void Update()
         {
             OnUpdate();
+        }
+
+        protected virtual void OnStart()
+        {
         }
 
         protected virtual void OnUpdate()
