@@ -159,7 +159,7 @@ public class WorldBehaviour : MonoBehaviour
 
     private void RenderFarm(Farm farm)
     {
-        var farmTemplate = templateContainer.transform.Find("Farm").gameObject;
+        var farmTemplate = GetBuildingTemplate("Farm");
 
         var farmGameObject = Instantiate(farmTemplate, tileContainer.transform);
 
