@@ -7,18 +7,20 @@ namespace Assets.Scripts.Core
 {
     public class TileController
     {
-        private TileBehaviour[,] tileMap;
+        private readonly TwoDimensionCache<Int32, TileBehaviour> tileCache = new TwoDimensionCache<Int32, TileBehaviour>();
 
-        public TileController(World world)
+        public TileController()
         {
-            this.tileMap = new TileBehaviour[world.Width, world.Height];
         }
 
         public void AddTile(TileBehaviour tileBehaviour)
         {
             if (tileBehaviour.Tile != default)
             {
-                this.tileMap[(Int32)tileBehaviour.Tile.Position.X, (Int32)tileBehaviour.Tile.Position.Z] = tileBehaviour;
+                var x = (Int32)tileBehaviour.Tile.Position.X;
+                var z = (Int32)tileBehaviour.Tile.Position.Z;
+
+                this.tileCache.PutSafe(x, z, tileBehaviour);
             }
         }
 
@@ -33,7 +35,7 @@ namespace Assets.Scripts.Core
                     var x = (Int32)tile.Position.X + i;
                     var z = (Int32)tile.Position.Z + j;
 
-                    var tileBehaviour = tileMap[x, z];
+                    var tileBehaviour = tileCache.GetSafe(x, z);
 
                     if (tileBehaviour != null && tileBehaviour.Tile.ID != tile.ID)
                     {

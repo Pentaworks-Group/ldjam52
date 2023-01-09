@@ -234,25 +234,43 @@ namespace Assets.Scripts.UI.TileView
 
             if (checkBuyAndBuild)
             {
+                var isBuyAndBuildPossible = true;
+
                 surroundingTiles = Base.Core.Game.TileController.GetSurroundingTiles(this.tileBehaviour.Tile);
 
                 if (surroundingTiles.Count > 0)
                 {
+                    if (surroundingTiles.Count != 8)
+                    {
+                        isBuyAndBuildPossible = false;
+                    }
+
                     foreach (var surroundingTile in surroundingTiles)
                     {
                         if (!surroundingTile.Tile.IsOwned)
                         {
                             tilesTotalCost += surroundingTile.Tile.Price;
                         }
+                        else if(surroundingTile.Tile.Farm != default)
+                        {
+                            isBuyAndBuildPossible = false;
+                            break;
+                        }
                     }
                 }
 
-                this.buyCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
+                if (isBuyAndBuildPossible && Base.Core.Game.State.FarmStorage.MoneyBalance < tilesTotalCost)
+                {
+                    isBuyAndBuildPossible = false;
+                }
 
-                if (Base.Core.Game.State.FarmStorage.MoneyBalance >= tilesTotalCost)
+                if (isBuyAndBuildPossible)
                 {
                     this.buyTileButton.interactable = true;
                     this.buyTileAndBuildFarmButton.interactable = true;
+                    
+                    this.buyCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
+                    this.buyCostBuyAndBuildContainer.SetActive(true);
 
                     buyCouldBuyText.text = "But it could.\nClick 'Buy' or 'Buy and Build' below, and it is yours!\nMaybe even with the Farm!";
                 }

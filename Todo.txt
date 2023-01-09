@@ -2,14 +2,13 @@ Todo:
 ----------------------------------
  Bugs:
  - WBGL audio: when starting game error in log & freeze
- - Game paused on load (unpause after load)
- - Impossible to buy land along the edges.
+ - Game paused on load (unpause after load) 
  - Closing Harvest View with esc disables tile click lock
  
  Exceptions: 
  - 
  Core:
- - Name! Suggested: H.I.V.E (Highly Involuntary Violent Evolition)
+ - Name! Suggested: - H.I.V.E (Highly Involuntary Violent Evolition) -
  - Farm Building price
  - Tile price per Biome
   
@@ -51,3 +50,4 @@ Ideas:
  
 Done:
 ----------------------------------
+ - Impossible to buy land along the edges.
