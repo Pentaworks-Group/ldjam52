@@ -282,12 +282,13 @@ namespace Assets.Scripts.UI.TileView
                     isBuyAndBuildPossible = false;
                 }
 
+                this.buyCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
+
                 if (isBuyAndBuildPossible)
                 {
                     this.buyTileButton.interactable = true;
                     this.buyTileAndBuildFarmButton.interactable = true;
 
-                    this.buyCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
                     this.buyCostBuyAndBuildContainer.SetActive(true);
 
                     buyCouldBuyText.text = "But it could.\nClick 'Buy' or 'Buy and Build' below, and it is yours!\nMaybe even with the Farm!";
