@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
@@ -77,8 +78,10 @@ public class FieldBehaviour : MonoBehaviour
                 if (IsFullyGrown() && !this.isNotified)
                 {
                     this.isNotified = true;
+                    Core.Game.EffectsAudioManager.Play("Bell");
+
                     //parentTile.PlayEffect("FullyGrown");
-                }                
+                }
             }
         }
     }
