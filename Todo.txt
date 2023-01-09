@@ -36,7 +36,7 @@ Nice to have:
  - Tooltip.cs in GameFrame 
  - ScrollView (List container)
  - Show owned tiles with fence
- - ShortKeys
+ - ShortKeys (e.g. "H" for Home)
  - Only buy adjacent tiles
  
 Ideas:

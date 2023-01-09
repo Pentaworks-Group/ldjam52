@@ -9,24 +9,28 @@
       "IsAllBiomesUsageForced": true,
       "TotalDayDuration": 240,
       "Shop": {
-        "TemplateReferences": [
-          "Trader"
-        ],
-        "Size": {
-          "X": 2,
-          "Y": 0,
-          "Z": 2
-        }
+        "Templates": [
+          {
+            "Reference": "Trader",
+            "Size": {
+              "X": 2,
+              "Y": 0,
+              "Z": 2
+            }
+          }
+        ]
       },
       "Laboratory": {
-        "TemplateReferences": [
-          "Trader"
-        ],
-        "Size": {
-          "X": 2,
-          "Y": 0,
-          "Z": 2
-        }
+        "Templates": [
+          {
+            "Reference": "Trader",
+            "Size": {
+              "X": 2,
+              "Y": 0,
+              "Z": 2
+            }
+          }
+        ]
       }
     },
     "Player": {

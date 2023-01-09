@@ -7,7 +7,6 @@ namespace Assets.Scripts.Core.Generating
 {
     public class BuildingSettings
     {
-        public Vector3 Size { get; set; }
-        public List<String> TemplateReferences { get; set; }
+        public List<TemplateReference> Templates { get; set; }
     }
 }
