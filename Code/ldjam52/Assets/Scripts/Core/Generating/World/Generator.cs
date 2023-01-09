@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Assets.Scripts.Model;
+using Assets.Scripts.Model.Buildings;
 
 using GameFrame.Core.Extensions;
 
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Core.Generating.World
 
         private readonly GameMode gameMode;
         private List<BiomeSpawn> biomes;
+        private Tile[,] tileCache;
 
         public Generator(GameMode gameMode)
         {
@@ -26,9 +28,29 @@ namespace Assets.Scripts.Core.Generating.World
         {
             var isSuccessful = true;
 
-            biomes = new List<BiomeSpawn>();
+            GenerateBiomes();
+            var tiles = GenerateTiles();
 
-            var tiles = new Tile[gameMode.World.Width, gameMode.World.Height];
+            var farm = SpawnBuilding<Farm>(gameMode.World.Farm);
+            var shop = SpawnBuilding<Shop>(gameMode.World.Shop);
+            var laboratory = SpawnBuilding<Laboratory>(gameMode.World.Laboratory);
+
+            this.world = new Model.World()
+            {
+                Height = gameMode.World.Height,
+                Width = gameMode.World.Width,
+                Tiles = tiles,
+                Farm = farm,
+                Shop = shop,
+                Laboratory = laboratory
+            };
+
+            return isSuccessful;
+        }
+
+        private void GenerateBiomes()
+        {
+            biomes = new List<BiomeSpawn>();
 
             if (gameMode.World.IsAllBiomesUsageForced)
             {
@@ -47,10 +69,15 @@ namespace Assets.Scripts.Core.Generating.World
                     biomes.Add(new BiomeSpawn(biome));
                 }
             }
+        }
+
+        private List<Tile> GenerateTiles()
+        {
+            this.tileCache = new Tile[gameMode.World.Width, gameMode.World.Height];
 
             foreach (var biomeSpawn in biomes)
             {
-                GetAvailableSpawnPoint(tiles, out Int32 x, out Int32 z);
+                GetAvailableSpawnPoint(this.tileCache, out Int32 x, out Int32 z);
 
                 biomeSpawn.Position = new GameFrame.Core.Math.Vector3(x, 0, z);
 
@@ -70,22 +97,28 @@ namespace Assets.Scripts.Core.Generating.World
                     }
                 };
 
-                tiles[x, z] = tile;
+                this.tileCache[x, z] = tile;
             }
 
-            var tileList = FillEmptyTiles(tiles);
-
-            this.world = new Model.World()
-            {
-                Height = gameMode.World.Height,
-                Width = gameMode.World.Width,
-                Tiles = tileList
-            };
-
-            return isSuccessful;
+            return FillEmptyTiles();
         }
 
-        private List<Tile> FillEmptyTiles(Tile[,] tiles)
+        private TBuilding SpawnBuilding<TBuilding>(BuildingSettings buildingSettings) where TBuilding : Building, new()
+        {
+            var building = default(TBuilding);
+
+            if (buildingSettings != default)
+            {
+                building = new TBuilding()
+                {
+                    Position = GetBuildingSpawnPoint(buildingSettings.Size)
+                };
+            }
+
+            return building;
+        }
+
+        private List<Tile> FillEmptyTiles()
         {
             var tileList = new List<Tile>();
 
@@ -93,7 +126,7 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 for (int z = 0; z < gameMode.World.Height; z++)
                 {
-                    var tile = tiles[x, z];
+                    var tile = this.tileCache[x, z];
 
                     if (tile == default)
                     {
@@ -118,7 +151,7 @@ namespace Assets.Scripts.Core.Generating.World
 
                         closestSpawn.Size++;
 
-                        tiles[x, z] = tile;
+                        this.tileCache[x, z] = tile;
                     }
 
                     tileList.Add(tile);
@@ -179,6 +212,75 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 throw new Exception("Failed to generate Position!");
             }
+        }
+
+        private GameFrame.Core.Math.Vector3 GetBuildingSpawnPoint(GameFrame.Core.Math.Vector3 size)
+        {
+            var x = 0;
+            var z = 0;
+
+            var sizeX = (Int32)size.X;
+            var sizeZ = (Int32)size.Z;
+
+            var positionFound = false;
+
+            for (var counter = 0; counter < 10; counter++)
+            {
+                x = UnityEngine.Random.Range(0, this.gameMode.World.Width - sizeX);
+                z = UnityEngine.Random.Range(0, this.gameMode.World.Height - sizeZ);
+
+                var usedTiles = GetAllTiles(x, z, sizeX, sizeZ);
+
+                var areTilesAvailable = true;
+
+                foreach (var usedTile in usedTiles)
+                {
+                    if (usedTile.Building != default)
+                    {
+                        areTilesAvailable = false;
+                        break;
+                    }
+                }
+
+                if (areTilesAvailable)
+                {
+                    positionFound = true;
+                    break;
+                }
+            }
+
+            if (!positionFound)
+            {
+                throw new Exception("Failed to generate Position!");
+            }
+
+            return new GameFrame.Core.Math.Vector3(x, 0, z);
+        }
+
+        private List<Tile> GetAllTiles(Int32 x, Int32 z, Int32 sizeX, Int32 sizeZ)
+        {
+            var tiles = new List<Tile>();
+            
+            for (int i = 0; i < sizeX; i++)
+            {
+                var xCoord = x + i;
+
+                for (int j = 0; j < sizeZ; j++)
+                {
+                    var zCoord = z + j;
+
+                    if ((xCoord < this.tileCache.GetLength(0)) && (zCoord < this.tileCache.GetLength(1)))
+                    {
+                        tiles.Add(this.tileCache[xCoord, zCoord]);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+
+            return tiles;
         }
     }
 }

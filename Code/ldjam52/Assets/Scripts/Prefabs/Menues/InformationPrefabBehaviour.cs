@@ -80,7 +80,7 @@ public class InformationPrefabBehaviour : MonoBehaviour
     {
         StatsBar bar = infoPanel.Find(barName).GetChild(0).GetComponent<StatsBar>();
 
-        if (pair.IsVisible || true)
+        if (pair.IsVisible)
         {
             bar.SetPlantValues(GrowthController.getDominantChromosome(pair).Value0, GrowthController.getDominantChromosome(pair).ValueDev);
             bar.ShowPlantValue();

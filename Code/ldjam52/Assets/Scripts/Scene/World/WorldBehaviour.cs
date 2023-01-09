@@ -4,11 +4,13 @@ using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core;
 using Assets.Scripts.Model;
+using Assets.Scripts.Model.Buildings;
 using Assets.Scripts.UI.TileView;
 
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WorldBehaviour : MonoBehaviour
 {
@@ -115,9 +117,12 @@ public class WorldBehaviour : MonoBehaviour
                     tileBehaviour.ShowFieldView();
                 });
             }
-            else if (tileBehaviour.Tile.Farm != default)
+            else if (tileBehaviour.Tile.Building != default)
             {
-                PauseMenuBehaviour.Show();
+                if (tileBehaviour.Tile.Building is Farm)
+                {
+                    PauseMenuBehaviour.Show();
+                }
             }
             else
             {
