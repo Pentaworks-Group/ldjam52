@@ -175,11 +175,11 @@ namespace Assets.Scripts.Core.Inventory
             return storage.StorageItems.FirstOrDefault(i => i.Plant.ID == plant.ID);
         }
 
-        private static StorageItem getStorageItemToPlant(FarmStorage storage, Plant plant)
+        public static StorageItem getStorageItemToPlant(FarmStorage storage, Plant plant, bool createIfInexistant = true)
         {
             var item = GetStorageItemToPlantOrDefault(storage, plant);
 
-            if (item == null)
+            if (item == null && createIfInexistant)
             {
                 item = new StorageItem
                 {

@@ -42,23 +42,26 @@ public class CameraBehaviour : MonoBehaviour
 
             if (Core.Game.Options.IsMouseScreenEdgeScrollingEnabled)
             {
+                //Camera angle
+                float angle = (float) (cam.transform.rotation.y);
+
                 // Mouse
                 if (Input.mousePosition.x <= Screen.width * 0.01f)
                 {
-                    moveX = -1.0f;
+                    moveX = 1.0f * Mathf.Sin(angle);
                 }
                 else if (Input.mousePosition.x >= Screen.width * 0.99f)
                 {
-                    moveX = 1.0f;
+                    moveX = -1.0f * Mathf.Sin(angle);
                 }
 
                 if (Input.mousePosition.y <= Screen.height * 0.01f)
                 {
-                    moveZ = -1.0f;
+                    moveZ = -1.0f * Mathf.Cos(angle);
                 }
                 else if (Input.mousePosition.y >= Screen.height * 0.99f)
                 {
-                    moveZ = 1.0f;
+                    moveZ = 1.0f * Mathf.Cos(angle);
                 }
             }
             if (moveX != 0)
