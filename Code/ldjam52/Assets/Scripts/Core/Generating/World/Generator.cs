@@ -52,6 +52,16 @@ namespace Assets.Scripts.Core.Generating.World
                     isSuccessful = false;
                     UnityEngine.Debug.LogError("World size is off!");
                 }
+
+                foreach (var tile in world.Tiles)
+                {
+                    if (tile.Biome == default)
+                    {
+                        isSuccessful = false;
+                        UnityEngine.Debug.LogError("One or more tiles are missing the biome!");
+                        break;
+                    }
+                }
             }
 
             return isSuccessful;
@@ -103,23 +113,7 @@ namespace Assets.Scripts.Core.Generating.World
                 GetAvailableSpawnPoint(this.tileCache, out Int32 x, out Int32 z);
 
                 biome.SpawnPosition = new GameFrame.Core.Math.Vector3(x, 0, z);
-
-                var tile = new Tile()
-                {
-                    ID = Guid.NewGuid(),
-                    Biome = biome,
-                    IsOwned = false,
-                    Position = new GameFrame.Core.Math.Vector3(x, 0, z),
-                    Color = biome.Type.Color,
-                    Price = GetTilePrice(biome.Type),
-                    Field = new Field()
-                    {
-                        Temperature = UnityEngine.Random.Range(biome.Type.TemperatureMin, biome.Type.TemperatureMax),
-                        Fertility = UnityEngine.Random.Range(biome.Type.FertilityMin, biome.Type.FertilityMax),
-                        Humidity = UnityEngine.Random.Range(biome.Type.HumidityMin, biome.Type.HumidityMax),
-                        Sunshine = UnityEngine.Random.Range(biome.Type.SunshineMin, biome.Type.SunshineMax),
-                    }
-                };
+                var tile = GenerateTile(biome.SpawnPosition, biome);
 
                 this.tileCache[x, z] = tile;
             }
@@ -147,6 +141,25 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 this.world.Buildings.Add(laboratory);
             }
+        }
+
+        private Tile GenerateTile(GameFrame.Core.Math.Vector3 position, Biome biome)
+        {
+            return new Tile()
+            {
+                ID = Guid.NewGuid(),
+                Biome = biome,
+                IsOwned = false,
+                Position = position,
+                Price = GetTilePrice(biome.Type),
+                Field = new Field()
+                {
+                    Temperature = UnityEngine.Random.Range(biome.Type.TemperatureMin, biome.Type.TemperatureMax),
+                    Fertility = UnityEngine.Random.Range(biome.Type.FertilityMin, biome.Type.FertilityMax),
+                    Humidity = UnityEngine.Random.Range(biome.Type.HumidityMin, biome.Type.HumidityMax),
+                    Sunshine = UnityEngine.Random.Range(biome.Type.SunshineMin, biome.Type.SunshineMax),
+                }
+            };
         }
 
         private Int32 GetTilePrice(BiomeType biome)
@@ -194,24 +207,11 @@ namespace Assets.Scripts.Core.Generating.World
 
                     if (tile == default)
                     {
-                        tile = new Tile()
-                        {
-                            ID = Guid.NewGuid(),
-                            Position = new GameFrame.Core.Math.Vector3(x, 0, z),
-                            Price = TilePrice
-                        };
+                        var position = new GameFrame.Core.Math.Vector3(x, 0, z);
 
-                        var closestSpawn = FindBiome(tile);
+                        var closestSpawn = FindBiome(position);
 
-                        tile.Color = closestSpawn.Type.Color;
-
-                        tile.Field = new Field()
-                        {
-                            Temperature = UnityEngine.Random.Range(closestSpawn.Type.TemperatureMin, closestSpawn.Type.TemperatureMax),
-                            Fertility = UnityEngine.Random.Range(closestSpawn.Type.FertilityMin, closestSpawn.Type.FertilityMax),
-                            Humidity = UnityEngine.Random.Range(closestSpawn.Type.HumidityMin, closestSpawn.Type.HumidityMax),
-                            Sunshine = UnityEngine.Random.Range(closestSpawn.Type.SunshineMin, closestSpawn.Type.SunshineMax),
-                        };
+                        tile = GenerateTile(position, closestSpawn);
 
                         closestSpawn.Size++;
 
@@ -225,14 +225,14 @@ namespace Assets.Scripts.Core.Generating.World
             return tileList;
         }
 
-        private Biome FindBiome(Tile tile)
+        private Biome FindBiome(GameFrame.Core.Math.Vector3 tilePosition)
         {
             var shortestWeightedDistance = Double.MaxValue;
             var closestSpawn = default(Biome);
 
             foreach (var spawn in biomes)
             {
-                var weightedDistance = CalculateWeightedDistance(tile, spawn);
+                var weightedDistance = CalculateWeightedDistance(tilePosition, spawn);
 
                 if (weightedDistance < shortestWeightedDistance)
                 {
@@ -244,9 +244,9 @@ namespace Assets.Scripts.Core.Generating.World
             return closestSpawn;
         }
 
-        private Single CalculateWeightedDistance(Tile tile, Biome spawn)
+        private Single CalculateWeightedDistance(GameFrame.Core.Math.Vector3 tilePosition, Biome spawn)
         {
-            var distanceVector = spawn.SpawnPosition - tile.Position;
+            var distanceVector = spawn.SpawnPosition - tilePosition;
 
             var distance = distanceVector.Length / spawn.Weight;
 

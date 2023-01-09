@@ -29,7 +29,6 @@ namespace Assets.Scripts.Scene.FieldTestScene
 
                 Tile tile = new()
                 {
-                    Color = new GameFrame.Core.Media.Color(1f, 0.411f, 0.705f),
                     Field = new() { Fertility = .5, Sunshine = 2, Temperature = .8, Humidity = .4 },
                     Position = GameFrame.Core.Math.Vector3.Zero
                 };

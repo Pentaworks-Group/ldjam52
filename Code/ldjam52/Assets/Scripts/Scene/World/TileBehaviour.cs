@@ -43,7 +43,7 @@ public class TileBehaviour : MonoBehaviour
                 {
                     if (meshRenderer.material != null)
                     {
-                        meshRenderer.material.color = tile.Color.ToUnity();
+                        meshRenderer.material.color = tile.Biome.Type.Color.ToUnity();
                     }
                 }
             }
