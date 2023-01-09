@@ -77,7 +77,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         // Initial balance and invetory
         balance = FarmStorageController.GetStorageBalance();
         inventory = FarmStorageController.getStorageInventory();
-        fillList(inventory, Plants, true);
+
         fillList(Core.Game.State.AvailableShopItems, Seeds, false);
     }
 
