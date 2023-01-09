@@ -12,6 +12,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
     private Slider effectsVolumeSlider;
     private Slider ambienceVolumeSlider;
     private Slider backgroundVolumeSlider;
+    private Slider touchSensivitySlider;
     private Toggle animationEnabledToggle;
     private Toggle sideScrollingEnabledToggle;
     private ToggleGroup mobileInterface;
@@ -21,6 +22,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
         effectsVolumeSlider = transform.Find("OptionContainer/EffectsVolume/Right/ForegroundSlider").GetComponent<Slider>();
         ambienceVolumeSlider = transform.Find("OptionContainer/AmbienceVolume/Right/AmbieceSlider").GetComponent<Slider>();
         backgroundVolumeSlider = transform.Find("OptionContainer/BackgroundVolume/Right/BackgroundSlider").GetComponent<Slider>();
+        touchSensivitySlider = transform.Find("OptionContainer/TouchSensivity/Right/Slider").GetComponent<Slider>();
 
         sideScrollingEnabledToggle = transform.Find("OptionContainer/EnableSideScroll/Right/Toggle").GetComponent<Toggle>();
         animationEnabledToggle = transform.Find("OptionContainer/EnableAnimations/Right/Toggle").GetComponent<Toggle>();
@@ -75,6 +77,11 @@ public class OptionsMenuBehaviour : MonoBehaviour
         Core.Game.Options.BackgroundVolume = backgroundVolumeSlider.value;
     }
 
+    public void OnTouchSensivitySliderChanged()
+    {
+        Core.Game.Options.TouchSensivity = touchSensivitySlider.value;
+    }
+
     public void OnAnimationEnabledToggleValueChanged()
     {
         Core.Game.Options.AreAnimationsEnabled = this.animationEnabledToggle.isOn;
@@ -100,6 +107,7 @@ public class OptionsMenuBehaviour : MonoBehaviour
         effectsVolumeSlider.value = 1f;
         ambienceVolumeSlider.value = 0.125f;
         backgroundVolumeSlider.value = 0.125f;
+        touchSensivitySlider.value = 0.125f;
         Core.Game.Options.AreAnimationsEnabled = true;
         Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = true;
         //Core.Game.Options.MobileInterface = "Right";
@@ -130,6 +138,11 @@ public class OptionsMenuBehaviour : MonoBehaviour
             if (this.backgroundVolumeSlider.value != Core.Game.Options.BackgroundVolume)
             {
                 this.backgroundVolumeSlider.value = Core.Game.Options.BackgroundVolume;
+            }
+
+            if (this.touchSensivitySlider.value != Core.Game.Options.TouchSensivity)
+            {
+                this.touchSensivitySlider.value = Core.Game.Options.TouchSensivity;
             }
 
             if (this.animationEnabledToggle.isOn != Core.Game.Options.AreAnimationsEnabled)
