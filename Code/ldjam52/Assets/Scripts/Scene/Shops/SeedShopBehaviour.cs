@@ -59,10 +59,13 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     {
         base.Hide();
 
+        emptyList(Plants);
+
         this.seedShopToggle.SetActive(false);
     }
 
     // Start is called before the first frame update
+    // TODO change to OnStart
     void Start()
     {
         if (Assets.Scripts.Base.Core.Game.State == default)
@@ -77,7 +80,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
 
-        
+
         // TODO use shop list when available
         fillList(Core.Game.State.AvailableShopItems, Seeds, false);
 
@@ -186,6 +189,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     public void Buy()
     {
         // Buy
+        if (seedValue * buyQuantity > FarmStorageController.GetStorageBalance())
+            return;
+
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
