@@ -75,7 +75,7 @@ public class FieldBehaviour : MonoBehaviour
                 if (IsFullyGrown() && !this.isNotified)
                 {
                     this.isNotified = true;
-                    parentTile.PlayEffect("FullyGrown");
+                    //parentTile.PlayEffect("FullyGrown");
                 }                
             }
         }
