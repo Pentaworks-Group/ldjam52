@@ -40,7 +40,7 @@ namespace Assets.Scripts.UI.TileView
 
         public void Show(TileBehaviour tileBehaviour, Action actionRequired)
         {
-            if (tileBehaviour != null)
+            if (tileBehaviour != null && !worldBehaviour.WasEscPressed())
             {
                 this.tileBehaviour = tileBehaviour;
                 this.actionRequired = actionRequired;
@@ -68,6 +68,7 @@ namespace Assets.Scripts.UI.TileView
 
             SetVisibility(false);
             Assets.Scripts.Base.Core.Game.PlayButtonSound();
+            worldBehaviour.PressEsc();
         }
 
         public void BuyTile(Boolean isBuyAndBuilt)
@@ -355,7 +356,7 @@ namespace Assets.Scripts.UI.TileView
         {
 
             Hide();
-            worldBehaviour.PressEsc();
+            
 
         }
     }

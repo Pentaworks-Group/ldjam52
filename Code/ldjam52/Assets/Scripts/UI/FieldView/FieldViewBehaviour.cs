@@ -74,21 +74,24 @@ public class FieldViewBehaviour : MonoBehaviour
         if (harvestResult.activeSelf)
         {
             HideHarvestResult();
-        } else
+        }
+        else
         {
             CloseView();
-            worldBehaviour.PressEsc();
         }
     }
 
 
     public void ViewField(FieldBehaviour fieldBehaviour)
     {
-        currentlyViewedField = fieldBehaviour;
-        viewToggle.SetActive(true);
-        Core.Game.LockCameraMovement = true;
-        UpdateView();
-        Core.Game.PlayButtonSound();
+        if (worldBehaviour == default || !worldBehaviour.WasEscPressed())
+        {
+            currentlyViewedField = fieldBehaviour;
+            viewToggle.SetActive(true);
+            Core.Game.LockCameraMovement = true;
+            UpdateView();
+            Core.Game.PlayButtonSound();
+        }
     }
 
     public Field GetField()
@@ -107,7 +110,7 @@ public class FieldViewBehaviour : MonoBehaviour
             currentInfo.SetActive(true);
             plantingOptions.SetActive(false);
             plantName.text = currentlyViewedField.Field.Seed.Name;
-            plantedTime.text = Mathf.RoundToInt(currentlyViewedField.Field.TimePlanted).ToString()+"s";
+            plantedTime.text = Mathf.RoundToInt(currentlyViewedField.Field.TimePlanted).ToString() + "s";
             plantImage.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(currentlyViewedField.Field.Seed.ImageName);
         }
         else
@@ -191,11 +194,12 @@ public class FieldViewBehaviour : MonoBehaviour
         harvestResult.SetActive(false);
         Core.Game.LockCameraMovement = false;
         Core.Game.PlayButtonSound();
+        worldBehaviour.PressEsc();
     }
 
     public void SelectParent1(InformationPrefabBehaviour plantBehaviour)
     {
-        if(plantBehaviour.Item != null)
+        if (plantBehaviour.Item != null)
         {
             parent1.DisplaySeedDetails(plantBehaviour.Item.Plant);
             Core.Game.PlayButtonSound();

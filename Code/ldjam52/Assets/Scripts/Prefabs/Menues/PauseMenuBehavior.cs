@@ -86,7 +86,7 @@ public class PauseMenuBehavior : MonoBehaviour
         }
         else
         {
-            if (!Core.Game.LockCameraMovement && !worldBehaviour.WasEscPressed())
+            if (!Core.Game.LockCameraMovement && (worldBehaviour == default || !worldBehaviour.WasEscPressed()))
             {
                 this.PauseToggled.Invoke(true);
                 foreach (GameObject gameObject in ObjectsToHide)
@@ -113,6 +113,11 @@ public class PauseMenuBehavior : MonoBehaviour
         Core.Game.LockCameraMovement = false;
 
         Time.timeScale = 1;
+
+        if (worldBehaviour != default)
+        {
+            worldBehaviour.PressEsc();
+        }
     }
 
     public void Show()
