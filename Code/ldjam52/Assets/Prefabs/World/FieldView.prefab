@@ -1599,7 +1599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d52c7fba4327db40a3851387cb5c76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldBehaviour: {fileID: 0}
+  OnHide:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1622292187820483451
 GameObject:
   m_ObjectHideFlags: 0
@@ -3693,11 +3695,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseView
+      value: Hide
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TileViewBehaviour, Assembly-CSharp
+      value: FieldViewBehaviour, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
