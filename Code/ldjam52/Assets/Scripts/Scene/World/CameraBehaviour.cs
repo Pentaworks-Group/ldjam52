@@ -7,8 +7,8 @@ public class CameraBehaviour : MonoBehaviour
 {
     public Camera cam;
 
-    private readonly float moveSpeed = 10f;
-    private readonly float zoomSpeed = 5.0f;
+    private readonly float moveSpeed = 1f;
+    private readonly float zoomSpeed = 3.0f;
     private readonly float zoomSpeedMouse = 80.0f;
     private readonly float zoomSpeedTouch = 10.0f;
 
@@ -74,7 +74,7 @@ public class CameraBehaviour : MonoBehaviour
 
             if (moveX != 0 || moveZ != 0)
             {
-                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed * Core.Game.Options.TouchSensivity;
+                cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed * Core.Game.Options.MoveSensivity;
             }
 
             //// Zoom
@@ -111,11 +111,13 @@ public class CameraBehaviour : MonoBehaviour
                     prevPinch = (touch1.position, touch2.position);
                 else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
                 {
-                    zoom = -zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2)) * Core.Game.Options.TouchSensivity;
+                    zoom = -zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2));
                 }
             }
-
-            cam.fieldOfView = Mathf.Max(minFov, cam.fieldOfView + zoom * Time.deltaTime);
+            if (zoom != 0)
+            {
+                cam.fieldOfView = Mathf.Max(minFov, cam.fieldOfView + zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity);
+            }
         }
     }
 }
