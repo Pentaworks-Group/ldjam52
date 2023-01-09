@@ -158,22 +158,22 @@ public class InheritanceController
             int randomPropertyID = (int) Math.Round(UnityEngine.Random.value * propertiesCount);
             
             //TODO: Unsch�n, ich weiss;-)
-            if (randomPropertyID==FieldProperties.PROP_HUMIDITY && field.IsHumidityVisible)
+            if (randomPropertyID==FieldProperties.PROP_HUMIDITY && !field.IsHumidityVisible)
             {
                 newVisibleProperties = newVisibleProperties + 1;
                 field.IsHumidityVisible = true;
             }
-            else if (randomPropertyID == FieldProperties.PROP_TEMPERATURE && field.IsTemperatureVisible)
+            else if (randomPropertyID == FieldProperties.PROP_TEMPERATURE && !field.IsTemperatureVisible)
             {
                 newVisibleProperties = newVisibleProperties + 1;
                 field.IsTemperatureVisible = true;
             }
-            else if (randomPropertyID == FieldProperties.PROP_SUNSHINE && field.IsSunshineVisible)
+            else if (randomPropertyID == FieldProperties.PROP_SUNSHINE && !field.IsSunshineVisible)
             {
                 newVisibleProperties = newVisibleProperties + 1;
                 field.IsSunshineVisible = true;
             }
-            else if (randomPropertyID == FieldProperties.PROP_FERTILITY && field.IsFertiliyVisible)
+            else if (randomPropertyID == FieldProperties.PROP_FERTILITY && !field.IsFertiliyVisible)
             {
                 newVisibleProperties = newVisibleProperties + 1;
                 field.IsFertiliyVisible = true;

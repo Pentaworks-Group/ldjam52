@@ -16,8 +16,7 @@ Todo:
  - Show chromosomes in various locations
  - Rotten fields
     
- UI:
- - GET RID OF THE ANNOYING SPHERE!!!!!
+ UI: 
  - Buttons as Prefabs (FieldView)
  - HarvestView overhaul
   

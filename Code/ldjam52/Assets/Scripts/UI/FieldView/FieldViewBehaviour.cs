@@ -31,6 +31,8 @@ public class FieldViewBehaviour : MonoBehaviour
     private Image harvestSeedPic;
     private Image harvestPlantPic;
 
+    private Text analyzeCosts;
+
     private void Awake()
     {
         viewToggle = transform.Find("FieldViewToggle").gameObject;
@@ -54,6 +56,8 @@ public class FieldViewBehaviour : MonoBehaviour
         harvestPlantName = transform.Find("FieldViewToggle/HarvestResult/Header/PlantName").GetComponent<Text>();
         harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Pic").GetComponent<Image>();
         harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Pic").GetComponent<Image>();
+
+        analyzeCosts = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeCosts").GetComponent<Text>();
     }
 
     private void Update()
@@ -119,6 +123,7 @@ public class FieldViewBehaviour : MonoBehaviour
             plantingOptions.SetActive(true);
         }
         seedList.UpdateList();
+        analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
     }
 
     public void CheckHarvestButton()
@@ -268,6 +273,13 @@ public class FieldViewBehaviour : MonoBehaviour
     {
         parent1.ClearDisplayDetails();
         parent2.ClearDisplayDetails();
+        Core.Game.PlayButtonSound();
+    }
+
+    public void AnalyseField(InformationPrefabBehaviour plantBehaviour)
+    {
+        InheritanceController.AnalyseField(GetField(), Core.Game.State.FieldAnalyzer);
+        plantBehaviour.GetComponent<InformationPrefabBehaviour>().UpdateInfo(plantBehaviour.Item, GetField(), false);
         Core.Game.PlayButtonSound();
     }
 }
