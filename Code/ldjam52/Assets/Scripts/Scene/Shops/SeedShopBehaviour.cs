@@ -222,6 +222,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             updateInfo(false);
 
         updateAnalyseView();
+
     }
 
     private bool checkAnalysability(Plant plant)
@@ -294,18 +295,18 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         {
             sellQuantity = Mathf.Min(chosenPlant.StorageAmountPlants, sellQuantity);
             SellQuantityText.text = sellQuantity.ToString();
-
-            if (chosenPlant.StorageAmountPlants == 0)
-            {
-                buttonPressed.onClick.RemoveAllListeners();
-                Destroy(buttonPressed.gameObject);
-                chosenPlant = null;
-            }
         }
 
         updatePrice(isSell);
         // Need to update amount
         updateInfo(isSell);
+
+        if (chosenPlant.StorageAmountPlants == 0)
+        {
+            buttonPressed.onClick.RemoveAllListeners();
+            Destroy(buttonPressed.gameObject);
+            chosenPlant = null;
+        }
     }
 
 
