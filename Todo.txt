@@ -7,7 +7,7 @@ Todo:
  - 
  
  Core:
- - Name! Suggested: - H.I.V.E (Highly Involuntary Vain Evolution) -
+ - Name! Suggested: - H.I.V.E (Highly Involuntary Vain Effort) -
  - Farm Building price
    
  GamePlay:
