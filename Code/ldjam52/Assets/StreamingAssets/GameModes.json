@@ -3,8 +3,8 @@
         "Name": "Test",
         "Description": "Test game mode 1",
         "World": {
-            "Height": 64,
-            "Width": 64,
+            "Height": 32,
+            "Width": 32,
             "RandomBiomesAmount": 10,
             "IsAllBiomesUsageForced": true,
             "TotalDayDuration": 240,
@@ -87,43 +87,43 @@
                 "StorageItems": [
                     {
                         "PlantId": "35054514-e9b5-45e1-bc5b-bd548de633da",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "9356849c-8c09-46f8-9521-29cea3e0c367",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "ac77c6d6-c379-499c-bc79-91b49ca6cd66",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "866ead50-2a6e-4ef5-a830-6297373ae879",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 1
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "7ac5b649-0f8f-48dc-bfb5-fb2a3328e4ef",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "0c77d03b-85da-4552-bff7-6ad6b2e71f5d",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "beb9d455-539a-4783-9a73-a91b326af581",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     },
                     {
                         "PlantId": "e5bc09bf-7517-4768-a01e-e8e79d97bc41",
-                        "StorageAmountPlants": 0,
-                        "StorageAmountSeeds": 0
+                        "StorageAmountPlants": 8,
+                        "StorageAmountSeeds": 8
                     }
 
                 ]
