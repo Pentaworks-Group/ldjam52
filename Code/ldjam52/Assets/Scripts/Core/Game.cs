@@ -61,10 +61,7 @@ namespace Assets.Scripts.Core
                     gameState.AvailableShopItems.Add(item);
                 }
             }
-
-            
         }
-
 
         public void PopulateKnownPlants(GameState gameState)
         {
