@@ -60,79 +60,9 @@ public class InformationPrefabBehaviour : MonoBehaviour
         drawStatsBar(information, "Sun", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
         drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
         drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
-
-        /*
-        StatsBar bar = information.Find("Temp").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-
-        bar = information.Find("Sun").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SUN];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-
-        bar = information.Find("Water").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.WATER];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-
-        bar = information.Find("Fertility").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.FERTILITY];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-        */
     }
 
-    private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair)
+    private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair/*, double biomeValue, bool isBiomeValueVisible*/)
     {
         StatsBar bar = infoPanel.Find(barName).GetChild(0).GetComponent<StatsBar>();
 
@@ -141,5 +71,17 @@ public class InformationPrefabBehaviour : MonoBehaviour
             bar.SetPlantValues(GrowthController.getDominantChromosome(pair).Value0, GrowthController.getDominantChromosome(pair).ValueDev);
             bar.ShowPlantValue();
         }
+        else
+        {
+            bar.HidePlantValue();
+        }
+
+/*        if (isBiomeValueVisible)
+        {
+        }
+        else
+        {
+
+        }*/
     }
 }

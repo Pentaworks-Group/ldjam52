@@ -7,7 +7,7 @@ public class StatsBar : MonoBehaviour
 
     // Values in [0,1]
     private double mean;
-    private double var;
+    private double width;
     private double biomeVal;
 
     private Color col;
@@ -24,8 +24,18 @@ public class StatsBar : MonoBehaviour
     public void SetPlantValues(double _mean, double _variance)
     {
         mean = _mean;
-        var = _variance;
 
+        double start = mean - 0.5 * _variance;
+        double end = mean + 0.5 * _variance;
+
+    }
+
+    public void SetBiomeValue(double value)
+    {
+        biomeVal = value;
+
+        BiomeTransform.anchorMin = new Vector2((float)value - 0.005f, 0.0f);
+        BiomeTransform.anchorMax = new Vector2((float)value + 0.005f, 1.0f);
     }
 
     public void ShowPlantValue()
