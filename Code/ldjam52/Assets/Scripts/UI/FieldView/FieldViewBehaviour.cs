@@ -1,14 +1,13 @@
 using Assets.Scripts.Base;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
+using Assets.Scripts.Prefabs.World;
 
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FieldViewBehaviour : MonoBehaviour
+public class FieldViewBehaviour : ViewBaseBehaviour
 {
-    public WorldBehaviour worldBehaviour;
-
     private FieldBehaviour currentlyViewedField;
 
     private GameObject viewToggle;
@@ -86,21 +85,17 @@ public class FieldViewBehaviour : MonoBehaviour
         }
         else
         {
-            CloseView();
+            Hide();
         }
     }
 
-
-    public void ViewField(FieldBehaviour fieldBehaviour)
+    public void Show(FieldBehaviour fieldBehaviour)
     {
-        if (worldBehaviour == default || !worldBehaviour.WasEscPressed())
-        {
-            currentlyViewedField = fieldBehaviour;
-            viewToggle.SetActive(true);
-            Core.Game.LockCameraMovement = true;
-            UpdateView();
-            Core.Game.PlayButtonSound();
-        }
+        Show();
+
+        currentlyViewedField = fieldBehaviour;
+        viewToggle.SetActive(true);
+        UpdateView();
     }
 
     public Field GetField()
@@ -207,16 +202,15 @@ public class FieldViewBehaviour : MonoBehaviour
         Core.Game.PlayButtonSound();
     }
 
-    public void CloseView()
+    public override void Hide()
     {
+        base.Hide();
+
         currentlyViewedField = null;
         currentInfo.SetActive(false);
         viewToggle.SetActive(false);
         plantingOptions.SetActive(false);
         harvestResult.SetActive(false);
-        Core.Game.LockCameraMovement = false;
-        Core.Game.PlayButtonSound();
-        worldBehaviour.PressEsc();
     }
 
     public void SelectParent1(InformationPrefabBehaviour plantBehaviour)
