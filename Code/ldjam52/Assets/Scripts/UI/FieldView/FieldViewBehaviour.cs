@@ -127,13 +127,16 @@ public class FieldViewBehaviour : MonoBehaviour
         }
         seedList.UpdateList();
         analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
-        if (Core.Game.State.FarmStorage.MoneyBalance < Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
+        if (analyseButton != null)
         {
-            analyseButton.enabled = false;
-        }
-        else
-        {
-            analyseButton.enabled = true;
+            if (Core.Game.State.FarmStorage.MoneyBalance < Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
+            {
+                analyseButton.interactable = false;
+            }
+            else
+            {
+                analyseButton.interactable = true;
+            }
         }
     }
 
