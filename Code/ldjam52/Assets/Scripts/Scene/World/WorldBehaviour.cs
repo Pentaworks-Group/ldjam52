@@ -75,18 +75,21 @@ public class WorldBehaviour : MonoBehaviour
 
     private void Update()
     {
-        Assets.Scripts.Base.Core.Game.State.ElapsedTime += Time.deltaTime;
-
-        if (!isFarmSet && gameState.World.Farm != default)
+        if (Core.Game.State != default)
         {
-            RenderFarm(gameState.World.Farm);
-        }
+            Core.Game.State.ElapsedTime += Time.deltaTime;
 
-        playRandomEffectSound();
+            if (!isFarmSet && gameState.World.Farm != default)
+            {
+                RenderFarm(gameState.World.Farm);
+            }
 
-        if (escTimeout > 0)
-        {
-            escTimeout--;
+            playRandomEffectSound();
+
+            if (escTimeout > 0)
+            {
+                escTimeout--;
+            }
         }
     }
 
