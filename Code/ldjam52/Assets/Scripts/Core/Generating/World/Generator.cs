@@ -10,7 +10,7 @@ namespace Assets.Scripts.Core.Generating.World
 {
     public class Generator
     {
-        private const Int32 TilePrice = 1;
+        private const Int32 TilePrice = 300;
 
         private readonly GameMode gameMode;
         private List<BiomeSpawn> biomes;
@@ -28,22 +28,31 @@ namespace Assets.Scripts.Core.Generating.World
         {
             var isSuccessful = true;
 
-            GenerateBiomes();
-            var tiles = GenerateTiles();
-
-            var farm = SpawnBuilding<Farm>(gameMode.World.Farm);
-            var shop = SpawnBuilding<Shop>(gameMode.World.Shop);
-            var laboratory = SpawnBuilding<Laboratory>(gameMode.World.Laboratory);
-
             this.world = new Model.World()
             {
                 Height = gameMode.World.Height,
                 Width = gameMode.World.Width,
-                Tiles = tiles,
-                Farm = farm,
-                Shop = shop,
-                Laboratory = laboratory
+                Buildings = new List<Building>()
             };
+
+            GenerateBiomes();
+            GenerateTiles();
+            GenerateBuildings();
+
+            if (world != null)
+            {
+                if (world.Tiles?.Count < 1)
+                {
+                    isSuccessful = false;
+                    UnityEngine.Debug.LogError("Too little or no tiles generated!");
+                }
+
+                if (world.Height < 1 || world.Width < 1)
+                {
+                    isSuccessful = false;
+                    UnityEngine.Debug.LogError("World size is off!");
+                }
+            }
 
             return isSuccessful;
         }
@@ -71,7 +80,7 @@ namespace Assets.Scripts.Core.Generating.World
             }
         }
 
-        private List<Tile> GenerateTiles()
+        private void GenerateTiles()
         {
             this.tileCache = new Tile[gameMode.World.Width, gameMode.World.Height];
 
@@ -87,7 +96,7 @@ namespace Assets.Scripts.Core.Generating.World
                     IsOwned = false,
                     Position = new GameFrame.Core.Math.Vector3(x, 0, z),
                     Color = biomeSpawn.Biome.Color,
-                    Price = TilePrice,
+                    Price = GetTilePrice(biomeSpawn.Biome),
                     Field = new Field()
                     {
                         Temperature = UnityEngine.Random.Range(biomeSpawn.Biome.TemperatureMin, biomeSpawn.Biome.TemperatureMax),
@@ -100,7 +109,39 @@ namespace Assets.Scripts.Core.Generating.World
                 this.tileCache[x, z] = tile;
             }
 
-            return FillEmptyTiles();
+            this.world.Tiles = FillEmptyTiles();
+        }
+
+        private void GenerateBuildings()
+        {
+            if (gameMode.World.Farm != default)
+            {
+                this.world.Farm = SpawnBuilding<Farm>(gameMode.World.Farm);
+            }
+
+            var shop = SpawnBuilding<Shop>(gameMode.World.Shop);
+
+            if (shop != default)
+            {
+                this.world.Buildings.Add(shop);
+            }
+
+            var laboratory = SpawnBuilding<Laboratory>(gameMode.World.Laboratory);
+
+            if (laboratory != default)
+            {
+                this.world.Buildings.Add(laboratory);
+            }
+        }
+
+        private Int32 GetTilePrice(Biome biome)
+        {
+            if ((biome.TilePriceMin > 0) && (biome.TilePriceMax > 0))
+            {
+                return UnityEngine.Random.Range(biome.TilePriceMin, biome.TilePriceMax);
+            }
+
+            return TilePrice;
         }
 
         private TBuilding SpawnBuilding<TBuilding>(BuildingSettings buildingSettings) where TBuilding : Building, new()
@@ -111,8 +152,13 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 building = new TBuilding()
                 {
-                    Position = GetBuildingSpawnPoint(buildingSettings.Size)
+                    Position = GetBuildingSpawnPoint(buildingSettings.Size, out var affectedTiles)
                 };
+
+                foreach (var affectedTile in affectedTiles)
+                {
+                    affectedTile.Building = building;
+                }
             }
 
             return building;
@@ -214,8 +260,10 @@ namespace Assets.Scripts.Core.Generating.World
             }
         }
 
-        private GameFrame.Core.Math.Vector3 GetBuildingSpawnPoint(GameFrame.Core.Math.Vector3 size)
+        private GameFrame.Core.Math.Vector3 GetBuildingSpawnPoint(GameFrame.Core.Math.Vector3 size, out List<Tile> affectedTiles)
         {
+            affectedTiles = new List<Tile>();
+
             var x = 0;
             var z = 0;
 
@@ -244,6 +292,8 @@ namespace Assets.Scripts.Core.Generating.World
 
                 if (areTilesAvailable)
                 {
+                    affectedTiles.AddRange(usedTiles);
+
                     positionFound = true;
                     break;
                 }
@@ -260,7 +310,7 @@ namespace Assets.Scripts.Core.Generating.World
         private List<Tile> GetAllTiles(Int32 x, Int32 z, Int32 sizeX, Int32 sizeZ)
         {
             var tiles = new List<Tile>();
-            
+
             for (int i = 0; i < sizeX; i++)
             {
                 var xCoord = x + i;

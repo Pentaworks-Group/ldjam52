@@ -8,6 +8,9 @@ namespace Assets.Scripts.Model
     {
         public String Name { get; set; }
         public Color Color { get; set; }
+
+        public Int32 TilePriceMin { get; set; }
+        public Int32 TilePriceMax { get; set; }
         
         //Use while generating world.
         public Single WeightMin { get; set; }

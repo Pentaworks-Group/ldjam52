@@ -27,6 +27,7 @@ public class FieldViewBehaviour : MonoBehaviour
 
     private Text harvestSeedAmount;
     private Text harvestPlantAmount;
+    private Text harvestPlantName;
     private Image harvestSeedPic;
     private Image harvestPlantPic;
 
@@ -50,6 +51,7 @@ public class FieldViewBehaviour : MonoBehaviour
 
         harvestSeedAmount = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Amount").GetComponent<Text>();
         harvestPlantAmount = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Amount").GetComponent<Text>();
+        harvestPlantName = transform.Find("FieldViewToggle/HarvestResult/Header/PlantName").GetComponent<Text>();
         harvestSeedPic = transform.Find("FieldViewToggle/HarvestResult/Body/Seeds/Pic").GetComponent<Image>();
         harvestPlantPic = transform.Find("FieldViewToggle/HarvestResult/Body/Plants/Pic").GetComponent<Image>();
     }
@@ -105,7 +107,7 @@ public class FieldViewBehaviour : MonoBehaviour
             currentInfo.SetActive(true);
             plantingOptions.SetActive(false);
             plantName.text = currentlyViewedField.Field.Seed.Name;
-            plantedTime.text = currentlyViewedField.Field.TimePlanted.ToString();
+            plantedTime.text = Mathf.RoundToInt(currentlyViewedField.Field.TimePlanted).ToString()+"s";
             plantImage.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(currentlyViewedField.Field.Seed.ImageName);
         }
         else
@@ -191,16 +193,22 @@ public class FieldViewBehaviour : MonoBehaviour
         Core.Game.PlayButtonSound();
     }
 
-    public void SelectParent1(FieldViewSeedListDetailsBehaviour plantBehaviour)
+    public void SelectParent1(InformationPrefabBehaviour plantBehaviour)
     {
-        parent1.DisplaySeedDetails(plantBehaviour.Plant);
-        Core.Game.PlayButtonSound();
+        if(plantBehaviour.Item != null)
+        {
+            parent1.DisplaySeedDetails(plantBehaviour.Item.Plant);
+            Core.Game.PlayButtonSound();
+        }
     }
 
-    public void SelectParent2(FieldViewSeedListDetailsBehaviour plantBehaviour)
+    public void SelectParent2(InformationPrefabBehaviour plantBehaviour)
     {
-        parent2.DisplaySeedDetails(plantBehaviour.Plant);
-        Core.Game.PlayButtonSound();
+        if (plantBehaviour.Item != null)
+        {
+            parent2.DisplaySeedDetails(plantBehaviour.Item.Plant);
+            Core.Game.PlayButtonSound();
+        }
     }
 
     public void SelectParent1Slot(FieldViewSeedListSlotBehaviour slotBehaviour)
@@ -233,6 +241,7 @@ public class FieldViewBehaviour : MonoBehaviour
         harvestResult.SetActive(true);
         harvestSeedAmount.text = result.NumSeeds.ToString();
         harvestPlantAmount.text = result.NumHarvest.ToString();
+        harvestPlantName.text = result.Plant.Name;
         harvestSeedPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.SeedImageName);
         harvestPlantPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.ImageName);
         seedList.UpdateList();

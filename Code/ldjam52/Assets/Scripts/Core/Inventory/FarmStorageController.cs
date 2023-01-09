@@ -35,6 +35,25 @@ namespace Assets.Scripts.Core.Inventory
             return storage.MoneyBalance;
         }
 
+
+        /// <summary>
+        /// Returns the amount of this plant which are stored
+        /// </summary>
+        /// <param name="plant"></param>
+        /// <returns></returns>
+        public static int GetPlantCountInStorage(Plant plant)
+        {
+            FarmStorage storage = Base.Core.Game.State.FarmStorage;
+            StorageItem item = GetStorageItemToPlantOrDefault(storage, plant);
+
+            if (item == default)
+            {
+                return 0;
+            }
+
+            return item.StorageAmountPlants;
+        }
+
         /// <summary>
         /// Tries to put in an amount of plants and returns the amount that fitted in the storage
         /// </summary>
@@ -73,6 +92,25 @@ namespace Assets.Scripts.Core.Inventory
             item.StorageAmountPlants = Math.Max(0, item.StorageAmountPlants - amount);
 
             return definitiveAmount;
+        }
+
+
+        /// <summary>
+        /// Returns the amount of this seed which are stored
+        /// </summary>
+        /// <param name="plant"></param>
+        /// <returns></returns>
+        public static int GetSeedCountInStorage(Plant plant)
+        {
+            FarmStorage storage = Base.Core.Game.State.FarmStorage;
+            StorageItem item = GetStorageItemToPlantOrDefault(storage, plant);
+
+            if (item == default)
+            {
+                return 0;
+            }
+
+            return item.StorageAmountSeeds;
         }
 
         /// <summary>
@@ -132,9 +170,14 @@ namespace Assets.Scripts.Core.Inventory
             storage.MoneyBalance -= amount;
         }
 
+        private static StorageItem GetStorageItemToPlantOrDefault(FarmStorage storage, Plant plant)
+        {
+            return storage.StorageItems.FirstOrDefault(i => i.Plant.ID == plant.ID);
+        }
+
         private static StorageItem getStorageItemToPlant(FarmStorage storage, Plant plant)
         {
-            var item = storage.StorageItems.FirstOrDefault(i => i.Plant.ID == plant.ID);
+            var item = GetStorageItemToPlantOrDefault(storage, plant);
 
             if (item == null)
             {
