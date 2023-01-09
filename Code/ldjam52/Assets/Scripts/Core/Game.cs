@@ -74,7 +74,10 @@ namespace Assets.Scripts.Core
                 AreAnimationsEnabled = true,
                 EffectsVolume = 0.7f,
                 BackgroundVolume = 0.9f,
-                AmbienceVolume = 0.125f
+                AmbienceVolume = 0.125f,
+                IsMouseScreenEdgeScrollingEnabled = true,
+                MoveSensivity = 0.5f,
+                ZoomSensivity = 0.5f
             };
         }
 

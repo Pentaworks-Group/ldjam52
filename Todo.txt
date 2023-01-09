@@ -41,6 +41,7 @@ Nice to have:
  - ScrollView (List container)
  - Show owned tiles with fence
  - ShortKeys
+ - Only buy adjacent tiles
  
 Ideas:
 ----------------------------------

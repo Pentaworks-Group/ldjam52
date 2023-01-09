@@ -15,13 +15,13 @@ public class WorldBehaviour : MonoBehaviour
     private GameObject tileContainer;
     private GameObject templateContainer;
 
-
     private int escTimeout = 3;
     private Boolean isFarmSet = false;
     private GameState gameState;
 
     public TileViewBehaviour TileViewBehaviour;
     public FieldViewBehaviour FieldViewBehaviour;
+    public PauseMenuBehavior PauseMenuBehaviour;
 
     //Random Ambient Sounds
     private float nextSoundEffectTime = 0;
@@ -93,7 +93,11 @@ public class WorldBehaviour : MonoBehaviour
                     tileBehaviour.ShowFieldView();
                 });
             }
-            else if (tileBehaviour.Tile.Farm == default)
+            else if (tileBehaviour.Tile.Farm != default)
+            {
+                PauseMenuBehaviour.Show();
+            }
+            else
             {
                 tileBehaviour.ShowFieldView();
             }

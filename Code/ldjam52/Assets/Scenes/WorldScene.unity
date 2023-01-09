@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17511049, g: 0.21907195, b: 0.3013715, a: 1}
+  m_IndirectSpecularColor: {r: 0.17511088, g: 0.21907213, b: 0.3013723, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -964,6 +964,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9199526047750111619, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
   m_PrefabInstance: {fileID: 1468167437}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1730686436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1682637802365037447, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+  m_PrefabInstance: {fileID: 1468167437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95faadea765385741a63672a3a37c07c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1813633752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileViewBehaviour: {fileID: 530696768}
   FieldViewBehaviour: {fileID: 1457188055}
+  PauseMenuBehaviour: {fileID: 1730686436}
 --- !u!114 &1900354446
 MonoBehaviour:
   m_ObjectHideFlags: 0

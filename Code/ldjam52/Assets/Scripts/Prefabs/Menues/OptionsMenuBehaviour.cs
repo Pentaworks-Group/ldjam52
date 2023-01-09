@@ -1,5 +1,3 @@
-
-using Assets.Scripts;
 using Assets.Scripts.Base;
 
 using TMPro;
@@ -111,17 +109,12 @@ public class OptionsMenuBehaviour : MonoBehaviour
     public void OnRestoreDefaultsClick()
     {
         Core.Game.PlayButtonSound();
-        effectsVolumeSlider.value = 1f;
-        ambienceVolumeSlider.value = 0.125f;
-        backgroundVolumeSlider.value = 0.125f;
-        moveSensivitySlider.value = 0.5f;
-        zoomSensivitySlider.value = 0.5f;
-        Core.Game.Options.AreAnimationsEnabled = true;
-        Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = true;
-        //Core.Game.Options.MobileInterface = "Right";
 
+        Core.Game.RestoreDefaultOptions();
 
-        this.SetMobileInterfaceToggles();
+        SetMobileInterfaceToggles();
+
+        UpdateValues();
     }
 
     public void SaveOptions()
