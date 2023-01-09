@@ -53,6 +53,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         balance = FarmStorageController.GetStorageBalance();
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
+        updateInfo(true);
+        updateInfo(false);
     }
 
     public override void Hide()
@@ -172,23 +174,31 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             return;
 
         int amount = sellAll ? chosenPlant.StorageAmountPlants : sellQuantity;
+
+        if (amount == 0)
+            return;
+
         FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, amount);
         FarmStorageController.PutMoneyInStorage((int)(plantValue * amount));
 
         stateUpdate(true);
+
+        Core.Game.EffectsAudioManager.Play("MoneyRain");
     }
 
     // Buy specified amount
     public void Buy()
     {
         // Buy
-        if (seedValue * buyQuantity > FarmStorageController.GetStorageBalance())
+        if (seedValue * buyQuantity > FarmStorageController.GetStorageBalance() || buyQuantity == 0)
             return;
 
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
         stateUpdate(false);
+
+        Core.Game.EffectsAudioManager.Play("MoneyRain");
     }
 
 
