@@ -1,6 +1,4 @@
-﻿using System;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts.Prefabs.World
@@ -24,6 +22,11 @@ namespace Assets.Scripts.Prefabs.World
         }
 
         private void Update()
+        {
+            OnUpdate();
+        }
+
+        protected virtual void OnUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
