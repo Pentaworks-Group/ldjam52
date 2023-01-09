@@ -76,7 +76,7 @@ namespace Assets.Scripts.Constants
                 Name = "Discover one Property in a Scan",
                 ValueVisibleCount = 1,
                 UpgradeCost = 0,
-                AnalyticsCost = 50,
+                AnalyticsCost = 300,
                 AnalyticsPlantCost = 0
             },
             new DevelopmentStage
@@ -85,7 +85,7 @@ namespace Assets.Scripts.Constants
                 Name = "Discover two Properties in a Scan",
                 ValueVisibleCount = 2,
                 UpgradeCost = 5000,
-                AnalyticsCost = 75,
+                AnalyticsCost = 450,
                 AnalyticsPlantCost = 0
             },
             new DevelopmentStage
@@ -94,7 +94,7 @@ namespace Assets.Scripts.Constants
                 Name = "Discover three Properties in a Scan",
                 ValueVisibleCount = 3,
                 UpgradeCost = 7500,
-                AnalyticsCost = 100,
+                AnalyticsCost = 600,
                 AnalyticsPlantCost = 0
             },
             new DevelopmentStage
@@ -103,7 +103,7 @@ namespace Assets.Scripts.Constants
                 Name = "Discover four Properties in a Scan",
                 ValueVisibleCount = 4,
                 UpgradeCost = 10000,
-                AnalyticsCost = 125,
+                AnalyticsCost = 750,
                 AnalyticsPlantCost = 0
             },
         };
