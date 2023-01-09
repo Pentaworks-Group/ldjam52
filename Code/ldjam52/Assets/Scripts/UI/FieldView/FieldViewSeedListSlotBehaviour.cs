@@ -46,7 +46,7 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
     public void ShowItemDetails()
     {
         FieldViewBehaviour fieldView = CurrentlyViewedField.GetComponent<FieldViewBehaviour>();
-        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(GetStorageItem(), fieldView.GetField());
+        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(GetStorageItem(), fieldView.GetField(), false);
     }
 
     override public void UpdateUI()
