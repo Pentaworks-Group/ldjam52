@@ -70,7 +70,7 @@ public class MainMenuBehaviour : MonoBehaviour
 
     public void Quit()
     {
-
+        Application.Quit();
     }
 
     public void LoadGameSettings()
