@@ -39,6 +39,21 @@ namespace Assets.Scripts.Core.Generating.World
             GenerateTiles();
             GenerateBuildings();
 
+            if (world != null)
+            {
+                if (world.Tiles?.Count < 1)
+                {
+                    isSuccessful = false;
+                    UnityEngine.Debug.LogError("Too little or no tiles generated!");
+                }
+
+                if (world.Height < 1 || world.Width < 1)
+                {
+                    isSuccessful = false;
+                    UnityEngine.Debug.LogError("World size is off!");
+                }
+            }
+
             return isSuccessful;
         }
 
@@ -65,7 +80,7 @@ namespace Assets.Scripts.Core.Generating.World
             }
         }
 
-        private List<Tile> GenerateTiles()
+        private void GenerateTiles()
         {
             this.tileCache = new Tile[gameMode.World.Width, gameMode.World.Height];
 
@@ -94,7 +109,7 @@ namespace Assets.Scripts.Core.Generating.World
                 this.tileCache[x, z] = tile;
             }
 
-            return FillEmptyTiles();
+            this.world.Tiles = FillEmptyTiles();
         }
 
         private void GenerateBuildings()

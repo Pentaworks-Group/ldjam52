@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
@@ -14,6 +15,8 @@ using UnityEngine.UIElements;
 
 public class WorldBehaviour : MonoBehaviour
 {
+    //private IDictionary<String, Game>
+
     private GameObject tileContainer;
     private GameObject templateContainer;
 
@@ -43,7 +46,7 @@ public class WorldBehaviour : MonoBehaviour
 
             if (gameState != default)
             {
-                Core.Game.TileController = new TileController();
+                Assets.Scripts.Base.Core.Game.TileController = new TileController();
 
                 if (gameState.World.Tiles.Count > 0)
                 {
@@ -104,6 +107,11 @@ public class WorldBehaviour : MonoBehaviour
         {
             RenderFarm(world.Farm);
         }
+
+        if (world.Buildings?.Count > 0)
+        {
+            RenderBuildings(world.Buildings);
+        }
     }
 
     private void TileSelected(TileBehaviour tileBehaviour)
@@ -131,8 +139,6 @@ public class WorldBehaviour : MonoBehaviour
         }
     }
 
-    
-
     public void PressEsc()
     {
         escTimeout = 3;
@@ -155,6 +161,21 @@ public class WorldBehaviour : MonoBehaviour
         }
 
         isFarmSet = true;
+    }
+
+    private void RenderBuildings(List<Building> buildings)
+    {
+        foreach (var building in buildings)
+        {
+            //var buildingTemplate = GetTemplate(building.TemplateReference);
+
+            //var buildingGameObject = Instantiate(buildingTemplate, tileContainer.transform);
+
+            //if ((buildingGameObject.transform.position.x != building.Position.X) || (buildingGameObject.transform.position.z != building.Position.Z))
+            //{
+            //    buildingGameObject.transform.position = new UnityEngine.Vector3(building.Position.X, this.transform.position.y, building.Position.Z);
+            //}
+        }
     }
 
     private void playRandomEffectSound()
