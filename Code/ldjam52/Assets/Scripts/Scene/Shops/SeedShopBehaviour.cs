@@ -75,8 +75,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
         fillList(inventory, Plants, true);
 
+        
         // TODO use shop list when available
-        fillList(inventory, Seeds, false);
+        fillList(Core.Game.State.AvailableShopItems, Seeds, false);
 
         //emptyList(Plants);
     }

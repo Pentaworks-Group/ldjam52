@@ -17,15 +17,7 @@ namespace Assets.Scripts.Scene.Shops
         public GameObject FieldAnalyzerPanel;
 
         public TMP_Text BalanceText;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            this.laboratoryViewToggle = transform.Find("LaboratoryViewToggle").gameObject;
-
-            updateGUI();
-        }
-
+                
         public override void Show()
         {
             base.Show();
@@ -38,6 +30,15 @@ namespace Assets.Scripts.Scene.Shops
             base.Hide();
 
             this.laboratoryViewToggle.SetActive(false);
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            this.laboratoryViewToggle = transform.Find("LaboratoryViewToggle").gameObject;
+
+            updateGUI();
         }
 
         private void updateGUI()

@@ -45,11 +45,26 @@ namespace Assets.Scripts.Core
 
             GenerateWorld(gameState);
             PopulateKnownPlants(gameState);
+            PopulateShopStorage(gameState);
             SetPlayerValues(gameState);
             GenerateAnalyzers(gameState);
 
             return gameState;
         }
+        public void PopulateShopStorage(GameState gameState)
+        {
+            if (gameState.AvailableShopItems == default)
+            {
+                gameState.AvailableShopItems = new(); 
+                foreach (StorageItem item in gameState.GameMode.AvailableShopItems)
+                {
+                    gameState.AvailableShopItems.Add(item);
+                }
+            }
+
+            
+        }
+
 
         public void PopulateKnownPlants(GameState gameState)
         {
