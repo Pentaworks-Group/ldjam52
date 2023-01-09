@@ -11,14 +11,16 @@ public class GrowthController
 {
     public static Double getGrowthRate(Field field, Plant plant)
     {
+        //Scaling Factor
+        double scalingFactor = 15;
         //Humidity
         Double humidityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
         //Temperature
-        Double temperatureFactor = getGrowthFactorForType(ChromosomeTypes.TEMP, plant, field.Humidity);
+        Double temperatureFactor = getGrowthFactorForType(ChromosomeTypes.TEMP, plant, field.Temperature);
         //Sunshine
-        Double sunshineFactor = getGrowthFactorForType(ChromosomeTypes.SUN, plant, field.Humidity);
+        Double sunshineFactor = getGrowthFactorForType(ChromosomeTypes.SUN, plant, field.Sunshine);
         //Fertility
-        Double fertilityFactor = getGrowthFactorForType(ChromosomeTypes.FERTILITY, plant, field.Humidity);
+        Double fertilityFactor = getGrowthFactorForType(ChromosomeTypes.FERTILITY, plant, field.Fertility);
 
         Double growthFactor = (humidityFactor + temperatureFactor + sunshineFactor + fertilityFactor) / 4;
 
@@ -33,7 +35,7 @@ public class GrowthController
             Debug.LogError($"Key {ChromosomeTypes.GROWTH} not defined for the plant!");
         }
 
-        return growthFactor * growthRate;
+        return growthFactor * growthRate / scalingFactor;
     }
 
     public static Double getGrowthFactorForType(String type, Plant plant, Double biomeValue)
@@ -73,7 +75,7 @@ public class GrowthController
     private static Double getGrowthForChromosome(Chromosome chromosome, Double biomeValue)
     {
         Normal normal = new Normal(mean: chromosome.Value0, stddev: chromosome.ValueDev);
-        double newMean = normal.Density(biomeValue);
+        double newMean = normal.Density(biomeValue) / normal.Density(chromosome.Value0) ;
 
         return newMean;
     }
