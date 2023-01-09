@@ -54,7 +54,7 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
         StorageItem item = GetStorageItem();
         Plant plant = item.Plant;
         plantName.text = plant.Name;
-        seedAmount.text = item.StorageAmountSeeds.ToString();
+        seedAmount.text = "Seeds in Storage: "+item.StorageAmountSeeds.ToString();
         pic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(plant?.SeedImageName);
     }
 }

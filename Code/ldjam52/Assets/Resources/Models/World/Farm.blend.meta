@@ -27,6 +27,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Licht
+    second: {fileID: 2100000, guid: c488ccc4a450133459779441b69da01d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stahl
+    second: {fileID: 2100000, guid: a2552e01f16730a4e9e9553a2d6096a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wand
     second: {fileID: 2100000, guid: ed275ddff27027d4aac5cc7898397588, type: 2}
   materials:
