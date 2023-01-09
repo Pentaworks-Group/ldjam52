@@ -28,8 +28,6 @@ public class SeedShopBehaviour : MonoBehaviour
 
     public Button buttonPrefab;
 
-    public Sprite[] plantImages;
-
     private int sellQuantity = 0;
     private int buyQuantity = 0;
     private int balance;
@@ -140,7 +138,6 @@ public class SeedShopBehaviour : MonoBehaviour
         FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, amount);
         FarmStorageController.PutMoneyInStorage((int)(plantValue * amount));
 
-        // TODO Update info, plants list, money...
         stateUpdate(true);
     }
 
@@ -150,7 +147,6 @@ public class SeedShopBehaviour : MonoBehaviour
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
-        // TODO Update info, plants list, money...
         stateUpdate(false);
     }
 
@@ -181,7 +177,6 @@ public class SeedShopBehaviour : MonoBehaviour
         }
     }
 
-    // TODO complete
     private void stateUpdate(bool isSell)
     {
         balance = FarmStorageController.GetStorageBalance();
@@ -255,75 +250,6 @@ public class SeedShopBehaviour : MonoBehaviour
         drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
         drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP]);
 
-        /*
-        StatsBar bar = information.Find("Temp").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.TEMP];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-
-        bar = information.Find("Sun").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SUN];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-
-        bar = information.Find("Water").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.WATER];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-
-        bar = information.Find("Fertility").GetChild(0).GetComponent<StatsBar>();
-        pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.FERTILITY];
-        if (pair.IsVisible || true)
-        {
-            bar.QuestionMark.SetActive(false);
-            bar.GradientTransform.gameObject.SetActive(true);
-            bar.BiomeTransform.gameObject.SetActive(true);
-            bar.Mean = GrowthController.getDominantChromosome(pair).Value0;
-            bar.Width = GrowthController.getDominantChromosome(pair).ValueDev;
-        }
-        else
-        {
-            bar.GradientTransform.gameObject.SetActive(false);
-            bar.BiomeTransform.gameObject.SetActive(false);
-            bar.QuestionMark.SetActive(true);
-        }
-        */
     }
 
     private void drawStatsBar(Transform infoPanel, string barName, ChromosomePair pair)
