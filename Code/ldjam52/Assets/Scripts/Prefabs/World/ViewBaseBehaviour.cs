@@ -6,11 +6,13 @@ namespace Assets.Scripts.Prefabs.World
     public class ViewBaseBehaviour : MonoBehaviour
     {
         public UnityEvent OnHide = new UnityEvent();
+        bool isShown = false;
 
         public virtual void Show()
         {
             Base.Core.Game.LockCameraMovement = true;
             Assets.Scripts.Base.Core.Game.PlayButtonSound();
+            isShown = true;
         }
 
         public virtual void Hide()
@@ -19,6 +21,7 @@ namespace Assets.Scripts.Prefabs.World
             Assets.Scripts.Base.Core.Game.PlayButtonSound();
 
             OnHide.Invoke();
+            isShown = false;
         }
 
         private void Update()
@@ -36,7 +39,10 @@ namespace Assets.Scripts.Prefabs.World
 
         protected virtual void OnEscapePressed()
         {
-            Hide();
+            if (isShown)
+            {
+                Hide();
+            }            
         }
     }
 }
