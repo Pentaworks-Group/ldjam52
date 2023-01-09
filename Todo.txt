@@ -1,7 +1,7 @@
 Todo:
 ----------------------------------
  Bugs: 
- - Closing Harvest View with esc disables tile click lock
+ - 
  
  Exceptions: 
  - 
@@ -9,12 +9,10 @@ Todo:
  Core:
  - Name! Suggested: - H.I.V.E (Highly Involuntary Violent Evolution) -
  - Farm Building price
- - Tile price per Biome
-  
+   
  GamePlay:
  - Keep TimeOfDay and Date in GameState (and load it correctly).
  - Shop integration (e.g. Lab & Shop buildings on map)
- - Open Inventory on farm click 
  - Show chromosomes in various locations
  - Rotten fields
     
@@ -46,8 +44,3 @@ Ideas:
 ----------------------------------
  - Increase map size (Generate extra tiles)
  
-Done:
-----------------------------------
- - Impossible to buy land along the edges.
- - WBGL audio: when starting game error in log & freeze
- - Game paused on load (unpause after load) 
