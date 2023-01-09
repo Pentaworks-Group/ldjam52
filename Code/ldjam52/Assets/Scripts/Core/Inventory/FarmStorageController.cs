@@ -62,8 +62,7 @@ namespace Assets.Scripts.Core.Inventory
         /// <returns></returns>
         public static int PutPlantInStorage(Plant plant, int amount)
         {
-            FarmStorage storage = Base.Core.Game.State.FarmStorage;
-            StorageItem item = getStorageItemToPlant(storage, plant);
+            StorageItem item = FarmStorageController.GetOrCreateItemToSeed(plant);
 
             int definitveAmount = amount;
             if (GetFreeStorageSpace() < amount)
@@ -121,8 +120,7 @@ namespace Assets.Scripts.Core.Inventory
         /// <returns></returns>
         public static int PutSeedInStorage(Plant plant, int amount)
         {
-            FarmStorage storage = Base.Core.Game.State.FarmStorage;
-            StorageItem item = getStorageItemToPlant(storage, plant);
+            StorageItem item = FarmStorageController.GetOrCreateItemToSeed(plant);
 
             int definitveAmount = amount;
             if (GetFreeStorageSpace() < amount)
@@ -168,6 +166,27 @@ namespace Assets.Scripts.Core.Inventory
         {
             FarmStorage storage = Base.Core.Game.State.FarmStorage;
             storage.MoneyBalance -= amount;
+        }
+
+        public static StorageItem GetOrCreateItemToSeed(Plant seed)
+        {
+            StorageItem item = FarmStorageController.GetItemToSeed(seed);
+            if (item == null)
+            {
+                item = new StorageItem
+                {
+                    PlantId = Guid.NewGuid(),
+                    Plant = seed,
+                    StorageAmountPlants = 0,
+                    StorageAmountSeeds = 0,
+                };
+            }
+            return item;
+        }
+
+        public static StorageItem GetItemToSeed(Plant seed)
+        {
+            return GetStorageItemToPlantOrDefault(Base.Core.Game.State.FarmStorage, seed);
         }
 
         private static StorageItem GetStorageItemToPlantOrDefault(FarmStorage storage, Plant plant)
