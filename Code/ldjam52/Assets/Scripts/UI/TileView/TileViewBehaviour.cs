@@ -81,7 +81,7 @@ namespace Assets.Scripts.UI.TileView
 
             if (isBuyAndBuilt)
             {
-                FarmStorageController.TakeMoneyOfStorage(tilesTotalCost);
+                FarmStorageController.TakeMoneyOfStorage(tilesTotalCost - this.tileBehaviour.Tile.Price);
 
                 //FarmStorageController.TakeMoneyOfStorage(tilesTotalCost); // Farm price tbd
 
