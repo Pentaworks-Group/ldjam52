@@ -5,6 +5,8 @@ using Assets.Scripts.Constants;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
 
+using GameFrame.Core.Extensions;
+
 using UnityEngine;
 
 public class FieldBehaviour : MonoBehaviour
@@ -106,6 +108,20 @@ public class FieldBehaviour : MonoBehaviour
             Transform flower = Instantiate(template, flowerPot.transform);
             flower.gameObject.name = "Flower";
             flower.gameObject.SetActive(true);
+
+            if(newModelName == "Flower4")
+            {
+                //TODO: Renderer is null?
+                if (flower.gameObject.TryGetComponent<Renderer>(out var meshRenderer))
+                {
+                    Material[] mats = meshRenderer.materials;
+                    if (mats[0] != null)
+                    {
+                        meshRenderer.material.color = field.Seed.BlossomColor.ToUnity();
+//                        meshRenderer.material.
+                    }
+                }
+            }
         }
     }
 
@@ -172,7 +188,7 @@ public class FieldBehaviour : MonoBehaviour
         foreach (GameObject flowerPot in flowerPots)
         {
             int randomNumber = (int)(UnityEngine.Random.value * 360);
-            flowerPot.transform.Rotate(new Vector3(0, randomNumber, 0));
+            flowerPot.transform.Rotate(new UnityEngine.Vector3(0, randomNumber, 0));
         }
 
         Debug.Log("GrowthRate: " + growthRate);

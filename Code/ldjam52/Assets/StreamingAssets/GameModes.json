@@ -65,6 +65,12 @@
         "Description": "a plant difficult to handle",
         "ImageName": "Basil",
         "SeedImageName": "Seed_Basil",
+        "BlossomColor": {
+          "Red": 1.000,
+          "Green": 0.000,
+          "Blue": 0.000,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -206,6 +212,12 @@
         "Description": "a dry plant",
         "ImageName": "PricklyPear",
         "SeedImageName": "Seed_PricklyPear",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -347,6 +359,12 @@
         "Description": "detectable only with dogs",
         "ImageName": "Truffle",
         "SeedImageName": "Seed_Truffle",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -488,6 +506,12 @@
         "Description": "do not let it get too hot",
         "ImageName": "Corn",
         "SeedImageName": "Seed_Corn",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -629,6 +653,12 @@
         "Description": "a symbol of courage, bravery and love",
         "ImageName": "Edelweiss",
         "SeedImageName": "Seed_Edelweiss",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -770,6 +800,12 @@
         "Description": "healthy AND delicious",
         "ImageName": "Blueberry",
         "SeedImageName": "Seed_Blueberry",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -911,6 +947,12 @@
         "Description": "this is certainly not a plant, what is it good for?",
         "ImageName": "Sand",
         "SeedImageName": "Seed_Sand",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -1052,6 +1094,12 @@
         "Description": "better keep your distance",
         "ImageName": "Carnivorous",
         "SeedImageName": "Seed_Carnivorous",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {
@@ -1193,6 +1241,12 @@
         "Description": "a little snow for switzerland",
         "ImageName": "Snowdrop",
         "SeedImageName": "Seed_Snowdrop",
+        "BlossomColor": {
+          "Red": 0.901,
+          "Green": 0.788,
+          "Blue": 0.686,
+          "Alpha": 1
+        },
         "Genome": {
           "Temp": {
             "Chromosome1": {

@@ -8,6 +8,8 @@ using MathNet.Numerics.Distributions;
 using UnityEngine;
 using GameFrame.Core.Extensions;
 
+using GameFrame.Core.Media;
+
 public class InheritanceController 
 {
     // Start is called before the first frame update
@@ -74,6 +76,13 @@ public class InheritanceController
     {
         Plant newPlant = new Plant();
         newPlant.Name = PlantNames.adjectives.GetRandomEntry()+" "+PlantNames.names.GetRandomEntry();
+        newPlant.BlossomColor = new GameFrame.Core.Media.Color
+        {
+            Red = UnityEngine.Random.value,
+            Green = UnityEngine.Random.value,
+            Blue = UnityEngine.Random.value,
+            Alpha = 1
+        };
         foreach (KeyValuePair<string, ChromosomePair> pair in plant1.Genome)
         {
             Chromosome chromosome1 = chooseRandomChromosome(pair.Value);
@@ -96,6 +105,32 @@ public class InheritanceController
             newPlant.ID = Guid.NewGuid();
         }
         return newPlant;
+    }
+
+    public static List<Chromosome> AnalysePlant(Plant plant, Analyzer analyzer)
+    {
+        List<Chromosome > chromosomes = new List<Chromosome>();
+        int newVisibleChromosomes = 0;
+        int attempts = 0;
+        while (newVisibleChromosomes < analyzer.CurrentDevelopmentStage.ValueVisibleCount)
+        {
+            List<String> keys = new List<String>();
+            keys.AddRange(plant.Genome.Keys);
+            var randomKey = keys.GetRandomEntry();
+            ChromosomePair pair = plant.Genome.GetValueOrDefault(randomKey);
+
+            if (!pair.IsVisible)
+            {
+                newVisibleChromosomes = newVisibleChromosomes + 1;
+                pair.IsVisible = true;
+                chromosomes.Add(GrowthController.getDominantChromosome(pair));
+            }
+            attempts++;
+            if (attempts >= plant.Genome.Count)
+                break;
+        }
+
+        return chromosomes;
     }
 
     public static Plant checkIfGenomeExists(Plant plant)
