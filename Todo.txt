@@ -38,6 +38,7 @@ Nice to have:
  - Show owned tiles with fence
  - ShortKeys (e.g. "H" for Home)
  - Only buy adjacent tiles
+ - Rename Crops
  
 Ideas:
 ----------------------------------

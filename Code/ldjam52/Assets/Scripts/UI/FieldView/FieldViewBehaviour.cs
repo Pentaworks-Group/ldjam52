@@ -15,10 +15,10 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     private GameObject plantingOptions;
     private GameObject harvestResult;
     private GameObject infoPanel;
+    private GameObject currentInfoPanel;
 
     private Image plantImage;
     private Text plantName;
-    private Text plantedTime;
     private Button harvestButton;
 
     private FieldViewSeedListBehaviour seedList;
@@ -35,6 +35,9 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     private Text analyzeCosts;
     private Button analyzeButton;
 
+    private Text currentGrowingTime;
+    private Text currentGrowingProcess;
+
     private void Awake()
     {
         viewToggle = transform.Find("FieldViewToggle").gameObject;
@@ -42,9 +45,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         plantingOptions = transform.Find("FieldViewToggle/PlantingOptions").gameObject;
         harvestResult = transform.Find("FieldViewToggle/HarvestResult").gameObject;
 
-        plantImage = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Image").GetComponent<Image>();
         plantName = transform.Find("FieldViewToggle/CurrentInfo/CurrentPlant/Name").GetComponent<Text>();
-        plantedTime = transform.Find("FieldViewToggle/CurrentInfo/PlantedTime/Value").GetComponent<Text>();
         harvestButton = transform.Find("FieldViewToggle/CurrentInfo/Buttons/Harvest").GetComponent<Button>();
 
         seedList = transform.Find("FieldViewToggle/PlantingOptions/SeedList/ListContainer").GetComponent<FieldViewSeedListBehaviour>();
@@ -62,6 +63,10 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         infoPanel = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information").gameObject;
         analyzeCosts = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeCosts").GetComponent<Text>();
         analyzeButton = transform.Find("FieldViewToggle/PlantingOptions/SeedList/Details/NameAndPic/Information/AnalyzeButton").GetComponent<Button>();
+
+        currentInfoPanel = transform.Find("FieldViewToggle/CurrentInfo/Information").gameObject;
+        currentGrowingTime = transform.Find("FieldViewToggle/CurrentInfo/GrowingTime/Value").GetComponent<Text>();
+        currentGrowingProcess = transform.Find("FieldViewToggle/CurrentInfo/GrowingProcess/Value").GetComponent<Text>();
     }
 
     private void Update()
@@ -75,6 +80,13 @@ public class FieldViewBehaviour : ViewBaseBehaviour
                 GoBackOrClose();
             }
         }
+
+        if (currentGrowingTime != null && currentlyViewedField!=null)
+        {
+            currentGrowingTime.text = Mathf.RoundToInt(Core.Game.State.ElapsedTime - currentlyViewedField.Field.TimePlanted).ToString() + "s";
+            currentGrowingProcess.text = Mathf.RoundToInt((float) currentlyViewedField.Field.GrowthProgress * 100).ToString() + "%";
+        }
+
     }
 
     private void GoBackOrClose()
@@ -111,11 +123,17 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     {
         if (currentlyViewedField.Field.Seed != null)
         {
+            if(item==null)
+            {
+                item = new StorageItem
+                {
+                    Plant = currentlyViewedField.Field.Seed
+                };
+            }
             currentInfo.SetActive(true);
             plantingOptions.SetActive(false);
             plantName.text = currentlyViewedField.Field.Seed.Name;
-            plantedTime.text = Mathf.RoundToInt(currentlyViewedField.Field.TimePlanted).ToString() + "s";
-            plantImage.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(currentlyViewedField.Field.Seed.ImageName);
+            currentInfoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), true);
         }
         else
         {
@@ -135,6 +153,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
                 analyzeButton.interactable = true;
             }
         }
+
         infoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), false);
     }
 

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using Assets.Scripts.Base;
 using Assets.Scripts.Core;
 using Assets.Scripts.Core.Inventory;
@@ -49,16 +48,24 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         base.Show();
 
         this.seedShopToggle.SetActive(true);
+
+        // Update balance and inventory view
+        balance = FarmStorageController.GetStorageBalance();
+        inventory = FarmStorageController.getStorageInventory();
+        fillList(inventory, Plants, true);
     }
 
     public override void Hide()
     {
         base.Hide();
 
+        emptyList(Plants);
+
         this.seedShopToggle.SetActive(false);
     }
 
     // Start is called before the first frame update
+    // TODO change to OnStart
     void Start()
     {
         if (Assets.Scripts.Base.Core.Game.State == default)
@@ -68,18 +75,15 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
         this.seedShopToggle = transform.Find("SeedShopToggle").gameObject;
 
+        // Initial balance and invetory
         balance = FarmStorageController.GetStorageBalance();
-        BalanceText.text = balance.ToString();
-
         inventory = FarmStorageController.getStorageInventory();
-
         fillList(inventory, Plants, true);
 
-        
+
         // TODO use shop list when available
         fillList(Core.Game.State.AvailableShopItems, Seeds, false);
 
-        //emptyList(Plants);
     }
 
     // TODO cleanup these three methods (low priority)
@@ -185,6 +189,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     public void Buy()
     {
         // Buy
+        if (seedValue * buyQuantity > FarmStorageController.GetStorageBalance())
+            return;
+
         int amount = FarmStorageController.PutSeedInStorage(chosenSeed.Plant, buyQuantity);
         FarmStorageController.TakeMoneyOfStorage((int)(amount * seedValue));
 
@@ -208,7 +215,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             FarmStorageController.TakePlantOfStorage(chosenPlant.Plant, plantCost);
             FarmStorageController.TakeMoneyOfStorage(moneyCost);
         }
-        updateInfo(true);
+        stateUpdate(true);
 
         // Show updated info if same seed selected
         if (chosenPlant == chosenSeed)
@@ -235,7 +242,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
     private void updateAnalyseView()
     {
-        if (!checkAnalysability(chosenPlant.Plant))
+        if (chosenPlant == null || !checkAnalysability(chosenPlant.Plant))
         {
             AnalyseUI.SetActive(false);
             return;
@@ -251,11 +258,6 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         // Values
         AnalyseUI.transform.Find("PlantCost").GetComponent<TMP_Text>().text = plantAnalyzer.CurrentDevelopmentStage.AnalyticsPlantCost.ToString();
         AnalyseUI.transform.Find("MoneyCost").GetComponent<TMP_Text>().text = plantAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
-
-    }
-
-    private void updateAnalyse()
-    {
 
     }
 
@@ -279,10 +281,12 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         Transform content = scrollRect.transform.Find("Viewport").Find("Content");
         while (content.childCount > 0)
         {
+            /*
             Button tmp = content.GetChild(0).GetComponent<Button>();
             tmp.onClick.RemoveAllListeners();
+            */
             Destroy(content.GetChild(0).gameObject);
-
+            
             if (content.childCount == 8)
                 break;
         }
@@ -350,16 +354,9 @@ public class SeedShopBehaviour : ViewBaseBehaviour
     }
 
 
-
-
-
-
-
-    // TESTING
     protected void InitializeGameState()
     {
         LoadGameSettings();
-        // Maybe add a Tutorial scene, where the user can set "skip" for the next time.
         var gameState = new GameState()
         {
             CurrentScene = "SeedShopScene",
