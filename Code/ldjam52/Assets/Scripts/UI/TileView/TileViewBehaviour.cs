@@ -336,7 +336,7 @@ namespace Assets.Scripts.UI.TileView
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && this.visiblityContainer.activeSelf)
             {
                 GoBackOrClose();
             }
