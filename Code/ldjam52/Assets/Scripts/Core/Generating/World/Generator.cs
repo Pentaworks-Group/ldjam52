@@ -137,8 +137,13 @@ namespace Assets.Scripts.Core.Generating.World
             {
                 building = new TBuilding()
                 {
-                    Position = GetBuildingSpawnPoint(buildingSettings.Size)
+                    Position = GetBuildingSpawnPoint(buildingSettings.Size, out var affectedTiles)
                 };
+
+                foreach (var affectedTile in affectedTiles)
+                {
+                    affectedTile.Building = building;
+                }
             }
 
             return building;
@@ -240,8 +245,10 @@ namespace Assets.Scripts.Core.Generating.World
             }
         }
 
-        private GameFrame.Core.Math.Vector3 GetBuildingSpawnPoint(GameFrame.Core.Math.Vector3 size)
+        private GameFrame.Core.Math.Vector3 GetBuildingSpawnPoint(GameFrame.Core.Math.Vector3 size, out List<Tile> affectedTiles)
         {
+            affectedTiles = new List<Tile>();
+
             var x = 0;
             var z = 0;
 
@@ -270,6 +277,8 @@ namespace Assets.Scripts.Core.Generating.World
 
                 if (areTilesAvailable)
                 {
+                    affectedTiles.AddRange(usedTiles);
+
                     positionFound = true;
                     break;
                 }
