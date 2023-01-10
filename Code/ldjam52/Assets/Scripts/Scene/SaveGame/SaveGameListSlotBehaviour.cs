@@ -52,7 +52,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void LoadGame()
         {
-            SaveGameController.LoadSave(GetGameState());
+            SaveGameController.LoadSavedGame(GetGameState());
         }
 
         public void OverrideGame()

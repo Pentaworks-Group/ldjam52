@@ -83,7 +83,7 @@ namespace Assets.Scripts.Scene.SaveGame
             PersistIndexAndSave();
         }
 
-        public static void LoadSave(GameState gameState)
+        public static void LoadSavedGame(GameState gameState)
         {
             var clone = CloneInAnUglyFashionJsonStyle(gameState);
 
