@@ -87,6 +87,7 @@ namespace Assets.Scripts.Scene.SaveGame
         public static void DeleteSavedGame(String targetKey)
         {
             SavedGames.Remove(targetKey);
+            PlayerPrefs.DeleteKey(targetKey);
             PersistIndexAndSave();
         }
 
