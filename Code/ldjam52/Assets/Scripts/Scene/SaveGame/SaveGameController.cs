@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 using Assets.Scripts.Core;
 
@@ -48,6 +50,8 @@ namespace Assets.Scripts.Scene.SaveGame
 
             var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
 
+            gameStateAsJson = Compress(gameStateAsJson);
+
             PlayerPrefs.SetString(key, gameStateAsJson);
             PersistIndexAndSave();
         }
@@ -72,6 +76,8 @@ namespace Assets.Scripts.Scene.SaveGame
             SavedGames[key] = clone;
 
             var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
+
+            gameStateAsJson = Compress(gameStateAsJson);
 
             PlayerPrefs.DeleteKey(targetKey);
             PlayerPrefs.SetString(key, gameStateAsJson);
@@ -115,7 +121,7 @@ namespace Assets.Scripts.Scene.SaveGame
             {
                 foreach (var index in indexList)
                 {
-                    var gameState = LoadFromPlayerPrefs<GameState>(index, saveGameSerializationSettings.Value);
+                    var gameState = LoadFromPlayerPrefs<GameState>(index, saveGameSerializationSettings.Value, true);
 
                     if (gameState != default)
                     {
@@ -127,7 +133,7 @@ namespace Assets.Scripts.Scene.SaveGame
             return dictionary;
         }
 
-        private static T LoadFromPlayerPrefs<T>(String key, JsonSerializerSettings serializerSettings)
+        private static T LoadFromPlayerPrefs<T>(String key, JsonSerializerSettings serializerSettings, Boolean useCompression = false)
         {
             if (!String.IsNullOrWhiteSpace(key))
             {
@@ -137,6 +143,11 @@ namespace Assets.Scripts.Scene.SaveGame
                 {
                     try
                     {
+                        if (useCompression)
+                        {
+                            keyContent = Decompress(keyContent);
+                        }
+
                         return GameFrame.Core.Json.Handler.Deserialize<T>(keyContent, serializerSettings);
                     }
                     catch (Exception exception)
@@ -148,6 +159,37 @@ namespace Assets.Scripts.Scene.SaveGame
             }
 
             return default;
+        }
+
+        private static String Compress(String source)
+        {
+            var payload = Encoding.UTF8.GetBytes(source);
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var gzipStream = new System.IO.Compression.GZipStream(memoryStream, System.IO.Compression.CompressionLevel.Optimal))
+                {
+                    gzipStream.Write(payload, 0, payload.Length);
+                }
+
+                return Convert.ToBase64String(memoryStream.ToArray());
+            }
+        }
+
+        public static String Decompress(String compressedString)
+        {
+            using (var memoryStream = new MemoryStream(Convert.FromBase64String(compressedString)))
+            {
+                using (var outputStream = new MemoryStream())
+                {
+                    using (var decompressStream = new System.IO.Compression.GZipStream(memoryStream, System.IO.Compression.CompressionMode.Decompress))
+                    {
+                        decompressStream.CopyTo(outputStream);
+                    }
+
+                    return Encoding.UTF8.GetString(outputStream.ToArray());
+                }
+            }
         }
     }
 }
