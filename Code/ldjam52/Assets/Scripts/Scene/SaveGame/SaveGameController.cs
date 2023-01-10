@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 using Assets.Scripts.Core;
 
@@ -40,6 +41,7 @@ namespace Assets.Scripts.Scene.SaveGame
             {
                 try
                 {
+                    savedGamesJson = Decompress(savedGamesJson);
                     savedGames = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson, saveGameSerializationSettings.Value);
                     return;
                 }
@@ -61,9 +63,43 @@ namespace Assets.Scripts.Scene.SaveGame
             SaveGames();
         }
 
+        public static string Compress(string input)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(input);
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var gzipStream = new GZipStream(memoryStream, System.IO.Compression.CompressionLevel.Optimal))
+                {
+                    gzipStream.Write(bytes, 0, bytes.Length);
+                }
+                bytes = memoryStream.ToArray();
+                return Encoding.UTF8.GetString(bytes);
+
+            }
+        }
+
+        public static string Decompress(string input)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(input);
+            using (var memoryStream = new MemoryStream(bytes))
+            {
+
+                using (var outputStream = new MemoryStream())
+                {
+                    using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                    {
+                        decompressStream.CopyTo(outputStream);
+                    }
+                    bytes = memoryStream.ToArray();
+                    return Encoding.UTF8.GetString(bytes);
+                }
+            }
+        }
+
         public static void SaveGames()
         {
             var savedGamesJson = GameFrame.Core.Json.Handler.Serialize(savedGames, Formatting.None, saveGameSerializationSettings.Value);
+            savedGamesJson = Compress(savedGamesJson);
             PlayerPrefs.SetString("SavedGames", savedGamesJson);
             PlayerPrefs.Save();
         }
