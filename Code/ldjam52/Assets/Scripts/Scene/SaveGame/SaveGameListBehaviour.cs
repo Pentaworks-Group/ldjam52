@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Assets.Scripts.Core;
-
-using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Scene.SaveGame
 {
     public class SaveGameListBehaviour : ListContainerBehaviour
     {
+        public Button SaveNewButton;
+
         override public void CustomStart()
         {
 
@@ -25,6 +25,18 @@ namespace Assets.Scripts.Scene.SaveGame
             }
 
             SetObjects(saveGames);
+
+            if (!Assets.Scripts.Base.Core.Game.IsFileAccessPossible)
+            {
+                if (saveGames.Count >= 5)
+                {
+                    SaveNewButton.interactable = false;
+                }
+                else
+                {
+                    SaveNewButton.interactable = true;
+                }
+            }
         }
 
         public void SaveGame()
@@ -33,6 +45,6 @@ namespace Assets.Scripts.Scene.SaveGame
             UpdateList();
         }
 
-       
+
     }
 }

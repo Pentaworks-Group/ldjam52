@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17511088, g: 0.21907213, b: 0.3013723, a: 1}
+  m_IndirectSpecularColor: {r: 0.17511049, g: 0.21907195, b: 0.3013715, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1011,6 +1011,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2064928025}
     m_Modifications:
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1468167439}
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Hide
+      objectReference: {fileID: 0}
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PauseMenuBehavior, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 241485599375790854, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1548934669274811023, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
