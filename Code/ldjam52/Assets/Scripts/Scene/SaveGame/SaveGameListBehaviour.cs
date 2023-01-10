@@ -18,7 +18,7 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             List<System.Object> saveGames = new();
 
-            foreach (GameState savedGame in SaveGameController.GetSaveGames())
+            foreach (var savedGame in SaveGameController.SavedGames)
             {
                 saveGames.Add(savedGame);
             }
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void SaveGame()
         {
-            SaveGameController.SaveNewGame();
+            SaveGameController.SaveGame();
             UpdateList();
         }
 

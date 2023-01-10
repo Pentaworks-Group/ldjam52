@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using Assets.Scripts.Core;
 
 using UnityEngine;
@@ -28,9 +30,14 @@ namespace Assets.Scripts.Scene.SaveGame
             overwriteButton.interactable = Base.Core.Game.State != default;
         }
 
+
+        private KeyValuePair<string, GameState> GetKVP()
+        {
+            return (KeyValuePair<string, GameState>)obj;
+        }
         public GameState GetGameState()
         {
-            return (GameState)obj;
+            return GetKVP().Value;
         }
 
         override public void UpdateUI()
@@ -50,13 +57,13 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void OverrideGame()
         {
-            SaveGameController.OverrideSave(index);
+            SaveGameController.OverwriteSavedGame(GetKVP().Key);
             listBehaviour.UpdateList();
         }
 
         public void DeleteGame()
         {
-            SaveGameController.DeleteSave(index);
+            SaveGameController.DeleteSavedGame(GetKVP().Key);
             listBehaviour.UpdateList();
         }
     }
