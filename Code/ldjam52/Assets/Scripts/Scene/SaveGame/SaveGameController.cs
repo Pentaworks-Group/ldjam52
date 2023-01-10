@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
 
 using Assets.Scripts.Core;
 
@@ -14,8 +11,6 @@ namespace Assets.Scripts.Scene.SaveGame
 {
     public class SaveGameController
     {
-        private static List<GameState> savedGames;
-
         private static Lazy<JsonSerializerSettings> saveGameSerializationSettings = new Lazy<JsonSerializerSettings>(() =>
         {
             return new JsonSerializerSettings()
@@ -26,106 +21,50 @@ namespace Assets.Scripts.Scene.SaveGame
             };
         });
 
-        public static List<GameState> GetSaveGames()
+        private const String SavedGameIndexKey = "SavedGameIndex";
+
+        private static readonly Lazy<Dictionary<string, GameState>> savedGameIndex = new Lazy<Dictionary<string, GameState>>(LoadSaveGamesFromPlayerPrefs);
+
+        public static Dictionary<String, GameState> SavedGames => savedGameIndex.Value;
+
+        public static void SaveGame(GameState gameState)
         {
-            if (savedGames == default)
-            {
-                LoadSaveGamesFromPlayerPrefs();
-            }
-            return savedGames;
+            gameState.SavedOn = DateTime.Now;
+
+            var key = $"SaveGame-{gameState.SavedOn.Ticks}";
+
+            var clone = CloneInAnUglyFashionJsonStyle(gameState);
+
+            SavedGames[key] = gameState;
+
+            var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
+
+            PlayerPrefs.SetString(key, gameStateAsJson);
+            PersistIndexAndSave();
         }
 
-        private static void LoadSaveGamesFromPlayerPrefs()
+        public static void OverwriteSavedGame(String targetKey, GameState gameState)
         {
-            var savedGamesJson = PlayerPrefs.GetString("SavedGames");
+            gameState.SavedOn = DateTime.Now;
 
-            if (!System.String.IsNullOrEmpty(savedGamesJson))
-            {
-                try
-                {
-                    savedGamesJson = Decompress(savedGamesJson);
-                    savedGames = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson, saveGameSerializationSettings.Value);
-                    return;
-                }
-                catch
-                {
-                }
-            }
-            savedGames = new();
+            var key = $"SaveGame-{gameState.SavedOn.Ticks}";
+
+            var clone = CloneInAnUglyFashionJsonStyle(gameState);
+
+            SavedGames.Remove(targetKey);
+            SavedGames[key] = gameState;
+
+            var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
+
+            PlayerPrefs.DeleteKey(targetKey);
+            PlayerPrefs.SetString(key, gameStateAsJson);
+            PersistIndexAndSave();
         }
 
-        public static void SaveNewGame()
+        public static void DeleteSavedGame(String targetKey)
         {
-            Base.Core.Game.State.SavedOn = DateTime.Now;
-
-            var clone = CloneInAnUglyFashionJsonStyle(Base.Core.Game.State);
-
-            GetSaveGames().Add(clone);
-            SaveGames();
-        }
-
-        public static string Compress(string input)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(input);
-            using (var memoryStream = new MemoryStream())
-            {
-                using (var gzipStream = new GZipStream(memoryStream, System.IO.Compression.CompressionLevel.Optimal))
-                {
-                    gzipStream.Write(bytes, 0, bytes.Length);
-                }
-
-                bytes = memoryStream.ToArray();
-                return Encoding.UTF8.GetString(bytes);
-
-            }
-        }
-
-        public static string Decompress(string input)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(input);
-
-            using (var memoryStream = new MemoryStream(bytes))
-            {
-
-                using (var outputStream = new MemoryStream())
-                {
-                    using (var decompressStream = new GZipStream(memoryStream, CompressionMode.Decompress))
-                    {
-                        decompressStream.CopyTo(outputStream);
-                    }
-                    bytes = memoryStream.ToArray();
-                    return Encoding.UTF8.GetString(bytes);
-                }
-            }
-        }
-
-        public static void SaveGames()
-        {
-            var savedGamesJson = GameFrame.Core.Json.Handler.Serialize(savedGames, Formatting.None, saveGameSerializationSettings.Value);
-            savedGamesJson = Compress(savedGamesJson);
-            PlayerPrefs.SetString("SavedGames", savedGamesJson);
-            PlayerPrefs.Save();
-        }
-
-        public static void OverrideSave(int index)
-        {
-            if (Assets.Scripts.Base.Core.Game.State != default)
-            {
-                var gameState = Assets.Scripts.Base.Core.Game.State;
-
-                gameState.SavedOn = DateTime.Now;
-
-                var clone = CloneInAnUglyFashionJsonStyle(gameState);
-
-                savedGames[index] = clone;
-                SaveGames();
-            }
-        }
-
-        public static void DeleteSave(int index)
-        {
-            savedGames.RemoveAt(index);
-            SaveGames();
+            SavedGames.Remove(targetKey);
+            PersistIndexAndSave();
         }
 
         public static void LoadSave(GameState gameState)
@@ -135,11 +74,59 @@ namespace Assets.Scripts.Scene.SaveGame
             Assets.Scripts.Base.Core.Game.Start(clone);
         }
 
+        private static void PersistIndexAndSave()
+        {
+            var indexAsJson = GameFrame.Core.Json.Handler.Serialize(SavedGames.Keys, Formatting.None);
+            PlayerPrefs.SetString(SavedGameIndexKey, indexAsJson);
+            PlayerPrefs.Save();
+        }
+
         private static GameState CloneInAnUglyFashionJsonStyle(GameState gameState)
         {
             var saveGameJson = GameFrame.Core.Json.Handler.Serialize(gameState, Formatting.None, saveGameSerializationSettings.Value);
 
             return GameFrame.Core.Json.Handler.Deserialize<GameState>(saveGameJson, saveGameSerializationSettings.Value);
+        }
+
+        private static Dictionary<String, GameState> LoadSaveGamesFromPlayerPrefs()
+        {
+            var dictionary = default(Dictionary<String, GameState>);
+
+            var indexList = LoadIndexFromPlayerPrefs();
+
+            //var savedGamesJson = PlayerPrefs.GetString("SavedGames");
+
+            //if (!System.String.IsNullOrEmpty(savedGamesJson))
+            //{
+            //    try
+            //    {
+            //        dictionary = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson, saveGameSerializationSettings.Value);
+            //    }
+            //    catch (Exception exception)
+            //    {
+            //        dictionary = new Dictionary<String, GameState>();
+            //    }
+            //}
+
+            return dictionary;
+        }
+
+        private static List<String> LoadIndexFromPlayerPrefs()
+        {
+            var indexListString = PlayerPrefs.GetString(SavedGameIndexKey);
+
+            if (!String.IsNullOrWhiteSpace(indexListString))
+            {
+                try
+                {
+                    return GameFrame.Core.Json.Handler.Deserialize<List<String>>(indexListString);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogError("Failed to deserialize stored index!");
+                    Debug.LogError(exception.ToString());
+                }
+            }
         }
     }
 }
