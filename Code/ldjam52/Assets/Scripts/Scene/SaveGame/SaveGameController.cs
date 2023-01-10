@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Text;
 
 using Assets.Scripts.Core;
@@ -72,6 +74,7 @@ namespace Assets.Scripts.Scene.SaveGame
                 {
                     gzipStream.Write(bytes, 0, bytes.Length);
                 }
+
                 bytes = memoryStream.ToArray();
                 return Encoding.UTF8.GetString(bytes);
 
@@ -81,6 +84,7 @@ namespace Assets.Scripts.Scene.SaveGame
         public static string Decompress(string input)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(input);
+
             using (var memoryStream = new MemoryStream(bytes))
             {
 
