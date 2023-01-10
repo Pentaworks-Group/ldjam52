@@ -27,6 +27,14 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public static Dictionary<String, GameState> SavedGames => savedGameIndex.Value;
 
+        public static void SaveGame()
+        {
+            if (Base.Core.Game.State != default)
+            {
+                SaveGame(Base.Core.Game.State);
+            }
+        }
+
         public static void SaveGame(GameState gameState)
         {
             gameState.SavedOn = DateTime.Now;
@@ -41,6 +49,14 @@ namespace Assets.Scripts.Scene.SaveGame
 
             PlayerPrefs.SetString(key, gameStateAsJson);
             PersistIndexAndSave();
+        }
+
+        public static void OverwriteSavedGame(String targetKey)
+        {
+            if (Base.Core.Game.State != default)
+            {
+                OverwriteSavedGame(targetKey, Base.Core.Game.State);
+            }
         }
 
         public static void OverwriteSavedGame(String targetKey, GameState gameState)
@@ -90,43 +106,47 @@ namespace Assets.Scripts.Scene.SaveGame
 
         private static Dictionary<String, GameState> LoadSaveGamesFromPlayerPrefs()
         {
-            var dictionary = default(Dictionary<String, GameState>);
+            var dictionary = new Dictionary<String, GameState>();
 
-            var indexList = LoadIndexFromPlayerPrefs();
+            var indexList = LoadFromPlayerPrefs<List<String>>(SavedGameIndexKey);
 
-            //var savedGamesJson = PlayerPrefs.GetString("SavedGames");
+            if (indexList != default)
+            {
+                foreach (var index in indexList)
+                {
+                    var gameState = LoadFromPlayerPrefs<GameState>(index);
 
-            //if (!System.String.IsNullOrEmpty(savedGamesJson))
-            //{
-            //    try
-            //    {
-            //        dictionary = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson, saveGameSerializationSettings.Value);
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        dictionary = new Dictionary<String, GameState>();
-            //    }
-            //}
+                    if (gameState != default)
+                    {
+                        dictionary[index] = gameState;
+                    }
+                }
+            }
 
             return dictionary;
         }
 
-        private static List<String> LoadIndexFromPlayerPrefs()
+        private static T LoadFromPlayerPrefs<T>(String key)
         {
-            var indexListString = PlayerPrefs.GetString(SavedGameIndexKey);
-
-            if (!String.IsNullOrWhiteSpace(indexListString))
+            if (!String.IsNullOrWhiteSpace(key))
             {
-                try
+                var keyContent = PlayerPrefs.GetString(key);
+
+                if (!String.IsNullOrWhiteSpace(keyContent))
                 {
-                    return GameFrame.Core.Json.Handler.Deserialize<List<String>>(indexListString);
-                }
-                catch (Exception exception)
-                {
-                    Debug.LogError("Failed to deserialize stored index!");
-                    Debug.LogError(exception.ToString());
+                    try
+                    {
+                        return GameFrame.Core.Json.Handler.Deserialize<T>(keyContent);
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.LogError("Failed to deserialize stored index!");
+                        Debug.LogError(exception.ToString());
+                    }
                 }
             }
+
+            return default;
         }
     }
 }
