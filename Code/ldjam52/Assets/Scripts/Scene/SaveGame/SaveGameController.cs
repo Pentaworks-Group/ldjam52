@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Core;
 
@@ -92,7 +93,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         private static void PersistIndexAndSave()
         {
-            var indexAsJson = GameFrame.Core.Json.Handler.Serialize(SavedGames.Keys, Formatting.None);
+            var indexAsJson = GameFrame.Core.Json.Handler.Serialize(SavedGames.Keys.ToList(), Formatting.None);
             PlayerPrefs.SetString(SavedGameIndexKey, indexAsJson);
             PlayerPrefs.Save();
         }
