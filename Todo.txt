@@ -18,6 +18,7 @@ Todo:
  - HarvestView overhaul
  - Check PlantButton inactivity check for seed count
  - min buy/sell 1
+ - register click on building model
   
  Audio:
  - Effect for opening/closing menues
