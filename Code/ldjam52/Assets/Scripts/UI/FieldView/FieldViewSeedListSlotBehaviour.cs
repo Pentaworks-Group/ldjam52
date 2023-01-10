@@ -1,10 +1,12 @@
 
 using Assets.Scripts.Model;
 
+using GameFrame.Core.UI.List;
+
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
+public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour<StorageItem>
 {
     private Image pic;
     private Text plantName;
@@ -35,23 +37,23 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour
 
     public Plant GetPlant()
     {
-        return GetStorageItem().Plant;
+        return content.Plant;
     }
 
     public StorageItem GetStorageItem()
     {
-        return (StorageItem)obj;
+        return content;
     }
 
     public void ShowItemDetails()
     {
         FieldViewBehaviour fieldView = CurrentlyViewedField.GetComponent<FieldViewBehaviour>();
-        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(GetStorageItem(), fieldView.GetField(), false);
+        InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(content, fieldView.GetField(), false);
     }
 
     override public void UpdateUI()
     {
-        StorageItem item = GetStorageItem();
+        StorageItem item = content;
         Plant plant = item.Plant;
         plantName.text = plant.Name;
         seedAmount.text = "Seeds in Storage: "+item.StorageAmountSeeds.ToString();

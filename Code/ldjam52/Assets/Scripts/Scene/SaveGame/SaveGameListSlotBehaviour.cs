@@ -2,12 +2,14 @@ using System.Collections.Generic;
 
 using Assets.Scripts.Core;
 
+using GameFrame.Core.UI.List;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Scene.SaveGame
 {
-    public class SaveGameListSlotBehaviour : ListSlotBehaviour
+    public class SaveGameListSlotBehaviour : ListSlotBehaviour<KeyValuePair<string, GameState>>
     {
         private Text createdOn;
         private Text timeStamp;
@@ -31,13 +33,10 @@ namespace Assets.Scripts.Scene.SaveGame
         }
 
 
-        private KeyValuePair<string, GameState> GetKVP()
-        {
-            return (KeyValuePair<string, GameState>)obj;
-        }
+     
         public GameState GetGameState()
         {
-            return GetKVP().Value;
+            return content.Value;
         }
 
         override public void UpdateUI()
@@ -57,13 +56,13 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void OverrideGame()
         {
-            SaveGameController.OverwriteSavedGame(GetKVP().Key);
+            SaveGameController.OverwriteSavedGame(content.Key);
             listBehaviour.UpdateList();
         }
 
         public void DeleteGame()
         {
-            SaveGameController.DeleteSavedGame(GetKVP().Key);
+            SaveGameController.DeleteSavedGame(content.Key);
             listBehaviour.UpdateList();
         }
     }
