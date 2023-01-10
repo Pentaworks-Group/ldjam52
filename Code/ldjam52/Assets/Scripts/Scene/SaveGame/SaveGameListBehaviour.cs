@@ -25,6 +25,7 @@ namespace Assets.Scripts.Scene.SaveGame
             
             SetContentList(saveGames);
 
+
             if (!Assets.Scripts.Base.Core.Game.IsFileAccessPossible)
             {
                 if (saveGames.Count >= 5)

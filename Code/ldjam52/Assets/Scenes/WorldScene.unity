@@ -878,6 +878,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2064928025}
     m_Modifications:
+    - target: {fileID: 1622292186854860802, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726834, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_Name
       value: FieldView
@@ -970,9 +974,17 @@ PrefabInstance:
       propertyPath: worldBehaviour
       value: 
       objectReference: {fileID: 1900354445}
+    - target: {fileID: 1622292187981982504, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5180865867346410009, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180865867972791977, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 13.925348
       objectReference: {fileID: 0}
     - target: {fileID: 5180865868069848644, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_SizeDelta.y
@@ -980,11 +992,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180865868498765349, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -39.71468
       objectReference: {fileID: 0}
     - target: {fileID: 5612281193020515610, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928251753163767598, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -0.57215077
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
@@ -1039,9 +1055,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 261244544261765539, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1548934669274811023, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 50.26065
       objectReference: {fileID: 0}
     - target: {fileID: 1682637802365037447, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: worldBehaviour
@@ -1057,11 +1077,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145769892168702879, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -33.18196
       objectReference: {fileID: 0}
     - target: {fileID: 3186908271673052816, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 50.26066
       objectReference: {fileID: 0}
     - target: {fileID: 7016828543276112029, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_Name
@@ -1069,11 +1089,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232062709979713464, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_SizeDelta.y
+      value: -33.18196
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451514606345876462, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626883899680046534, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -33.18196
       objectReference: {fileID: 0}
     - target: {fileID: 9199526047750111619, guid: 9c57f1b75b2515e45a9c7fa79450e136, type: 3}
       propertyPath: m_Pivot.x
