@@ -4,7 +4,6 @@ namespace Assets.Scripts.Model
 {
     public class Field
     {
-        public Guid ID { get; set; }
         public Plant Seed { get; set; }
         // Humidity of the field
         public bool IsHumidityVisible { get; set; } = false;

@@ -13,8 +13,5 @@ namespace Assets.Scripts.Model
         public Field Field { get; set; }
         public Building Building { get; set; }
         public Int32 Price { get; set; }
-
-        public Int32 NaturalElementsAmount { get; set; }
-
     }
 }
