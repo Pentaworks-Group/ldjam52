@@ -12,7 +12,7 @@ public class GrowthController
     public static Double getGrowthRate(Field field, Plant plant)
     {
         //Scaling Factor
-        double scalingFactor = 15;
+        double scalingFactor = 1;// 15;
         //Humidity
         Double humidityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
         //Temperature
@@ -22,7 +22,8 @@ public class GrowthController
         //Fertility
         Double fertilityFactor = getGrowthFactorForType(ChromosomeTypes.FERTILITY, plant, field.Fertility);
 
-        Double growthFactor = (humidityFactor + temperatureFactor + sunshineFactor + fertilityFactor) / 4;
+        //        Double growthFactor = (humidityFactor + temperatureFactor + sunshineFactor + fertilityFactor) / 4;
+        double growthFactor = humidityFactor * temperatureFactor * sunshineFactor * fertilityFactor;
 
         Double growthRate = 0.0;
         if (plant.Genome.TryGetValue(ChromosomeTypes.GROWTH, out ChromosomePair growthPair))
@@ -35,7 +36,7 @@ public class GrowthController
             Debug.LogError($"Key {ChromosomeTypes.GROWTH} not defined for the plant!");
         }
 
-        return growthFactor * growthRate / scalingFactor;
+        return growthFactor * growthRate * scalingFactor;
     }
 
     public static Double getGrowthFactorForType(String type, Plant plant, Double biomeValue)
