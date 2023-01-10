@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 
+using Assets.Extensions;
 using Assets.Scripts.Base;
+using Assets.Scripts.Core;
 using Assets.Scripts.Model;
 
 using GameFrame.Core.Extensions;
@@ -12,7 +15,7 @@ public class TileBehaviour : MonoBehaviour
 {
     public UnityEvent<TileBehaviour> OnClick = new UnityEvent<TileBehaviour>();
 
-    private AudioSource audioSource;
+    private readonly Dictionary<String, GameObject> borders = new Dictionary<String, GameObject>();
 
     private GameObject floorGameObject;
     private GameObject naturalAreaGameObject;
@@ -49,22 +52,21 @@ public class TileBehaviour : MonoBehaviour
         }
     }
 
-    public void PlayEffect(String audioClipName)
-    {
-        var audioSource = GetAudioSource();
-
-        var audioClip = GameFrame.Base.Resources.Manager.Audio.Get(audioClipName);
-
-        audioSource.clip = audioClip;
-
-        audioSource.Play();
-    }
-
     private void Awake()
     {
         this.floorGameObject = transform.Find("Surface").gameObject;
         this.FieldBehaviour = transform.Find("Field").GetComponent<FieldBehaviour>();
         this.naturalAreaGameObject = transform.Find("NatureArea").gameObject;
+
+        var borderContainer = transform.Find("Border");
+
+        if (borderContainer != null)
+        {
+            foreach (Transform borderTransform in borderContainer)
+            {
+                this.borders[borderTransform.name] = borderTransform.gameObject;
+            }
+        }
     }
 
     // Start is called before the first frame update
@@ -83,19 +85,39 @@ public class TileBehaviour : MonoBehaviour
 
                 this.FieldBehaviour.gameObject.SetActive(this.Tile.IsOwned);
                 this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
+
+                RenderBorder();
             }
         }
     }
 
-    private AudioSource GetAudioSource()
+    private void RenderBorder()
     {
-        if (this.audioSource == default)
+        UpdateTile(TileDirection.Top);
+        UpdateTile(TileDirection.Left);
+        UpdateTile(TileDirection.Bottom);
+        UpdateTile(TileDirection.Right);
+    }
+
+    private void UpdateTile(TileDirection direction, Boolean isFromNeightbour = false)
+    {
+        if (borders.TryGetValue(direction.ToString(), out var border))
         {
-            this.audioSource = GetComponent<AudioSource>();
+            var isActive = true;
+
+            var neighbourTileBehaviour = Core.Game.TileController.GetTileInDirection(this.Tile, direction);
+
+            if ((neighbourTileBehaviour != null) && (neighbourTileBehaviour.Tile.IsOwned))
+            {
+                isActive = false;
+
+                if (!isFromNeightbour)
+                {
+                    neighbourTileBehaviour.UpdateTile(direction.Invert(), true);
+                }
+            }
+
+            border.SetActive(isActive);
         }
-
-        this.audioSource.volume = audioSource.volume = Core.Game.Options.EffectsVolume;
-
-        return this.audioSource;
     }
 }
