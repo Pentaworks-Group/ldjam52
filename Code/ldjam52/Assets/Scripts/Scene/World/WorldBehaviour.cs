@@ -68,6 +68,8 @@ public class WorldBehaviour : MonoBehaviour
     private void Start()
     {
         this.TileViewBehaviour.OnHide.AddListener(OnTileViewHide);
+        this.TileViewBehaviour.FieldViewRequested.AddListener(OnFieldViewRequested);
+
         this.FieldViewBehaviour.OnHide.AddListener(OnFieldViewHide);
         this.SeedShopBehaviour.OnHide.AddListener(OnShopViewHide);
         this.LaboratoryBehaviour.OnHide.AddListener(OnLaboratiryHide);
@@ -127,11 +129,6 @@ public class WorldBehaviour : MonoBehaviour
         }
     }
 
-    private void TileBought(Tile tile)
-    {
-        throw new NotImplementedException();
-    }
-
     private void TileSelected(TileBehaviour tileBehaviour)
     {
         if (tileBehaviour != null)
@@ -155,10 +152,7 @@ public class WorldBehaviour : MonoBehaviour
                 }
                 else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
                 {
-                    this.TileViewBehaviour.Show(tileBehaviour, () =>
-                    {
-                        this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
-                    });
+                    this.TileViewBehaviour.Show(tileBehaviour);
                 }
                 else
                 {
@@ -166,6 +160,11 @@ public class WorldBehaviour : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnFieldViewRequested(TileBehaviour tileBehaviour)
+    {
+        this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
     }
 
     public void PressEsc()
