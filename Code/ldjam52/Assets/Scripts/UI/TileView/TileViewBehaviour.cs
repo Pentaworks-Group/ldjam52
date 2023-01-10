@@ -169,37 +169,47 @@ namespace Assets.Scripts.UI.TileView
                         isAbleToBuild = false;
                         isAbleToBuyAndBuild = false;
                     }
-
-                    foreach (var surroundingTile in surroundingTiles)
+                    else
                     {
-                        if (surroundingTile.Tile.Building != default)
+                        foreach (var surroundingTile in surroundingTiles)
                         {
-                            statusString = "One or more of the surrounding tiles are occupied!";
-                            errorLevel = 2;
+                            if (surroundingTile.Tile.Building != default)
+                            {
+                                statusString = "One or more of the surrounding tiles are occupied!";
+                                errorLevel = 2;
 
-                            isAbleToBuild = false;
-                            isAbleToBuyAndBuild = false;
-                            break;
-                        }
-                        else if (surroundingTile.Tile.Field.Seed != default)
-                        {
-                            statusString = "One or more of the surrounding fields are in use!";
-                            errorLevel = 3;
+                                isAbleToBuild = false;
+                                isAbleToBuyAndBuild = false;
+                                break;
+                            }
+                            else if (surroundingTile.Tile.Field.Seed != default)
+                            {
+                                statusString = "One or more of the surrounding fields are in use!";
+                                errorLevel = 3;
 
-                            isAbleToBuild = false;
-                            isAbleToBuyAndBuild = false;
-                            break;
-                        }
-                        else if (!surroundingTile.Tile.IsOwned)
-                        {
-                            errorLevel = 1;
-                            statusString = "You dont own all the surrounding tiles!";
-                            tilesTotalCost += surroundingTile.Tile.Price;
+                                isAbleToBuild = false;
+                                isAbleToBuyAndBuild = false;
+                                break;
+                            }
+                            else if (!surroundingTile.Tile.IsOwned)
+                            {
+                                errorLevel = 1;
+                                statusString = "You dont own all the surrounding tiles!";
+                                tilesTotalCost += surroundingTile.Tile.Price;
 
-                            isAbleToBuild = false;
+                                isAbleToBuild = false;
+                            }
                         }
                     }
                 }
+            }
+
+            if (Base.Core.Game.State.FarmStorage.MoneyBalance < tilesTotalCost)
+            {
+                isAbleToBuyAndBuild = false;
+                errorLevel = 4;
+
+                statusString = "Not enought money to buy the required tiles!";
             }
 
             this.buildFarmStatusText.text = statusString;
@@ -222,7 +232,10 @@ namespace Assets.Scripts.UI.TileView
             {
                 case 1: textColor = Color.yellow; break;
                 case 2: textColor = new Color(1, 0.647f, 0); break;
-                case 3: textColor = Color.red; break;
+                case 3:
+                case 4:
+                    textColor = Color.red;
+                    break;
             }
 
             buildFarmStatusText.color = textColor;
@@ -240,7 +253,6 @@ namespace Assets.Scripts.UI.TileView
             {
                 biomeText.text = "This field is in the " + tileBehaviour.Tile.Biome.Type.Name;
             }
-
 
             buyCostFundsAvailableText.text = Base.Core.Game.State.FarmStorage.MoneyBalance.ToString("n0");
             buyCostTotalCostAmount.text = this.tileBehaviour.Tile.Price.ToString("n0");

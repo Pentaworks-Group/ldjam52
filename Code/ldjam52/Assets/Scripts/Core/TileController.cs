@@ -14,7 +14,7 @@ namespace Assets.Scripts.Core
         public readonly UnityEvent<TileBehaviour> TileAdded = new UnityEvent<TileBehaviour>();
 
         private readonly TwoDimensionCache<Int32, TileBehaviour> tileCache = new TwoDimensionCache<Int32, TileBehaviour>();
-        
+
         public TileController()
         {
         }
@@ -39,12 +39,33 @@ namespace Assets.Scripts.Core
             var x = (Int32)tile.Position.X;
             var z = (Int32)tile.Position.Z;
 
-            tiles.AddIfNotNull(tileCache.GetSafe(x - 1, z));
-            tiles.AddIfNotNull(tileCache.GetSafe(x - 1, z -1));
-            tiles.AddIfNotNull(tileCache.GetSafe(x, z + 1));
-            tiles.AddIfNotNull(tileCache.GetSafe(x + 1, z + 1));
+            tiles.AddIfNotNull(GetTileInDirection(x, z + 1, TileDirection.Top));
+            tiles.AddIfNotNull(GetTileInDirection(x - 1, z, TileDirection.Left));
+            tiles.AddIfNotNull(GetTileInDirection(x, z - 1, TileDirection.Bottom));
+            tiles.AddIfNotNull(GetTileInDirection(x + 1, z, TileDirection.Right));
 
             return tiles;
+        }
+
+        public TileBehaviour GetTileInDirection(Tile tile, TileDirection direction)
+        {
+            var x = (Int32)tile.Position.X;
+            var z = (Int32)tile.Position.Z;
+
+            return GetTileInDirection(x, z, direction);
+        }
+
+        public TileBehaviour GetTileInDirection(Int32 x, Int32 z, TileDirection direction)
+        {
+            switch (direction)
+            {
+                case TileDirection.Top: return tileCache.GetSafe(x, z + 1);
+                case TileDirection.Left: return tileCache.GetSafe(x - 1, z);
+                case TileDirection.Bottom: return tileCache.GetSafe(x, z - 1);
+                case TileDirection.Right: return tileCache.GetSafe(x + 1, z);
+            }
+
+            return default;
         }
 
         public List<TileBehaviour> GetSurroundingTiles(Tile tile)
