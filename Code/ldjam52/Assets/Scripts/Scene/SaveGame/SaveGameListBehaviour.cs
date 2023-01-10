@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Core;
 
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             List<System.Object> saveGames = new();
 
-            foreach (var savedGame in SaveGameController.SavedGames)
+            foreach (var savedGame in SaveGameController.SavedGames.OrderByDescending(kvp => kvp.Key))
             {
                 saveGames.Add(savedGame);
             }
