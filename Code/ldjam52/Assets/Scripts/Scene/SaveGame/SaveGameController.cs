@@ -44,7 +44,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
             var clone = CloneInAnUglyFashionJsonStyle(gameState);
 
-            SavedGames[key] = gameState;
+            SavedGames[key] = clone;
 
             var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
 
@@ -69,7 +69,7 @@ namespace Assets.Scripts.Scene.SaveGame
             var clone = CloneInAnUglyFashionJsonStyle(gameState);
 
             SavedGames.Remove(targetKey);
-            SavedGames[key] = gameState;
+            SavedGames[key] = clone;
 
             var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
 
@@ -93,7 +93,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         private static void PersistIndexAndSave()
         {
-            var indexAsJson = GameFrame.Core.Json.Handler.Serialize(SavedGames.Keys.ToList(), Formatting.None);
+            var indexAsJson = GameFrame.Core.Json.Handler.Serialize(SavedGames.Keys.ToList(), Formatting.None, new JsonSerializerSettings());
             PlayerPrefs.SetString(SavedGameIndexKey, indexAsJson);
             PlayerPrefs.Save();
         }
@@ -109,13 +109,13 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             var dictionary = new Dictionary<String, GameState>();
 
-            var indexList = LoadFromPlayerPrefs<List<String>>(SavedGameIndexKey);
+            var indexList = LoadFromPlayerPrefs<List<String>>(SavedGameIndexKey, new JsonSerializerSettings());
 
             if (indexList != default)
             {
                 foreach (var index in indexList)
                 {
-                    var gameState = LoadFromPlayerPrefs<GameState>(index);
+                    var gameState = LoadFromPlayerPrefs<GameState>(index, saveGameSerializationSettings.Value);
 
                     if (gameState != default)
                     {
@@ -127,7 +127,7 @@ namespace Assets.Scripts.Scene.SaveGame
             return dictionary;
         }
 
-        private static T LoadFromPlayerPrefs<T>(String key)
+        private static T LoadFromPlayerPrefs<T>(String key, JsonSerializerSettings serializerSettings)
         {
             if (!String.IsNullOrWhiteSpace(key))
             {
@@ -137,7 +137,7 @@ namespace Assets.Scripts.Scene.SaveGame
                 {
                     try
                     {
-                        return GameFrame.Core.Json.Handler.Deserialize<T>(keyContent);
+                        return GameFrame.Core.Json.Handler.Deserialize<T>(keyContent, serializerSettings);
                     }
                     catch (Exception exception)
                     {
