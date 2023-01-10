@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 using Assets.Scripts.Core;
+
+using Newtonsoft.Json;
 
 using UnityEngine;
 
@@ -12,6 +12,16 @@ namespace Assets.Scripts.Scene.SaveGame
     public class SaveGameController
     {
         private static List<GameState> savedGames;
+
+        private static Lazy<JsonSerializerSettings> saveGameSerializationSettings = new Lazy<JsonSerializerSettings>(() =>
+        {
+            return new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                Formatting = Formatting.None
+            };
+        });
 
         public static List<GameState> GetSaveGames()
         {
@@ -30,7 +40,7 @@ namespace Assets.Scripts.Scene.SaveGame
             {
                 try
                 {
-                    savedGames = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson);
+                    savedGames = GameFrame.Core.Json.Handler.Deserialize<List<GameState>>(savedGamesJson, saveGameSerializationSettings.Value);
                     return;
                 }
                 catch
@@ -43,15 +53,17 @@ namespace Assets.Scripts.Scene.SaveGame
         public static void SaveNewGame()
         {
             Base.Core.Game.State.SavedOn = DateTime.Now;
-            var saveGameJson = GameFrame.Core.Json.Handler.Serialize(Base.Core.Game.State);
-            var saveGame = GameFrame.Core.Json.Handler.Deserialize<GameState>(saveGameJson);
+
+            var saveGameJson = GameFrame.Core.Json.Handler.Serialize(Base.Core.Game.State, Formatting.None, saveGameSerializationSettings.Value);
+            var saveGame = GameFrame.Core.Json.Handler.Deserialize<GameState>(saveGameJson, saveGameSerializationSettings.Value);
+
             GetSaveGames().Add(saveGame);
             SaveGames();
         }
 
         public static void SaveGames()
         {
-            var savedGamesJson = GameFrame.Core.Json.Handler.Serialize(savedGames);
+            var savedGamesJson = GameFrame.Core.Json.Handler.Serialize(savedGames, Formatting.None, saveGameSerializationSettings.Value);
             PlayerPrefs.SetString("SavedGames", savedGamesJson);
             PlayerPrefs.Save();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 
 using GameFrame.Core.Math;
-using GameFrame.Core.Media;
 
 namespace Assets.Scripts.Model
 {
@@ -16,6 +15,6 @@ namespace Assets.Scripts.Model
         public Int32 Price { get; set; }
 
         public Int32 NaturalElementsAmount { get; set; }
-        
+
     }
 }

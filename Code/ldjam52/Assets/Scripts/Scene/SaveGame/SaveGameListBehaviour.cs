@@ -17,6 +17,7 @@ namespace Assets.Scripts.Scene.SaveGame
         public void UpdateList()
         {
             List<System.Object> saveGames = new();
+
             foreach (GameState savedGame in SaveGameController.GetSaveGames())
             {
                 saveGames.Add(savedGame);

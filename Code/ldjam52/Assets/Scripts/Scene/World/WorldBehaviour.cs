@@ -50,7 +50,9 @@ public class WorldBehaviour : MonoBehaviour
 
             if (gameState != default)
             {
-                Assets.Scripts.Base.Core.Game.TileController = new TileController();
+                var tileController = new TileController();
+
+                Assets.Scripts.Base.Core.Game.TileController = tileController;
 
                 if (gameState.World.Tiles.Count > 0)
                 {
@@ -124,6 +126,11 @@ public class WorldBehaviour : MonoBehaviour
         {
             RenderBuildings(world.Buildings);
         }
+    }
+
+    private void TileBought(Tile tile)
+    {
+        throw new NotImplementedException();
     }
 
     private void TileSelected(TileBehaviour tileBehaviour)
