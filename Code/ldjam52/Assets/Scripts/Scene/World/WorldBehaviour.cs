@@ -107,7 +107,6 @@ public class WorldBehaviour : MonoBehaviour
             tileBehaviour.OnClick.AddListener(TileSelected);
 
             tileBehaviour.SetTile(tile);
-            tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
 
             Core.Game.TileController.AddTile(tileBehaviour);
 
@@ -158,12 +157,12 @@ public class WorldBehaviour : MonoBehaviour
                 {
                     this.TileViewBehaviour.Show(tileBehaviour, () =>
                     {
-                        tileBehaviour.ShowFieldView();
+                        this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
                     });
                 }
                 else
                 {
-                    tileBehaviour.ShowFieldView();
+                    this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
                 }
             }
         }
