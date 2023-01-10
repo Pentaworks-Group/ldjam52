@@ -58,10 +58,9 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             Base.Core.Game.State.SavedOn = DateTime.Now;
 
-            var saveGameJson = GameFrame.Core.Json.Handler.Serialize(Base.Core.Game.State, Formatting.None, saveGameSerializationSettings.Value);
-            var saveGame = GameFrame.Core.Json.Handler.Deserialize<GameState>(saveGameJson, saveGameSerializationSettings.Value);
+            var clone = CloneInAnUglyFashionJsonStyle(Base.Core.Game.State);
 
-            GetSaveGames().Add(saveGame);
+            GetSaveGames().Add(clone);
             SaveGames();
         }
 
@@ -112,8 +111,13 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             if (Assets.Scripts.Base.Core.Game.State != default)
             {
-                Assets.Scripts.Base.Core.Game.State.SavedOn = DateTime.Now;
-                savedGames[index] = Assets.Scripts.Base.Core.Game.State;
+                var gameState = Assets.Scripts.Base.Core.Game.State;
+
+                gameState.SavedOn = DateTime.Now;
+
+                var clone = CloneInAnUglyFashionJsonStyle(gameState);
+
+                savedGames[index] = clone;
                 SaveGames();
             }
         }
@@ -122,6 +126,20 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             savedGames.RemoveAt(index);
             SaveGames();
+        }
+
+        public static void LoadSave(GameState gameState)
+        {
+            var clone = CloneInAnUglyFashionJsonStyle(gameState);
+
+            Assets.Scripts.Base.Core.Game.Start(clone);
+        }
+
+        private static GameState CloneInAnUglyFashionJsonStyle(GameState gameState)
+        {
+            var saveGameJson = GameFrame.Core.Json.Handler.Serialize(gameState, Formatting.None, saveGameSerializationSettings.Value);
+
+            return GameFrame.Core.Json.Handler.Deserialize<GameState>(saveGameJson, saveGameSerializationSettings.Value);
         }
     }
 }
