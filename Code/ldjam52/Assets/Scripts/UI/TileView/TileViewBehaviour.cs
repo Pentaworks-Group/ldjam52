@@ -8,6 +8,7 @@ using Assets.Scripts.Prefabs.World;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.TileView
@@ -34,18 +35,18 @@ namespace Assets.Scripts.UI.TileView
         private Button buildBuyAndBuildFarmButton;
 
         private TileBehaviour tileBehaviour;
-        private Action actionRequired;
         private List<TileBehaviour> surroundingTiles;
         private Int32 tilesTotalCost;
 
-        public virtual void Show(TileBehaviour tileBehaviour, Action actionRequired)
+        public UnityEvent<TileBehaviour> FieldViewRequested = new UnityEvent<TileBehaviour>();
+
+        public virtual void Show(TileBehaviour tileBehaviour)
         {
             if (tileBehaviour != null)
             {
                 Show();
 
                 this.tileBehaviour = tileBehaviour;
-                this.actionRequired = actionRequired;
                 this.surroundingTiles = default;
                 this.tilesTotalCost = 0;
 
@@ -67,7 +68,6 @@ namespace Assets.Scripts.UI.TileView
             base.Hide();
 
             this.tileBehaviour = null;
-            this.actionRequired = null;
 
             SetVisibility(false);
         }
@@ -102,11 +102,10 @@ namespace Assets.Scripts.UI.TileView
             }
             else
             {
+                FieldViewRequested.Invoke(this.tileBehaviour);
             }
 
             Hide();
-
-            this.actionRequired?.Invoke();
         }
 
         public void BuildFarm()

@@ -68,6 +68,8 @@ public class WorldBehaviour : MonoBehaviour
     private void Start()
     {
         this.TileViewBehaviour.OnHide.AddListener(OnTileViewHide);
+        this.TileViewBehaviour.FieldViewRequested.AddListener(OnFieldViewRequested);
+
         this.FieldViewBehaviour.OnHide.AddListener(OnFieldViewHide);
         this.SeedShopBehaviour.OnHide.AddListener(OnShopViewHide);
         this.LaboratoryBehaviour.OnHide.AddListener(OnLaboratiryHide);
@@ -107,7 +109,6 @@ public class WorldBehaviour : MonoBehaviour
             tileBehaviour.OnClick.AddListener(TileSelected);
 
             tileBehaviour.SetTile(tile);
-            tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
 
             Core.Game.TileController.AddTile(tileBehaviour);
 
@@ -126,11 +127,6 @@ public class WorldBehaviour : MonoBehaviour
         {
             RenderBuildings(world.Buildings);
         }
-    }
-
-    private void TileBought(Tile tile)
-    {
-        throw new NotImplementedException();
     }
 
     private void TileSelected(TileBehaviour tileBehaviour)
@@ -156,17 +152,19 @@ public class WorldBehaviour : MonoBehaviour
                 }
                 else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
                 {
-                    this.TileViewBehaviour.Show(tileBehaviour, () =>
-                    {
-                        tileBehaviour.ShowFieldView();
-                    });
+                    this.TileViewBehaviour.Show(tileBehaviour);
                 }
                 else
                 {
-                    tileBehaviour.ShowFieldView();
+                    this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
                 }
             }
         }
+    }
+
+    private void OnFieldViewRequested(TileBehaviour tileBehaviour)
+    {
+        this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
     }
 
     public void PressEsc()

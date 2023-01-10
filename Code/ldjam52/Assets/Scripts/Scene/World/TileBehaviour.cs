@@ -20,7 +20,6 @@ public class TileBehaviour : MonoBehaviour
     private Boolean isTileOwned;
 
     public FieldBehaviour FieldBehaviour;
-    public FieldViewBehaviour FieldViewBehaviour;
 
     public Tile Tile { get; private set; }
 
@@ -50,14 +49,6 @@ public class TileBehaviour : MonoBehaviour
         }
     }
 
-    public void ShowFieldView()
-    {
-        if (this.FieldViewBehaviour != null)
-        {
-            this.FieldViewBehaviour.Show(this.FieldBehaviour);
-        }
-    }
-
     public void PlayEffect(String audioClipName)
     {
         var audioSource = GetAudioSource();
@@ -65,7 +56,7 @@ public class TileBehaviour : MonoBehaviour
         var audioClip = GameFrame.Base.Resources.Manager.Audio.Get(audioClipName);
 
         audioSource.clip = audioClip;
-        
+
         audioSource.Play();
     }
 

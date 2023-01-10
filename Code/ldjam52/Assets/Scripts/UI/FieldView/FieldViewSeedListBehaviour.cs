@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
 
+using GameFrame.Core.UI.List;
+
 using UnityEngine;
 
-public class FieldViewSeedListBehaviour : ListContainerBehaviour
+public class FieldViewSeedListBehaviour : ListContainerBehaviour<StorageItem>
 {
     override public void CustomStart()
     {
@@ -16,7 +18,7 @@ public class FieldViewSeedListBehaviour : ListContainerBehaviour
 
     public void UpdateList()
     {
-        List<System.Object> plants = new();
+        List<StorageItem> plants = new();
         foreach (StorageItem item in FarmStorageController.getStorageInventory())
         {
             if (item.StorageAmountSeeds > 0)
@@ -25,7 +27,7 @@ public class FieldViewSeedListBehaviour : ListContainerBehaviour
             }
         }
 
-        SetObjects(plants);
+        SetContentList(plants);
     }
 
 }

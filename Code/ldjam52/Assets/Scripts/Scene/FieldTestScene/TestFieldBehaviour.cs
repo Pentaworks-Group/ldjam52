@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
@@ -42,21 +40,20 @@ namespace Assets.Scripts.Scene.FieldTestScene
                 tileBehaviour.OnClick.AddListener(TileSelected);
 
                 tileBehaviour.SetTile(tile);
-                tileBehaviour.FieldViewBehaviour = this.FieldViewBehaviour;
                 tileBehaviour.gameObject.SetActive(true);
             }
         }
 
         private void Update()
         {
-            
+
         }
 
         private void TileSelected(TileBehaviour tileBehaviour)
         {
             if (tileBehaviour != null)
             {
-                tileBehaviour.ShowFieldView();
+                this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
             }
         }
 

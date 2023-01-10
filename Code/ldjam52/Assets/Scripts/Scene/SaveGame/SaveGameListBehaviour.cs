@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Assets.Scripts.Core;
+
+using GameFrame.Core.UI.List;
+
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Scene.SaveGame
 {
-    public class SaveGameListBehaviour : ListContainerBehaviour
+    public class SaveGameListBehaviour : ListContainerBehaviour<KeyValuePair<string, GameState>>
     {
         public Button SaveNewButton;
 
@@ -17,14 +21,9 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void UpdateList()
         {
-            List<System.Object> saveGames = new();
-
-            foreach (var savedGame in SaveGameController.SavedGames.OrderByDescending(kvp => kvp.Key))
-            {
-                saveGames.Add(savedGame);
-            }
-
-            SetObjects(saveGames);
+            List<KeyValuePair<string, GameState>> saveGames = SaveGameController.SavedGames.OrderByDescending(kvp => kvp.Key).ToList();
+            
+            SetContentList(saveGames);
 
             if (!Assets.Scripts.Base.Core.Game.IsFileAccessPossible)
             {

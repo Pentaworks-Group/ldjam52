@@ -15,7 +15,6 @@ public class MainMenuBehaviour : MonoBehaviour
     public EffectsAudioManager EffectsAudioManager;
     public ContinuousAudioManager AmbienceAudioManager;
     public ContinuousAudioManager BackgroundAudioManager;
-    private GameObject quitButton;
 
     public void ShowSavedGames()
     {

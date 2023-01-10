@@ -10,9 +10,7 @@ Todo:
  - 
    
  GamePlay:
- - Keep TimeOfDay and Date in GameState (and load it correctly).
- - Shop integration (e.g. Lab & Shop buildings on map)
- - Show chromosomes in various locations
+ - Keep TimeOfDay and Date in GameState (and load it correctly). 
  - Rotten fields
     
  UI: 
