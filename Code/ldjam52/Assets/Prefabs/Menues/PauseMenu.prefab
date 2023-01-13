@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95faadea765385741a63672a3a37c07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldBehaviour: {fileID: 0}
   PauseToggled:
     m_PersistentCalls:
       m_Calls: []
@@ -852,6 +853,10 @@ PrefabInstance:
     - target: {fileID: 3190420073446597854, guid: 051154810500606449808b6ecc961fec, type: 3}
       propertyPath: m_Name
       value: SaveGames
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175230209195530212, guid: 051154810500606449808b6ecc961fec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 051154810500606449808b6ecc961fec, type: 3}
