@@ -1,16 +1,17 @@
-using Assets.Scripts.Model;
-using Assets.Scripts.Constants;
-using Assets.Scripts.Base;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using MathNet.Numerics.Distributions;
-using UnityEngine;
+
+using Assets.Scripts.Base;
+using Assets.Scripts.Constants;
+using Assets.Scripts.Model;
+
 using GameFrame.Core.Extensions;
 
-using GameFrame.Core.Media;
+using MathNet.Numerics.Distributions;
 
-public class InheritanceController 
+using UnityEngine;
+
+public class InheritanceController
 {
     // Start is called before the first frame update
     void Start()
@@ -68,14 +69,14 @@ public class InheritanceController
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // Cross two Plants to create a new one. The new genome is generated randomly based on the parents.
     public static Plant crossPlants(Plant plant1, Plant plant2)
     {
         Plant newPlant = new Plant();
-        newPlant.Name = PlantNames.adjectives.GetRandomEntry()+" "+PlantNames.names.GetRandomEntry();
+        newPlant.Name = PlantNames.adjectives.GetRandomEntry() + " " + PlantNames.names.GetRandomEntry();
         newPlant.BlossomColor = new GameFrame.Core.Media.Color
         {
             Red = UnityEngine.Random.value,
@@ -112,7 +113,7 @@ public class InheritanceController
 
     public static List<Chromosome> AnalysePlant(Plant plant, Analyzer analyzer)
     {
-        List<Chromosome > chromosomes = new List<Chromosome>();
+        List<Chromosome> chromosomes = new List<Chromosome>();
         int newVisibleChromosomes = 0;
 
         List<string> keys = new List<String>();
@@ -156,29 +157,30 @@ public class InheritanceController
         int newVisibleProperties = 0;
         int attempts = 0;
         int propertiesCount = 4;
+
         while (newVisibleProperties < analyzer.CurrentDevelopmentStage.ValueVisibleCount)
         {
-            int randomPropertyID = (int) Math.Round(UnityEngine.Random.value * propertiesCount);
-            
-            //TODO: Unsch�n, ich weiss;-)
-            if (randomPropertyID==FieldProperties.PROP_HUMIDITY && !field.IsHumidityVisible)
+            int randomPropertyID = (int)Math.Round(UnityEngine.Random.value * propertiesCount);
+
+            //TODO: Unschön, ich weiss;-)
+            if (randomPropertyID == FieldProperties.PROP_HUMIDITY && !field.IsHumidityVisible)
             {
-                newVisibleProperties = newVisibleProperties + 1;
+                newVisibleProperties++;
                 field.IsHumidityVisible = true;
             }
             else if (randomPropertyID == FieldProperties.PROP_TEMPERATURE && !field.IsTemperatureVisible)
             {
-                newVisibleProperties = newVisibleProperties + 1;
+                newVisibleProperties++;
                 field.IsTemperatureVisible = true;
             }
             else if (randomPropertyID == FieldProperties.PROP_SUNSHINE && !field.IsSunshineVisible)
             {
-                newVisibleProperties = newVisibleProperties + 1;
+                newVisibleProperties++;
                 field.IsSunshineVisible = true;
             }
             else if (randomPropertyID == FieldProperties.PROP_FERTILITY && !field.IsFertiliyVisible)
             {
-                newVisibleProperties = newVisibleProperties + 1;
+                newVisibleProperties++;
                 field.IsFertiliyVisible = true;
             }
 
@@ -225,7 +227,8 @@ public class InheritanceController
         {
             newPlant.ImageName = plant1.ImageName;
             newPlant.SeedImageName = plant1.SeedImageName;
-        } else
+        }
+        else
         {
             newPlant.ImageName = plant2.ImageName;
             newPlant.SeedImageName = plant2.SeedImageName;
@@ -239,7 +242,8 @@ public class InheritanceController
         if (plant.Genome.TryGetValue(type, out chromosomePair))
         {
             return chooseRandomChromosome(chromosomePair);
-        } else
+        }
+        else
         {
             Debug.LogError($"Key {type} not defined for the plant!");
             return null;

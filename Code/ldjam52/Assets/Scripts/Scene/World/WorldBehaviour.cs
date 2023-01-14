@@ -155,7 +155,11 @@ public class WorldBehaviour : MonoBehaviour
 
             if (tileBehaviour != default)
             {
-                if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
+                if (tile.Building != default)
+                {
+                    OnBuildingClicked(tile.Building); // redirect due to clickable fence :)
+                }
+                else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
                 {
                     this.TileViewBehaviour.Show(tileBehaviour);
                 }

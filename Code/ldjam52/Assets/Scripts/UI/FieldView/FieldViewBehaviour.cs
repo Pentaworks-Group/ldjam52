@@ -77,16 +77,19 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         {
             CheckHarvestButtons();
             CheckPlantingButton();
+
+            CheckAnalyzeButton();
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 GoBackOrClose();
             }
         }
 
-        if (currentGrowingTime != null && currentlyViewedField!=null)
+        if (currentGrowingTime != null && currentlyViewedField != null)
         {
             currentGrowingTime.text = Mathf.RoundToInt(Core.Game.State.ElapsedTime - currentlyViewedField.Field.TimePlanted).ToString() + "s";
-            currentGrowingProcess.text = Mathf.RoundToInt((float) currentlyViewedField.Field.GrowthProgress * 100).ToString() + "%";
+            currentGrowingProcess.text = Mathf.RoundToInt((float)currentlyViewedField.Field.GrowthProgress * 100).ToString() + "%";
         }
 
     }
@@ -118,17 +121,18 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         {
             return currentlyViewedField.Field;
         }
+
         return null;
     }
 
-    private void UpdateView(StorageItem item=null)
+    private void UpdateView(StorageItem item = null)
     {
         if (currentlyViewedField.Field.Seed != null)
         {
-            if (item==null)
+            if (item == null)
             {
                 item = FarmStorageController.getStorageItemToPlant(Core.Game.State.FarmStorage, currentlyViewedField.Field.Seed, false);
-                if (item==null)
+                if (item == null)
                 {
                     item = new StorageItem
                     {
@@ -146,19 +150,9 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             currentInfo.SetActive(false);
             plantingOptions.SetActive(true);
         }
+
         seedList.UpdateList();
         analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
-        if (analyzeButton != null)
-        {
-            if (Core.Game.State.FarmStorage.MoneyBalance < Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
-            {
-                analyzeButton.interactable = false;
-            }
-            else
-            {
-                analyzeButton.interactable = true;
-            }
-        }
 
         infoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), false);
     }
@@ -201,6 +195,31 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         }
     }
 
+    private void CheckAnalyzeButton()
+    {
+        if (analyzeButton != null)
+        {
+            var canAnalyze = true;
+
+            if (Core.Game.State.FarmStorage.MoneyBalance < Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
+            {
+                canAnalyze = false;
+            }
+
+            if (canAnalyze)
+            {
+                var field = GetField();
+
+                if (field.IsSunshineVisible && field.IsTemperatureVisible && field.IsFertiliyVisible && field.IsHumidityVisible)
+                {
+                    canAnalyze = false;
+                }
+            }
+
+            analyzeButton.interactable = canAnalyze;
+        }
+    }
+
     public void HarvestCrop()
     {
         var harvest = currentlyViewedField.HarvestCrop();
@@ -223,8 +242,6 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
         Hide();
     }
-
-
 
     public void FertilizeCrop()
     {
@@ -327,13 +344,14 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
     public void AnalyseField(InformationPrefabBehaviour plantBehaviour)
     {
-        if (Core.Game.State.FarmStorage.MoneyBalance >= Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost )
+        if (Core.Game.State.FarmStorage.MoneyBalance >= Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost)
         {
-            InheritanceController.AnalyseField(GetField(), Core.Game.State.FieldAnalyzer);
-            plantBehaviour.GetComponent<InformationPrefabBehaviour>().UpdateInfo(plantBehaviour.Item, GetField(), false);
+            var field = GetField();
+
+            InheritanceController.AnalyseField(field, Core.Game.State.FieldAnalyzer);
+            plantBehaviour.GetComponent<InformationPrefabBehaviour>().UpdateInfo(plantBehaviour.Item, field, false);
             FarmStorageController.TakeMoneyOfStorage(Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost);
             Core.Game.PlayButtonSound();
         }
-
     }
 }
