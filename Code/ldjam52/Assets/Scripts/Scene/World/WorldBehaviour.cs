@@ -262,7 +262,7 @@ public class WorldBehaviour : MonoBehaviour
             }
         }
 
-        return default;
+        throw new Exception(String.Format("Building template '{0}' not found!", templateReference));
     }
 
     private void OnFieldViewHide()
