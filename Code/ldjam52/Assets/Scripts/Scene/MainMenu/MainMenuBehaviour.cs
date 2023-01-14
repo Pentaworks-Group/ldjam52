@@ -63,7 +63,6 @@ public class MainMenuBehaviour : MonoBehaviour
         //else
         //{
         Core.Game.Start();
-        Debug.Log("Whazzuuup");
         //}
     }
 

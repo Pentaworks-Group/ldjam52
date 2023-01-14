@@ -99,13 +99,15 @@ namespace Assets.Scripts.UI.TileView
                     surroundingBehvaiour.Tile.IsOwned = true;
                     surroundingBehvaiour.Tile.Building = farm;
                 }
+                Hide();
             }
             else
             {
                 FieldViewRequested.Invoke(this.tileBehaviour);
+                Hide();
+                Base.Core.Game.LockCameraMovement = true;
             }
 
-            Hide();
         }
 
         public void BuildFarm()

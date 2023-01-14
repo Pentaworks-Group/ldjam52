@@ -77,7 +77,14 @@ namespace Assets.Scripts.Scene.SaveGame
 
             var gameStateAsJson = GameFrame.Core.Json.Handler.Serialize(clone, Formatting.None, saveGameSerializationSettings.Value);
 
+            //Stopwatch stopwatch = new Stopwatch();
+
+            //stopwatch.Start();
             gameStateAsJson = Compress(gameStateAsJson);
+            //stopwatch.Stop();
+
+            //UnityEngine.Debug.Log("Elapsed Time is " + stopwatch.ElapsedMilliseconds + " ms");
+            //UnityEngine.Debug.Log("Size: " + gameStateAsJson.Length);
 
             PlayerPrefs.DeleteKey(targetKey);
             PlayerPrefs.SetString(key, gameStateAsJson);
@@ -153,8 +160,8 @@ namespace Assets.Scripts.Scene.SaveGame
                     }
                     catch (Exception exception)
                     {
-                        Debug.LogError("Failed to deserialize stored index!");
-                        Debug.LogError(exception.ToString());
+                        UnityEngine.Debug.LogError("Failed to deserialize stored index!");
+                        UnityEngine.Debug.LogError(exception.ToString());
                     }
                 }
             }
@@ -172,6 +179,11 @@ namespace Assets.Scripts.Scene.SaveGame
                 {
                     gzipStream.Write(payload, 0, payload.Length);
                 }
+
+                //using (var brotliStream = new BrotliStream(memoryStream, System.IO.Compression.CompressionLevel.Optimal))
+                //{
+                //    brotliStream.Write(payload, 0, payload.Length);
+                //}
 
                 return Convert.ToBase64String(memoryStream.ToArray());
             }
