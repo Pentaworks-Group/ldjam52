@@ -3,7 +3,32 @@ guid: 57327d2ec6d8b78418ec786670f14c2a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boden_trader
+    second: {fileID: 2100000, guid: 28e934a5b7ae7d14d870ebdefeda3fca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dach_trader
+    second: {fileID: 2100000, guid: 9a5d539447e15b7459b050164c567daf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Text_color
+    second: {fileID: 2100000, guid: c488ccc4a450133459779441b69da01d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wand_trader
+    second: {fileID: 2100000, guid: 766529ce1a1c2384d8a19e15f28af073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Woodplanks_trader
+    second: {fileID: 2100000, guid: 26c65c717445e8148a9e8aad8ee077c7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
