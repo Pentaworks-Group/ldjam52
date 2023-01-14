@@ -13,7 +13,8 @@ namespace Assets.Scripts.Core
     {
         public readonly UnityEvent<TileBehaviour> TileAdded = new UnityEvent<TileBehaviour>();
 
-        private readonly TwoDimensionCache<Int32, TileBehaviour> tileCache = new TwoDimensionCache<Int32, TileBehaviour>();
+        private readonly Dictionary<Guid, TileBehaviour> tileCacheByID = new Dictionary<Guid, TileBehaviour>();
+        private readonly TwoDimensionCache<Int32, TileBehaviour> tileCacheByCoordinates = new TwoDimensionCache<Int32, TileBehaviour>();
 
         public TileController()
         {
@@ -23,10 +24,12 @@ namespace Assets.Scripts.Core
         {
             if (tileBehaviour.Tile != default)
             {
+                tileCacheByID[tileBehaviour.Tile.ID] = tileBehaviour;
+
                 var x = (Int32)tileBehaviour.Tile.Position.X;
                 var z = (Int32)tileBehaviour.Tile.Position.Z;
 
-                this.tileCache.PutSafe(x, z, tileBehaviour);
+                this.tileCacheByCoordinates.PutSafe(x, z, tileBehaviour);
 
                 TileAdded.Invoke(tileBehaviour);
             }
@@ -59,13 +62,12 @@ namespace Assets.Scripts.Core
         {
             switch (direction)
             {
-                case TileDirection.Top: return tileCache.GetSafe(x, z + 1);
-                case TileDirection.Left: return tileCache.GetSafe(x - 1, z);
-                case TileDirection.Bottom: return tileCache.GetSafe(x, z - 1);
-                case TileDirection.Right: return tileCache.GetSafe(x + 1, z);
+                case TileDirection.Top: return tileCacheByCoordinates.GetSafe(x, z + 1);
+                case TileDirection.Left: return tileCacheByCoordinates.GetSafe(x - 1, z);
+                case TileDirection.Bottom: return tileCacheByCoordinates.GetSafe(x, z - 1);
+                case TileDirection.Right: return tileCacheByCoordinates.GetSafe(x + 1, z);
+                default: return default;
             }
-
-            return default;
         }
 
         public List<TileBehaviour> GetSurroundingTiles(Tile tile)
@@ -79,7 +81,7 @@ namespace Assets.Scripts.Core
                     var x = (Int32)tile.Position.X + i;
                     var z = (Int32)tile.Position.Z + j;
 
-                    var tileBehaviour = tileCache.GetSafe(x, z);
+                    var tileBehaviour = tileCacheByCoordinates.GetSafe(x, z);
 
                     if (tileBehaviour != null && tileBehaviour.Tile.ID != tile.ID)
                     {
@@ -89,6 +91,16 @@ namespace Assets.Scripts.Core
             }
 
             return surroundingTiles;
+        }
+
+        public TileBehaviour GetBehaviour(Guid tileID)
+        {
+            if (this.tileCacheByID.TryGetValue(tileID, out var tileBehaviour))
+            {
+                return tileBehaviour;
+            }
+
+            return default;
         }
     }
 }

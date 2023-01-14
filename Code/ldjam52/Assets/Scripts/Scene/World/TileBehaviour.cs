@@ -13,8 +13,6 @@ using UnityEngine.Events;
 
 public class TileBehaviour : MonoBehaviour
 {
-    public UnityEvent<TileBehaviour> OnClick = new UnityEvent<TileBehaviour>();
-
     private readonly Dictionary<String, GameObject> borders = new Dictionary<String, GameObject>();
 
     private GameObject floorGameObject;

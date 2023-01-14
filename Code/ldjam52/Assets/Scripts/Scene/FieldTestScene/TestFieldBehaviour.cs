@@ -37,7 +37,7 @@ namespace Assets.Scripts.Scene.FieldTestScene
 
                 var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
 
-                tileBehaviour.OnClick.AddListener(TileSelected);
+                //tileBehaviour.OnClick.AddListener(TileSelected);
 
                 tileBehaviour.SetTile(tile);
                 tileBehaviour.gameObject.SetActive(true);

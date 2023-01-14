@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
@@ -7,6 +8,7 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Model;
 using Assets.Scripts.Model.Buildings;
 using Assets.Scripts.Scene.Shops;
+using Assets.Scripts.Scene.World.Clickables;
 using Assets.Scripts.UI.TileView;
 
 using GameFrame.Core.Extensions;
@@ -16,8 +18,10 @@ using UnityEngine;
 public class WorldBehaviour : MonoBehaviour
 {
     private GameObject tileContainer;
+    private GameObject buildingContainer;
     private GameObject templateContainer;
 
+    private readonly IDictionary<String, GameObject> tileTemplateCache = new Dictionary<String, GameObject>();
     private readonly IDictionary<String, GameObject> buildingTemplateCache = new Dictionary<String, GameObject>();
     private int escTimeout = 3;
     private Boolean isFarmSet = false;
@@ -33,6 +37,16 @@ public class WorldBehaviour : MonoBehaviour
     //Random Ambient Sounds
     private float nextSoundEffectTime = 0;
 
+    public void PressEsc()
+    {
+        escTimeout = 3;
+    }
+
+    public bool WasEscPressed()
+    {
+        return escTimeout > 0;
+    }
+
     private void Awake()
     {
         if (Core.Game.AvailableGameModes.Count < 1)
@@ -42,6 +56,7 @@ public class WorldBehaviour : MonoBehaviour
         else
         {
             this.tileContainer = transform.Find("TileContainer").gameObject;
+            this.buildingContainer = transform.Find("BuildingContainer").gameObject;
             this.templateContainer = transform.Find("Templates").gameObject;
 
             LoadTemplates();
@@ -88,7 +103,7 @@ public class WorldBehaviour : MonoBehaviour
                 RenderFarm(gameState.World.Farm);
             }
 
-            playRandomEffectSound();
+            PlayRandomEffectSound();
 
             if (escTimeout > 0)
             {
@@ -99,16 +114,19 @@ public class WorldBehaviour : MonoBehaviour
 
     private void RenderWorld(World world)
     {
-        var tileTemplate = templateContainer.GetComponentInChildren<TileBehaviour>().gameObject;
+        var tileTemplate = this.tileTemplateCache.Values.FirstOrDefault();
 
         foreach (var tile in world.Tiles)
         {
             var tileGameObject = Instantiate(tileTemplate, this.tileContainer.transform);
 
             var tileBehaviour = tileGameObject.GetComponent<TileBehaviour>();
-            tileBehaviour.OnClick.AddListener(TileSelected);
 
             tileBehaviour.SetTile(tile);
+
+            var clickableTile = tileGameObject.GetComponent<ClickableTile>();
+            clickableTile.item = tile;
+            clickableTile.Clicked.AddListener(OnTileClicked);
 
             Core.Game.TileController.AddTile(tileBehaviour);
 
@@ -129,28 +147,15 @@ public class WorldBehaviour : MonoBehaviour
         }
     }
 
-    private void TileSelected(TileBehaviour tileBehaviour)
+    private void OnTileClicked(Tile tile)
     {
-        if (tileBehaviour != null)
+        if (!WasEscPressed())
         {
-            if (!WasEscPressed())
+            var tileBehaviour = Core.Game.TileController.GetBehaviour(tile.ID);
+
+            if (tileBehaviour != default)
             {
-                if (tileBehaviour.Tile.Building != default)
-                {
-                    if (tileBehaviour.Tile.Building is Farm)
-                    {
-                        PauseMenuBehaviour.Show();
-                    }
-                    else if (tileBehaviour.Tile.Building is Shop)
-                    {
-                        this.SeedShopBehaviour.Show();
-                    }
-                    else if (tileBehaviour.Tile.Building is Laboratory)
-                    {
-                        this.LaboratoryBehaviour.Show();
-                    }
-                }
-                else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
+                if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
                 {
                     this.TileViewBehaviour.Show(tileBehaviour);
                 }
@@ -167,21 +172,23 @@ public class WorldBehaviour : MonoBehaviour
         this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
     }
 
-    public void PressEsc()
-    {
-        escTimeout = 3;
-    }
-
-    public bool WasEscPressed()
-    {
-        return escTimeout > 0;
-    }
-
     private void RenderFarm(Farm farm)
     {
         var farmTemplate = GetBuildingTemplate("FarmPrefab");
 
-        var farmGameObject = Instantiate(farmTemplate, tileContainer.transform);
+        var farmGameObject = Instantiate(farmTemplate, buildingContainer.transform);
+
+        var collider = farmGameObject.GetComponentInChildren<ClickableBuilding>();
+
+        if (collider != null)
+        {
+            collider.item = farm;
+            collider.Clicked.AddListener(OnBuildingClicked);
+        }
+        else
+        {
+            throw new Exception("Buildings need to have a BuildingColliderBehaviour!");
+        }
 
         if ((farmGameObject.transform.position.x != farm.Position.X) || (farmGameObject.transform.position.z != farm.Position.Z))
         {
@@ -199,7 +206,20 @@ public class WorldBehaviour : MonoBehaviour
             {
                 var buildingTemplate = GetBuildingTemplate(building.TemplateReference);
 
-                var buildingGameObject = Instantiate(buildingTemplate, tileContainer.transform);
+                var buildingGameObject = Instantiate(buildingTemplate, buildingContainer.transform);
+
+                var collider = buildingGameObject.GetComponentInChildren<ClickableBuilding>();
+
+                if (collider != null)
+                {
+                    collider.item = building;
+                    collider.Clicked.AddListener(OnBuildingClicked);
+                }
+                else
+                {
+                    Debug.LogError("Buildings need to have a BuildingColliderBehaviour!");
+                    throw new Exception("Buildings need to have a BuildingColliderBehaviour!");
+                }
 
                 if ((buildingGameObject.transform.position.x != building.Position.X) || (buildingGameObject.transform.position.z != building.Position.Z))
                 {
@@ -213,7 +233,23 @@ public class WorldBehaviour : MonoBehaviour
         }
     }
 
-    private void playRandomEffectSound()
+    private void OnBuildingClicked(Building building)
+    {
+        if (building is Farm)
+        {
+            PauseMenuBehaviour.Show();
+        }
+        else if (building is Shop)
+        {
+            this.SeedShopBehaviour.Show();
+        }
+        else if (building is Laboratory)
+        {
+            this.LaboratoryBehaviour.Show();
+        }
+    }
+
+    private void PlayRandomEffectSound()
     {
         if (Assets.Scripts.Base.Core.Game.State.ElapsedTime > nextSoundEffectTime && nextSoundEffectTime != 0)
         {
@@ -236,19 +272,28 @@ public class WorldBehaviour : MonoBehaviour
 
         if (templateConatiner != default)
         {
-            var buildingTemplates = templateContainer.transform.Find("Buildings").gameObject;
+            LoadTemplates(this.tileTemplateCache, templateConatiner, "Tiles");
+            LoadTemplates(this.buildingTemplateCache, templateConatiner, "Buildings");
+        }
+    }
 
-            if (buildingTemplates.transform.childCount > 0)
+    private void LoadTemplates<T>(IDictionary<String, T> cache, Transform rootTemplateContainer, String templateContainerName)
+    {
+        var buildingTemplates = rootTemplateContainer.transform.Find(templateContainerName).gameObject;
+
+        if (buildingTemplates.transform.childCount > 0)
+        {
+            foreach (Transform buildingTemplate in buildingTemplates.transform)
             {
-                foreach (Transform buildingTemplate in buildingTemplates.transform)
+                if (buildingTemplate.gameObject is T castedObject)
                 {
-                    this.buildingTemplateCache[buildingTemplate.name] = buildingTemplate.gameObject;
+                    cache[buildingTemplate.name] = castedObject;
                 }
             }
-            else
-            {
-                throw new Exception("Missing Templates!");
-            }
+        }
+        else
+        {
+            throw new Exception("Missing Templates!");
         }
     }
 
