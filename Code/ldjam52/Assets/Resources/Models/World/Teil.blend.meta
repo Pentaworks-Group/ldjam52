@@ -3,7 +3,7 @@ guid: 0bd18c6407dfa3446b4f246d111c8f92
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
+   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
