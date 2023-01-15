@@ -154,7 +154,7 @@ namespace Assets.Scripts.UI.TileView
             if (!this.tileBehaviour.Tile.IsOwned)
             {
                 statusString = "You dont own the select land...";
-                errorLevel = 1;
+                errorLevel = 4;
 
                 isAbleToBuild = false;
                 tilesTotalCost += this.tileBehaviour.Tile.Price;
@@ -168,6 +168,9 @@ namespace Assets.Scripts.UI.TileView
                 {
                     if (surroundingTiles.Count != 8)
                     {
+                        statusString = "Not enough space...";
+                        errorLevel = 1;
+
                         isAbleToBuild = false;
                         isAbleToBuyAndBuild = false;
                     }
@@ -220,13 +223,16 @@ namespace Assets.Scripts.UI.TileView
 
             if (errorLevel == 1)
             {
-                this.buildCostBuyAndBuildContainer.SetActive(true);
+                this.buildCostBuyAndBuildContainer.SetActive(isAbleToBuyAndBuild);
                 this.buildCostBuyAndBuildAmount.text = tilesTotalCost.ToString("n0");
             }
             else
             {
                 this.buildCostBuyAndBuildContainer.SetActive(false);
             }
+
+            this.buildFarmButton.gameObject.SetActive(isAbleToBuild);
+            this.buildBuyAndBuildFarmButton.gameObject.SetActive(isAbleToBuyAndBuild);
 
             var textColor = Color.green;
 
@@ -311,6 +317,8 @@ namespace Assets.Scripts.UI.TileView
                 {
                     this.buyTileButton.interactable = true;
                     this.buyTileAndBuildFarmButton.interactable = false;
+
+                    this.buyCostBuyAndBuildContainer.SetActive(checkBuyAndBuild);
 
                     buyCouldBuyText.text = "But it could.\nClick 'Buy' below, and it is yours!\nDo it. Do it now!";
                 }

@@ -242,6 +242,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2064928025}
     m_Modifications:
+    - target: {fileID: 701629875510733629, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 850523688856324619, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726834, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
       propertyPath: m_Name
       value: TileView
@@ -346,7 +354,15 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2946252060277130555, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3021816721040198420, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129805686863524274, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -355,6 +371,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5127691653441056121, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180865868498765349, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6890418980410677724, guid: baee8aab894f19f4abcdd215721bfb53, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}

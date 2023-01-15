@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.85
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2922622291970279485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -754,7 +754,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1fbe90c24893fd43914af1ed6fb79f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldBehaviour: {fileID: 0}
+  OnHide:
+    m_PersistentCalls:
+      m_Calls: []
+  FieldViewRequested:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1622292187981982504
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +971,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.7
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1747,7 +1752,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.85
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1882,7 +1887,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.25
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2017,7 +2022,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.7
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2152,7 +2157,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2309,7 +2314,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -22.685852}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4625147981503698628
 CanvasRenderer:
@@ -2400,7 +2405,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -55.69986}
+  m_SizeDelta: {x: 0, y: -20.17392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2022535786600724221
 CanvasRenderer:
@@ -2547,7 +2552,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52.2
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2626,7 +2631,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -20.17392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4168519856312043276
 CanvasRenderer:
@@ -2976,7 +2981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -59.448837
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3252,7 +3257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -21.144892
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3536,7 +3541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -7.0972476
+      value: -21.144903
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
