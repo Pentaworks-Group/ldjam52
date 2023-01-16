@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Core;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Scene.World
 {
@@ -8,19 +6,22 @@ namespace Assets.Scripts.Scene.World
     {
         private void Update()
         {
-            if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonDown(0))
+            if (Input.touchCount < 2)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out var raycastHit, 100.0f))
+                if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonDown(0))
                 {
-                    if (raycastHit.transform.gameObject != null)
-                    {
-                        var hitItem = raycastHit.transform.gameObject.GetComponentInParent<ClickableItemBehaviour>();
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                        if (hitItem != null)
+                    if (Physics.Raycast(ray, out var raycastHit, 100.0f))
+                    {
+                        if (raycastHit.transform.gameObject != null)
                         {
-                            hitItem.Click();
+                            var hitItem = raycastHit.transform.gameObject.GetComponentInParent<ClickableItemBehaviour>();
+
+                            if (hitItem != null)
+                            {
+                                hitItem.Click();
+                            }
                         }
                     }
                 }
