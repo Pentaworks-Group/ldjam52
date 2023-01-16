@@ -6,11 +6,11 @@ namespace Assets.Scripts.Model
         public Chromosome Chromosome2 { get; set; }
         public bool IsVisible { get; set; } = false;
 
-        public bool Equals(ChromosomePair other)
+        public bool SameChromosomePair(ChromosomePair other)
         {
             //Don't Compare IsVisible, because it doesn't affect the equality of the genome
-            return (Chromosome1 == other.Chromosome1) &&
-                   (Chromosome2 == other.Chromosome2);
+            return (Chromosome1.Equals(other.Chromosome1)) &&
+                   (Chromosome2.Equals(other.Chromosome2));
         }
     }
 }
