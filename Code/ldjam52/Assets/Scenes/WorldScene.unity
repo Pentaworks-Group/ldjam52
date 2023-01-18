@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7891072086529702164, guid: 58c1ff3cb4b862442add76e95a92508c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7891072086529702164, guid: 58c1ff3cb4b862442add76e95a92508c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -469,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726846, guid: 1d46bfbcb724dcf4281a2df42b8c71c0, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726846, guid: 1d46bfbcb724dcf4281a2df42b8c71c0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -872,7 +872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726846, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1622292187684726846, guid: e5135988eb81028488dfe42946eb86ac, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1270,8 +1270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f57d01d58b0174bb33024d502a4bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewTileViewBehaviour: {fileID: 1052668215}
-  TileViewBehaviour: {fileID: 0}
+  TileViewBehaviour: {fileID: 1052668215}
   FieldViewBehaviour: {fileID: 1457188055}
   LaboratoryBehaviour: {fileID: 1431662536}
   SeedShopBehaviour: {fileID: 1922770013}
@@ -1346,7 +1345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4969353866576654281, guid: d8d3c3183f7286e4bb0d19660976013a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4969353866576654281, guid: d8d3c3183f7286e4bb0d19660976013a, type: 3}
       propertyPath: m_AnchorMax.x
