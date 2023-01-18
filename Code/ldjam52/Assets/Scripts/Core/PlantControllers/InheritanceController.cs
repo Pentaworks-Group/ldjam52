@@ -201,7 +201,7 @@ public class InheritanceController
                 ChromosomePair otherPair;
                 if (plant.Genome.TryGetValue(chromosomePair.Key, out otherPair))
                 {
-                    equal &= chromosomePair.Equals(otherPair);
+                    equal &= chromosomePair.Value.SameChromosomePair(otherPair);
                     if (!equal)
                     {
                         break;
