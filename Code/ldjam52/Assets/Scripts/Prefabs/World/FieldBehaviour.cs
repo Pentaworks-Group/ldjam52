@@ -18,7 +18,7 @@ public class FieldBehaviour : MonoBehaviour
     private GrowthStage currentStadium = null;
     private readonly List<GameObject> flowerPots = new List<GameObject>();
 
-    private Double growthRate = 0;
+    private Double? growthRate;
 
     private Field field;
     private Boolean isNotified;
@@ -72,7 +72,12 @@ public class FieldBehaviour : MonoBehaviour
 
             if (isPlanted)
             {
-                this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate * Time.deltaTime);
+                if (!growthRate.HasValue)
+                {
+                    growthRate = GrowthController.getGrowthRate(this.field, this.field.Seed);
+                }
+
+                this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate.Value * Time.deltaTime);
                 AdjustStadium();
 
                 if (IsFullyGrown() && !this.isNotified)
