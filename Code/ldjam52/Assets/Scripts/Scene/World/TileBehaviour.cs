@@ -9,7 +9,6 @@ using Assets.Scripts.Model;
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TileBehaviour : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class TileBehaviour : MonoBehaviour
     private GameObject naturalAreaGameObject;
 
     private Boolean isTileOwned;
+    private Boolean isBorderRendered;
 
     public FieldBehaviour FieldBehaviour;
 
@@ -77,12 +77,15 @@ public class TileBehaviour : MonoBehaviour
     {
         if (this.Tile != default)
         {
-            if (this.Tile.IsOwned && !this.isTileOwned)
+            if (this.Tile.IsOwned)
             {
-                this.isTileOwned = this.Tile.IsOwned;
+                if (!this.isTileOwned)
+                {
+                    this.isTileOwned = this.Tile.IsOwned;
 
-                this.FieldBehaviour.gameObject.SetActive(this.Tile.IsOwned);
-                this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
+                    this.FieldBehaviour.gameObject.SetActive(this.Tile.IsOwned);
+                    this.naturalAreaGameObject.SetActive(!this.Tile.IsOwned);
+                }
 
                 RenderBorder();
             }
@@ -91,10 +94,15 @@ public class TileBehaviour : MonoBehaviour
 
     private void RenderBorder()
     {
-        UpdateTile(TileDirection.Top);
-        UpdateTile(TileDirection.Left);
-        UpdateTile(TileDirection.Bottom);
-        UpdateTile(TileDirection.Right);
+        if (!isBorderRendered)
+        {
+            UpdateTile(TileDirection.Top);
+            UpdateTile(TileDirection.Left);
+            UpdateTile(TileDirection.Bottom);
+            UpdateTile(TileDirection.Right);
+
+            this.isBorderRendered = true;
+        }
     }
 
     private void UpdateTile(TileDirection direction, Boolean isFromNeightbour = false)
