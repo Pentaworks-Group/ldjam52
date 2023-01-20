@@ -129,9 +129,8 @@ public class CameraBehaviour : MonoBehaviour
         // Mouse
         if (Input.mouseScrollDelta.y != 0)
         {
-            zoom = zoomSpeedMouse * -Input.mouseScrollDelta.y;
+            zoom = zoomSpeedMouse * Input.mouseScrollDelta.y;
         }
-
 
         // Touch
         if (Input.touchCount == 2)
@@ -154,7 +153,8 @@ public class CameraBehaviour : MonoBehaviour
             Vector3 newCamPos = cam.transform.position + cam.transform.forward * zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity;
             if (newCamPos.y < 1)
             {
-                return false;            }
+                return false;
+            }
             cam.transform.position = newCamPos;
             return true;
         }
@@ -179,7 +179,7 @@ public class CameraBehaviour : MonoBehaviour
             FarmButton.SetActive(false);
             return; // Object center is visible
         }
-        
+
         FarmButton.SetActive(true);
         v3Pos.x -= 0.5f;  // Translate to use center of viewport
         v3Pos.y -= 0.5f;
@@ -218,9 +218,12 @@ public class CameraBehaviour : MonoBehaviour
     public void CenterFarm()
     {
         Vector3 target = GetCenterTarget();
+
         float yDiff = cam.transform.position.y - target.y;
         float factor = yDiff / cam.transform.forward.y;
+
         cam.transform.position = target + cam.transform.forward * factor;
+
         UpdateFarmButton();
     }
 }

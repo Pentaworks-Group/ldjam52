@@ -19,7 +19,6 @@ public class WorldBehaviour : MonoBehaviour
 {
     private GameObject tileContainer;
     private GameObject buildingContainer;
-    private GameObject templateContainer;
 
     private readonly IDictionary<String, GameObject> tileTemplateCache = new Dictionary<String, GameObject>();
     private readonly IDictionary<String, GameObject> buildingTemplateCache = new Dictionary<String, GameObject>();
@@ -31,6 +30,7 @@ public class WorldBehaviour : MonoBehaviour
     public FieldViewBehaviour FieldViewBehaviour;
     public LaboratoryBehaviour LaboratoryBehaviour;
     public SeedShopBehaviour SeedShopBehaviour;
+    public CameraBehaviour CameraBehaviour;
 
     public PauseMenuBehavior PauseMenuBehaviour;
 
@@ -57,7 +57,6 @@ public class WorldBehaviour : MonoBehaviour
         {
             this.tileContainer = transform.Find("TileContainer").gameObject;
             this.buildingContainer = transform.Find("BuildingContainer").gameObject;
-            this.templateContainer = transform.Find("Templates").gameObject;
 
             LoadTemplates();
 
@@ -109,6 +108,8 @@ public class WorldBehaviour : MonoBehaviour
             {
                 escTimeout--;
             }
+
+            CheckShortKeys();
         }
     }
 
@@ -332,5 +333,16 @@ public class WorldBehaviour : MonoBehaviour
     private void OnLaboratiryHide()
     {
         PressEsc();
+    }
+
+    private void CheckShortKeys()
+    {
+        if (!WasEscPressed())
+        {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                this.CameraBehaviour.CenterFarm();   
+            }
+        }
     }
 }
