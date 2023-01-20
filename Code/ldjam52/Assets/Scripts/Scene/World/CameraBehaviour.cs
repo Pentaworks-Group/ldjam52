@@ -164,8 +164,8 @@ public class CameraBehaviour : MonoBehaviour
     private void UpdateFarmButton()
     {
 
-
-        Vector3 v3Pos = Camera.main.WorldToViewportPoint(GetCenterTarget());
+        Vector3 target = GetCenterTarget();
+        Vector3 v3Pos = Camera.main.WorldToViewportPoint(target);
 
         //if (v3Pos.z < Camera.main.nearClipPlane)
         //{
@@ -179,13 +179,17 @@ public class CameraBehaviour : MonoBehaviour
             FarmButton.SetActive(false);
             return; // Object center is visible
         }
-
+        
         FarmButton.SetActive(true);
         v3Pos.x -= 0.5f;  // Translate to use center of viewport
         v3Pos.y -= 0.5f;
-        v3Pos.z = 0;
 
         float fAngle = Mathf.Atan2(v3Pos.x, v3Pos.y);
+        if (v3Pos.z < 0)
+        {
+            fAngle += Mathf.PI;
+        }
+        v3Pos.z = 0;
         FarmButton.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -fAngle * Mathf.Rad2Deg);
 
         v3Pos.x = (0.45f * Mathf.Sin(fAngle) + 0.5f) * Screen.width;  // Place on ellipse touc$$anonymous$$ng 
