@@ -77,7 +77,9 @@ namespace Assets.Scripts.Scene.Shops
             }
             else
             {
-                panel.transform.Find("ButtonUpgrade")?.gameObject.SetActive(false);
+                panel.transform.Find("Footer")?.gameObject.SetActive(false);
+                panel.transform.Find("NextStageDesc").gameObject.SetActive(false);
+                //panel.transform.Find("Footer/ButtonUpgrade")?.gameObject.SetActive(false);
             }
         }
 
