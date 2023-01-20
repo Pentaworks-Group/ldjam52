@@ -4,9 +4,10 @@ namespace Assets.Scripts.Scene.World
 {
     public class ClickBehaviour : MonoBehaviour
     {
+        private Vector2 prevTouch = Vector2.zero;
         private void Update()
         {
-            if (Input.touchCount < 2)
+            if (Input.touchCount < 1 || Input.touchCount == 1 && Input.GetTouch(0).phase != TouchPhase.Moved)
             {
                 if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonDown(0))
                 {

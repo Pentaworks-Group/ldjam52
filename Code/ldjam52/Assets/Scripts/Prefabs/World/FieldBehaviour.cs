@@ -33,7 +33,7 @@ public class FieldBehaviour : MonoBehaviour
         {
             if (parentTile.Tile.IsOwned)
             {
-                this.dirtPatch.SetActive(true);
+                ActivateField();
             }
         }
     }
@@ -50,23 +50,24 @@ public class FieldBehaviour : MonoBehaviour
         {
             flowerPots.Add(child.gameObject);
         }
+
+
+        
     }
 
     private void Start()
     {
+        if (parentTile.Tile.IsOwned)
+        {
+            this.dirtPatch.SetActive(true);
+        }
     }
 
     void Update()
     {
-        if (this.field != default)
-        {
-            if (!this.dirtPatch.activeSelf)
-            {
-                if (GetComponentInParent<TileBehaviour>().Tile.IsOwned)
-                {
-                    this.dirtPatch.SetActive(true);
-                }
-            }
+        //if (this.field != default)
+        //{
+
 
             var isPlanted = this.field.Seed != null;
 
@@ -86,8 +87,16 @@ public class FieldBehaviour : MonoBehaviour
                     Core.Game.EffectsAudioManager.PlayAt("Bell", parentTile.Tile.Position.ToUnity());
                 }
             }
-        }
+        //}
     }
+
+
+    public void ActivateField()
+    {
+        this.dirtPatch.SetActive(true);
+        this.GetComponent<FieldBehaviour>().enabled = true;
+    }
+
 
     private void AdjustStadium()
     {

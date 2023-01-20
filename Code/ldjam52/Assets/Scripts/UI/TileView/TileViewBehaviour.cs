@@ -83,6 +83,9 @@ namespace Assets.Scripts.UI.TileView
                     surroundingBehvaiour.Tile.IsOwned = true;
                     surroundingBehvaiour.Tile.Building = farm;
                 }
+            } else
+            {
+                this.tileBehaviour.FieldBehaviour.ActivateField();
             }
 
             var tempTileBehaviour = this.tileBehaviour;

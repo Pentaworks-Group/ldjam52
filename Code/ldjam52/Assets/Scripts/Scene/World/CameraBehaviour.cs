@@ -145,7 +145,10 @@ public class CameraBehaviour : MonoBehaviour
     {
         if (Core.Game.State.World.Farm != default)
         {
-            cam.transform.position = new UnityEngine.Vector3(Core.Game.State.World.Farm.Position.X, this.transform.position.y, Core.Game.State.World.Farm.Position.Z);
+            cam.transform.position = new Vector3(Core.Game.State.World.Farm.Position.X, cam.transform.position.y, Core.Game.State.World.Farm.Position.Z);
+        } else
+        {
+            cam.transform.position = new Vector3(0, cam.transform.position.y, 0);
         }
     }
 }
