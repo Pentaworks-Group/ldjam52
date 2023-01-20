@@ -17,7 +17,8 @@ namespace Assets.Scripts.Scene.Shops
         public GameObject FieldAnalyzerPanel;
 
         public TMP_Text BalanceText;
-                
+
+
         public override void Show()
         {
             base.Show();
@@ -76,7 +77,7 @@ namespace Assets.Scripts.Scene.Shops
             }
             else
             {
-                panel.transform.Find("ButtonUpgrade").gameObject.SetActive(false);
+                panel.transform.Find("ButtonUpgrade")?.gameObject.SetActive(false);
             }
         }
 

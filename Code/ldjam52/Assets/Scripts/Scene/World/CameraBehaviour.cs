@@ -140,4 +140,12 @@ public class CameraBehaviour : MonoBehaviour
             }
         }
     }
+
+    public void CenterFarm()
+    {
+        if (Core.Game.State.World.Farm != default)
+        {
+            cam.transform.position = new UnityEngine.Vector3(Core.Game.State.World.Farm.Position.X, this.transform.position.y, Core.Game.State.World.Farm.Position.Z);
+        }
+    }
 }
