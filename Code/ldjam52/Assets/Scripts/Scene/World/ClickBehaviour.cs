@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.Scene.World
 {
@@ -11,17 +12,20 @@ namespace Assets.Scripts.Scene.World
             {
                 if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonDown(0))
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                    if (Physics.Raycast(ray, out var raycastHit, 100.0f))
+                    if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                     {
-                        if (raycastHit.transform.gameObject != null)
-                        {
-                            var hitItem = raycastHit.transform.gameObject.GetComponentInParent<ClickableItemBehaviour>();
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                            if (hitItem != null)
+                        if (Physics.Raycast(ray, out var raycastHit, 100.0f))
+                        {
+                            if (raycastHit.transform.gameObject != null)
                             {
-                                hitItem.Click();
+                                var hitItem = raycastHit.transform.gameObject.GetComponentInParent<ClickableItemBehaviour>();
+
+                                if (hitItem != null)
+                                {
+                                    hitItem.Click();
+                                }
                             }
                         }
                     }
