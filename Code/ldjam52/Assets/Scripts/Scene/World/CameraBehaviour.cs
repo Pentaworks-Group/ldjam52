@@ -15,7 +15,7 @@ public class CameraBehaviour : MonoBehaviour
     private readonly float moveSpeed = 10f;
     private readonly float moveSpeedTouch = 0.085f;
     private readonly float zoomSpeed = 10.0f;
-    private readonly float zoomSpeedMouse = 80.0f;
+    private readonly float zoomSpeedMouse = 20.0f;
     private readonly float zoomSpeedTouch = .5f;
 
     //private readonly float minFov = 15.0f;
