@@ -12,7 +12,7 @@ public class GrowthController
     public static Double getGrowthRate(Field field, Plant plant)
     {
         //Scaling Factor
-        double scalingFactor = 1;// 15;
+        double scalingFactor =  0.1;
         //Humidity
         Double humidityFactor = getGrowthFactorForType(ChromosomeTypes.WATER, plant, field.Humidity);
         //Temperature
