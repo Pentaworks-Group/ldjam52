@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5301914820988866182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -216,6 +216,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5301914820988866182}
     m_Modifications:
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7891072086529702167}
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradePlantAnalyzer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Assets.Scripts.Scene.Shops.LaboratoryBehaviour, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7328073442758746366, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -343,6 +359,10 @@ PrefabInstance:
     - target: {fileID: 7328073442793820873, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970390146347131020, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -9.1773
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
@@ -522,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -29.259983
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -602,6 +622,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5301914820988866182}
     m_Modifications:
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7891072086529702167}
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradeFieldAnalyzer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Assets.Scripts.Scene.Shops.LaboratoryBehaviour, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329737086696276274, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7328073442758746366, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -705,6 +741,10 @@ PrefabInstance:
     - target: {fileID: 7328073442793820873, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970390146347131020, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -9.911798
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bf8aa2b9a9fb6f4fbd59612c0c4edda, type: 3}

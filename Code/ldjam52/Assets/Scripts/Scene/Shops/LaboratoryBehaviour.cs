@@ -72,7 +72,7 @@ namespace Assets.Scripts.Scene.Shops
                 {
                     Debug.Log("Not Enough Money to Upgrade");
                     upgradeButton.interactable = false;
-                    upgradeButton.transform.Find("Text").GetComponent<TMP_Text>().color = Color.gray;
+//                    upgradeButton.transform.Find("Text").GetComponent<TMP_Text>().color = Color.gray;
                 }
             }
             else

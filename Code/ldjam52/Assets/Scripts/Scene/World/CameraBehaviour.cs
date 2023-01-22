@@ -173,7 +173,7 @@ public class CameraBehaviour : MonoBehaviour
         //    return;  // Object is behind the camera
         //}
 
-        Debug.Log("v3Pos: " + v3Pos);
+//        Debug.Log("v3Pos: " + v3Pos);
         if (v3Pos.x >= 0.0f && v3Pos.x <= 1.0f && v3Pos.y >= 0.0f && v3Pos.y <= 1.0f)
         {
             FarmButton.SetActive(false);
