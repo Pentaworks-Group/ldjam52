@@ -88,6 +88,8 @@ public class WorldBehaviour : MonoBehaviour
         this.SeedShopBehaviour.OnHide.AddListener(OnShopViewHide);
         this.LaboratoryBehaviour.OnHide.AddListener(OnLaboratiryHide);
 
+        this.PauseMenuBehaviour.PauseToggled.AddListener(OnPauseMenuToggled);
+
         Core.Game.LockCameraMovement = false;
     }
 
@@ -162,10 +164,12 @@ public class WorldBehaviour : MonoBehaviour
                 }
                 else if (!tileBehaviour.Tile.IsOwned || (Core.Game.State.World.Farm == default))
                 {
+                    this.CameraBehaviour.HideToFarmButton();
                     this.TileViewBehaviour.Show(tileBehaviour);
                 }
                 else
                 {
+                    this.CameraBehaviour.HideToFarmButton();
                     this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
                 }
             }
@@ -174,6 +178,7 @@ public class WorldBehaviour : MonoBehaviour
 
     private void OnFieldViewRequested(TileBehaviour tileBehaviour)
     {
+        this.CameraBehaviour.HideToFarmButton();
         this.FieldViewBehaviour.Show(tileBehaviour.FieldBehaviour);
     }
 
@@ -242,14 +247,16 @@ public class WorldBehaviour : MonoBehaviour
     {
         if (building is Farm)
         {
-            PauseMenuBehaviour.Show();
+            PauseMenuBehaviour.ToggleMenu();
         }
         else if (building is Shop)
         {
+            this.CameraBehaviour.HideToFarmButton();
             this.SeedShopBehaviour.Show();
         }
         else if (building is Laboratory)
         {
+            this.CameraBehaviour.HideToFarmButton();
             this.LaboratoryBehaviour.Show();
         }
     }
@@ -318,21 +325,25 @@ public class WorldBehaviour : MonoBehaviour
     private void OnFieldViewHide()
     {
         PressEsc();
+        this.CameraBehaviour.ShowToFarmButton();
     }
 
     private void OnTileViewHide()
     {
         PressEsc();
+        this.CameraBehaviour.ShowToFarmButton();
     }
 
     private void OnShopViewHide()
     {
         PressEsc();
+        this.CameraBehaviour.ShowToFarmButton();
     }
 
     private void OnLaboratiryHide()
     {
         PressEsc();
+        this.CameraBehaviour.ShowToFarmButton();
     }
 
     private void CheckShortKeys()
@@ -341,8 +352,20 @@ public class WorldBehaviour : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.H))
             {
-                this.CameraBehaviour.CenterFarm();   
+                this.CameraBehaviour.CenterFarm();
             }
+        }
+    }
+
+    private void OnPauseMenuToggled(Boolean isPaused)
+    {
+        if (isPaused)
+        {
+            this.CameraBehaviour.HideToFarmButton();
+        }
+        else
+        {
+            this.CameraBehaviour.ShowToFarmButton();
         }
     }
 }

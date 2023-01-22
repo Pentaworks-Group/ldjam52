@@ -67,10 +67,9 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         if (menuToggle.activeSelf == true)
         {
-
             if (this.optionsArea.activeSelf || this.saveGameArea.activeSelf)
             {
-                this.OnBackButtonClicked();
+                OnBackButtonClicked();
             }
             else
             {
