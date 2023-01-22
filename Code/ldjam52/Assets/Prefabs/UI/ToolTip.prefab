@@ -318,7 +318,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8405887846135611698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ba3e8d84540b424db52a43203d167b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dd392ad11282f34ab057f192b37a5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: ToolTip
+  Text: 
