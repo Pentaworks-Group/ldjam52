@@ -409,8 +409,11 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             var field = GetField();
 
             InheritanceController.AnalyseField(field, Core.Game.State.FieldAnalyzer);
-            plantBehaviour.GetComponent<InformationPrefabBehaviour>().UpdateInfo(plantBehaviour.Item, field, false);
+
+            plantBehaviour.UpdateInfo(plantBehaviour.Item, field, false);
+
             FarmStorageController.TakeMoneyOfStorage(Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost);
+
             Core.Game.PlayButtonSound();
         }
     }

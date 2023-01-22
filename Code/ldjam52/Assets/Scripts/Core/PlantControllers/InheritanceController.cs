@@ -185,8 +185,11 @@ public class InheritanceController
             }
 
             attempts++;
+
             if (attempts >= propertiesCount)
+            {
                 break;
+            }
         }
     }
 
