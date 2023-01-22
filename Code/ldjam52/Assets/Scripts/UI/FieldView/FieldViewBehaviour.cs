@@ -43,6 +43,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
     public TMP_Text errorMsg;
 
+    public TMP_Text estimatedDuration;
+
     private void Awake()
     {
         viewToggle = transform.Find("FieldViewToggle").gameObject;
@@ -150,6 +152,9 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             plantingOptions.SetActive(false);
             plantName.text = currentlyViewedField.Field.Seed.Name;
             currentInfoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), true);
+            int growTime = Mathf.RoundToInt( (float) (1.0f / GrowthController.getGrowthRate(currentlyViewedField.Field, currentlyViewedField.Field.Seed)));
+            estimatedDuration.text = growTime.ToString()+"s";
+
         }
         else
         {

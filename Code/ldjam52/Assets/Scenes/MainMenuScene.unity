@@ -335,6 +335,22 @@ PrefabInstance:
       propertyPath: m_text
       value: Play
       objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
     - target: {fileID: 7235878592488330974, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -573,6 +589,22 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 72
       objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
     - target: {fileID: 7235878592488330974, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -726,6 +758,26 @@ PrefabInstance:
     - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_text
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontSize
+      value: 68.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     - target: {fileID: 7235878592488330974, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_Sprite
@@ -1590,26 +1642,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SaveGamesButton
       objectReference: {fileID: 0}
-    - target: {fileID: 5789573318911678547, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789573318911678547, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789573318911678547, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789573318911678547, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789573318911678547, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1693,10 +1725,6 @@ PrefabInstance:
     - target: {fileID: 5865278983240936799, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6247823382118759686, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
-      propertyPath: m_text
-      value: Saved games
       objectReference: {fileID: 0}
     - target: {fileID: 7235878592488330974, guid: ff6ee55779b3ff54680bca82c3084923, type: 3}
       propertyPath: m_Sprite
