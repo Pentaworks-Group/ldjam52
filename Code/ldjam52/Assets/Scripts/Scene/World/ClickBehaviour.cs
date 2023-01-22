@@ -5,12 +5,14 @@ namespace Assets.Scripts.Scene.World
 {
     public class ClickBehaviour : MonoBehaviour
     {
-        private Vector2 prevTouch = Vector2.zero;
-        private void Update()
+        private void LateUpdate()
         {
-            if (Input.touchCount < 1 || Input.touchCount == 1 && Input.GetTouch(0).phase != TouchPhase.Moved)
+
+
+            if (!CameraBehaviour.IsPanning())
+            //if (Input.touchCount < 1 || panTimeout < 1)
             {
-                if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0)) //!Base.Core.Game.LockCameraMovement && 
                 {
                     if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                     {

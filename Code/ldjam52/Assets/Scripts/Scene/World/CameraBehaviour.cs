@@ -14,15 +14,21 @@ public class CameraBehaviour : MonoBehaviour
     //    private readonly float moveSpeedTouch = 0.125f;
     private readonly float moveSpeed = 10f;
     private readonly float moveSpeedTouch = 0.085f;
+    private readonly float moveSpeedTouchDrag = 2f;
     private readonly float zoomSpeed = 10.0f;
     private readonly float zoomSpeedMouse = 20.0f;
-    private readonly float zoomSpeedTouch = .5f;
+    private readonly float zoomSpeedTouch = 0.5f;
 
     //private readonly float minFov = 15.0f;
     //private float maxFov = 120.0f;
 
     private Vector2 prevTouch = Vector2.zero;
     private (Vector2, Vector2) prevPinch;
+    private Vector3 clickDown;
+
+
+    public static int panTimeout { get; private set; } = 0;
+    private bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +41,10 @@ public class CameraBehaviour : MonoBehaviour
     {
         if (!Core.Game.LockCameraMovement)
         {
+            if (!isMoving && panTimeout > 0)
+            {
+                panTimeout -= 1;
+            }
 
             bool zoomChanged = ZoomHandling();
             bool positionChanged = MoveHandling();
@@ -43,6 +53,11 @@ public class CameraBehaviour : MonoBehaviour
                 UpdateFarmButton();
             }
         }
+    }
+
+    public static bool IsPanning()
+    {
+        return panTimeout >= 1;
     }
 
     private bool MoveHandling()
@@ -95,13 +110,33 @@ public class CameraBehaviour : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 this.prevTouch = touch.position;
+                isMoving = true;
+                Debug.Log("Touch Begin");
             }
             else if (touch.phase == TouchPhase.Moved)
             {
                 moveX = (prevTouch.x - touch.position.x) * moveSpeedTouch;
                 moveZ = (prevTouch.y - touch.position.y) * moveSpeedTouch;
+                panTimeout = 6;
+                Debug.Log("Touch End");
+                isMoving = false;
             }
-        }
+        } 
+        //else if (Input.GetMouseButtonDown(0))
+        //{
+        //    clickDown = Input.mousePosition;
+        //    isMoving = true;
+        //} else if (Input.GetMouseButtonUp(0))
+        //{
+        //    if (Input.mousePosition != clickDown)
+        //    {
+        //        moveX = (clickDown.x - Input.mousePosition.x) * moveSpeedTouchDrag;
+        //        moveZ = (clickDown.y - Input.mousePosition.y) * moveSpeedTouchDrag;
+        //        panTimeout = 2;
+        //        Debug.Log("Pan move");
+        //    }
+        //    isMoving = false;
+        //}
 
         if (moveX != 0 || moveZ != 0)
         {
@@ -141,7 +176,7 @@ public class CameraBehaviour : MonoBehaviour
                 prevPinch = (touch1.position, touch2.position);
             else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
             {
-                zoom = -zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2));
+                zoom = zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2));
             }
         }
         if (zoom != 0)
