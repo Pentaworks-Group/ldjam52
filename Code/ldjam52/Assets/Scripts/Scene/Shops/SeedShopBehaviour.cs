@@ -299,8 +299,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
             Transform parent = scrollRect.transform.Find("Viewport").Find("Content");
             newItem.transform.SetParent(parent);
-            //Parents height is 0? => using width to scale
-            newItem.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(parent.GetComponent<RectTransform>().rect.width, parent.GetComponent<RectTransform>().rect.width/7);
+            Transform viewport = parent.parent;
+            newItem.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(viewport.GetComponent<RectTransform>().rect.width, viewport.GetComponent<RectTransform>().rect.height/10);
 
             newItem.onClick.AddListener(() => { ItemSelected(item, isPlant, newItem); });
         }
