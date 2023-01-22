@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0.9843137}
+  m_Color: {r: 0.98039216, g: 0.9254902, b: 0.8392157, a: 0.54901963}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3754,7 +3754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -39.547546
+      value: -26.64839
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4801,7 +4801,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4389463303899055504, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 52.45
       objectReference: {fileID: 0}
     - target: {fileID: 6913870563594960795, guid: 5533653e35cec482f8acfd94b10eb3ba, type: 3}
       propertyPath: m_Pivot.x
