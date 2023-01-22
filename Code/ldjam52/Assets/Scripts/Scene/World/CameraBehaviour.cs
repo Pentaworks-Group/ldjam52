@@ -163,7 +163,6 @@ public class CameraBehaviour : MonoBehaviour
 
     private void UpdateFarmButton()
     {
-
         Vector3 target = GetCenterTarget();
         Vector3 v3Pos = Camera.main.WorldToViewportPoint(target);
 
@@ -173,7 +172,7 @@ public class CameraBehaviour : MonoBehaviour
         //    return;  // Object is behind the camera
         //}
 
-//        Debug.Log("v3Pos: " + v3Pos);
+        //        Debug.Log("v3Pos: " + v3Pos);
         if (v3Pos.x >= 0.0f && v3Pos.x <= 1.0f && v3Pos.y >= 0.0f && v3Pos.y <= 1.0f)
         {
             FarmButton.SetActive(false);
@@ -225,5 +224,15 @@ public class CameraBehaviour : MonoBehaviour
         cam.transform.position = target + cam.transform.forward * factor;
 
         UpdateFarmButton();
+    }
+
+    public void ShowToFarmButton()
+    {
+        UpdateFarmButton();
+    }
+
+    public void HideToFarmButton()
+    {
+        this.FarmButton.gameObject.SetActive(false);
     }
 }
