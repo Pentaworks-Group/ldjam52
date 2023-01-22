@@ -19,6 +19,8 @@ namespace Assets.Scripts.UI.TileView
         public UnityEvent<TileBehaviour> FieldViewRequested = new UnityEvent<TileBehaviour>();
 
         private readonly Color orangeColor = new Color(1, 0.647f, 0);
+        private readonly Color greenColor = new Color(0.3f, 0.423f, 0.314f);
+        private readonly Color redColor = new Color(0.5f, 0, 0);
 
         private GameObject visiblityContainer;
         private TMP_Text headerText;
@@ -202,9 +204,9 @@ namespace Assets.Scripts.UI.TileView
 
             switch (errorLevel)
             {
-                case 1: this.statusText.color = Color.green; break;
-                case 2: this.statusText.color = Color.yellow; break;
-                case 3: this.statusText.color = this.orangeColor; break;
+                case 1: this.statusText.color = this.greenColor; break;
+                case 2: this.statusText.color = this.orangeColor; break;
+                case 3: this.statusText.color = this.redColor; break;
                 case 4:
                 default:
                     this.statusText.color = Color.red; break;
