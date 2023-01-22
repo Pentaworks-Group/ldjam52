@@ -282,7 +282,10 @@ public class SeedShopBehaviour : ViewBaseBehaviour
             Debug.Log($"Adding plant {item.Plant.Name} now.");
             Button newItem = Instantiate(buttonPrefab);
             newItem.GetComponentInChildren<TMP_Text>().text = item.Plant.Name;
-            newItem.transform.SetParent(scrollRect.transform.Find("Viewport").Find("Content"));
+            Transform parent = scrollRect.transform.Find("Viewport").Find("Content");
+            newItem.transform.SetParent(parent);
+            //Parents height is 0? => using width to scale
+            newItem.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(parent.GetComponent<RectTransform>().rect.width, parent.GetComponent<RectTransform>().rect.width/7);
 
             newItem.onClick.AddListener(() => { ItemSelected(item, isPlant, newItem); });
         }
