@@ -171,6 +171,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
 
         infoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), false);
+
+        CheckPlantingButton();
     }
 
     public void CheckHarvestButtons()
