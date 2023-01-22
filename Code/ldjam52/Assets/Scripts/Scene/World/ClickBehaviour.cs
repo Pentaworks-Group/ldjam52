@@ -10,7 +10,7 @@ namespace Assets.Scripts.Scene.World
         {
             if (Input.touchCount < 1 || Input.touchCount == 1 && Input.GetTouch(0).phase != TouchPhase.Moved)
             {
-                if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonDown(0))
+                if (!Base.Core.Game.LockCameraMovement && Input.GetMouseButtonUp(0))
                 {
                     if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                     {
