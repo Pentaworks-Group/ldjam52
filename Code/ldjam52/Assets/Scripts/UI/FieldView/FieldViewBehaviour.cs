@@ -3,6 +3,8 @@ using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
 using Assets.Scripts.Prefabs.World;
 
+using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +40,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
     private Text currentGrowingTime;
     private Text currentGrowingProcess;
+
+    public TMP_Text errorMsg;
 
     private void Awake()
     {
@@ -192,38 +196,50 @@ public class FieldViewBehaviour : ViewBaseBehaviour
                     if (FarmStorageController.GetSeedCountInStorage(p1Plant) >= 2)
                     {
                         plantButton.interactable = true;
+                        errorMsg.gameObject.SetActive(false);
                     }
                     else
                     {
                         plantButton.interactable = false;
+                        errorMsg.text = "Not enough seeds.";
+                        errorMsg.gameObject.SetActive(true);
                     }
 
                 }
                 else if (FarmStorageController.GetSeedCountInStorage(p1Plant) >= 1 && FarmStorageController.GetSeedCountInStorage(p2Plant) >= 1)
                 {
                     plantButton.interactable = true;
+                    errorMsg.gameObject.SetActive(false);
                 }
                 else
                 {
                     plantButton.interactable = false;
+                    errorMsg.text = "Not enough seeds.";
+                    errorMsg.gameObject.SetActive(true);
                 }
             }
             else if (p1Plant != default && FarmStorageController.GetSeedCountInStorage(p1Plant) >= 1)
             {
                 plantButton.interactable = true;
+                errorMsg.gameObject.SetActive(false);
             }
             else if (p2Plant != default && FarmStorageController.GetSeedCountInStorage(p2Plant) >= 1)
             {
                 plantButton.interactable = true;
+                errorMsg.gameObject.SetActive(false);
             }
             else
             {
                 plantButton.interactable = false;
+                errorMsg.text = "Not enough seeds.";
+                errorMsg.gameObject.SetActive(true);
             }
         }
         else
         {
             plantButton.interactable = false;
+            errorMsg.text = "Choose a seed.";
+            errorMsg.gameObject.SetActive(true);
         }
     }
 
