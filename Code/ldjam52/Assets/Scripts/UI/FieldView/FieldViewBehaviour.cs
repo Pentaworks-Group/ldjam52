@@ -314,8 +314,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     public void ShowHarvestResult(HarvestResult result)
     {
         harvestResult.SetActive(true);
-        harvestSeedAmount.text = result.NumSeeds.ToString();
-        harvestPlantAmount.text = result.NumHarvest.ToString();
+        harvestSeedAmount.text = "You harvested "+result.NumSeeds.ToString()+" Seeds";
+        harvestPlantAmount.text = "You harvested "+result.NumHarvest.ToString()+" Plants";
         harvestPlantName.text = result.Plant.Name;
         harvestSeedPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.SeedImageName);
         harvestPlantPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.ImageName);
