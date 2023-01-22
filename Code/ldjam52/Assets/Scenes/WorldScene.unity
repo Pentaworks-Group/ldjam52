@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17511049, g: 0.21907197, b: 0.3013715, a: 1}
+  m_IndirectSpecularColor: {r: 0.17511088, g: 0.21907213, b: 0.3013723, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1729,19 +1729,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.55
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.55
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.45
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.45
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5865278983240936799, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1804,8 +1804,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: cbb05b5b5993b2c48ac9ca4e3f15c6ca, type: 3}
     - target: {fileID: 7235878592488330974, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_Color.b
+      value: 0.007030964
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235878592488330974, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235878592488330974, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235878592488330974, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_PreserveAspect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800947973618845156, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_AspectRatio
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8849340443900071137, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
