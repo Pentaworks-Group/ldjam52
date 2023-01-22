@@ -52,7 +52,7 @@ public class FieldBehaviour : MonoBehaviour
         }
 
 
-        
+
     }
 
     private void Start()
@@ -69,24 +69,24 @@ public class FieldBehaviour : MonoBehaviour
         //{
 
 
-            var isPlanted = this.field.Seed != null;
+        var isPlanted = this.field.Seed != null;
 
-            if (isPlanted)
+        if (isPlanted)
+        {
+            if (!growthRate.HasValue)
             {
-                if (!growthRate.HasValue)
-                {
-                    growthRate = GrowthController.getGrowthRate(this.field, this.field.Seed);
-                }
-
-                this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate.Value * Time.deltaTime);
-                AdjustStadium();
-
-                if (IsFullyGrown() && !this.isNotified)
-                {
-                    this.isNotified = true;
-                    Core.Game.EffectsAudioManager.PlayAt("Bell", parentTile.Tile.Position.ToUnity());
-                }
+                growthRate = GrowthController.getGrowthRate(this.field, this.field.Seed);
             }
+
+            this.field.GrowthProgress = Math.Min(1.0, this.field.GrowthProgress + growthRate.Value * Time.deltaTime);
+            AdjustStadium();
+
+            if (IsFullyGrown() && !this.isNotified)
+            {
+                this.isNotified = true;
+                Core.Game.EffectsAudioManager.PlayAt("Bell", parentTile.Tile.Position.ToUnity());
+            }
+        }
         //}
     }
 
@@ -169,11 +169,14 @@ public class FieldBehaviour : MonoBehaviour
     {
         if (parent1 != default && parent2 != default)
         {
-            if (parent1.ID == parent2.ID && FarmStorageController.GetSeedCountInStorage(parent1) >= 2)
+            if (parent1.ID == parent2.ID)
             {
-                FarmStorageController.TakeSeedsOfStorage(parent1, 2);
-                Plant child = InheritanceController.crossPlants(parent1, parent2);
-                PlantCrop(child);
+                if (FarmStorageController.GetSeedCountInStorage(parent1) >= 2)
+                {
+                    FarmStorageController.TakeSeedsOfStorage(parent1, 2);
+                    Plant child = InheritanceController.crossPlants(parent1, parent2);
+                    PlantCrop(child);
+                }
 
             }
             else if (FarmStorageController.GetSeedCountInStorage(parent1) >= 1 && FarmStorageController.GetSeedCountInStorage(parent2) >= 1)

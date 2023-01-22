@@ -76,7 +76,6 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         if (viewToggle.activeSelf)
         {
             CheckHarvestButtons();
-            CheckPlantingButton();
 
             CheckAnalyzeButton();
 
@@ -84,13 +83,16 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             {
                 GoBackOrClose();
             }
+
+
+            if (currentGrowingTime != null && currentlyViewedField != null)
+            {
+                currentGrowingTime.text = Mathf.RoundToInt(Core.Game.State.ElapsedTime - currentlyViewedField.Field.TimePlanted).ToString() + "s";
+                currentGrowingProcess.text = Mathf.RoundToInt((float)currentlyViewedField.Field.GrowthProgress * 100).ToString() + "%";
+            }
         }
 
-        if (currentGrowingTime != null && currentlyViewedField != null)
-        {
-            currentGrowingTime.text = Mathf.RoundToInt(Core.Game.State.ElapsedTime - currentlyViewedField.Field.TimePlanted).ToString() + "s";
-            currentGrowingProcess.text = Mathf.RoundToInt((float)currentlyViewedField.Field.GrowthProgress * 100).ToString() + "%";
-        }
+
 
     }
 
@@ -179,19 +181,49 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
     public void CheckPlantingButton()
     {
-        if (currentlyViewedField != default && (parent1.Plant != default || parent2.Plant != default))
+        var p1Plant = parent1.Plant;
+        var p2Plant = parent2.Plant;
+        if (currentlyViewedField != default && (p1Plant != default || p2Plant != default))
         {
-            if (plantButton.interactable == false)
+            if (p1Plant != default && p2Plant != default)
+            {
+                if (p1Plant.ID == p2Plant.ID)
+                {
+                    if (FarmStorageController.GetSeedCountInStorage(p1Plant) >= 2)
+                    {
+                        plantButton.interactable = true;
+                    }
+                    else
+                    {
+                        plantButton.interactable = false;
+                    }
+
+                }
+                else if (FarmStorageController.GetSeedCountInStorage(p1Plant) >= 1 && FarmStorageController.GetSeedCountInStorage(p2Plant) >= 1)
+                {
+                    plantButton.interactable = true;
+                }
+                else
+                {
+                    plantButton.interactable = false;
+                }
+            }
+            else if (p1Plant != default && FarmStorageController.GetSeedCountInStorage(p1Plant) >= 1)
             {
                 plantButton.interactable = true;
+            }
+            else if (p2Plant != default && FarmStorageController.GetSeedCountInStorage(p2Plant) >= 1)
+            {
+                plantButton.interactable = true;
+            }
+            else
+            {
+                plantButton.interactable = false;
             }
         }
         else
         {
-            if (plantButton.interactable == true)
-            {
-                plantButton.interactable = false;
-            }
+            plantButton.interactable = false;
         }
     }
 
@@ -274,6 +306,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         {
             parent1.DisplaySeedDetails(plantBehaviour.Item.Plant);
             Core.Game.PlayButtonSound();
+            CheckPlantingButton();
         }
     }
 
@@ -283,6 +316,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         {
             parent2.DisplaySeedDetails(plantBehaviour.Item.Plant);
             Core.Game.PlayButtonSound();
+            CheckPlantingButton();
         }
     }
 
@@ -290,12 +324,14 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     {
         parent1.DisplaySeedDetails(slotBehaviour.GetPlant());
         Core.Game.PlayButtonSound();
+        CheckPlantingButton();
     }
 
     public void SelectParent2Slot(FieldViewSeedListSlotBehaviour slotBehaviour)
     {
         parent2.DisplaySeedDetails(slotBehaviour.GetPlant());
         Core.Game.PlayButtonSound();
+        CheckPlantingButton();
     }
 
     public void PlantSeeds()
@@ -314,8 +350,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     public void ShowHarvestResult(HarvestResult result)
     {
         harvestResult.SetActive(true);
-        harvestSeedAmount.text = "You harvested "+result.NumSeeds.ToString()+" Seeds";
-        harvestPlantAmount.text = "You harvested "+result.NumHarvest.ToString()+" Plants";
+        harvestSeedAmount.text = "You harvested " + result.NumSeeds.ToString() + " Seeds";
+        harvestPlantAmount.text = "You harvested " + result.NumHarvest.ToString() + " Plants";
         harvestPlantName.text = result.Plant.Name;
         harvestSeedPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.SeedImageName);
         harvestPlantPic.sprite = GameFrame.Base.Resources.Manager.Sprites.Get(result.Plant.ImageName);
@@ -327,12 +363,14 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     {
         parent1.ClearDisplayDetails();
         Core.Game.PlayButtonSound();
+        CheckPlantingButton();
     }
 
     public void ClearSelectedParent2()
     {
         parent2.ClearDisplayDetails();
         Core.Game.PlayButtonSound();
+        CheckPlantingButton();
     }
 
     public void ClearSelectedParents()
@@ -340,6 +378,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         parent1.ClearDisplayDetails();
         parent2.ClearDisplayDetails();
         Core.Game.PlayButtonSound();
+        CheckPlantingButton();
     }
 
     public void AnalyseField(InformationPrefabBehaviour plantBehaviour)
