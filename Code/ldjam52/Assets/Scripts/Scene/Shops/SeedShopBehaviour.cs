@@ -54,8 +54,20 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         balance = FarmStorageController.GetStorageBalance();
         inventory = FarmStorageController.getStorageInventory();
         fillList(inventory, Plants, true);
-//        updateInfo(true);
-//        updateInfo(false);
+        //        updateInfo(true);
+        //        updateInfo(false);
+
+        sellQuantity = 0;
+        buyQuantity = 0;
+        SellQuantityText.text = sellQuantity.ToString();
+        BuyQuantityText.text = buyQuantity.ToString();
+
+        updatePrice(true);
+        updateInfo(true);
+        updatePrice(false);
+        updateInfo(false);
+
+
     }
 
     public override void Hide()
@@ -106,6 +118,7 @@ public class SeedShopBehaviour : ViewBaseBehaviour
         ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.PLANTVALUE];
         plantValue = GrowthController.getDominantChromosome(pair).Value0;
 
+        sellQuantity = Mathf.Max(1, sellQuantity);
         sellQuantity = Mathf.Min(chosenPlant.StorageAmountPlants, sellQuantity);
         SellQuantityText.text = sellQuantity.ToString();
 
@@ -121,6 +134,8 @@ public class SeedShopBehaviour : ViewBaseBehaviour
 
         ChromosomePair pair = item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.SEEDSVALUE];
         seedValue = GrowthController.getDominantChromosome(pair).Value0;
+        buyQuantity = 1;
+        BuyQuantityText.text = buyQuantity.ToString();
 
         updatePrice(false);
         updateInfo(false);
