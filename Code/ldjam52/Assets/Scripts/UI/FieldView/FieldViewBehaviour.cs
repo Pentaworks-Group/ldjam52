@@ -75,6 +75,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         currentInfoPanel = transform.Find("FieldViewToggle/CurrentInfo/Information").gameObject;
         currentGrowingTime = transform.Find("FieldViewToggle/CurrentInfo/GrowingTime/Value").GetComponent<Text>();
         currentGrowingProcess = transform.Find("FieldViewToggle/CurrentInfo/GrowingProcess/Value").GetComponent<Text>();
+
     }
 
     private void Update()
@@ -98,6 +99,10 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Return) && plantButton.IsInteractable())
+        {
+            PlantSeeds();
+        }
 
 
     }
@@ -166,6 +171,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         analyzeCosts.text = Core.Game.State.FieldAnalyzer.CurrentDevelopmentStage.AnalyticsCost.ToString();
 
         infoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), false);
+
+        CheckPlantingButton();
     }
 
     public void CheckHarvestButtons()
