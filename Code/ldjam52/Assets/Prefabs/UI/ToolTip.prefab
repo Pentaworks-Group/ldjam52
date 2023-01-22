@@ -321,4 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd392ad11282f34ab057f192b37a5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ToolTipObject: {fileID: 8405887846135611698}
+  TextField: {fileID: 3304082704568080566}
   Text: 

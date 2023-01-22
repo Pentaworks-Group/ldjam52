@@ -7,6 +7,7 @@ public class ToolTipBehaviour : MonoBehaviour
 {
     private GameObject Parent;
     private GameObject ToolTipObject;
+    public Text TextField;
 
     public string Text;
 
@@ -17,7 +18,7 @@ public class ToolTipBehaviour : MonoBehaviour
         EventTrigger trigger = Parent.AddComponent<EventTrigger>();
         AddTrigger(trigger, EventTriggerType.PointerEnter, Show);
         AddTrigger(trigger, EventTriggerType.PointerExit, Hide);
-        Text TextField = ToolTipObject.transform.GetChild(2).GetComponent<Text>();
+//        Text TextField = ToolTipObject.transform.GetChild(2).GetComponent<Text>();
         TextField.text = Text;
     }
 
