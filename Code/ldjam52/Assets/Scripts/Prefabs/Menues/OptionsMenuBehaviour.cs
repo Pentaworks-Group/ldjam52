@@ -8,9 +8,9 @@ using UnityEngine.UI;
 
 public class OptionsMenuBehaviour : MonoBehaviour
 {
-    private Slider effectsVolumeSlider;
-    private Slider ambienceVolumeSlider;
-    private Slider backgroundVolumeSlider;
+    public Slider EffectsVolumeSlider;
+    public Slider AmbienceVolumeSlider;
+    public Slider BackgroundVolumeSlider;
     private Slider moveSensivitySlider;
     private Slider zoomSensivitySlider;
     private Toggle animationEnabledToggle;
@@ -19,9 +19,6 @@ public class OptionsMenuBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        effectsVolumeSlider = transform.Find("OptionContainer/EffectsVolume/Right/ForegroundSlider").GetComponent<Slider>();
-        ambienceVolumeSlider = transform.Find("OptionContainer/AmbienceVolume/Right/AmbieceSlider").GetComponent<Slider>();
-        backgroundVolumeSlider = transform.Find("OptionContainer/BackgroundVolume/Right/BackgroundSlider").GetComponent<Slider>();
         moveSensivitySlider = transform.Find("OptionContainer/MoveSensivity/Right/Slider").GetComponent<Slider>();
         zoomSensivitySlider = transform.Find("OptionContainer/ZoomSensivity/Right/Slider").GetComponent<Slider>();
 
@@ -62,20 +59,20 @@ public class OptionsMenuBehaviour : MonoBehaviour
 
     public void OnForegroundSliderChanged()
     {
-        Core.Game.EffectsAudioManager.Volume = effectsVolumeSlider.value;
-        Core.Game.Options.EffectsVolume = effectsVolumeSlider.value;
+        Core.Game.EffectsAudioManager.Volume = EffectsVolumeSlider.value;
+        Core.Game.Options.EffectsVolume = EffectsVolumeSlider.value;
     }
 
     public void OnAmbienceSliderChanged()
     {
-        Core.Game.AmbienceAudioManager.Volume = ambienceVolumeSlider.value;
-        Core.Game.Options.AmbienceVolume = ambienceVolumeSlider.value;
+        Core.Game.AmbienceAudioManager.Volume = AmbienceVolumeSlider.value;
+        Core.Game.Options.AmbienceVolume = AmbienceVolumeSlider.value;
     }
 
     public void OnBackgroundSliderChanged()
     {
-        Core.Game.BackgroundAudioManager.Volume = backgroundVolumeSlider.value;
-        Core.Game.Options.BackgroundVolume = backgroundVolumeSlider.value;
+        Core.Game.BackgroundAudioManager.Volume = BackgroundVolumeSlider.value;
+        Core.Game.Options.BackgroundVolume = BackgroundVolumeSlider.value;
     }
 
     public void OnMoveSensivitySliderChanged()
@@ -127,19 +124,19 @@ public class OptionsMenuBehaviour : MonoBehaviour
     {
         if (Core.Game.Options != default)
         {
-            if (this.effectsVolumeSlider.value != Core.Game.Options.EffectsVolume)
+            if (this.EffectsVolumeSlider.value != Core.Game.Options.EffectsVolume)
             {
-                this.effectsVolumeSlider.value = Core.Game.Options.EffectsVolume;
+                this.EffectsVolumeSlider.value = Core.Game.Options.EffectsVolume;
             }
 
-            if (this.ambienceVolumeSlider.value != Core.Game.Options.AmbienceVolume)
+            if (this.AmbienceVolumeSlider.value != Core.Game.Options.AmbienceVolume)
             {
-                this.ambienceVolumeSlider.value = Core.Game.Options.AmbienceVolume;
+                this.AmbienceVolumeSlider.value = Core.Game.Options.AmbienceVolume;
             }
 
-            if (this.backgroundVolumeSlider.value != Core.Game.Options.BackgroundVolume)
+            if (this.BackgroundVolumeSlider.value != Core.Game.Options.BackgroundVolume)
             {
-                this.backgroundVolumeSlider.value = Core.Game.Options.BackgroundVolume;
+                this.BackgroundVolumeSlider.value = Core.Game.Options.BackgroundVolume;
             }
 
             if (this.moveSensivitySlider.value != Core.Game.Options.MoveSensivity)
