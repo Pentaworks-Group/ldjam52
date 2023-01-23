@@ -14,10 +14,10 @@ public class CameraBehaviour : MonoBehaviour
     //    private readonly float moveSpeedTouch = 0.125f;
     private readonly float moveSpeed = 10f;
     private readonly float moveSpeedTouch = 0.085f;
-    private readonly float moveSpeedTouchDrag = 2f;
+    private readonly float moveSpeedMouseDrag = 2f;
     private readonly float zoomSpeed = 10.0f;
     private readonly float zoomSpeedMouse = 20.0f;
-    private readonly float zoomSpeedTouch = 0.5f;
+    private readonly float zoomSpeedTouch = 0.25f;
 
     //private readonly float minFov = 15.0f;
     //private float maxFov = 120.0f;
@@ -28,7 +28,7 @@ public class CameraBehaviour : MonoBehaviour
 
 
     public static int panTimeout { get; private set; } = 0;
-    private bool isMoving = false;
+    private static bool isMoving { get; set; } = false;
 
     // Start is called before the first frame update
     void Start()
@@ -103,40 +103,52 @@ public class CameraBehaviour : MonoBehaviour
         }
 
         // Touch
-        if (Input.touchCount == 1)
-        {
-            Touch touch = Input.GetTouch(0);
+        //if (Input.touchCount == 1)
+        //{
+        //    Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                this.prevTouch = touch.position;
-                isMoving = true;
-                Debug.Log("Touch Begin");
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                moveX = (prevTouch.x - touch.position.x) * moveSpeedTouch;
-                moveZ = (prevTouch.y - touch.position.y) * moveSpeedTouch;
-                panTimeout = 6;
-                Debug.Log("Touch End");
-                isMoving = false;
-            }
-        } 
-        //else if (Input.GetMouseButtonDown(0))
-        //{
-        //    clickDown = Input.mousePosition;
-        //    isMoving = true;
-        //} else if (Input.GetMouseButtonUp(0))
-        //{
-        //    if (Input.mousePosition != clickDown)
+        //    if (touch.phase == TouchPhase.Began)
         //    {
-        //        moveX = (clickDown.x - Input.mousePosition.x) * moveSpeedTouchDrag;
-        //        moveZ = (clickDown.y - Input.mousePosition.y) * moveSpeedTouchDrag;
-        //        panTimeout = 2;
-        //        Debug.Log("Pan move");
+        //        this.prevTouch = touch.position;
+        //        isMoving = true;
+        //        Debug.Log("Touch Begin");
         //    }
-        //    isMoving = false;
-        //}
+        //    else if (touch.phase == TouchPhase.Moved)
+        //    {
+        //        moveX = (prevTouch.x - touch.position.x) * moveSpeedTouch;
+        //        moveZ = (prevTouch.y - touch.position.y) * moveSpeedTouch;
+        //        panTimeout = 6;
+        //        Debug.Log("Touch End");
+        //        isMoving = false;
+        //    }
+        //} 
+        if (Input.GetMouseButtonDown(0))
+        {
+            clickDown = Input.mousePosition;
+            isMoving = true;
+            Debug.Log("Down");
+        }
+        else if (isMoving && Input.GetMouseButtonUp(0))
+        {
+            if (Input.mousePosition != clickDown)
+            {
+                moveX = (clickDown.x - Input.mousePosition.x);
+                moveZ = (clickDown.y - Input.mousePosition.y);
+                if (Application.isMobilePlatform)
+                {
+                    moveX *= moveSpeedTouch;
+                    moveZ *= moveSpeedTouch;
+                }
+                else
+                {
+                    moveX *= moveSpeedMouseDrag;
+                    moveZ *= moveSpeedMouseDrag;
+                }
+                panTimeout = 2;
+                Debug.Log("Pan move");
+            }
+            isMoving = false;
+        }
 
         if (moveX != 0 || moveZ != 0)
         {
@@ -257,7 +269,7 @@ public class CameraBehaviour : MonoBehaviour
         float factor = yDiff / cam.transform.forward.y;
 
         cam.transform.position = target + cam.transform.forward * factor;
-
+        panTimeout = 2;
         UpdateFarmButton();
     }
 
