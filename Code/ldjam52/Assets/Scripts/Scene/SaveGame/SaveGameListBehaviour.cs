@@ -21,7 +21,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void UpdateList()
         {
-            List<KeyValuePair<string, GameState>> saveGames = SaveGameController.SavedGames.OrderByDescending(kvp => kvp.Key).ToList();
+            List<KeyValuePair<string, GameState>> saveGames = SaveGameController.SavedGames.OrderBy(kvp => kvp.Key).ToList();
 
             SetContentList(saveGames);
 
