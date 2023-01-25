@@ -14,7 +14,7 @@ namespace Assets.Scripts.Scene.SaveGame
     {
         public Button SaveNewButton;
 
-        override public void CustomStart()
+        public override void CustomStart()
         {
             UpdateList();
         }
@@ -40,6 +40,8 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void SaveGame()
         {
+            Base.Core.Game.PlayButtonSound();
+
             SaveGameController.SaveGame();
             UpdateList();
         }

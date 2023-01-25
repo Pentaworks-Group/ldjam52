@@ -4,7 +4,6 @@ using Assets.Scripts.Core;
 
 using GameFrame.Core.UI.List;
 
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Scene.SaveGame
@@ -48,18 +47,21 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void LoadGame()
         {
+            Base.Core.Game.PlayButtonSound();
             SaveGameController.LoadSavedGame(GetGameState());
         }
 
         public void OverrideGame()
         {
+            Base.Core.Game.PlayButtonSound();
+
             SaveGameController.OverwriteSavedGame(content.Key);
             listBehaviour.UpdateList();
         }
 
         public void DeleteGame()
         {
-            Debug.Log("DeleteGame triggered");
+            Base.Core.Game.PlayButtonSound();
 
             SaveGameController.DeleteSavedGame(content.Key);
             listBehaviour.UpdateList();
