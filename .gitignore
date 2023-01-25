@@ -110,3 +110,4 @@ Assembly-UnityScript-firstpass.unityproj
 *.suo
 /Data/.~lock.Description.odt#
 /Deployments/web
+/Deployments

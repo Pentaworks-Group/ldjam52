@@ -138,7 +138,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.2.1
+  bundleVersion: 1.2.2
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -501,7 +501,10 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: WebGL
     m_EncodingQuality: 2
-  m_BuildTargetGroupLightmapSettings: []
+  m_BuildTargetGroupLightmapSettings:
+  - m_BuildTarget: WebGL
+    m_TextureStreamingEnabled: 1
+    m_TextureStreamingPriority: 0
   m_BuildTargetNormalMapEncoding:
   - m_BuildTarget: Android
     m_Encoding: 1
@@ -746,7 +749,7 @@ PlayerSettings:
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
   webGLMemorySize: 16
-  webGLExceptionSupport: 1
+  webGLExceptionSupport: 0
   webGLNameFilesAsHashes: 0
   webGLDataCaching: 1
   webGLDebugSymbols: 0

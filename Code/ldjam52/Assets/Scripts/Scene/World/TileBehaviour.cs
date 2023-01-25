@@ -5,12 +5,13 @@ using Assets.Extensions;
 using Assets.Scripts.Base;
 using Assets.Scripts.Core;
 using Assets.Scripts.Model;
+using Assets.Scripts.Scene.World;
 
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
 
-public class TileBehaviour : MonoBehaviour
+public class TileBehaviour : MonoBehaviour, IUpdateME
 {
     private readonly Dictionary<String, GameObject> borders = new Dictionary<String, GameObject>();
 
@@ -65,15 +66,14 @@ public class TileBehaviour : MonoBehaviour
                 this.borders[borderTransform.name] = borderTransform.gameObject;
             }
         }
+
+        Assets.Scripts.Scene.World.UpdateManager.RegisterBehaviour(this);
+
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
+  
     // Update is called once per frame
-    void Update()
+    public void UpdateME()
     {
         if (this.Tile != default)
         {

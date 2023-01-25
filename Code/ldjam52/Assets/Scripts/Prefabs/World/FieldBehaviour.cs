@@ -5,12 +5,13 @@ using Assets.Scripts.Base;
 using Assets.Scripts.Constants;
 using Assets.Scripts.Core.Inventory;
 using Assets.Scripts.Model;
+using Assets.Scripts.Scene.World;
 
 using GameFrame.Core.Extensions;
 
 using UnityEngine;
 
-public class FieldBehaviour : MonoBehaviour
+public class FieldBehaviour : MonoBehaviour, IUpdateME
 {
     private GameObject dirtPatch;
     private TileBehaviour parentTile;
@@ -51,6 +52,7 @@ public class FieldBehaviour : MonoBehaviour
             flowerPots.Add(child.gameObject);
         }
 
+        UpdateManager.RegisterBehaviour(this);
 
 
     }
@@ -63,7 +65,7 @@ public class FieldBehaviour : MonoBehaviour
         }
     }
 
-    void Update()
+    public void UpdateME()
     {
         //if (this.field != default)
         //{
