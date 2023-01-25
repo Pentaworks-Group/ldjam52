@@ -14,7 +14,7 @@ public class CameraBehaviour : MonoBehaviour
     //    private readonly float moveSpeedTouch = 0.125f;
     private readonly float moveSpeed = 10f;
     private readonly float moveSpeedTouch = 0.085f;
-    private readonly float moveSpeedMouseDrag = 2f;
+    private readonly float moveSpeedMouseDrag = 1f;
     private readonly float zoomSpeed = 10.0f;
     private readonly float zoomSpeedMouse = 20.0f;
     private readonly float zoomSpeedTouch = 0.25f;
@@ -126,9 +126,8 @@ public class CameraBehaviour : MonoBehaviour
         {
             clickDown = Input.mousePosition;
             isMoving = true;
-            Debug.Log("Down");
         }
-        else if (isMoving && Input.GetMouseButtonUp(0))
+        else if (isMoving && Input.GetMouseButton(0))
         {
             if (Input.mousePosition != clickDown)
             {
@@ -144,9 +143,11 @@ public class CameraBehaviour : MonoBehaviour
                     moveX *= moveSpeedMouseDrag;
                     moveZ *= moveSpeedMouseDrag;
                 }
-                panTimeout = 2;
-                Debug.Log("Pan move");
+               clickDown = Input.mousePosition;
+               panTimeout = 2;
             }
+        } else if (isMoving && Input.GetMouseButtonUp(0))
+        {
             isMoving = false;
         }
 
