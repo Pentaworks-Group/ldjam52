@@ -22,13 +22,13 @@ public class CameraBehaviour : MonoBehaviour
     //private readonly float minFov = 15.0f;
     //private float maxFov = 120.0f;
 
-    private Vector2 prevTouch = Vector2.zero;
-    private (Vector2, Vector2) prevPinch;
+    private (Vector2, Vector2) prevPinch = default;
     private Vector3 clickDown;
 
 
     public static int panTimeout { get; private set; } = 0;
     private static bool isMoving { get; set; } = false;
+    private static bool isZooming { get; set; } = false;
 
     // Start is called before the first frame update
     void Start()
@@ -102,30 +102,14 @@ public class CameraBehaviour : MonoBehaviour
             moveZ *= moveSpeed;
         }
 
-        // Touch
-        //if (Input.touchCount == 1)
-        //{
-        //    Touch touch = Input.GetTouch(0);
-
-        //    if (touch.phase == TouchPhase.Began)
-        //    {
-        //        this.prevTouch = touch.position;
-        //        isMoving = true;
-        //        Debug.Log("Touch Begin");
-        //    }
-        //    else if (touch.phase == TouchPhase.Moved)
-        //    {
-        //        moveX = (prevTouch.x - touch.position.x) * moveSpeedTouch;
-        //        moveZ = (prevTouch.y - touch.position.y) * moveSpeedTouch;
-        //        panTimeout = 6;
-        //        Debug.Log("Touch End");
-        //        isMoving = false;
-        //    }
-        //} 
         if (Input.GetMouseButtonDown(0))
         {
             clickDown = Input.mousePosition;
             isMoving = true;
+        }
+        else if (Input.touchCount == 2)
+        {
+            isMoving = false;
         }
         else if (isMoving && Input.GetMouseButton(0))
         {
@@ -185,11 +169,13 @@ public class CameraBehaviour : MonoBehaviour
         {
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
-            if (touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began)
+            if (prevPinch == default)
                 prevPinch = (touch1.position, touch2.position);
             else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
             {
                 zoom = zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2));
+                prevPinch = (touch1.position, touch2.position);
+                panTimeout = 20;
             }
         }
         if (zoom != 0)
