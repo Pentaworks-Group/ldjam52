@@ -61,6 +61,7 @@ public class WorldBehaviour : MonoBehaviour
             LoadTemplates();
 
             gameState = Assets.Scripts.Base.Core.Game.State;
+            Assets.Scripts.Scene.World.UpdateManager.ResetArrays((gameState.World.Height * gameState.World.Width) * 2);
 
             if (gameState != default)
             {
@@ -76,6 +77,8 @@ public class WorldBehaviour : MonoBehaviour
 
             Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListGame;
             Core.Game.AmbienceAudioManager.Resume();
+
+           
         }
     }
 
@@ -113,6 +116,7 @@ public class WorldBehaviour : MonoBehaviour
 
             CheckShortKeys();
         }
+        Assets.Scripts.Scene.World.UpdateManager.UpdateBehaviours();
     }
 
     private void RenderWorld(World world)
