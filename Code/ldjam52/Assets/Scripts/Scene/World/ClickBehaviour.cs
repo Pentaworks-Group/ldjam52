@@ -7,8 +7,6 @@ namespace Assets.Scripts.Scene.World
     {
         private void LateUpdate()
         {
-
-
             if (!CameraBehaviour.IsPanning())
             //if (Input.touchCount < 1 || panTimeout < 1)
             {
@@ -16,6 +14,8 @@ namespace Assets.Scripts.Scene.World
                 {
                     if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                     {
+                        Debug.Log("Click triggered");
+
                         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                         if (Physics.Raycast(ray, out var raycastHit, 100.0f))

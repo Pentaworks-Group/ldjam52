@@ -59,40 +59,61 @@ public class OptionsMenuBehaviour : MonoBehaviour
 
     public void OnForegroundSliderChanged()
     {
-        Core.Game.EffectsAudioManager.Volume = EffectsVolumeSlider.value;
-        Core.Game.Options.EffectsVolume = EffectsVolumeSlider.value;
+        if (Core.Game?.Options != default)
+        {
+            Core.Game.EffectsAudioManager.Volume = EffectsVolumeSlider.value;
+            Core.Game.Options.EffectsVolume = EffectsVolumeSlider.value;
+        }
     }
 
     public void OnAmbienceSliderChanged()
     {
-        Core.Game.AmbienceAudioManager.Volume = AmbienceVolumeSlider.value;
-        Core.Game.Options.AmbienceVolume = AmbienceVolumeSlider.value;
+        if (Core.Game?.Options != default)
+        {
+            Core.Game.AmbienceAudioManager.Volume = AmbienceVolumeSlider.value;
+            Core.Game.Options.AmbienceVolume = AmbienceVolumeSlider.value;
+        }
     }
 
     public void OnBackgroundSliderChanged()
     {
-        Core.Game.BackgroundAudioManager.Volume = BackgroundVolumeSlider.value;
-        Core.Game.Options.BackgroundVolume = BackgroundVolumeSlider.value;
+        if (Core.Game?.Options != default)
+        {
+            Core.Game.BackgroundAudioManager.Volume = BackgroundVolumeSlider.value;
+            Core.Game.Options.BackgroundVolume = BackgroundVolumeSlider.value;
+        }
     }
 
     public void OnMoveSensivitySliderChanged()
     {
-        Core.Game.Options.MoveSensivity = moveSensivitySlider.value;
+        if (Core.Game?.Options != default && (this.moveSensivitySlider != null))
+        {
+            Core.Game.Options.MoveSensivity = this.moveSensivitySlider.value;
+        }
     }
 
     public void OnZoomSensivitySliderChanged()
     {
-        Core.Game.Options.ZoomSensivity = zoomSensivitySlider.value;
+        if ((Core.Game?.Options != default) && (zoomSensivitySlider != null))
+        {
+            Core.Game.Options.ZoomSensivity = zoomSensivitySlider.value;
+        }
     }
 
     public void OnAnimationEnabledToggleValueChanged()
     {
-        Core.Game.Options.AreAnimationsEnabled = this.animationEnabledToggle.isOn;
+        if (Core.Game?.Options != default)
+        {
+            Core.Game.Options.AreAnimationsEnabled = this.animationEnabledToggle.isOn;
+        }
     }
 
     public void OnSideScrollEnabledToggleValueChanged()
     {
-        Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = this.sideScrollingEnabledToggle.isOn;
+        if (Core.Game?.Options != default && this.sideScrollingEnabledToggle != null)
+        {
+            Core.Game.Options.IsMouseScreenEdgeScrollingEnabled = this.sideScrollingEnabledToggle.isOn;
+        }
     }
 
     public void OnMobileInterfaceValueChanged(Toggle t)

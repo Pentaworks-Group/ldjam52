@@ -18,8 +18,7 @@ namespace Assets.Scripts.Scene.SaveGame
         private Button overwriteButton;
         private SaveGameListBehaviour listBehaviour;
 
-
-        override public void RudeAwake()
+        public override void RudeAwake()
         {
             createdOn = transform.Find("SlotContainer/Info/Created").GetComponent<Text>();
             timeStamp = transform.Find("SlotContainer/Info/TimeStamp").GetComponent<Text>();
@@ -32,14 +31,12 @@ namespace Assets.Scripts.Scene.SaveGame
             overwriteButton.interactable = Base.Core.Game.State != default;
         }
 
-
-     
         public GameState GetGameState()
         {
             return content.Value;
         }
 
-        override public void UpdateUI()
+        public override void UpdateUI()
         {
             GameState saveGame = GetGameState();
 
@@ -62,6 +59,8 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void DeleteGame()
         {
+            Debug.Log("DeleteGame triggered");
+
             SaveGameController.DeleteSavedGame(content.Key);
             listBehaviour.UpdateList();
         }

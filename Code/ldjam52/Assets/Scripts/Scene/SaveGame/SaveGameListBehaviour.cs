@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,16 +16,14 @@ namespace Assets.Scripts.Scene.SaveGame
 
         override public void CustomStart()
         {
-
             UpdateList();
         }
 
         public void UpdateList()
         {
             List<KeyValuePair<string, GameState>> saveGames = SaveGameController.SavedGames.OrderByDescending(kvp => kvp.Key).ToList();
-            
-            SetContentList(saveGames);
 
+            SetContentList(saveGames);
 
             if (!Assets.Scripts.Base.Core.Game.IsFileAccessPossible)
             {
@@ -44,7 +43,5 @@ namespace Assets.Scripts.Scene.SaveGame
             SaveGameController.SaveGame();
             UpdateList();
         }
-
-
     }
 }
