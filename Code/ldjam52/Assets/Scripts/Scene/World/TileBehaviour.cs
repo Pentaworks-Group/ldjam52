@@ -68,15 +68,13 @@ public class TileBehaviour : MonoBehaviour, IUpdateME
         }
 
         Assets.Scripts.Scene.World.UpdateManager.RegisterBehaviour(this);
-
     }
 
-  
     // Update is called once per frame
     public void UpdateME()
     {
         if (this.Tile != default)
-        {
+        { 
             if (this.Tile.IsOwned)
             {
                 if (!this.isTileOwned)
