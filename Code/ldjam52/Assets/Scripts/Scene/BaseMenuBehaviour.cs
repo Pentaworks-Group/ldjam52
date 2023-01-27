@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Constants;
 
-using Assets.Scripts.Constants;
+using UnityEngine;
 
 namespace Assets.Scripts.Scenes
 {
@@ -15,14 +15,26 @@ namespace Assets.Scripts.Scenes
                 return;
             }
 
-
             CustomAwake();
         }
 
         protected virtual void CustomAwake()
         {
-
         }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ToMainMenu();
+            }
+
+            OnUpdate();
+        }
+
+        protected virtual void OnUpdate()
+        {
+        }    
 
         public void ToMainMenu()
         {

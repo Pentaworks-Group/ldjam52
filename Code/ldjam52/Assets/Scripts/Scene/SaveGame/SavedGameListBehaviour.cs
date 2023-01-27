@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Scene.SaveGame
 {
-    public class SaveGameListBehaviour : ListContainerBehaviour<KeyValuePair<string, GameState>>
+    public class SavedGameListBehaviour : ListContainerBehaviour<KeyValuePair<String, SavedGamedPreviewImpl>>
     {
         public Button SaveNewButton;
 
@@ -21,13 +21,13 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void UpdateList()
         {
-            List<KeyValuePair<string, GameState>> saveGames = SaveGameController.SavedGames.OrderBy(kvp => kvp.Key).ToList();
+            List<KeyValuePair<String, SavedGamedPreviewImpl>> savedGames = Base.Core.Game.GetSavedGamePreviews().OrderBy(kvp => kvp.Key).ToList();
 
-            SetContentList(saveGames);
+            SetContentList(savedGames);
 
             if (!Assets.Scripts.Base.Core.Game.IsFileAccessPossible)
             {
-                if (saveGames.Count >= 5)
+                if (savedGames.Count >= 5)
                 {
                     SaveNewButton.interactable = false;
                 }
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Scene.SaveGame
         {
             Base.Core.Game.PlayButtonSound();
 
-            SaveGameController.SaveGame();
+            Base.Core.Game.SaveGame();
             UpdateList();
         }
     }

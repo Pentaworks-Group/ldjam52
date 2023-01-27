@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
 using Assets.Scripts.Model;
+using Assets.Scripts.Scene.SaveGame;
 
 using GameFrame.Core.Audio.Continuous;
 using GameFrame.Core.Audio.Multi;
@@ -20,6 +21,9 @@ namespace Assets.Scripts.Core
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
 
+        protected SavedGameController<SavedGamedPreviewImpl, GameState> SavedGameController { get; set; }
+
+
         public List<AudioClip> AudioClipListMenu { get; set; }
         public List<AudioClip> AudioClipListGame { get; set; }
         public List<AudioClip> AmbientClipList { get; set; }
@@ -32,6 +36,11 @@ namespace Assets.Scripts.Core
         public void PlayButtonSound()
         {
             EffectsAudioManager.Play("ButtonSound");
+        }
+
+        protected override void OnGameStart()
+        {
+            SavedGameController = new SavedGameController<SavedGamedPreviewImpl, GameState>();
         }
 
         protected override GameState InitializeGameState()
@@ -51,6 +60,7 @@ namespace Assets.Scripts.Core
 
             return gameState;
         }
+
         public void PopulateShopStorage(GameState gameState)
         {
             if (gameState.AvailableShopItems == default)
@@ -157,6 +167,42 @@ namespace Assets.Scripts.Core
         private static void GameStart()
         {
             Base.Core.Game.Startup();
+        }
+
+
+        public void SaveGame()
+        {
+            if (Base.Core.Game.State != default)
+            {
+                SavedGameController.SaveGame(Base.Core.Game.State);
+            }
+        }
+
+        public void LoadSavedGame(String key)
+        {
+            var gameState = SavedGameController.LoadSavedGame(key);
+            if (gameState != default)
+            {
+                Start(gameState);
+            }
+        }
+
+        public void OverwriteSavedGame(String targetKey)
+        {
+            if (Base.Core.Game.State != default)
+            {
+                SavedGameController.OverwriteSavedGame(targetKey, Base.Core.Game.State);
+            }
+        }
+
+        public void DeleteSavedGame(String targetKey)
+        {
+            SavedGameController.DeleteSavedGame(targetKey);
+        }
+
+        public IDictionary<String, SavedGamedPreviewImpl> GetSavedGamePreviews()
+        {
+            return this.SavedGameController.SaveGamePreviews;
         }
     }
 }

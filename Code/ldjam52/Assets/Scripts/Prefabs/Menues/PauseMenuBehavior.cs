@@ -19,7 +19,7 @@ public class PauseMenuBehavior : MonoBehaviour
     private GameObject menuToggle;
     private GameObject pauseArea;
     private GameObject optionsArea;
-    private GameObject saveGameArea;
+    private GameObject savedGameArea;
     //public GameObject GUI;
     private Button backButton;
     private Button continueButton;
@@ -35,7 +35,7 @@ public class PauseMenuBehavior : MonoBehaviour
         menuToggle = transform.Find("ToggleArea").gameObject;
         pauseArea = transform.Find("ToggleArea/ContentArea/PauseArea").gameObject;
         optionsArea = transform.Find("ToggleArea/ContentArea/OptionsArea").gameObject;
-        saveGameArea = transform.Find("ToggleArea/ContentArea/SaveGameArea").gameObject;
+        savedGameArea = transform.Find("ToggleArea/ContentArea/SaveGameArea").gameObject;
 
         backButton = transform.Find("ToggleArea/Header/Back").GetComponent<Button>();
         continueButton = transform.Find("ToggleArea/Header/Continue").GetComponent<Button>();
@@ -67,7 +67,7 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         if (menuToggle.activeSelf == true)
         {
-            if (this.optionsArea.activeSelf || this.saveGameArea.activeSelf)
+            if (this.optionsArea.activeSelf || this.savedGameArea.activeSelf)
             {
                 OnBackButtonClicked();
             }
@@ -102,7 +102,7 @@ public class PauseMenuBehavior : MonoBehaviour
     {
         Core.Game.PlayButtonSound();
 
-        SetVisible(saveGame: true);
+        SetVisible(savedGame: true);
     }
 
     public void Hide()
@@ -131,7 +131,7 @@ public class PauseMenuBehavior : MonoBehaviour
 
     public void OnBackButtonClicked()
     {
-        if (this.saveGameArea.activeSelf)
+        if (this.savedGameArea.activeSelf)
         {
             Core.Game.SaveOptions();
         }
@@ -180,7 +180,7 @@ public class PauseMenuBehavior : MonoBehaviour
 
     }
 
-    private void SetVisible(Boolean pauseMenu = false, Boolean options = false, Boolean saveGame = false)
+    private void SetVisible(Boolean pauseMenu = false, Boolean options = false, Boolean savedGame = false)
     {
         if (pauseMenu)
         {
@@ -190,14 +190,14 @@ public class PauseMenuBehavior : MonoBehaviour
         {
             currentOpenMenu.text = "Options";
         }
-        else if (saveGame)
+        else if (savedGame)
         {
-            currentOpenMenu.text = "Save Games";
+            currentOpenMenu.text = "Saved games";
         }
 
         this.pauseArea.SetActive(pauseMenu);
         this.optionsArea.SetActive(options);
-        this.saveGameArea.SetActive(saveGame);
+        this.savedGameArea.SetActive(savedGame);
 
         this.continueButton.gameObject.SetActive(pauseMenu);
         this.backButton.gameObject.SetActive(!pauseMenu);

@@ -12,7 +12,6 @@ namespace Assets.Scripts.Scene.World
             {
                 if (Input.GetMouseButtonUp(0)) //!Base.Core.Game.LockCameraMovement && 
                 {
-                    UnityEngine.EventSystems.EventSystem.current.currentInputModule.Process();
 
                     if (!EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                     {
