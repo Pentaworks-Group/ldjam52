@@ -27,7 +27,6 @@ namespace Assets.Scripts.Scene.SaveGame
             moneyAmount = transform.Find("DetailsContainer/Money/Value").GetComponent<Text>();
             var overwriteButton = transform.Find("DetailsContainer/Buttons/Override").GetComponent<Button>();
 
-
             overwriteButton.gameObject.SetActive(Base.Core.Game.State != default);
             container.SetActive(false);
         }
