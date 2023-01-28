@@ -34,14 +34,14 @@ namespace Assets.Scripts.Scene.SaveGame
             container.SetActive(false);
         }
 
-        public void DisplayDetails(SavedGamedPreviewImpl preview, string key)
+        public void DisplayDetails(SavedGamedPreviewImpl preview)
         {
             createdOn.text = preview.CreatedOn;
             timeStamp.text = preview.SavedOn;
             timeElapsed.text = preview.TimeElapsed;
             moneyAmount.text = preview.Money;
 
-            this.key = key;
+            this.key = preview.Key;
             container.SetActive(true);
         }
 

@@ -30,7 +30,7 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void DisplaySlot(SavedGameDetailBehaviour details)
         {
-            details.DisplayDetails(GetSavedGamedPreview(), content.Key);
+            details.DisplayDetails(GetSavedGamedPreview());
         }
 
         public override void UpdateUI()
@@ -46,7 +46,7 @@ namespace Assets.Scripts.Scene.SaveGame
         public void LoadGame()
         {
             Base.Core.Game.PlayButtonSound();
-            Base.Core.Game.LoadSavedGame(GetSavedGamedPreview().key);
+            Base.Core.Game.LoadSavedGame(content.Key);
         }
     }
 }

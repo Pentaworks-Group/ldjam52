@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using GameFrame.Core.SavedGames;
 
 using UnityEngine;
 
