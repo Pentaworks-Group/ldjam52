@@ -3,17 +3,16 @@ using System.Collections.Generic;
 
 using Assets.Scripts.Constants;
 using Assets.Scripts.Model;
-using Assets.Scripts.Scene.SaveGame;
 
 using GameFrame.Core.Audio.Continuous;
 using GameFrame.Core.Audio.Multi;
+using GameFrame.Core.SavedGames;
 
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts.Core
 {
-    public class Game : GameFrame.Core.Game<GameState, PlayerOptions>
+    public class Game : GameFrame.Core.Game<GameState, PlayerOptions, SavedGamedPreviewImpl>
     {
         public ContinuousAudioManager AmbienceAudioManager { get; set; }
         public ContinuousAudioManager BackgroundAudioManager { get; set; }
@@ -21,9 +20,6 @@ namespace Assets.Scripts.Core
 
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
-
-        protected SavedGameController<SavedGamedPreviewImpl, GameState> SavedGameController { get; set; }
-
 
         public List<AudioClip> AudioClipListMenu { get; set; }
         public List<AudioClip> AudioClipListGame { get; set; }
@@ -38,12 +34,6 @@ namespace Assets.Scripts.Core
         {
             EffectsAudioManager.Play("ButtonSound");
         }
-
-        protected override void OnGameStart()
-        {
-            SavedGameController = new SavedGameController<SavedGamedPreviewImpl, GameState>();
-        }
-
         protected override GameState InitializeGameState()
         {
             // Maybe add a Tutorial scene, where the user can set "skip" for the next time.
@@ -221,42 +211,6 @@ namespace Assets.Scripts.Core
             {
                 UnityEngine.Debug.Log("File does not exist...");
             }
-        }
-
-
-        public void SaveGame()
-        {
-            if (Base.Core.Game.State != default)
-            {
-                SavedGameController.SaveGame(Base.Core.Game.State);
-            }
-        }
-
-        public void LoadSavedGame(String key)
-        {
-            var gameState = SavedGameController.LoadSavedGame(key);
-            if (gameState != default)
-            {
-                Start(gameState);
-            }
-        }
-
-        public void OverwriteSavedGame(String targetKey)
-        {
-            if (Base.Core.Game.State != default)
-            {
-                SavedGameController.OverwriteSavedGame(targetKey, Base.Core.Game.State);
-            }
-        }
-
-        public void DeleteSavedGame(String targetKey)
-        {
-            SavedGameController.DeleteSavedGame(targetKey);
-        }
-
-        public IDictionary<String, SavedGamedPreviewImpl> GetSavedGamePreviews()
-        {
-            return this.SavedGameController.SaveGamePreviews;
         }
     }
 }
