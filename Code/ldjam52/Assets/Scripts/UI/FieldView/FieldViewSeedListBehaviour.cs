@@ -19,14 +19,21 @@ public class FieldViewSeedListBehaviour : ListContainerBehaviour<StorageItem>
     public void UpdateList()
     {
         List<StorageItem> plants = new();
+        List<StorageItem> favorites = new ();
         foreach (StorageItem item in FarmStorageController.getStorageInventory())
         {
             if (item.StorageAmountSeeds > 0)
             {
-                plants.Add(item);
+                if (item.Plant.Favorit)
+                {
+                    favorites.Add(item);
+                } else
+                {
+                    plants.Add(item);
+                }
             }
         }
-
+        plants.AddRange(favorites);
         SetContentList(plants);
     }
 
