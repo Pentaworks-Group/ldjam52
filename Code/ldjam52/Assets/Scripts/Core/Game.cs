@@ -19,7 +19,7 @@ namespace Assets.Scripts.Core
 
         public IList<GameMode> AvailableGameModes { get; } = new List<GameMode>();
         public GameMode SelectedGameMode { get; set; }
-
+        
         public List<AudioClip> AudioClipListMenu { get; set; }
         public List<AudioClip> AudioClipListGame { get; set; }
         public List<AudioClip> AmbientClipList { get; set; }
@@ -33,6 +33,7 @@ namespace Assets.Scripts.Core
         {
             EffectsAudioManager.Play("ButtonSound");
         }
+
         protected override GameState InitializeGameState()
         {
             // Maybe add a Tutorial scene, where the user can set "skip" for the next time.

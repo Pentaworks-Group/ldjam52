@@ -77,8 +77,6 @@ public class WorldBehaviour : MonoBehaviour
 
             Core.Game.BackgroundAudioManager.Clips = Core.Game.AudioClipListGame;
             Core.Game.AmbienceAudioManager.Resume();
-
-           
         }
     }
 
@@ -94,6 +92,7 @@ public class WorldBehaviour : MonoBehaviour
         this.PauseMenuBehaviour.PauseToggled.AddListener(OnPauseMenuToggled);
 
         Core.Game.LockCameraMovement = false;
+        Time.timeScale = 1;
     }
 
     private void Update()
@@ -116,6 +115,7 @@ public class WorldBehaviour : MonoBehaviour
 
             CheckShortKeys();
         }
+
         Assets.Scripts.Scene.World.UpdateManager.UpdateBehaviours();
     }
 

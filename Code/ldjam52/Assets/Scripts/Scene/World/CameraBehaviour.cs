@@ -68,7 +68,6 @@ public class CameraBehaviour : MonoBehaviour
 
         float moveZ = Input.GetAxisRaw("Vertical");
 
-
         if (Core.Game.Options.IsMouseScreenEdgeScrollingEnabled)
         {
             //Camera angle
@@ -93,10 +92,12 @@ public class CameraBehaviour : MonoBehaviour
                 moveZ = 1.0f * Mathf.Cos(angle);
             }
         }
+
         if (moveX != 0)
         {
             moveX *= moveSpeed;
         }
+
         if (moveZ != 0)
         {
             moveZ *= moveSpeed;
@@ -127,10 +128,11 @@ public class CameraBehaviour : MonoBehaviour
                     moveX *= moveSpeedMouseDrag;
                     moveZ *= moveSpeedMouseDrag;
                 }
-               clickDown = Input.mousePosition;
-               panTimeout = 2;
+                clickDown = Input.mousePosition;
+                panTimeout = 2;
             }
-        } else if (isMoving && Input.GetMouseButtonUp(0))
+        }
+        else if (isMoving && Input.GetMouseButtonUp(0))
         {
             isMoving = false;
         }
@@ -138,8 +140,10 @@ public class CameraBehaviour : MonoBehaviour
         if (moveX != 0 || moveZ != 0)
         {
             cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * Core.Game.Options.MoveSensivity;
+
             return true;
         }
+
         return false;
     }
 
@@ -169,8 +173,11 @@ public class CameraBehaviour : MonoBehaviour
         {
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
+
             if (prevPinch == default)
+            {
                 prevPinch = (touch1.position, touch2.position);
+            }
             else if (touch1.phase == TouchPhase.Moved || touch2.phase == TouchPhase.Moved)
             {
                 zoom = zoomSpeedTouch * (Vector2.Distance(touch1.position, touch2.position) - Vector2.Distance(prevPinch.Item1, prevPinch.Item2));
@@ -178,6 +185,7 @@ public class CameraBehaviour : MonoBehaviour
                 panTimeout = 20;
             }
         }
+
         if (zoom != 0)
         {
             //float newView = cam.fieldOfView + zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity;
@@ -189,9 +197,11 @@ public class CameraBehaviour : MonoBehaviour
             {
                 return false;
             }
+
             cam.transform.position = newCamPos;
             return true;
         }
+
         return false;
     }
 
@@ -235,6 +245,7 @@ public class CameraBehaviour : MonoBehaviour
     private Vector3 GetCenterTarget()
     {
         Vector3 target;
+
         if (Core.Game.State.World.Farm != default)
         {
             target = new Vector3(Core.Game.State.World.Farm.Position.X, Core.Game.State.World.Farm.Position.Y, Core.Game.State.World.Farm.Position.Z);
@@ -245,6 +256,7 @@ public class CameraBehaviour : MonoBehaviour
             var z = Core.Game.State.World.Height / 2;
             target = new Vector3(x, 0, z);
         }
+
         return target;
     }
 

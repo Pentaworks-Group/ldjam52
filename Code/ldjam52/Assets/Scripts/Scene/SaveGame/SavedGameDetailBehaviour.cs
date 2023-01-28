@@ -1,5 +1,3 @@
-using Assets.Scripts.Core;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,7 +69,6 @@ namespace Assets.Scripts.Scene.SaveGame
 
         public void ClearDetails()
         {
-
             container.SetActive(false);
         }
     }
