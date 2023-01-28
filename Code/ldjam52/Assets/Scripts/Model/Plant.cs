@@ -16,6 +16,7 @@ namespace Assets.Scripts.Model
         public String ImageName { get; set; }
         public String SeedImageName { get; set; }
         public Color BlossomColor { get; set; }
+        public bool Favorit { get; set; }
         //Set of Chromosome Pairs
         //The following Sets have to be defined:
         // 'Temp': reaction to temperature

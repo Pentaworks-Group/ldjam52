@@ -22,6 +22,9 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour<StorageItem>
 
     public GameObject RenamePanel;
 
+    [SerializeField]
+    private GameObject FavoriteButtonFill;
+
     //private void Awake()
     //{
     //    plantName = transform.Find("PlantName").GetComponent<Text>();
@@ -55,6 +58,7 @@ public class FieldViewSeedListSlotBehaviour : ListSlotBehaviour<StorageItem>
     {
         FieldViewBehaviour fieldView = CurrentlyViewedField.GetComponent<FieldViewBehaviour>();
         InformationPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(content, fieldView.GetField(), false);
+        FavoriteButtonFill.SetActive(GetPlant().Favorit);
     }
 
     public void ShowRenameField()

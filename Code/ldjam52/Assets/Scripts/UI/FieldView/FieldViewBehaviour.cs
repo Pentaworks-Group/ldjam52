@@ -45,6 +45,10 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
     public TMP_Text estimatedDuration;
 
+
+    [SerializeField]
+    private GameObject FavoriteButtonFill;
+
     private void Awake()
     {
         viewToggle = transform.Find("FieldViewToggle").gameObject;
@@ -423,5 +427,12 @@ public class FieldViewBehaviour : ViewBaseBehaviour
 
             Core.Game.PlayButtonSound();
         }
+    }
+
+    public void TogglePlantFavorite(InformationPrefabBehaviour plantBehaviour)
+    {
+        Plant plant = plantBehaviour.Item.Plant;
+        plant.Favorit = !plant.Favorit;
+        FavoriteButtonFill.SetActive(plant.Favorit);
     }
 }
