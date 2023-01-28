@@ -9,7 +9,6 @@ using GameFrame.Core.Audio.Continuous;
 using GameFrame.Core.Audio.Multi;
 
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts.Core
 {
@@ -66,7 +65,7 @@ namespace Assets.Scripts.Core
         {
             if (gameState.AvailableShopItems == default)
             {
-                gameState.AvailableShopItems = new(); 
+                gameState.AvailableShopItems = new();
                 foreach (StorageItem item in gameState.GameMode.AvailableShopItems)
                 {
                     gameState.AvailableShopItems.Add(item);
@@ -168,61 +167,7 @@ namespace Assets.Scripts.Core
         private static void GameStart()
         {
             Base.Core.Game.Startup();
-
-
-            Test();
         }
-
-        private static void Test()
-        {
-            var filePath = Application.persistentDataPath + "/test.json";
-
-            if (System.IO.File.Exists(filePath))
-            {
-                UnityEngine.Debug.Log("TEST exists");
-                System.IO.File.Delete(filePath);
-            }
-
-            var timestamp = DateTime.Now;
-
-            var sampleText = Newtonsoft.Json.JsonConvert.SerializeObject(new TestObject(timestamp));
-
-            System.IO.File.WriteAllText(filePath, sampleText);
-
-            UnityEngine.Debug.Log("Wrote file");
-
-            if (System.IO.File.Exists(filePath))
-            {
-                UnityEngine.Debug.Log("File exists");
-
-                var outText = System.IO.File.ReadAllText(filePath);
-                                
-                if (!String.IsNullOrEmpty(outText))
-                {
-                    UnityEngine.Debug.Log(String.Format("loaded json: {0}", outText));
-
-                    var restoredTestObject = Newtonsoft.Json.JsonConvert.DeserializeObject<TestObject>(outText);
-
-                    if (restoredTestObject != default)
-                    {
-                        UnityEngine.Debug.Log(String.Format("Object restored. Timestamp matches: {0}", timestamp == restoredTestObject.Timestamp));
-                    }
-                    else
-                    {
-                        UnityEngine.Debug.Log("Failed to deserialize...");
-                    }
-                }
-                else
-                {
-                    UnityEngine.Debug.Log("No text loaded...");
-                }
-            }
-            else
-            {
-                UnityEngine.Debug.Log("File does not exist...");
-            }
-        }
-
 
         public void SaveGame()
         {
