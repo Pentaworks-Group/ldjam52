@@ -25,6 +25,7 @@ namespace Assets.Scripts.Scene.World
         private float startOfDusk;
         private float startOfNighttime;
         private float startOfSunset;
+        private Vector3 centerPoint = Vector3.zero;
 
         private float timeRT = 0;
         public float TimeOfDay // game time 0 .. 1
@@ -42,7 +43,8 @@ namespace Assets.Scripts.Scene.World
             float sunangle = TimeOfDay * 360;
 
             sun.transform.position = Vector3.zero + Quaternion.Euler(-70, 0, sunangle) * (radius * Vector3.right);
-            sun.transform.LookAt(Vector3.zero);
+
+            sun.transform.LookAt(centerPoint);
         }
 
         private Color CalculateSkyColor()
@@ -85,6 +87,8 @@ namespace Assets.Scripts.Scene.World
             this.startOfDusk = dayTimeDuration / totalDayDuration;
             this.startOfNighttime = startOfDusk + duskDuration / totalDayDuration;
             this.startOfSunset = startOfNighttime + nightTimeDuration / totalDayDuration;
+
+            this.centerPoint =  new Vector3(this.gameState.World.Width / 2, 0,  this.gameState.World.Height /2);
         }
     }
 }
