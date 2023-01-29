@@ -15,23 +15,17 @@ public class InformationPrefabBehaviour : MonoBehaviour
 
     public StorageItem Item;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject FavoriteButtonFill;
+    [SerializeField]
+    private GameObject FavoriteButton;
 
     public void UpdateInfo(StorageItem item, Field field, bool isPlant)
     {
         this.Item = item;
 
         Transform information = Information.transform;
+
 
         // Always shown
         if (item!=null)
@@ -86,6 +80,9 @@ public class InformationPrefabBehaviour : MonoBehaviour
                 drawStatsBar(information, "Water", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.WATER], 0, false);
                 drawStatsBar(information, "Fertility", item.Plant.Genome[Assets.Scripts.Constants.ChromosomeTypes.FERTILITY], 0, false);
             }
+
+            FavoriteButton.SetActive(true);
+            FavoriteButtonFill.SetActive(item.Plant.Favorit);
         }
         else
         {
@@ -112,7 +109,7 @@ public class InformationPrefabBehaviour : MonoBehaviour
                 drawStatsBar(information, "Water", null, 0, false);
                 drawStatsBar(information, "Fertility", null, 0, false);
             }
-
+            FavoriteButton.SetActive(false);
         }
 
     }
@@ -140,5 +137,11 @@ public class InformationPrefabBehaviour : MonoBehaviour
         {
             bar.hideBiomeValue();
         }
+    }
+    public void TogglePlantFavorite()
+    {
+        Plant plant = Item.Plant;
+        plant.Favorit = !plant.Favorit;
+        FavoriteButtonFill.SetActive(plant.Favorit);
     }
 }

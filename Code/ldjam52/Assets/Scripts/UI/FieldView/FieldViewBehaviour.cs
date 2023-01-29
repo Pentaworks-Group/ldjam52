@@ -46,8 +46,7 @@ public class FieldViewBehaviour : ViewBaseBehaviour
     public TMP_Text estimatedDuration;
 
 
-    [SerializeField]
-    private GameObject FavoriteButtonFill;
+
 
     private void Awake()
     {
@@ -161,8 +160,8 @@ public class FieldViewBehaviour : ViewBaseBehaviour
             plantingOptions.SetActive(false);
             plantName.text = currentlyViewedField.Field.Seed.Name;
             currentInfoPanel.GetComponent<InformationPrefabBehaviour>().UpdateInfo(item, GetField(), true);
-            int growTime = Mathf.RoundToInt( (float) (1.0f / GrowthController.getGrowthRate(currentlyViewedField.Field, currentlyViewedField.Field.Seed)));
-            estimatedDuration.text = growTime.ToString()+"s";
+            int growTime = Mathf.RoundToInt((float)(1.0f / GrowthController.getGrowthRate(currentlyViewedField.Field, currentlyViewedField.Field.Seed)));
+            estimatedDuration.text = growTime.ToString() + "s";
 
         }
         else
@@ -429,10 +428,5 @@ public class FieldViewBehaviour : ViewBaseBehaviour
         }
     }
 
-    public void TogglePlantFavorite(InformationPrefabBehaviour plantBehaviour)
-    {
-        Plant plant = plantBehaviour.Item.Plant;
-        plant.Favorit = !plant.Favorit;
-        FavoriteButtonFill.SetActive(plant.Favorit);
-    }
+
 }
