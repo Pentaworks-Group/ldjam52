@@ -1667,6 +1667,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b0284c58442ee79418befe524f4c0cc4, type: 3}
+    - target: {fileID: 5186305691340195087, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5316028962385788454, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1767,6 +1771,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: ad48aa8e405e19141a2c1e57bbc1e3cf, type: 3}
+    - target: {fileID: 7235878592488330974, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7800947973618845156, guid: a39745fda9bf97347b20a6d53d4cc0fe, type: 3}
       propertyPath: m_Enabled
       value: 0
