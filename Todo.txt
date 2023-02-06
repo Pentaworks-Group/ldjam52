@@ -18,6 +18,7 @@ Todo:
  - Show error why research is not possible (Money and seeds used) - e.g. text in red.
  - Number of discovered plants in saved game overview
  - Review Button prefabs
+ - Refactor shop list (consider using gameframe list)
    
  Audio:
  - Effect for opening/closing menues
