@@ -10,43 +10,58 @@ Todo:
  - 
    
  GamePlay:
- - Keep TimeOfDay and Date in GameState (and load it correctly). 
- - Rotten fields
-    
+ - Ensure that saved games can be loaded from older versions.
+     
  UI: 
  - Buttons as Prefabs (FieldView)
- - HarvestView overhaul
- - Check PlantButton inactivity check for seed count
- - min buy/sell 1
  - max range for cam movement
- 
-  
+ - Show error why research is not possible (Money and seeds used) - e.g. text in red.
+ - Number of discovered plants in saved game overview
+ - Review Button prefabs
+   
  Audio:
  - Effect for opening/closing menues
- 
+ - 
   
 Refactoring:
 ----------------------------------
  
 WIP:
 ----------------------------------
- 
+ - Keep TimeOfDay and Date in GameState (and load it correctly). 
  
 Nice to have:
 ----------------------------------
  - Tooltip.cs in GameFrame 
- - ShortKeys (e.g. "H" for Home)
- - Only buy adjacent tiles
- - Rename Crops
+ - Create Slider Prefab to better integrate into options. Also improve sensitivity and how to use
+ - ShortKeys (some keys to confirm dialogs)
+   - Tab to cycle fields
+   - "C" to "Confirm"
+   - "Q" to quit dialog
+ - Improve "Rename" visiblity for crops
+ - Small random variation on crops harvest
  - Inventory manager (delete seeds?)
- - Fertilizer
- - ShortKeys
- - list controll with drag
- - using assets prefab
- - add landscaping models
+ - List - Scroll with drag
+ - Using assets prefab
+ - Add landscaping models
+ - "infinite" plane for world (below fields)
+ - Update description and screenshots on itch.io
+ - Background for Saved games in MainMenu
  
 Ideas:
 ----------------------------------
  - Increase map size (Generate extra tiles)
- - add road tile & fields only available if 3 tiles from next road
+ - Field purchase limitations 
+   - Add road tile & fields only available if 3 tiles from next road
+   - Only buy adjacent tiles
+ - Rotten fields
+ - Rotate camera
+ - Pan using the camera angle to the grid
+ - Fertilizer
+ - Tutorial (Maybe add a scene on first start)
+ - Add "New version available" text to game (link to Itch.io or similar).
+ - Highlight selected fields
+ - Group fields
+ - Auto harvest & replant (for money?)
+ - Pitch sound effects (to increase the "variety" in  effects)
  
