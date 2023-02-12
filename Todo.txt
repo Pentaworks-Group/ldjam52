@@ -11,6 +11,7 @@ Todo:
    
  GamePlay:
  - Ensure that saved games can be loaded from older versions.
+ - Improve analyze tool - Once the tool is improved, not all values are able to be unlocked.
      
  UI: 
  - Buttons as Prefabs (FieldView)
