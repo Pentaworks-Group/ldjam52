@@ -30,7 +30,7 @@ Refactoring:
  
 WIP:
 ----------------------------------
- - Keep TimeOfDay and Date in GameState (and load it correctly). 
+ - Keep Date in GameState (and load it correctly). 
  
 Nice to have:
 ----------------------------------
