@@ -12,5 +12,7 @@ namespace Assets.Scripts.Model
         public Farm Farm { get; set; }
         public List<Tile> Tiles { get; set; }
         public List<Building> Buildings { get; set; }
+        public Single TimeOfDay { get; set; }
+        public GameFrame.Core.Math.Vector3? CameraPosition { get; set; }
     }
 }

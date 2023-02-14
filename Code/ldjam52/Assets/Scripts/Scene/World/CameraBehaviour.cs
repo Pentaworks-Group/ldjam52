@@ -1,6 +1,8 @@
 
 using Assets.Scripts.Base;
 
+using GameFrame.Core.Extensions;
+
 using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
@@ -22,17 +24,20 @@ public class CameraBehaviour : MonoBehaviour
     //private readonly float minFov = 15.0f;
     //private float maxFov = 120.0f;
 
-    private (Vector2, Vector2) prevPinch = default;
-    private Vector3 clickDown;
+    private (UnityEngine.Vector2, UnityEngine.Vector2) prevPinch = default;
+    private UnityEngine.Vector3 clickDown;
 
-
-    public static int panTimeout { get; private set; } = 0;
-    private static bool isMoving { get; set; } = false;
-    private static bool isZooming { get; set; } = false;
+    public static int panTimeout = 0;
+    private static bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (Core.Game.State.World.CameraPosition.HasValue)
+        {
+            cam.transform.position = Core.Game.State.World.CameraPosition.Value.ToUnity();
+        }
+
         UpdateFarmButton();
     }
 
@@ -48,9 +53,12 @@ public class CameraBehaviour : MonoBehaviour
 
             bool zoomChanged = ZoomHandling();
             bool positionChanged = MoveHandling();
+
             if (zoomChanged || positionChanged)
             {
                 UpdateFarmButton();
+
+                Core.Game.State.World.CameraPosition = cam.transform.position.ToFrame();
             }
         }
     }
@@ -62,7 +70,6 @@ public class CameraBehaviour : MonoBehaviour
 
     private bool MoveHandling()
     {
-        //// Movement along x, z axis
         // Keys
         float moveX = Input.GetAxisRaw("Horizontal");
 
@@ -118,6 +125,7 @@ public class CameraBehaviour : MonoBehaviour
             {
                 moveX = (clickDown.x - Input.mousePosition.x);
                 moveZ = (clickDown.y - Input.mousePosition.y);
+
                 if (Application.isMobilePlatform)
                 {
                     moveX *= moveSpeedTouch;
@@ -128,6 +136,7 @@ public class CameraBehaviour : MonoBehaviour
                     moveX *= moveSpeedMouseDrag;
                     moveZ *= moveSpeedMouseDrag;
                 }
+
                 clickDown = Input.mousePosition;
                 panTimeout = 2;
             }
@@ -139,7 +148,7 @@ public class CameraBehaviour : MonoBehaviour
 
         if (moveX != 0 || moveZ != 0)
         {
-            cam.transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * Core.Game.Options.MoveSensivity;
+            cam.transform.position += Core.Game.Options.MoveSensivity * Time.deltaTime * new UnityEngine.Vector3(moveX, 0, moveZ);
 
             return true;
         }
@@ -188,17 +197,15 @@ public class CameraBehaviour : MonoBehaviour
 
         if (zoom != 0)
         {
-            //float newView = cam.fieldOfView + zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity;
-            //newView = Mathf.Max(minFov, newView);
-            //newView = Mathf.Min(maxFov, newView);
-            //cam.fieldOfView = newView;
-            Vector3 newCamPos = cam.transform.position + cam.transform.forward * zoom * Time.deltaTime * Core.Game.Options.ZoomSensivity;
+            var newCamPos = cam.transform.position + Core.Game.Options.ZoomSensivity * Time.deltaTime * zoom * this.cam.transform.forward;
+
             if (newCamPos.y < 1)
             {
                 return false;
             }
 
             cam.transform.position = newCamPos;
+
             return true;
         }
 
@@ -207,14 +214,8 @@ public class CameraBehaviour : MonoBehaviour
 
     private void UpdateFarmButton()
     {
-        Vector3 target = GetCenterTarget();
-        Vector3 v3Pos = Camera.main.WorldToViewportPoint(target);
-
-        //if (v3Pos.z < Camera.main.nearClipPlane)
-        //{
-        //    FarmButton.SetActive(false);
-        //    return;  // Object is behind the camera
-        //}
+        var target = GetCenterTarget();
+        var v3Pos = Camera.main.WorldToViewportPoint(target);
 
         //        Debug.Log("v3Pos: " + v3Pos);
         if (v3Pos.x >= 0.0f && v3Pos.x <= 1.0f && v3Pos.y >= 0.0f && v3Pos.y <= 1.0f)
@@ -233,7 +234,8 @@ public class CameraBehaviour : MonoBehaviour
             fAngle += Mathf.PI;
         }
         v3Pos.z = 0;
-        FarmButton.transform.localEulerAngles = new Vector3(0.0f, 0.0f, -fAngle * Mathf.Rad2Deg);
+
+        FarmButton.transform.localEulerAngles = new UnityEngine.Vector3(0.0f, 0.0f, -fAngle * Mathf.Rad2Deg);
 
         v3Pos.x = (0.45f * Mathf.Sin(fAngle) + 0.5f) * Screen.width;  // Place on ellipse touc$$anonymous$$ng 
         v3Pos.y = (0.45f * Mathf.Cos(fAngle) + 0.5f) * Screen.height;  //   side of viewport
@@ -242,19 +244,22 @@ public class CameraBehaviour : MonoBehaviour
         FarmButton.transform.position = v3Pos;
     }
 
-    private Vector3 GetCenterTarget()
+    private UnityEngine.Vector3 GetCenterTarget()
     {
-        Vector3 target;
+        UnityEngine.Vector3 target;
 
-        if (Core.Game.State.World.Farm != default)
+        var world = Core.Game.State.World;
+
+        if (world.Farm != default)
         {
-            target = new Vector3(Core.Game.State.World.Farm.Position.X, Core.Game.State.World.Farm.Position.Y, Core.Game.State.World.Farm.Position.Z);
+            target = new UnityEngine.Vector3(world.Farm.Position.X, world.Farm.Position.Y, world.Farm.Position.Z);
         }
         else
         {
-            var x = Core.Game.State.World.Width / 2;
-            var z = Core.Game.State.World.Height / 2;
-            target = new Vector3(x, 0, z);
+            float x = world.Width / 2;
+            float z = world.Height / 2;
+
+            target = new UnityEngine.Vector3(x, 0, z);
         }
 
         return target;
@@ -262,7 +267,7 @@ public class CameraBehaviour : MonoBehaviour
 
     public void CenterFarm()
     {
-        Vector3 target = GetCenterTarget();
+        var target = GetCenterTarget();
 
         float yDiff = cam.transform.position.y - target.y;
         float factor = yDiff / cam.transform.forward.y;
@@ -279,6 +284,6 @@ public class CameraBehaviour : MonoBehaviour
 
     public void HideToFarmButton()
     {
-        this.FarmButton.gameObject.SetActive(false);
+        this.FarmButton.SetActive(false);
     }
 }

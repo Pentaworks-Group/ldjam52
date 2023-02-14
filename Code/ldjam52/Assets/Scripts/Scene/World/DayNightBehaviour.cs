@@ -27,29 +27,32 @@ namespace Assets.Scripts.Scene.World
         private float startOfSunset;
         private Vector3 centerPoint = Vector3.zero;
 
-        private float timeRT = 0;
-        public float TimeOfDay // game time 0 .. 1
-        {
-            get { return timeRT / totalDayDuration; }
-            set { timeRT = value * totalDayDuration; }
-        }
+        private float relativeTime = 0;
+        private float timeOfDay = 0;
 
         void Update()
         {
-            timeRT = (timeRT + Time.deltaTime) % totalDayDuration;
+            if (Time.timeScale != 0)
+            {
+                relativeTime = (relativeTime + Time.deltaTime) % totalDayDuration;
 
-            Camera.main.backgroundColor = CalculateSkyColor();
+                Camera.main.backgroundColor = CalculateSkyColor();
 
-            float sunangle = TimeOfDay * 360;
+                this.timeOfDay = relativeTime / totalDayDuration;
 
-            sun.transform.position = Vector3.zero + Quaternion.Euler(-70, 0, sunangle) * (radius * Vector3.right);
+                this.gameState.World.TimeOfDay = this.timeOfDay;
 
-            sun.transform.LookAt(centerPoint);
+                float sunangle = this.timeOfDay * 360;
+
+                sun.transform.position = Vector3.zero + Quaternion.Euler(-70, 0, sunangle) * (radius * Vector3.right);
+
+                sun.transform.LookAt(centerPoint);
+            }
         }
 
         private Color CalculateSkyColor()
         {
-            float time = TimeOfDay;
+            float time = relativeTime;
 
             if (time <= 0.25f)
             {
@@ -79,6 +82,8 @@ namespace Assets.Scripts.Scene.World
             this.gameState = Base.Core.Game.State;
 
             this.totalDayDuration = gameState.GameMode.World.TotalDayDuration;
+            this.timeOfDay = gameState.World.TimeOfDay;
+            this.relativeTime = this.timeOfDay * this.totalDayDuration;
 
             this.dayTimeDuration = this.totalDayDuration / 2f;
             this.nightTimeDuration = this.dayTimeDuration * 0.7f;
@@ -88,7 +93,7 @@ namespace Assets.Scripts.Scene.World
             this.startOfNighttime = startOfDusk + duskDuration / totalDayDuration;
             this.startOfSunset = startOfNighttime + nightTimeDuration / totalDayDuration;
 
-            this.centerPoint =  new Vector3(this.gameState.World.Width / 2, 0,  this.gameState.World.Height /2);
+            this.centerPoint = new Vector3(this.gameState.World.Width / 2, 0, this.gameState.World.Height / 2);
         }
     }
 }
